@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3622 | Check Divisibility by Digit Sum and Product</title>
+  <meta name="description"
+    content="Complete solutions LeetCode 3622: Learn efficient digit extraction techniques & multiple approaches to solve divisibility problems with detailed implementations." />
+  <meta name="keywords"
+    content="3622. Check Divisibility by Digit Sum and Product, leetcode, leetcode 3622, digit sum, digit product, divisibility problem, number theory, digit extraction, modulo operation, leetcode easy problem, programming solution, algorithm optimization, , leetcode premium problem, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, leetcode array question, leetcode contest question, leetcode contest" />
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3622-check-divisibility-by-digit-sum-and-product.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3622: Check Divisibility by Digit Sum and Product">
+  <meta property="og:description"
+    content="Optimal solutions with O(d) time complexity where d is digit count. Complete guide with modulus and string conversion approaches.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3622.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3622-check-divisibility-by-digit-sum-and-product.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3622: Check Divisibility by Digit Sum and Product">
+  <meta name="twitter:description"
+    content="Solve divisibility problems using digit extraction techniques. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3622.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Check Divisibility by Digit Sum and Product",
+      "url": "https://algopush.com/Leetcode/3622-check-divisibility-by-digit-sum-and-product.html",
+      "image": "https://algopush.com/Leetcode/Images/3622.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-07-20",
+      "dateModified": "2025-07-20",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Visualization Container */
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+
+      50% {
+        background-color: #b3e0ff;
+      }
+
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3622. Check Divisibility by Digit Sum and Product</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3622.png" alt="Digit extraction visualization" loading="lazy">
+    </div>
+
+    <h1>3622: Check Divisibility by Digit Sum and Product</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Easy</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Digit Manipulation, Number Theory</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Amazon, Microsoft, Adobe</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> For digit manipulation problems, always consider modulus operations for efficient digit
+      extraction. Handle zero digits carefully as they make the product zero.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given a positive integer <code>n</code>, determine if <code>n</code> is divisible by the sum of its digit sum and
+      digit product. Return <code>true</code> if divisible, otherwise <code>false</code>.</p>
+    <p>Formally: Let <code>S</code> = sum of digits of <code>n</code>, <code>P</code> = product of digits of
+      <code>n</code>. Return <code>true</code> if <code>n % (S + P) == 0</code>.</p>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> n = 99</p>
+        <p><strong>Calculation:</strong> S = 9+9 = 18, P = 9×9 = 81, S+P = 99</p>
+        <p>99 % 99 = 0 → <strong>Output: true</strong></p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 2</h4>
+        <p><strong>Input:</strong> n = 23</p>
+        <p><strong>Calculation:</strong> S = 2+3 = 5, P = 2×3 = 6, S+P = 11</p>
+        <p>23 % 11 = 1 → <strong>Output: false</strong></p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/check-divisibility-by-digit-sum-and-product/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Key Insight</h2>
+    <p>The problem requires:</p>
+    <ol>
+      <li>Extracting each digit from the number</li>
+      <li>Calculating the sum of the digits (S)</li>
+      <li>Calculating the product of the digits (P)</li>
+      <li>Checking divisibility: n % (S + P) == 0</li>
+    </ol>
+
+    <div class="callout warning">
+      <strong>Important:</strong> If any digit is zero, the product becomes zero. This is acceptable per problem
+      requirements.
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Modulus Digit Extraction</h2>
+    <p>Extract digits using modulus and division operations.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize <code>sum = 0</code> and <code>product = 1</code></li>
+      <li>Make a copy of <code>n</code> (to preserve original value)</li>
+      <li>While the number > 0:
+        <ul>
+          <li>Extract last digit: <code>digit = num % 10</code></li>
+          <li>Add digit to <code>sum</code></li>
+          <li>Multiply digit with <code>product</code></li>
+          <li>Remove last digit: <code>num = num / 10</code></li>
+        </ul>
+      </li>
+      <li>Compute <code>total = sum + product</code></li>
+      <li>Check if <code>n % total == 0</code></li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(d)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where <code>d</code> is number of digits in n. Since n ≤ 10^6, d ≤ 7.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Modulus Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-mod">C++</button>
+          <button class="tab-button" data-tab="java-mod">Java</button>
+          <button class="tab-button" data-tab="python-mod">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-mod-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">checkDivisibility</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-keyword">int</span> num = n;
+        <span class="code-token-keyword">int</span> sum = 0;
+        <span class="code-token-keyword">int</span> product = 1;
+        
+        <span class="code-token-keyword">while</span> (num > 0) {
+            <span class="code-token-keyword">int</span> digit = num % 10;
+            sum += digit;
+            product *= digit;
+            num /= 10;
+        }
+        
+        <span class="code-token-keyword">int</span> total = sum + product;
+        <span class="code-token-keyword">return</span> (n % total == 0);
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-mod-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">checkDivisibility</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-keyword">int</span> num = n;
+        <span class="code-token-keyword">int</span> sum = 0;
+        <span class="code-token-keyword">int</span> product = 1;
+        
+        <span class="code-token-keyword">while</span> (num > 0) {
+            <span class="code-token-keyword">int</span> digit = num % 10;
+            sum += digit;
+            product *= digit;
+            num /= 10;
+        }
+        
+        <span class="code-token-keyword">int</span> total = sum + product;
+        <span class="code-token-keyword">return</span> (n % total == 0);
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-mod-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">checkDivisibility</span>(self, n: int) -> bool:
+        num = n
+        digit_sum = 0
+        product = 1
+        
+        <span class="code-token-keyword">while</span> num > 0:
+            digit = num % 10
+            digit_sum += digit
+            product *= digit
+            num //= 10
+        
+        total = digit_sum + product
+        <span class="code-token-keyword">return</span> n % total == 0</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This is the most efficient method with O(1) space and O(d) time
+        complexity. Works for numbers up to 10^9.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: String Conversion Method</h2>
+    <p>Convert number to string and process each character.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Convert integer <code>n</code> to string</li>
+      <li>Iterate through each character in the string:
+        <ul>
+          <li>Convert char to digit</li>
+          <li>Add digit to <code>sum</code></li>
+          <li>Multiply digit with <code>product</code></li>
+        </ul>
+      </li>
+      <li>Compute <code>total = sum + product</code></li>
+      <li>Check if <code>n % total == 0</code></li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(d)</td>
+          <td>O(d)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where <code>d</code> is number of digits. Conversion to string requires O(d) space.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">String Conversion Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-str">C++</button>
+          <button class="tab-button" data-tab="java-str">Java</button>
+          <button class="tab-button" data-tab="python-str">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-str-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">checkDivisibility</span>(<span class="code-token-keyword">int</span> n) {
+        string num_str = to_string(n);
+        <span class="code-token-keyword">int</span> sum = 0;
+        <span class="code-token-keyword">int</span> product = 1;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : num_str) {
+            <span class="code-token-keyword">int</span> digit = c - '0';
+            sum += digit;
+            product *= digit;
+        }
+        
+        <span class="code-token-keyword">int</span> total = sum + product;
+        <span class="code-token-keyword">return</span> (n % total == 0);
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-str-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">checkDivisibility</span>(<span class="code-token-keyword">int</span> n) {
+        String num_str = Integer.<span class="code-token-function">toString</span>(n);
+        <span class="code-token-keyword">int</span> sum = 0;
+        <span class="code-token-keyword">int</span> product = 1;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : num_str.toCharArray()) {
+            <span class="code-token-keyword">int</span> digit = c - '0';
+            sum += digit;
+            product *= digit;
+        }
+        
+        <span class="code-token-keyword">int</span> total = sum + product;
+        <span class="code-token-keyword">return</span> (n % total == 0);
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-str-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">checkDivisibility</span>(self, n: int) -> bool:
+        num_str = str(n)
+        digit_sum = 0
+        product = 1
+        
+        <span class="code-token-keyword">for</span> char <span class="code-token-keyword">in</span> num_str:
+            digit = int(char)
+            digit_sum += digit
+            product *= digit
+        
+        total = digit_sum + product
+        <span class="code-token-keyword">return</span> n % total == 0</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach is more readable but slightly less efficient due to string
+        conversion. Useful for languages with strong string manipulation.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Functional Programming Style (Python)</h2>
+    <p>Use Python's functional programming features for concise implementation.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Convert number to string</li>
+      <li>Map each character to integer digit</li>
+      <li>Compute sum using <code>sum()</code></li>
+      <li>Compute product using <code>reduce()</code> with multiplication</li>
+      <li>Check divisibility condition</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(d)</td>
+          <td>O(d)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Same as string conversion method but more concise.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Functional Python Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="python-func">Python</button>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content active" id="python-func-tab">
+          <pre><code><span class="code-token-keyword">from</span> functools <span class="code-token-keyword">import</span> reduce
+<span class="code-token-keyword">import</span> operator
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">checkDivisibility</span>(self, n: int) -> bool:
+        digits = [int(d) <span class="code-token-keyword">for</span> d <span class="code-token-keyword">in</span> str(n)]
+        digit_sum = sum(digits)
+        <span class="code-token-comment"># Handle case with zero digits</span>
+        product = reduce(operator.mul, digits, 1)
+        total = digit_sum + product
+        <span class="code-token-keyword">return</span> n % total == 0</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach uses Python's functional programming features for concise
+        code. The <code>reduce</code> function elegantly handles product calculation.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+    <h3>1. Single Digit Numbers</h3>
+    <pre><code>Input: n = 5 → Output: false
+Calculation: S=5, P=5, total=10 → 5%10=5 (not 0)</code></pre>
+
+    <h3>2. Numbers with Zero Digits</h3>
+    <pre><code>Input: n = 100 → Output: true
+Calculation: S=1+0+0=1, P=1*0*0=0, total=1 → 100%1=0</code></pre>
+
+    <h3>3. Numbers with One Zero Digit</h3>
+    <pre><code>Input: n = 10 → Output: true
+Calculation: S=1+0=1, P=1*0=0, total=1 → 10%1=0</code></pre>
+
+    <h3>4. All Digits Zero</h3>
+    <pre><code>Input: n = 0 → Output: undefined (n≥1 per constraints)</code></pre>
+
+    <h3>5. Large Numbers</h3>
+    <pre><code>Input: n = 999999 → Output: false
+Calculation: S=54, P=531441, total=531495 → 999999 % 531495 = 468504 (not 0)</code></pre>
+
+    <div class="callout danger">
+      <strong>Warning:</strong> Always initialize product as 1 (not 0) to ensure correct multiplication. Zero
+      initialization would make product always zero.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. What if the product of digits is zero?</summary>
+        <p>This is perfectly valid. The total becomes (sum + 0) = sum. The divisibility check then becomes n % sum == 0.
+        </p>
+      </details>
+
+      <details>
+        <summary>2. Can the total (sum+product) be zero?</summary>
+        <p>No. Since n ≥ 1, at least one digit is ≥1, making sum ≥1. Therefore, total = sum + product ≥1.</p>
+      </details>
+
+      <details>
+        <summary>3. How to handle negative numbers?</summary>
+        <p>The problem states n is positive, so negative cases don't need to be handled.</p>
+      </details>
+
+      <details>
+        <summary>4. Why does modulus approach work better?</summary>
+        <p>Modulus avoids string conversion and has O(1) space complexity vs O(d) for string methods.</p>
+      </details>
+
+      <details>
+        <summary>5. What's the maximum number of digits?</summary>
+        <p>For n ≤ 10^6, maximum digits is 7 (e.g., 9,999,999).</p>
+      </details>
+
+      <details>
+        <summary>6. How does the product initialization work?</summary>
+        <p>Product must be initialized to 1 because multiplying by 1 is the multiplicative identity. Initializing to 0
+          would make the entire product zero.</p>
+      </details>
+
+      <details>
+        <summary>7. What if a number has leading zeros?</summary>
+        <p>Numbers don't have leading zeros in their decimal representation. For example, 001 is stored as 1.</p>
+      </details>
+
+      <details>
+        <summary>8. Is there a mathematical formula?</summary>
+        <p>No direct formula exists. Digit extraction is required for each number.</p>
+      </details>
+
+      <details>
+        <summary>9. Can we use logarithms to count digits?</summary>
+        <p>Logarithms can count digits but don't help with extracting individual digits. Stick to modulus or string
+          methods.</p>
+      </details>
+
+      <details>
+        <summary>10. What are common mistakes?</summary>
+        <p>Common mistakes: initializing product to 0, not preserving original n value, and not handling zero digits
+          correctly.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Insight:</strong> This problem demonstrates how mathematical digit manipulation can be efficiently
+      solved with basic operations. The modulus approach is optimal, while string conversion offers readability. Always
+      handle zero digits carefully in product calculations.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

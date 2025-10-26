@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 2094 | Finding 3-Digit Even Numbers</title>
+  <meta name="description"
+    content="Complete solutions for LeetCode 2094: Efficient approaches to find all unique 3-digit even numbers from digits. Detailed analysis with time/space complexity.">
+  <meta name="keywords"
+    content="LeetCode 2094, 3-Digit Even Numbers, Array Permutations, Digit Combinations, LeetCode Easy Problem, Unique Numbers Generation, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, Leetcode company dsa problem">
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/2094-finding-3-digit-even-numbers.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 2094: Finding 3-Digit Even Numbers">
+  <meta property="og:description"
+    content="Learn efficient methods to generate valid 3-digit even numbers from digit arrays. Complete guide with brute-force and optimized approaches.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/2094.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/2094-finding-3-digit-even-numbers.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 2094: Finding 3-Digit Even Numbers">
+  <meta name="twitter:description"
+    content="Optimal solutions for generating valid 3-digit even numbers with unique combinations. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/2094.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Finding 3-Digit Even Numbers",
+      "url": "https://algopush.com/Leetcode/2094-finding-3-digit-even-numbers.html",
+      "image": "https://algopush.com/Leetcode/Images/2094.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-15",
+      "dateModified": "2025-05-15",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>2094. Finding 3-Digit Even Numbers</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/2094.png" alt="3-digit number formation visualization"
+        loading="lazy">
+    </div>
+
+    <h1>2094: Finding 3-Digit Even Numbers</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Easy</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Combinatorics, Sorting</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Microsoft, Adobe</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Optimization Insight:</strong> Generate numbers from 100 to 998 (step 2) and check digit availability for
+      O(1) space complexity.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an array of digits (0-9), return all unique 3-digit even numbers that can be formed using these digits
+      without leading zeros.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: digits = [2,1,3,0]
+Output: [102,120,130,132,210,230,302,310,312,320]</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: digits = [2,2,8,8,2]
+Output: [222,228,282,288,822,828,882]</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/finding-3-digit-even-numbers/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Brute-force Check (Optimal)</h2>
+    <p>Iterate through all possible 3-digit even numbers and verify digit availability.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Generate numbers from 100 to 998 with step 2</li>
+      <li>For each number, check if all digits exist in input</li>
+      <li>Use frequency count to handle duplicates</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(450 * n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimal Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-opt">C++</button>
+          <button class="tab-button" data-tab="java-opt">Java</button>
+          <button class="tab-button" data-tab="python-opt">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;<span class="code-token-keyword">int</span>&gt; <span class="code-token-function">findEvenNumbers</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& digits) {
+        vector&lt;<span class="code-token-keyword">int</span>&gt; res;
+        <span class="code-token-keyword">int</span> count[10] = {0};
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> d : digits) count[d]++;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num = 100; num < 999; num += 2) {
+            <span class="code-token-keyword">int</span> temp[10] = {0};
+            <span class="code-token-keyword">int</span> n = num;
+            temp[n%10]++; n /= 10;
+            temp[n%10]++; n /= 10;
+            temp[n%10]++;
+            
+            <span class="code-token-keyword">if</span>(temp[0] > count[0]) <span class="code-token-keyword">continue</span>;
+            <span class="code-token-keyword">bool</span> valid = true;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i=1; i<10; i++) {
+                <span class="code-token-keyword">if</span>(temp[i] > count[i]) {
+                    valid = false;
+                    <span class="code-token-keyword">break</span>;
+                }
+            }
+            <span class="code-token-keyword">if</span>(valid) res.push_back(num);
+        }
+        <span class="code-token-keyword">return</span> res;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span>[] <span class="code-token-function">findEvenNumbers</span>(<span class="code-token-keyword">int</span>[] digits) {
+        List&lt;Integer&gt; res = <span class="code-token-keyword">new</span> ArrayList<>();
+        <span class="code-token-keyword">int</span>[] count = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[10];
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> d : digits) count[d]++;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num = 100; num < 999; num += 2) {
+            <span class="code-token-keyword">int</span>[] temp = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[10];
+            <span class="code-token-keyword">int</span> n = num;
+            temp[n%10]++; n /= 10;
+            temp[n%10]++; n /= 10;
+            temp[n%10]++;
+            
+            <span class="code-token-keyword">if</span>(temp[0] > count[0]) <span class="code-token-keyword">continue</span>;
+            <span class="code-token-keyword">boolean</span> valid = true;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i=1; i<10; i++) {
+                <span class="code-token-keyword">if</span>(temp[i] > count[i]) {
+                    valid = false;
+                    <span class="code-token-keyword">break</span>;
+                }
+            }
+            <span class="code-token-keyword">if</span>(valid) res.add(num);
+        }
+        <span class="code-token-keyword">return</span> res.stream().mapToInt(i->i).toArray();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">findEvenNumbers</span>(self, digits: List[int]) -> List[int]:
+        freq = Counter(digits)
+        res = []
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> range(100, 999, 2):
+            temp = defaultdict(int)
+            n = num
+            temp[n%10] += 1
+            n //= 10
+            temp[n%10] += 1
+            n //= 10
+            temp[n%10] += 1
+            
+            <span class="code-token-keyword">if</span> temp[0] > freq.get(0, 0):
+                <span class="code-token-keyword">continue</span>
+                
+            valid = True
+            <span class="code-token-keyword">for</span> d <span class="code-token-keyword">in</span> temp:
+                <span class="code-token-keyword">if</span> d == 0:
+                    <span class="code-token-keyword">continue</span>
+                <span class="code-token-keyword">if</span> temp[d] > freq.get(d, 0):
+                    valid = False
+                    <span class="code-token-keyword">break</span>
+                    
+            <span class="code-token-keyword">if</span> valid:
+                res.append(num)
+                
+        <span class="code-token-keyword">return</span> res</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Efficiency Note:</strong> This approach checks only 450 numbers (100-998 even) making it O(1) in
+        practice for large digit arrays.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Permutation Generation</h2>
+    <p>Generate all valid 3-digit combinations and filter results.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Generate all 3-digit permutations with replacement</li>
+      <li>Filter numbers with leading zeros and odd numbers</li>
+      <li>Use set to eliminate duplicates</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n³)</td>
+          <td>O(n³)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Combinatorial Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-comb">C++</button>
+          <button class="tab-button" data-tab="java-comb">Java</button>
+          <button class="tab-button" data-tab="python-comb">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-comb-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;<span class="code-token-keyword">int</span>&gt; <span class="code-token-function">findEvenNumbers</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& digits) {
+        unordered_set&lt;<span class="code-token-keyword">int</span>&gt; res;
+        <span class="code-token-keyword">int</span> n = digits.<span class="code-token-function">size</span>();
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span>(digits[i] == 0) <span class="code-token-keyword">continue</span>;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j < n; j++) {
+                <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> k = 0; k < n; k++) {
+                    <span class="code-token-keyword">if</span>(i == j || j == k || i == k) <span class="code-token-keyword">continue</span>;
+                    <span class="code-token-keyword">int</span> num = digits[i]*100 + digits[j]*10 + digits[k];
+                    <span class="code-token-keyword">if</span>(num % 2 == 0) res.insert(num);
+                }
+            }
+        }
+        
+        vector&lt;<span class="code-token-keyword">int</span>&gt; result(res.begin(), res.end());
+        sort(result.begin(), result.end());
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-comb-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span>[] <span class="code-token-function">findEvenNumbers</span>(<span class="code-token-keyword">int</span>[] digits) {
+        Set&lt;Integer&gt; res = <span class="code-token-keyword">new</span> HashSet<>();
+        <span class="code-token-keyword">int</span> n = digits.length;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span>(digits[i] == 0) <span class="code-token-keyword">continue</span>;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j < n; j++) {
+                <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> k = 0; k < n; k++) {
+                    <span class="code-token-keyword">if</span>(i == j || j == k || i == k) <span class="code-token-keyword">continue</span>;
+                    <span class="code-token-keyword">int</span> num = digits[i]*100 + digits[j]*10 + digits[k];
+                    <span class="code-token-keyword">if</span>(num % 2 == 0) res.add(num);
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> res.stream().sorted().mapToInt(i->i).toArray();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-comb-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">findEvenNumbers</span>(self, digits: List[int]) -> List[int]:
+        res = set()
+        n = len(digits)
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            <span class="code-token-keyword">if</span> digits[i] == 0:
+                <span class="code-token-keyword">continue</span>
+            <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(n):
+                <span class="code-token-keyword">for</span> k <span class="code-token-keyword">in</span> range(n):
+                    <span class="code-token-keyword">if</span> i == j <span class="code-token-keyword">or</span> j == k <span class="code-token-keyword">or</span> i == k:
+                        <span class="code-token-keyword">continue</span>
+                    num = digits[i]*100 + digits[j]*10 + digits[k]
+                    <span class="code-token-keyword">if</span> num % 2 == 0:
+                        res.add(num)
+                        
+        <span class="code-token-keyword">return</span> sorted(res)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> While intuitive, this approach becomes inefficient for large input sizes
+        (n=100 → 1,000,000 iterations).
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time</th>
+          <th>Space</th>
+          <th>Best Use Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brute-force Check</td>
+          <td>O(450n)</td>
+          <td>O(n)</td>
+          <td>Large input sizes</td>
+        </tr>
+        <tr>
+          <td>Permutation Generation</td>
+          <td>O(n³)</td>
+          <td>O(n³)</td>
+          <td>Small input sizes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Performance Note:</strong> The permutation approach becomes impractical for n > 20 (4000+ operations vs
+      450*20=9000 for brute-force).
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+    <h3>1. All Zeros</h3>
+    <pre><code>Input: [0,0,0] → Output: []</code></pre>
+
+    <h3>2. Single Non-zero Digit</h3>
+    <pre><code>Input: [2,2,2] → Output: [222]</code></pre>
+
+    <h3>3. No Even Numbers Possible</h3>
+    <pre><code>Input: [1,3,5] → Output: []</code></pre>
+
+    <div class="callout danger">
+      <strong>Critical Check:</strong> Always verify the last digit is even and first digit is non-zero in all generated
+      numbers.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why use frequency counting in optimal approach?</summary>
+        <p>To handle duplicate digits efficiently and verify digit availability in O(1) time per number.</p>
+      </details>
+
+      <details>
+        <summary>2. How to handle duplicate digits in permutation approach?</summary>
+        <p>Using a Set data structure automatically eliminates duplicate combinations.</p>
+      </details>
+
+      <details>
+        <summary>3. Why start from 100 and increment by 2?</summary>
+        <p>Ensures we only check even numbers and skip invalid numbers with leading zeros.</p>
+      </details>
+
+      <details>
+        <summary>4. Can we optimize permutation generation?</summary>
+        <p>Yes, by pre-filtering even digits for last position and non-zero digits for first position.</p>
+      </details>
+
+      <details>
+        <summary>5. How does the optimal approach handle duplicates?</summary>
+        <p>By checking frequency counts rather than tracking indices, allowing natural handling of duplicates.</p>
+      </details>
+
+      <details>
+        <summary>6. What's the maximum possible numbers to check?</summary>
+        <p>450 numbers (from 100 to 998 with step 2), making the optimal approach very efficient.</p>
+      </details>
+
+      <details>
+        <summary>7. Why sort the result at the end?</summary>
+        <p>To meet problem requirements of returning numbers in sorted order.</p>
+      </details>
+
+      <details>
+        <summary>8. How to handle input with less than 3 digits?</summary>
+        <p>Problem constraints guarantee at least 3 digits, so no need to handle this case.</p>
+      </details>
+
+      <details>
+        <summary>9. What if input contains negative numbers?</summary>
+        <p>Problem constraints specify digits are 0-9, so no negative values to handle.</p>
+      </details>
+
+      <details>
+        <summary>10. Real-world applications of this problem?</summary>
+        <p>Combination locks, password generation, and inventory code validation systems.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Observation:</strong> This problem demonstrates the importance of choosing the right approach based
+      on input constraints. While combinatorial solutions seem natural, mathematical insights often provide more
+      efficient answers.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    // Reuse the same JavaScript from previous post
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

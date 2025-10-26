@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore free programming resources: LeetCode solutions, coding patterns, tech trends, and in-depth algorithm explanations. Learn data structures and algorithms." />
+  <meta name="keywords" content="LeetCode solutions, programming patterns, coding blog, data structures, algorithms, C++, Python, Java, algorithm explanations, tech trends, free programming resources" />
+  <title>Algopush | Free Programming Resources & LeetCode Solutions</title>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://algopush.com" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="../components/favicon.png" />
+
+  <!-- Google Adsense verification -->
+  <meta name="google-adsense-account" content="ca-pub-2721629716313837">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="Algopush | Free Programming Resources & LeetCode Solutions" />
+  <meta property="og:description"
+    content="Free programming resources: LeetCode solutions, coding patterns, and algorithm explanations. Learn data structures through detailed blog posts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://algopush.com/" />
+  <meta property="og:image" content="https://algopush.com/components/MainImage1.png" />
+  <meta property="og:site_name" content="Algopush" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Algopush | Free Programming Resources & LeetCode Solutions" />
+  <meta name="twitter:description"
+    content="Free programming resources: LeetCode solutions, coding patterns, and algorithm explanations. Learn data structures through detailed blog posts." />
+  <meta name="twitter:image" content="https://algopush.com/components/MainImage1.png" />
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Structured Data (Schema.org) -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Algopush",
+        "url": "https://algopush.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://algopush.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com/",
+        "logo": "https://algopush.com/components/MainImage1.png"
+      }
+    </script>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://algopush.com"
+        }]
+      }
+    </script>
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="./styles.css" as="style" />
+  <link rel="preload" href="./script.js" as="script" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Animate.css for animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0SVDQ76NF5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-0SVDQ76NF5");
+  </script>
+
+  <style>
+    :root {
+      /* Core Colors */
+      --primary-color: #196391;
+      /* Main buttons, headings, navigation */
+      --secondary-color: #102b41;
+      /* Borders, footer, secondary elements */
+      --accent-color: #f0c39f;
+      /* Links, highlights, interactive states */
+      --text-color: #222;
+      /* Soft black for better readability */
+      --light-text: #6b7280;
+      /* Lighter gray (accessible contrast) */
+
+      /* Backgrounds */
+      --background-color: #f5f9fc;
+      /* Light blue-gray for page BG */
+      --card-bg: #ffffff;
+      /* Pure white for content cards/posts */
+      --hover-bg: rgba(25,
+          99,
+          145,
+          0.05);
+      /* Subtle hover effect (optional) */
+
+      /* UI Elements */
+      --border-radius: 6px;
+      /* Consistent rounded corners */
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+      /* Softer shadow */
+      --box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.12);
+      /* Hover elevation */
+
+      /* Spacing */
+      --spacing-unit: 1rem;
+      /* Base spacing for margins/padding */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Breadcrumb Styles */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: #f5f5f5;
+      border-radius: var(--border-radius);
+      margin: 1rem 0 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb ol {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin: 0;
+    }
+
+    .breadcrumb li {
+      display: inline;
+      margin-right: 0.5rem;
+    }
+
+    .breadcrumb li:not(:last-child)::after {
+      content: "›";
+      margin-left: 0.5rem;
+      color: var(--light-text);
+    }
+
+    .breadcrumb [aria-current="page"] {
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      font-size: clamp(1rem, 1vw, 1.25rem);
+    }
+
+    .main-container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 calc(var(--spacing-unit) * 1.5);
+    }
+
+    section {
+      padding: calc(var(--spacing-unit) * 3) 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      text-align: center;
+      margin-bottom: calc(var(--spacing-unit) * 2);
+      color: var(--secondary-color);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-radius: var(--border-radius);
+      margin: calc(var(--spacing-unit) * 2) 0;
+    }
+
+    .hero-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      margin-bottom: var(--spacing-unit);
+      line-height: 1.2;
+    }
+
+    .hero-title span {
+      color: var(--primary-color);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--light-text);
+      max-width: 100%;
+      margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: var(--spacing-unit);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-view-all,
+    .btn-newsletter {
+      padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.5);
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+      font-size: clamp(0.875rem, 2vw, 1rem);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-0.125rem);
+    }
+
+    .btn-secondary {
+      border: 0.125rem solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: calc(var(--spacing-unit) * 3) 0;
+      background-color: #f8fafc;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+      gap: calc(var(--spacing-unit) * 2);
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      padding: calc(var(--spacing-unit) * 2);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .feature-card.animate {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-0.5rem);
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: var(--spacing-unit);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon img {
+      transform: scale(1.1);
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: calc(var(--spacing-unit) * 0.5);
+      color: var(--primary-color);
+    }
+
+    .feature-card p {
+      color: var(--light-text);
+      font-size: 0.9375rem;
+    }
+
+    /* Latest Posts */
+    .latest-posts {
+      padding: calc(var(--spacing-unit) * 3) 0;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+      gap: calc(var(--spacing-unit) * 2);
+      margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+
+    .post-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: calc(var(--spacing-unit) * 1.5);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-0.3125rem);
+    }
+
+    .post-badge {
+      position: absolute;
+      top: -0.625rem;
+      right: 1.25rem;
+      background: var(--primary-color);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .post-card h3 {
+      margin-bottom: calc(var(--spacing-unit) * 0.5);
+      font-size: 1.125rem;
+    }
+
+    .post-card p {
+      color: var(--light-text);
+      margin-bottom: var(--spacing-unit);
+      font-size: 0.9375rem;
+    }
+
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      color: var(--light-text);
+      margin-bottom: var(--spacing-unit);
+    }
+
+    .post-link {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .post-link:hover {
+      text-decoration: underline;
+    }
+
+    .view-all-container {
+      text-align: center;
+      margin-top: calc(var(--spacing-unit) * 1.5);
+    }
+
+    .btn-view-all {
+      background: var(--primary-color);
+      color: white;
+      padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 2);
+    }
+
+    .btn-view-all:hover {
+      background: var(--secondary-color);
+    }
+
+    /* LeetCode Solutions */
+    .leetcode-section {
+      padding: calc(var(--spacing-unit) * 3) 0;
+      background-color: #f8fafc;
+    }
+
+    .leetcode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+      gap: calc(var(--spacing-unit) * 2);
+      margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+
+    .leetcode-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: calc(var(--spacing-unit) * 1.5);
+      transition: transform 0.3s ease;
+    }
+
+    .leetcode-card:hover {
+      transform: translateY(-0.3125rem);
+    }
+
+    .leetcode-card h3 {
+      margin-bottom: calc(var(--spacing-unit) * 0.5);
+      font-size: 1.125rem;
+    }
+
+    .leetcode-card p {
+      color: var(--light-text);
+      margin-bottom: var(--spacing-unit);
+      font-size: 0.9375rem;
+    }
+
+    .leetcode-difficulty {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-unit);
+    }
+
+    .leetcode-difficulty.easy {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    .leetcode-difficulty.medium {
+      background-color: #fef9c3;
+      color: #854d0e;
+    }
+
+    .leetcode-difficulty.hard {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .leetcode-link {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .leetcode-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Developers Section */
+    .developers-section {
+      padding: calc(var(--spacing-unit) * 4) 0;
+      background: linear-gradient(135deg, #d9edfac1 0%, #e0f2fe 100%);
+      text-align: center;
+    }
+
+    .developers-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin-bottom: calc(var(--spacing-unit) * 2);
+      color: var(--secondary-color);
+    }
+
+    .developers-slider {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 calc(var(--spacing-unit) * 2);
+    }
+
+    .developer-slide {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: calc(var(--spacing-unit) * 2);
+      margin: 0 calc(var(--spacing-unit) * 1);
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .developer-slide.active {
+      display: block;
+    }
+
+    .developer-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .developer-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary-color);
+      margin-bottom: var(--spacing-unit);
+      transition: transform 0.3s ease;
+    }
+
+    .developer-slide:hover .developer-image {
+      transform: scale(1.05);
+    }
+
+    .developer-name {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: calc(var(--spacing-unit) * 0.5);
+    }
+
+    .developer-role {
+      color: var(--light-text);
+      margin-bottom: var(--spacing-unit);
+      font-size: 0.9375rem;
+    }
+
+    .developer-bio {
+      margin-bottom: var(--spacing-unit);
+      max-width: 600px;
+      color: var(--text-color);
+    }
+
+    .developer-links {
+      display: flex;
+      justify-content: center;
+      gap: calc(var(--spacing-unit) * 1);
+      margin-top: var(--spacing-unit);
+    }
+
+    .developer-link {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.1);
+    }
+
+    .developer-link:hover {
+      color: white;
+      background: var(--primary-color);
+      transform: translateY(-0.25rem);
+    }
+
+    .slider-controls {
+      margin-top: calc(var(--spacing-unit) * 2);
+      display: flex;
+      justify-content: center;
+      gap: calc(var(--spacing-unit) * 1);
+    }
+
+    .slider-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slider-btn:hover {
+      background: var(--secondary-color);
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 62rem) {
+
+      .features-grid,
+      .posts-grid,
+      .leetcode-grid {
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      }
+    }
+
+    @media (max-width: 48rem) {
+      section {
+        padding: calc(var(--spacing-unit) * 2) 0;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        text-align: center;
+      }
+
+      .post-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .developer-slide {
+        padding: var(--spacing-unit);
+      }
+
+      .developer-image {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    @media (max-width: 30rem) {
+      .main-container {
+        padding: 0 var(--spacing-unit);
+      }
+
+      .feature-card {
+        padding: var(--spacing-unit);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+  <br>
+
+  <main class="main-container">
+    <!-- Hero Section -->
+    <section class="hero animate__animated animate__fadeIn">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Free Programming Resources at <span>Algopush</span>
+        </h1>
+        <p class="hero-subtitle">
+          LeetCode solutions, algorithm patterns, tech trends, and in-depth
+          explanations
+        </p>
+        <div class="hero-cta">
+          <a href="/Leetcode/leetcode.html" class="btn-primary">Browse LeetCode Solutions</a>
+          <a href="#" class="btn-secondary">Read Latest Posts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <h2 class="section-title">What You'll Find Here</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="./components/Image1.png" alt="Detailed Explanations" />
+          </div>
+          <h3>Detailed Explanations</h3>
+          <p>
+            Clear breakdowns of algorithms and data structures with multiple
+            approaches and complexity analysis.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="./components/Image2.png" alt="Pattern Recognition" />
+          </div>
+          <h3>Pattern Recognition</h3>
+          <p>
+            Identify common coding patterns to solve problems more
+            efficiently.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="./components/Image3.png" alt="Tech Trends" />
+          </div>
+          <h3>Tech Trends</h3>
+          <p>
+            Analysis of current trends in software development and computer
+            science.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="./components/Image4.png" alt="Practical Tips" />
+          </div>
+          <h3>Practical Tips</h3>
+          <p>
+            Actionable advice for coding interviews and real-world programming
+            challenges.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Posts -->
+    <!-- <section class="latest-posts">
+      <h2 class="section-title">Recent Articles</h2>
+      <div class="posts-grid">
+        
+        <article class="post-card">
+          <div class="post-badge">New</div>
+          <h3>Mastering Sliding Window Technique</h3>
+          <p>Complete guide with 5 LeetCode examples and variations</p>
+          <div class="post-meta">
+            <span class="post-date">April 28, 2024</span>
+            <span class="post-read-time">8 min read</span>
+          </div>
+          <a href="./Blog/sliding-window-technique.html" class="post-link">Read Article →</a>
+        </article>
+
+        
+        <article class="post-card">
+          <div class="post-badge">Algorithm</div>
+          <h3>Union-Find Explained</h3>
+          <p>Understanding Disjoint Set Union with path compression</p>
+          <div class="post-meta">
+            <span class="post-date">April 29, 2024</span>
+            <span class="post-read-time">6 min read</span>
+          </div>
+          <a href="#" class="post-link">Read Article →</a>
+        </article>
+
+        
+        <article class="post-card">
+          <div class="post-badge">Trends</div>
+          <h3>Rust in 2023</h3>
+          <p>Why Rust is gaining popularity for systems programming</p>
+          <div class="post-meta">
+            <span class="post-date">April 30, 2024</span>
+            <span class="post-read-time">5 min read</span>
+          </div>
+          <a href="#" class="post-link">Read Article →</a>
+        </article>
+      </div>
+      <div class="view-all-container">
+        <a href="#" class="btn-view-all">View All Articles</a>
+      </div>
+    </section> -->
+
+    <!-- LeetCode Solutions -->
+    <section class="leetcode-section">
+      <h2 class="section-title">Popular LeetCode Solutions</h2>
+      <div class="leetcode-grid">
+        <div class="leetcode-card">
+          <h3>Count Subarrays of Length Three With a Condition</h3>
+          <p>Multiple approaches with time/space analysis</p>
+          <div class="leetcode-difficulty easy">Easy</div>
+          <a href="./Leetcode/3392-count-subarrays-of-length-three-with-condition.html" class="leetcode-link">View
+            Solution →</a>
+        </div>
+        <div class="leetcode-card">
+          <h3>Count Subarrays Where Max Element Appears at Least K Times</h3>
+          <p>
+            Count all subarrays where the maximum element appears at least k
+            times
+          </p>
+          <div class="leetcode-difficulty medium">Medium</div>
+          <a href="./Leetcode/2962-count-subarrays-where-max-element-appears-at-least-k-times.html"
+            class="leetcode-link">View Solution →</a>
+        </div>
+        <div class="leetcode-card">
+          <h3>Count Subarrays With Score Less Than K</h3>
+          <p>
+            Count all the subarrays where product of sum and length is less
+            than k
+          </p>
+          <div class="leetcode-difficulty hard">Hard</div>
+          <a href="./Leetcode/2302-count-subarrays-with-score-less-than-k.html" class="leetcode-link">View Solution
+            →</a>
+        </div>
+      </div>
+      <div class="view-all-container">
+        <a href="./Leetcode/leetcode.html" class="btn-view-all">Browse All Solutions</a>
+      </div>
+    </section>
+
+    <!-- Developers Section -->
+    <!-- <section class="developers-section animate__animated animate__fadeIn">
+      <h2 class="developers-title">Meet Our Team</h2>
+      <div class="developers-slider">
+        Developer 1
+        <div class="developer-slide active">
+          <div class="developer-info">
+            <img src="./components/developer1.jpg" alt="Piyush Kumar" class="developer-image" />
+            <h3 class="developer-name">Piyush Kumar</h3>
+            <p class="developer-role">Developer</p>
+            <p class="developer-bio">
+              NSUT Graduate | GATE CS Qualified | C++ Developer/Programmer
+            </p>
+            <div class="developer-links">
+              <a href="https://leetcode.com/u/Delhi_Boy_2/" target="_blank" class="developer-link" aria-label="LeetCode profile">
+                <i class="fas fa-code"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/piyushkumarnsut/" target="_blank" class="developer-link" aria-label="LinkedIn profile">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        Developer 2
+        <div class="developer-slide">
+          <div class="developer-info">
+            <img src="./components/developer2.jpg" alt="Devanshu Sahay" class="developer-image" />
+            <h3 class="developer-name">Devanshu Sahay</h3>
+            <p class="developer-role">Engineer</p>
+            <p class="developer-bio">
+              NSUT Student | BioTech Engineer | Programmer
+            </p>
+            <div class="developer-links">
+              <a href="#" class="developer-link" aria-label="LeetCode profile">
+                <i class="fas fa-code"></i>
+              </a>
+              <a href="#" class="developer-link" aria-label="LinkedIn profile">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="developer-link" aria-label="GitHub profile">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-controls">
+          <button class="slider-btn prev-btn" aria-label="Previous developer">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="slider-btn next-btn" aria-label="Next developer">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>  -->
+    
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    // Load header and footer
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("../components/headerhead.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+
+      // Animate feature cards on scroll
+      const featureCards = document.querySelectorAll(".feature-card");
+
+      const animateCards = () => {
+        featureCards.forEach((card, index) => {
+          setTimeout(() => {
+            const cardPosition = card.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+
+            if (cardPosition < screenPosition) {
+              card.classList.add("animate");
+            }
+          }, index * 150);
+        });
+      };
+
+      window.addEventListener("load", animateCards);
+      window.addEventListener("scroll", animateCards);
+
+      // Developer slider functionality
+      const slides = document.querySelectorAll(".developer-slide");
+      const prevBtn = document.querySelector(".prev-btn");
+      const nextBtn = document.querySelector(".next-btn");
+      let currentSlide = 0;
+      let slideInterval;
+
+      function showSlide(index) {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        slides[index].classList.add("active");
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+        resetInterval();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+        resetInterval();
+      }
+
+      function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+
+      // Start auto-rotation
+      slideInterval = setInterval(nextSlide, 5000);
+    });
+  </script>
+</body>
+
+</html>

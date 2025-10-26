@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Primary Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Algopush | Coding Solutions & Algorithm Learning Platform</title>
+  <meta name="description"
+    content="Algopush provides comprehensive coding solutions, algorithm tutorials, programming resources to help developers master computer science fundamentals.">
+  <meta name="keywords"
+    content="coding solutions, algorithm tutorials, programming help, learn algorithms, data structures, computer science resources">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="About Algopush | Coding Solutions & Algorithm Learning Platform">
+  <meta property="og:description" content="Algopush provides comprehensive coding solutions and algorithm tutorials">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://algopush.com/components/about.html">
+  <meta property="og:image" content="https://algopush.com/components/MainImage1.png">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://algopush.com/components/about.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #f0c39f;
+      --text-color: #222;
+      --light-text: #6b7280;
+      --background-color: #f5f9fc;
+      --card-bg: #ffffff;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+      --spacing-unit: 1rem;
+      --transition: all 0.2s ease;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .content-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 var(--spacing-unit);
+    }
+
+    .about-content {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 2.25rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--secondary-color);
+      font-size: 1.75rem;
+      margin: 2rem 0 1rem;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .mission-statement {
+      background-color: rgba(25, 99, 145, 0.1);
+      padding: 1.5rem;
+      border-left: 4px solid var(--secondary-color);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      margin: 2rem 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card {
+      background: var(--background-color);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+
+    /* Enhanced Link Styling */
+    .content-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid var(--accent-color);
+      transition: var(--transition);
+      padding-bottom: 2px;
+    }
+
+    .content-link:hover {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      margin-top: 1rem;
+    }
+
+    .cta-button:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: var(--box-shadow);
+    }
+
+    @media (max-width: 768px) {
+      .about-content {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content-container {
+        margin: 1rem auto;
+      }
+
+      .about-content {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header-container"></div>
+
+  <main class="content-container">
+    <article class="about-content">
+      <h1>About - Algopush</h1>
+
+      <section>
+        <h2>Our Platform</h2>
+        <p>Algopush is a comprehensive programming resource dedicated to helping developers master algorithms, data
+          structures, and problem-solving techniques. Our platform offers:</p>
+        <ul>
+          <li>Detailed algorithm explanations with complexity analysis</li>
+          <li>Practical coding solutions for common interview questions</li>
+          <li>Step-by-step tutorials on fundamental computer science concepts</li>
+          <li>Regularly updated content to reflect current industry standards</li>
+        </ul>
+      </section>
+
+      <section class="mission-statement">
+        <h2>Our Mission</h2>
+        <p>We believe that understanding algorithms and data structures is fundamental to becoming a proficient
+          developer. Our mission is to make these concepts accessible through clear explanations, practical examples,
+          and well-organized resources.</p>
+      </section>
+
+      <section>
+        <h2>What We Offer</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3>Educational Content</h3>
+            <p>Comprehensive tutorials covering essential computer science topics with practical implementations.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>Problem Solving</h3>
+            <p>Detailed solutions to coding problems with multiple approaches and complexity analysis.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚙️</div>
+            <h3>Practical Resources</h3>
+            <p>Real-world applications of algorithms to help bridge the gap between theory and practice.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Content Principles</h2>
+        <p>All Algopush content is created following these core principles:</p>
+        <ul>
+          <li><strong>Accuracy:</strong> Verified solutions with correct implementations</li>
+          <li><strong>Clarity:</strong> Clear explanations suitable for various skill levels</li>
+          <li><strong>Practicality:</strong> Focus on real-world applications</li>
+          <li><strong>Originality:</strong> Unique content created by our team</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Get Started</h2>
+        <p>Explore our <a href="../Leetcode/leetcode.html" class="content-link">Leetcode solutions</a> or <a
+            href="../components/contacts.html" class="content-link">contact us</a> with any questions.</p>
+        <a href="https://algopush.com" class="cta-button">Visit Homepage</a>
+      </section>
+    </article>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script>
+    // Load header and footer
+    fetch('./header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-container').innerHTML = data)
+      .catch(error => console.error('Error loading header:', error));
+
+    fetch('./footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-container').innerHTML = data)
+      .catch(error => console.error('Error loading footer:', error));
+
+    // Schema markup for SEO
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Algopush",
+      "url": "https://algopush.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://algopush.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    });
+    document.head.appendChild(script);
+  </script>
+</body>
+
+</html>

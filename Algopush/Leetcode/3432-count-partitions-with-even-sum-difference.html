@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3432 | Count Partitions with Even Sum Difference</title>
+  <meta name="description"
+    content="Learn how to solve LeetCode problem 3432 - Count Partitions with Even Sum Difference with efficient approaches in C++, Java, and Python." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode 3432, Count Partitions with Even Sum Difference, prefix sum, array partitioning, coding interview preparation, algorithm solutions" />
+  <meta name="author" content="Algopush" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3432: Count Partitions with Even Sum Difference">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3432.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3432-count-partitions-with-even-sum-difference.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3432: Count Partitions with Even Sum Difference">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3432.png">
+
+  <!-- Google News / Publisher Meta Tags -->
+  <meta name="news_keywords" content="LeetCode, Count Partitions, Even Sum Difference, Algorithm, Programming">
+  <meta name="standout" content="https://algopush.com/Leetcode/3432-count-partitions-with-even-sum-difference.html">
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3432-count-partitions-with-even-sum-difference.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Structured Data for enhanced SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Count Partitions with Even Sum Difference",
+      "url": "https://algopush.com/Leetcode/3432-count-partitions-with-even-sum-difference.html",
+      "image": "https://algopush.com/Leetcode/Images/3432.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-03",
+      "dateModified": "2025-05-03",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header will be inserted by JavaScript -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3432. Count Partitions with Even Sum Difference</span>
+    </div>
+
+    <!-- Problem Visualization Image -->
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3432.png" alt="Count Partitions with Even Sum Difference"
+        loading="lazy">
+    </div>
+
+    <h1>3432: Count Partitions with Even Sum Difference</h1>
+
+    <!-- Problem Metadata -->
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Easy</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Prefix Sum, Math</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> The optimal solution for this problem runs in O(n) time with O(1) space by leveraging
+      prefix sums and mathematical properties of even numbers.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an integer array <code>nums</code> of length <code>n</code>, count the number of partitions where the
+      difference between the sum of the left and right subarrays is even.</p>
+    <p>A partition is defined as an index <code>i</code> where <code>0 <= i < n - 1</code>, splitting the array into:
+    </p>
+    <ul>
+      <li>Left subarray: indices <code>[0, i]</code></li>
+      <li>Right subarray: indices <code>[i + 1, n - 1]</code></li>
+    </ul>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: nums = [10,10,3,7,6]
+Output: 4
+Explanation:
+Partition at index 0: Left = [10], Right = [10,3,7,6], Difference = -16 (even)
+Partition at index 1: Left = [10,10], Right = [3,7,6], Difference = 4 (even)
+Partition at index 2: Left = [10,10,3], Right = [7,6], Difference = 10 (even)
+Partition at index 3: Left = [10,10,3,7], Right = [6], Difference = 24 (even)</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: nums = [1,2,2]
+Output: 0
+Explanation: No partition results in an even difference.</code></pre>
+
+    <h3>Example 3</h3>
+    <pre><code>Input: nums = [2,4,6,8]
+Output: 3</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/count-partitions-with-even-sum-difference/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Brute Force</h2>
+    <p>Calculate sums for all possible partitions and check if their difference is even.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Iterate through all possible partition indices</li>
+      <li>For each partition, calculate left and right sums</li>
+      <li>Check if the difference is even</li>
+      <li>Count valid partitions</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n²)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Brute Force Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-bf">C++</button>
+          <button class="tab-button" data-tab="java-bf">Java</button>
+          <button class="tab-button" data-tab="python-bf">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-bf-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countPartitions</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        <span class="code-token-keyword">int</span> count = 0;
+
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n - 1; ++i) {
+            <span class="code-token-keyword">int</span> leftSum = 0, rightSum = 0;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt;= i; ++j) {
+                leftSum += nums[j];
+            }
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i + 1; j &lt; n; ++j) {
+                rightSum += nums[j];
+            }
+            <span class="code-token-keyword">if</span> ((leftSum - rightSum) % 2 == 0) {
+                ++count;
+            }
+        }
+
+        <span class="code-token-keyword">return</span> count;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-bf-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countPartitions</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">int</span> count = 0;
+
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n - 1; i++) {
+            <span class="code-token-keyword">int</span> leftSum = 0, rightSum = 0;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt;= i; j++) {
+                leftSum += nums[j];
+            }
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i + 1; j &lt; n; j++) {
+                rightSum += nums[j];
+            }
+            <span class="code-token-keyword">if</span> ((leftSum - rightSum) % 2 == 0) {
+                count++;
+            }
+        }
+
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-bf-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">countPartitions</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = <span class="code-token-function">len</span>(nums)
+        count = 0
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n - 1):
+            leftSum = <span class="code-token-function">sum</span>(nums[:i+1])
+            rightSum = <span class="code-token-function">sum</span>(nums[i+1:])
+            <span class="code-token-keyword">if</span> (leftSum - rightSum) % 2 == 0:
+                count += 1
+                
+        <span class="code-token-keyword">return</span> count</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> While straightforward, this approach is inefficient for large arrays due
+        to its O(n²) time complexity from recalculating sums for each partition.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Prefix Sum</h2>
+    <p>Optimize by precomputing prefix sums to calculate subarray sums in constant time.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Compute prefix sum array</li>
+      <li>Calculate total sum of the array</li>
+      <li>For each partition, get left sum from prefix array</li>
+      <li>Right sum is total sum minus left sum</li>
+      <li>Check if difference is even</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Prefix Sum Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-ps">C++</button>
+          <button class="tab-button" data-tab="java-ps">Java</button>
+          <button class="tab-button" data-tab="python-ps">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-ps-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countPartitions</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        vector&lt;<span class="code-token-keyword">int</span>&gt; <span class="code-token-function">prefix</span>(n);
+        prefix[0] = nums[0];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 1; i &lt; n; ++i) {
+            prefix[i] = prefix[i - 1] + nums[i];
+        }
+        
+        <span class="code-token-keyword">int</span> totalSum = prefix[n - 1];
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n - 1; ++i) {
+            <span class="code-token-keyword">int</span> leftSum = prefix[i];
+            <span class="code-token-keyword">int</span> rightSum = totalSum - leftSum;
+            <span class="code-token-keyword">if</span> ((leftSum - rightSum) % 2 == 0) {
+                ++count;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> count;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-ps-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countPartitions</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">int</span>[] prefix = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n];
+        prefix[0] = nums[0];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 1; i &lt; n; i++) {
+            prefix[i] = prefix[i - 1] + nums[i];
+        }
+        
+        <span class="code-token-keyword">int</span> totalSum = prefix[n - 1];
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n - 1; i++) {
+            <span class="code-token-keyword">int</span> leftSum = prefix[i];
+            <span class="code-token-keyword">int</span> rightSum = totalSum - leftSum;
+            <span class="code-token-keyword">if</span> ((leftSum - rightSum) % 2 == 0) {
+                count++;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-ps-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">countPartitions</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = <span class="code-token-function">len</span>(nums)
+        prefix = [0] * n
+        prefix[0] = nums[0]
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(1, n):
+            prefix[i] = prefix[i-1] + nums[i]
+            
+        totalSum = prefix[-1]
+        count = 0
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n - 1):
+            leftSum = prefix[i]
+            rightSum = totalSum - leftSum
+            <span class="code-token-keyword">if</span> (leftSum - rightSum) % 2 == 0:
+                count += 1
+                
+        <span class="code-token-keyword">return</span> count</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> The prefix sum approach reduces time complexity to O(n) by avoiding
+        repeated sum calculations, though it uses O(n) space for the prefix array.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Optimized Space (Mathematical Insight)</h2>
+    <p>Further optimize by recognizing that (leftSum - rightSum) is even when (leftSum + rightSum) and (leftSum -
+      rightSum) have the same parity.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Calculate total sum of the array</li>
+      <li>Track cumulative left sum as we iterate</li>
+      <li>Right sum is total sum minus current left sum</li>
+      <li>Check if difference is even using mathematical properties</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimized Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-opt">C++</button>
+          <button class="tab-button" data-tab="java-opt">Java</button>
+          <button class="tab-button" data-tab="python-opt">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countPartitions</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+        <span class="code-token-keyword">int</span> totalSum = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            totalSum += num;
+        }
+        
+        <span class="code-token-keyword">int</span> leftSum = 0;
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; nums.<span class="code-token-function">size</span>() - 1; ++i) {
+            leftSum += nums[i];
+            <span class="code-token-keyword">int</span> rightSum = totalSum - leftSum;
+            <span class="code-token-keyword">if</span> ((leftSum - rightSum) % 2 == 0) {
+                ++count;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> count;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countPartitions</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> totalSum = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            totalSum += num;
+        }
+        
+        <span class="code-token-keyword">int</span> leftSum = 0;
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; nums.length - 1; i++) {
+            leftSum += nums[i];
+            <span class="code-token-keyword">int</span> rightSum = totalSum - leftSum;
+            <span class="code-token-keyword">if</span> ((leftSum - rightSum) % 2 == 0) {
+                count++;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">countPartitions</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        totalSum = <span class="code-token-function">sum</span>(nums)
+        leftSum = 0
+        count = 0
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(<span class="code-token-function">len</span>(nums) - 1):
+            leftSum += nums[i]
+            rightSum = totalSum - leftSum
+            <span class="code-token-keyword">if</span> (leftSum - rightSum) % 2 == 0:
+                count += 1
+                
+        <span class="code-token-keyword">return</span> count</code></pre>
+        </div>
+      </div>
+      <div class="callout tip">
+        <strong>Key Insight:</strong> The difference (leftSum - rightSum) is even exactly when (leftSum + rightSum) and
+        (leftSum - rightSum) have the same parity. Since totalSum = leftSum + rightSum, we can optimize further by just
+        tracking the parity of leftSum.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Comparison of Approaches</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+          <th>When to Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brute Force</td>
+          <td>O(n²)</td>
+          <td>O(1)</td>
+          <td>Only for small inputs or understanding</td>
+        </tr>
+        <tr>
+          <td>Prefix Sum</td>
+          <td>O(n)</td>
+          <td>O(n)</td>
+          <td>When space is not a concern</td>
+        </tr>
+        <tr>
+          <td>Optimized</td>
+          <td>O(n)</td>
+          <td>O(1)</td>
+          <td>Best for most cases</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <strong>Interview Tip:</strong> When explaining the optimized solution, emphasize the mathematical insight that
+      allows us to reduce the space complexity while maintaining linear time.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Special Considerations</h2>
+    <p>When implementing solutions for this problem, consider these edge cases:</p>
+
+    <h3>1. Small Arrays</h3>
+    <pre><code><b>Input:</b> nums = [1,1]
+<b>Output:</b> 1
+<b>Explanation:</b> Only one possible partition with difference 0 (even)</code></pre>
+
+    <h3>2. All Elements Same</h3>
+    <pre><code><b>Input:</b> nums = [2,2,2,2]
+<b>Output:</b> 3
+<b>Explanation:</b> All partitions will have even difference (0)</code></pre>
+
+    <h3>3. No Valid Partitions</h3>
+    <pre><code><b>Input:</b> nums = [1,3,5]
+<b>Output:</b> 0
+<b>Explanation:</b> All partitions result in odd differences</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test your solution with arrays of length 2 (minimum valid input) and arrays
+      where all elements are identical, as these often reveal edge cases.
+    </div>
+
+    <hr />
+
+    <h2>Visualization</h2>
+    <div class="callout">
+      <p>The optimized approach works by maintaining a running left sum:</p>
+      <ol>
+        <li><strong>Initialization:</strong> Calculate total sum of the array</li>
+        <li><strong>Iteration:</strong> For each element, add to left sum and compute right sum</li>
+        <li><strong>Check:</strong> Verify if (leftSum - rightSum) is even</li>
+        <li><strong>Result:</strong> Count of valid partitions where the condition holds</li>
+      </ol>
+      <p>This approach efficiently tracks the necessary sums with minimal space usage.</p>
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why does (leftSum - rightSum) % 2 == 0 work?</summary>
+        <p>
+          The modulo operation checks the parity (evenness/oddness) of the difference. When the result is 0, the
+          difference is even. This is equivalent to checking if leftSum and rightSum have the same parity.
+        </p>
+      </details>
+
+      <details>
+        <summary>2. Can this problem be solved with constant space?</summary>
+        <p>
+          Yes, the optimized approach uses O(1) space by maintaining only the total sum and a running left sum, without
+          storing prefix sums.
+        </p>
+      </details>
+
+      <details>
+        <summary>3. How would you handle very large arrays?</summary>
+        <p>
+          The optimized O(n) time, O(1) space solution is ideal for large arrays as it processes the array in a single
+          pass without additional storage.
+        </p>
+      </details>
+
+      <details>
+        <summary>4. What's the mathematical insight behind the optimization?</summary>
+        <p>
+          The key insight is that (leftSum - rightSum) is even when (leftSum + rightSum) is even (since leftSum -
+          rightSum = 2*leftSum - totalSum). This allows us to just track the parity of leftSum.
+        </p>
+      </details>
+
+      <details>
+        <summary>5. Can this be extended to check for other difference conditions?</summary>
+        <p>
+          Yes, similar approaches can check for divisibility by other numbers (e.g., difference divisible by 3) by
+          adjusting the modulo condition.
+        </p>
+      </details>
+
+      <details>
+        <summary>6. How does this compare to the "Equal Sum Partition" problem?</summary>
+        <p>
+          This problem is simpler as it only checks for even difference, not exact equality. The equal sum problem
+          requires more complex dynamic programming.
+        </p>
+      </details>
+
+      <details>
+        <summary>7. What if we needed to return the partition indices?</summary>
+        <p>
+          We would store the indices where the condition is met rather than just counting them, but the core logic would
+          remain the same.
+        </p>
+      </details>
+
+      <details>
+        <summary>8. Can this be parallelized for better performance?</summary>
+        <p>
+          For extremely large arrays, prefix sums can be computed in parallel, but the O(n) sequential solution is
+          typically sufficient.
+        </p>
+      </details>
+
+      <details>
+        <summary>9. How would you test this code?</summary>
+        <p>
+          Test with arrays of varying lengths, including edge cases (length 2), arrays with all even/odd numbers, and
+          mixed parity arrays to verify all conditions.
+        </p>
+      </details>
+
+      <details>
+        <summary>10. What's the practical application of this algorithm?</summary>
+        <p>
+          Similar partitioning problems appear in load balancing, database sharding, and parallel computing where you
+          need to divide data with certain properties.
+        </p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Thoughts:</strong> This problem demonstrates how mathematical insights can lead to significant
+      optimizations in algorithm design. The progression from brute force to optimized solution shows the importance of
+      analyzing problem constraints and properties.
+    </div>
+  </main>
+
+  <!-- Footer will be inserted by JavaScript -->
+  <div id="footer"></div>
+
+  <script>
+    // Tab functionality with improved mobile support
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize tabs
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Set first tab as active by default if none are active
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        // Add click handlers
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+
+            // Update active tab button
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update active tab content
+            tabContents.forEach(content => content.classList.remove('active'));
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // FAQ highlight when opened
+      document.querySelectorAll('.faq-section details').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (detail.open) {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

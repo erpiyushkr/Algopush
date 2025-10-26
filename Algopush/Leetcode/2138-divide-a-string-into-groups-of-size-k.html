@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2138. Divide a String Into Groups of Size k | LeetCode</title>
+    <meta name="description"
+        content="Complete solution for LeetCode 2138: Multiple approaches to divide a string into groups of size k with C++, Java, and Python implementations.">
+    <meta name="keywords"
+        content="LeetCode 2138, Divide String, Groups of Size k, String Partition, Algorithm, Programming, Coding Interview, LeetCode Medium Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical" href="https://algopush.com/Leetcode/2138-divide-a-string-into-groups-of-size-k.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="2138. Divide a String Into Groups of Size k">
+    <meta property="og:description"
+        content="Efficient solutions for LeetCode 2138 with multiple approaches and code implementations.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/2138.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/2138-divide-a-string-into-groups-of-size-k.html">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 2138: Divide String Into Groups">
+    <meta name="twitter:description"
+        content="Complete solution for LeetCode 2138 with multiple approaches and code implementations.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/2138.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Divide String Into Groups Solution Guide",
+        "url": "https://algopush.com/Leetcode/2138-divide-a-string-into-groups-of-size-k.html",
+        "image": "https://algopush.com/Leetcode/Images/2138.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-06-21",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        }
+    }
+    </script>
+    <style>
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Main Content Container */
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        /* Problem Visualization Image */
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: #f8f9fa;
+            margin-top: 0.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        /* LeetCode-like Syntax Highlighting with Light Theme */
+        .code-token-keyword {
+            color: #007acc;
+        }
+
+        .code-token-function {
+            color: #795e26;
+        }
+
+        .code-token-number {
+            color: #098658;
+        }
+
+        .code-token-string {
+            color: #a31515;
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        /* Highlight Callouts */
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Code Container */
+        .code-container {
+            position: relative;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        /* Tabs */
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Problem Metadata */
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>2138. Divide a String Into Groups of Size k</span>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/2138.png" alt="String Partition Visualization">
+        </div>
+
+        <h1>2138. Divide a String Into Groups of Size k</h1>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Easy</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">String, Simulation</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Google, Amazon, Microsoft</span>
+            </div>
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>Given a string <code>s</code>, an integer <code>k</code>, and a character <code>fill</code>, partition the
+            string into groups of size <code>k</code> as follows:</p>
+        <ol>
+            <li>The first group consists of the first <code>k</code> characters</li>
+            <li>The second group consists of the next <code>k</code> characters</li>
+            <li>Continue this process until all characters are used</li>
+            <li>For the last group, if there aren't enough characters, complete it using the <code>fill</code> character
+            </li>
+        </ol>
+        <p>Return an array of strings representing all groups after partitioning.</p>
+
+        <h3>Example 1</h3>
+        <pre><code>Input: s = "abcdefghi", k = 3, fill = "x"
+Output: ["abc","def","ghi"]</code></pre>
+
+        <h3>Example 2</h3>
+        <pre><code>Input: s = "abcdefghij", k = 3, fill = "x"
+Output: ["abc","def","ghi","jxx"]</code></pre>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/" target="_blank">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr>
+
+        <h2>Approach 1: Substring with Padding (Brute Force)</h2>
+        <p>This approach processes the string by taking substrings of length <code>k</code> and pads the last group if
+            needed.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize an empty result list</li>
+            <li>Calculate the number of complete groups: <code>n = s.length() / k</code></li>
+            <li>For each complete group, take a substring of length <code>k</code> and add to result</li>
+            <li>For the last group:
+                <ul>
+                    <li>Take the remaining substring</li>
+                    <li>Add <code>fill</code> characters until length equals <code>k</code></li>
+                    <li>Add this group to result</li>
+                </ul>
+            </li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Substring with Padding</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-brute">C++</button>
+                    <button class="tab-button" data-tab="java-brute">Java</button>
+                    <button class="tab-button" data-tab="python-brute">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;string&gt; <span class="code-token-function">divideString</span>(string s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        vector&lt;string&gt; res;
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        <span class="code-token-keyword">int</span> completeGroups = n / k;
+        
+        <span class="code-token-comment">// Process complete groups</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < completeGroups; i++) {
+            res.<span class="code-token-function">push_back</span>(s.<span class="code-token-function">substr</span>(i * k, k));
+        }
+        
+        <span class="code-token-comment">// Handle last group</span>
+        <span class="code-token-keyword">if</span> (n % k != 0) {
+            string last = s.<span class="code-token-function">substr</span>(completeGroups * k);
+            <span class="code-token-keyword">while</span> (last.<span class="code-token-function">length</span>() < k) {
+                last += fill;
+            }
+            res.<span class="code-token-function">push_back</span>(last);
+        }
+        <span class="code-token-keyword">return</span> res;
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> String[] divideString(String s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        <span class="code-token-keyword">int</span> groups = (n + k - 1) / k; <span class="code-token-comment">// Ceiling division</span>
+        String[] res = <span class="code-token-keyword">new</span> String[groups];
+        
+        <span class="code-token-comment">// Process each group</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < groups; i++) {
+            <span class="code-token-keyword">int</span> start = i * k;
+            <span class="code-token-keyword">int</span> end = Math.<span class="code-token-function">min</span>(start + k, n);
+            String group = s.<span class="code-token-function">substring</span>(start, end);
+            
+            <span class="code-token-comment">// Pad if necessary</span>
+            <span class="code-token-keyword">if</span> (group.<span class="code-token-function">length</span>() < k) {
+                group += <span class="code-token-function">String</span>.<span class="code-token-function">valueOf</span>(fill).<span class="code-token-function">repeat</span>(k - group.<span class="code-token-function">length</span>());
+            }
+            res[i] = group;
+        }
+        <span class="code-token-keyword">return</span> res;
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">divideString</span>(self, s: str, k: int, fill: str) -> List[str]:
+        n = len(s)
+        groups = (n + k - 1) // k  <span class="code-token-comment"># Ceiling division</span>
+        res = []
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(groups):
+            start = i * k
+            end = min(start + k, n)
+            group = s[start:end]
+            
+            <span class="code-token-comment"># Pad if necessary</span>
+            <span class="code-token-keyword">if</span> len(group) < k:
+                group += fill * (k - len(group))
+            res.append(group)
+            
+        <span class="code-token-keyword">return</span> res</code></pre>
+                </div>
+            </div>
+
+            <div class="callout note">
+                <strong>Complexity:</strong> O(n) time, O(n) space
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach 2: Two-Pointer Technique</h2>
+        <p>This approach uses two pointers to efficiently traverse the string and form groups.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize two pointers: <code>start = 0</code> and <code>end = k-1</code></li>
+            <li>While <code>end</code> is within the string length:
+                <ul>
+                    <li>Extract substring from <code>start</code> to <code>end</code></li>
+                    <li>Add to result list</li>
+                    <li>Move pointers: <code>start = end + 1</code>, <code>end += k</code></li>
+                </ul>
+            </li>
+            <li>After loop, check if any characters remain:
+                <ul>
+                    <li>Take substring from <code>start</code> to end of string</li>
+                    <li>Pad with <code>fill</code> to make length <code>k</code></li>
+                    <li>Add to result</li>
+                </ul>
+            </li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Two-Pointer Technique</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-pointer">C++</button>
+                    <button class="tab-button" data-tab="java-pointer">Java</button>
+                    <button class="tab-button" data-tab="python-pointer">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-pointer-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;string&gt; <span class="code-token-function">divideString</span>(string s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        vector&lt;string&gt; res;
+        <span class="code-token-keyword">int</span> start = 0;
+        <span class="code-token-keyword">int</span> end = k - 1;
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        <span class="code-token-keyword">while</span> (end < n) {
+            res.<span class="code-token-function">push_back</span>(s.<span class="code-token-function">substr</span>(start, k));
+            start = end + 1;
+            end += k;
+        }
+        
+        <span class="code-token-keyword">if</span> (start < n) {
+            string last = s.<span class="code-token-function">substr</span>(start);
+            <span class="code-token-keyword">while</span> (last.<span class="code-token-function">length</span>() < k) {
+                last += fill;
+            }
+            res.<span class="code-token-function">push_back</span>(last);
+        }
+        
+        <span class="code-token-keyword">return</span> res;
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-pointer-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> String[] divideString(String s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        List&lt;String&gt; res = <span class="code-token-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="code-token-keyword">int</span> start = 0;
+        <span class="code-token-keyword">int</span> end = k - 1;
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        <span class="code-token-keyword">while</span> (end < n) {
+            res.<span class="code-token-function">add</span>(s.<span class="code-token-function">substring</span>(start, end + 1));
+            start = end + 1;
+            end += k;
+        }
+        
+        <span class="code-token-keyword">if</span> (start < n) {
+            String last = s.<span class="code-token-function">substring</span>(start);
+            <span class="code-token-keyword">while</span> (last.<span class="code-token-function">length</span>() < k) {
+                last += fill;
+            }
+            res.<span class="code-token-function">add</span>(last);
+        }
+        
+        <span class="code-token-keyword">return</span> res.<span class="code-token-function">toArray</span>(<span class="code-token-keyword">new</span> String[0]);
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-pointer-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">divideString</span>(self, s: str, k: int, fill: str) -> List[str]:
+        res = []
+        start = 0
+        n = len(s)
+        
+        <span class="code-token-keyword">while</span> start < n:
+            end = start + k
+            <span class="code-token-keyword">if</span> end <= n:
+                res.append(s[start:end])
+            <span class="code-token-keyword">else</span>:
+                group = s[start:]
+                group += fill * (k - len(group))
+                res.append(group)
+            start = end
+            
+        <span class="code-token-keyword">return</span> res</code></pre>
+                </div>
+            </div>
+
+            <div class="callout note">
+                <strong>Complexity:</strong> O(n) time, O(n) space
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach 3: Iterative Character Collection</h2>
+        <p>This approach builds each group character by character, which is efficient and easy to understand.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize an empty result list and a temporary string for current group</li>
+            <li>Iterate through each character in the string:
+                <ul>
+                    <li>Add character to current group</li>
+                    <li>When group reaches size <code>k</code>, add to result and reset group</li>
+                </ul>
+            </li>
+            <li>After iteration, if there's an incomplete group:
+                <ul>
+                    <li>Pad with <code>fill</code> until length is <code>k</code></li>
+                    <li>Add to result</li>
+                </ul>
+            </li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Iterative Character Collection</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-iterative">C++</button>
+                    <button class="tab-button" data-tab="java-iterative">Java</button>
+                    <button class="tab-button" data-tab="python-iterative">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-iterative-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;string&gt; <span class="code-token-function">divideString</span>(string s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        vector&lt;string&gt; res;
+        string current;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : s) {
+            current += c;
+            <span class="code-token-keyword">if</span> (current.<span class="code-token-function">size</span>() == k) {
+                res.<span class="code-token-function">push_back</span>(current);
+                current = "";
+            }
+        }
+        
+        <span class="code-token-keyword">if</span> (!current.<span class="code-token-function">empty</span>()) {
+            <span class="code-token-keyword">while</span> (current.<span class="code-token-function">size</span>() < k) {
+                current += fill;
+            }
+            res.<span class="code-token-function">push_back</span>(current);
+        }
+        
+        <span class="code-token-keyword">return</span> res;
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-iterative-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> String[] divideString(String s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        List&lt;String&gt; res = <span class="code-token-keyword">new</span> ArrayList&lt;&gt;();
+        StringBuilder current = <span class="code-token-keyword">new</span> StringBuilder();
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : s.toCharArray()) {
+            current.<span class="code-token-function">append</span>(c);
+            <span class="code-token-keyword">if</span> (current.<span class="code-token-function">length</span>() == k) {
+                res.<span class="code-token-function">add</span>(current.toString());
+                current = <span class="code-token-keyword">new</span> StringBuilder();
+            }
+        }
+        
+        <span class="code-token-keyword">if</span> (current.<span class="code-token-function">length</span>() > 0) {
+            <span class="code-token-keyword">while</span> (current.<span class="code-token-function">length</span>() < k) {
+                current.<span class="code-token-function">append</span>(fill);
+            }
+            res.<span class="code-token-function">add</span>(current.toString());
+        }
+        
+        <span class="code-token-keyword">return</span> res.<span class="code-token-function">toArray</span>(<span class="code-token-keyword">new</span> String[0]);
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-iterative-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">divideString</span>(self, s: str, k: int, fill: str) -> List[str]:
+        res = []
+        current = []
+        
+        <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> s:
+            current.append(c)
+            <span class="code-token-keyword">if</span> len(current) == k:
+                res.append(''.join(current))
+                current = []
+                
+        <span class="code-token-keyword">if</span> current:
+            res.append(''.join(current) + fill * (k - len(current)))
+            
+        <span class="code-token-keyword">return</span> res</code></pre>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                <strong>Optimized:</strong> Efficient for memory with O(k) space for current group
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach 4: Mathematical Grouping</h2>
+        <p>This approach calculates the exact number of groups needed and processes them mathematically.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Calculate total groups: <code>groups = ceil(s.length / k)</code></li>
+            <li>Initialize result array with empty strings</li>
+            <li>For each group index <code>i</code>:
+                <ul>
+                    <li>Calculate start index: <code>i * k</code></li>
+                    <li>Calculate end index: <code>min((i+1)*k, n)</code></li>
+                    <li>Extract substring from start to end</li>
+                    <li>Pad to length <code>k</code> if needed</li>
+                </ul>
+            </li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Mathematical Grouping</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-math">C++</button>
+                    <button class="tab-button" data-tab="java-math">Java</button>
+                    <button class="tab-button" data-tab="python-math">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-math-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;string&gt; <span class="code-token-function">divideString</span>(string s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">size</span>();
+        <span class="code-token-keyword">int</span> groups = (n + k - 1) / k; <span class="code-token-comment">// Ceiling division</span>
+        vector&lt;string&gt; res(groups);
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < groups; i++) {
+            <span class="code-token-keyword">int</span> start = i * k;
+            <span class="code-token-keyword">int</span> end = <span class="code-token-function">min</span>(start + k, n);
+            res[i] = s.<span class="code-token-function">substr</span>(start, end - start);
+            
+            <span class="code-token-keyword">if</span> (res[i].<span class="code-token-function">size</span>() < k) {
+                res[i] += <span class="code-token-function">string</span>(k - res[i].<span class="code-token-function">size</span>(), fill);
+            }
+        }
+        <span class="code-token-keyword">return</span> res;
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-math-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> String[] divideString(String s, <span class="code-token-keyword">int</span> k, <span class="code-token-keyword">char</span> fill) {
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        <span class="code-token-keyword">int</span> groups = (n + k - 1) / k; <span class="code-token-comment">// Ceiling division</span>
+        String[] res = <span class="code-token-keyword">new</span> String[groups];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < groups; i++) {
+            <span class="code-token-keyword">int</span> start = i * k;
+            <span class="code-token-keyword">int</span> end = Math.<span class="code-token-function">min</span>(start + k, n);
+            res[i] = s.<span class="code-token-function">substring</span>(start, end);
+            
+            <span class="code-token-keyword">if</span> (res[i].<span class="code-token-function">length</span>() < k) {
+                res[i] += <span class="code-token-function">String</span>.<span class="code-token-function">valueOf</span>(fill).<span class="code-token-function">repeat</span>(k - res[i].<span class="code-token-function">length</span>());
+            }
+        }
+        <span class="code-token-keyword">return</span> res;
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-math-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">divideString</span>(self, s: str, k: int, fill: str) -> List[str]:
+        n = len(s)
+        groups = (n + k - 1) // k  <span class="code-token-comment"># Ceiling division</span>
+        res = [''] * groups
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(groups):
+            start = i * k
+            end = min(start + k, n)
+            res[i] = s[start:end]
+            <span class="code-token-keyword">if</span> len(res[i]) < k:
+                res[i] += fill * (k - len(res[i]))
+                
+        <span class="code-token-keyword">return</span> res</code></pre>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                <strong>Efficiency:</strong> O(n) time, O(n) space with minimal overhead
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time</th>
+                    <th>Space</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Substring with Padding</td>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                    <td>Readability</td>
+                </tr>
+                <tr>
+                    <td>Two-Pointer</td>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                    <td>Learning purposes</td>
+                </tr>
+                <tr>
+                    <td>Iterative Collection</td>
+                    <td>O(n)</td>
+                    <td>O(k)</td>
+                    <td>Memory efficiency</td>
+                </tr>
+                <tr>
+                    <td>Mathematical</td>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                    <td>Performance</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout tip">
+            <strong>Recommendation:</strong> Mathematical approach is most efficient for large inputs
+        </div>
+
+        <hr>
+
+        <h2>Edge Cases</h2>
+        <h3>1. String length exactly divisible by k</h3>
+        <pre><code>Input: s = "abcd", k = 2, fill = 'x'
+Output: ["ab","cd"]</code></pre>
+
+        <h3>2. String shorter than k</h3>
+        <pre><code>Input: s = "a", k = 4, fill = 'x'
+Output: ["axxx"]</code></pre>
+
+        <h3>3. Empty string</h3>
+        <pre><code>Input: s = "", k = 3, fill = 'x' → Output: ["xxx"] (but constraints prevent this)</code></pre>
+
+        <h3>4. k = 1</h3>
+        <pre><code>Input: s = "abc", k = 1, fill = 'x'
+Output: ["a","b","c"]</code></pre>
+
+        <div class="callout warning">
+            <strong>Important:</strong> Always handle the last group padding correctly
+        </div>
+
+        <hr>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <details>
+                <summary>What if k is larger than the string length?</summary>
+                <p>The entire string becomes the first group, padded with fill characters to reach length k.</p>
+            </details>
+
+            <details>
+                <summary>How do we calculate the number of groups?</summary>
+                <p>Use ceiling division: groups = (n + k - 1) / k, which ensures we account for partial groups.</p>
+            </details>
+
+            <details>
+                <summary>Can we solve this with constant space?</summary>
+                <p>No, since we need to store all groups, which requires O(n) space.</p>
+            </details>
+
+            <details>
+                <summary>Which approach is most efficient?</summary>
+                <p>All approaches are O(n) time, but the mathematical approach has minimal overhead.</p>
+            </details>
+
+            <details>
+                <summary>How does padding work with multi-character fill?</summary>
+                <p>The problem specifies fill is a single character, so we repeat that character.</p>
+            </details>
+
+            <details>
+                <summary>What if fill character is part of the string?</summary>
+                <p>It doesn't matter - we only add fill characters to incomplete groups at the end.</p>
+            </details>
+
+            <details>
+                <summary>Can we modify the string in-place?</summary>
+                <p>No, since strings are immutable in many languages. We need to create new strings/groups.</p>
+            </details>
+
+            <details>
+                <summary>How to handle k = 0?</summary>
+                <p>Constraints ensure k ≥ 1, so no need to handle k = 0.</p>
+            </details>
+
+            <details>
+                <summary>What's the best approach for very large strings?</summary>
+                <p>The mathematical approach is most efficient as it minimizes operations.</p>
+            </details>
+
+            <details>
+                <summary>Can we use recursion?</summary>
+                <p>Yes, but iterative approaches are more efficient and avoid stack overflow.</p>
+            </details>
+
+            <details>
+                <summary>How does the solution handle Unicode characters?</summary>
+                <p>The problem specifies lowercase English letters, but solutions work with any characters.</p>
+            </details>
+
+            <details>
+                <summary>Is there a one-line solution?</summary>
+                <p>In Python: [s[i*k:(i+1)*k].ljust(k, fill) for i in range((len(s)+k-1)//k)]</p>
+            </details>
+        </div>
+
+        <div class="callout">
+            <strong>Final Recommendation:</strong> The mathematical approach provides the best combination of efficiency
+            and readability.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+    <script>
+        // Same as previous solution
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+
+                        // Update active tab button
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        // Update active tab content
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            document.querySelectorAll('.faq-section details').forEach(detail => {
+                detail.addEventListener('toggle', () => {
+                    if (detail.open) {
+                        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>

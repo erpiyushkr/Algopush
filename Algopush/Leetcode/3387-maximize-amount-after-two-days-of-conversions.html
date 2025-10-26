@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3387 | Maximize Amount After Two Days of Conversions</title>
+  <meta name="description"
+    content="Solve the currency conversion maximization problem using Floyd-Warshall algorithm. Complete solutions in C++, Java, and Python." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode 3387, Maximize Amount After Two Days of Conversions, Floyd-Warshall algorithm, graph problems, dynamic programming, C++ Java Python solutions, coding interview preparation" />
+  <meta name="author" content="Algopush" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3387: Maximize Amount After Two Days of Conversions">
+  <meta property="og:description"
+    content="Complete guide to solving the Maximize Amount After Two Days of Conversions problem using Floyd-Warshall algorithm.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3387.png">
+  <meta property="og:url"
+    content="https://algopush.com/Leetcode/3387-maximize-amount-after-two-days-of-conversions.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3387: Maximize Amount After Two Days of Conversions">
+  <meta name="twitter:description"
+    content="Floyd-Warshall approach to solve the LeetCode 3387: Maximize Amount After Two Days of Conversions problem with code examples.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3387.png">
+
+  <!-- Google News / Publisher Meta Tags -->
+  <meta name="news_keywords"
+    content="LeetCode, leetcode 3387, Maximize Amount After Two Days of Conversions, Algorithm, Programming">
+  <meta name="standout" content="https://algopush.com/Leetcode/3387-maximize-amount-after-two-days-of-conversions.html">
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3387-maximize-amount-after-two-days-of-conversions.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Structured Data for enhanced SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Maximize Currency After Two Days of Conversions",
+      "url": "https://algopush.com/Leetcode/3387-maximize-amount-after-two-days-of-conversions.html",
+      "image": "https://algopush.com/Leetcode/Images/3387.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-03",
+      "dateModified": "2025-05-03",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header will be inserted by JavaScript -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3387. Maximize Amount After Two Days of Conversions</span>
+    </div>
+
+    <!-- Problem Visualization Image -->
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3387.png" alt="Maximize Amount After Two Days of Conversions"
+        loading="lazy">
+    </div>
+
+    <h1>3387: Maximize Amount After Two Days of Conversions</h1>
+
+    <!-- Problem Metadata -->
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Graph Theory, Dynamic Programming, Floyd-Warshall</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Bloomberg, Stripe</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> This problem requires understanding of graph algorithms and dynamic programming. The
+      optimal solution using Floyd-Warshall runs in O(V^3) time where V is the number of currencies.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>You are given an initial currency and exchange rates for two consecutive days. The task is to maximize the amount
+      of initial currency after performing any number of conversions on both days, using the respective day's exchange
+      rates.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input:
+initialCurrency = "EUR"
+pairs1 = [["EUR", "USD"], ["USD", "JPY"]]
+rates1 = [2.0, 3.0]
+pairs2 = [["JPY", "USD"], ["USD", "CHF"], ["CHF", "EUR"]]
+rates2 = [4.0, 5.0, 6.0]
+
+Output: 720.00000</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input:
+initialCurrency = "NGN"
+pairs1 = [["NGN", "EUR"]]
+rates1 = [9.0]
+pairs2 = [["NGN", "EUR"]]
+rates2 = [6.0]
+
+Output: 1.50000</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/maximize-amount-after-two-days-of-conversions/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Brute Force</h2>
+    <p>Calculate all possible conversion paths for both days and find the maximum amount.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Build graphs for Day 1 and Day 2 exchange rates</li>
+      <li>Calculate all possible conversion paths for Day 1</li>
+      <li>For each Day 1 result, calculate conversions for Day 2</li>
+      <li>Track the maximum amount of initial currency</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n^k)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr />
+
+    <h2>Approach 2: Floyd-Warshall Algorithm (Optimal)</h2>
+    <p>Use Floyd-Warshall to compute all-pairs maximum exchange rates for both days.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Build adjacency lists for Day 1 and Day 2</li>
+      <li>Apply Floyd-Warshall to compute maximum rates between all currency pairs</li>
+      <li>Calculate all reachable amounts on Day 1</li>
+      <li>Use Day 2 rates to determine final maximum amount</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(V^3)</td>
+          <td>O(V^2)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Floyd-Warshall Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-fw">C++</button>
+          <button class="tab-button" data-tab="java-fw">Java</button>
+          <button class="tab-button" data-tab="python-fw">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-fw-tab">
+          <pre><code><span class="code-token-keyword">#include</span> <span class="code-token-string">&lt;unordered_map&gt;</span>
+<span class="code-token-keyword">#include</span> <span class="code-token-string">&lt;vector&gt;</span>
+<span class="code-token-keyword">#include</span> <span class="code-token-string">&lt;string&gt;</span>
+<span class="code-token-keyword">#include</span> <span class="code-token-string">&lt;algorithm&gt;</span>
+<span class="code-token-keyword">using</span> <span class="code-token-keyword">namespace</span> std;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    unordered_map&lt;string, unordered_map&lt;string, double&gt;&gt; <span class="code-token-function">buildGraph</span>(vector&lt;vector&lt;string&gt;&gt;& pairs, vector&lt;double&gt;& rates) {
+        unordered_map&lt;string, unordered_map&lt;string, double&gt;&gt; graph;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; pairs.<span class="code-token-function">size</span>(); ++i) {
+            string from = pairs[i][0], to = pairs[i][1];
+            <span class="code-token-keyword">double</span> rate = rates[i];
+            graph[from][to] = rate;
+            graph[to][from] = 1.0 / rate;
+        }
+        <span class="code-token-keyword">return</span> graph;
+    }
+
+    unordered_map&lt;string, unordered_map&lt;string, double&gt;&gt; <span class="code-token-function">floydWarshall</span>(unordered_map&lt;string, unordered_map&lt;string, double&gt;&gt;& graph) {
+        vector&lt;string&gt; currencies;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& pair : graph) currencies.<span class="code-token-function">push_back</span>(pair.first);
+
+        unordered_map&lt;string, unordered_map&lt;string, double&gt;&gt; dist;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& from : currencies) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& to : currencies) {
+                <span class="code-token-keyword">if</span> (from == to) dist[from][to] = 1.0;
+                <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (graph[from].<span class="code-token-function">count</span>(to)) dist[from][to] = graph[from][to];
+                <span class="code-token-keyword">else</span> dist[from][to] = 0.0;
+            }
+        }
+
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& k : currencies) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& i : currencies) {
+                <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& j : currencies) {
+                    dist[i][j] = <span class="code-token-function">max</span>(dist[i][j], dist[i][k] * dist[k][j]);
+                }
+            }
+        }
+        <span class="code-token-keyword">return</span> dist;
+    }
+
+    <span class="code-token-keyword">double</span> <span class="code-token-function">maxAmount</span>(string initialCurrency, vector&lt;vector&lt;string&gt;&gt;& pairs1, vector&lt;double&gt;& rates1, vector&lt;vector&lt;string&gt;&gt;& pairs2, vector&lt;double&gt;& rates2) {
+        <span class="code-token-keyword">auto</span> graph1 = <span class="code-token-function">buildGraph</span>(pairs1, rates1);
+        <span class="code-token-keyword">auto</span> graph2 = <span class="code-token-function">buildGraph</span>(pairs2, rates2);
+        <span class="code-token-keyword">auto</span> day1Rates = <span class="code-token-function">floydWarshall</span>(graph1);
+        <span class="code-token-keyword">auto</span> day2Rates = <span class="code-token-function">floydWarshall</span>(graph2);
+
+        unordered_map&lt;string, <span class="code-token-keyword">double</span>&gt; day1Amounts;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& currency : day1Rates) {
+            <span class="code-token-keyword">if</span> (day1Rates[initialCurrency].<span class="code-token-function">count</span>(currency.first)) {
+                day1Amounts[currency.first] = day1Rates[initialCurrency][currency.first];
+            }
+        }
+        day1Amounts[initialCurrency] = 1.0;
+
+        <span class="code-token-keyword">double</span> maxAmount = 1.0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span>& [currency, amount] : day1Amounts) {
+            <span class="code-token-keyword">if</span> (day2Rates.<span class="code-token-function">count</span>(currency)) {
+                maxAmount = <span class="code-token-function">max</span>(maxAmount, amount * day2Rates[currency][initialCurrency]);
+            }
+        }
+
+        <span class="code-token-keyword">return</span> maxAmount;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-fw-tab">
+          <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">double</span> <span class="code-token-function">maxAmount</span>(String initialCurrency, String[][] pairs1, <span class="code-token-keyword">double</span>[] rates1, String[][] pairs2, <span class="code-token-keyword">double</span>[] rates2) {
+        Map&lt;String, Map&lt;String, Double&gt;&gt; graph1 = <span class="code-token-function">buildGraph</span>(pairs1, rates1);
+        Map&lt;String, Map&lt;String, Double&gt;&gt; graph2 = <span class="code-token-function">buildGraph</span>(pairs2, rates2);
+        
+        Map&lt;String, Map&lt;String, Double&gt;&gt; day1Rates = <span class="code-token-function">floydWarshall</span>(graph1);
+        Map&lt;String, Map&lt;String, Double&gt;&gt; day2Rates = <span class="code-token-function">floydWarshall</span>(graph2);
+        
+        Map&lt;String, Double&gt; day1Amounts = <span class="code-token-keyword">new</span> HashMap&lt;&gt;();
+        <span class="code-token-keyword">for</span> (String currency : day1Rates.<span class="code-token-function">keySet</span>()) {
+            <span class="code-token-keyword">if</span> (day1Rates.<span class="code-token-function">get</span>(initialCurrency).<span class="code-token-function">containsKey</span>(currency)) {
+                day1Amounts.<span class="code-token-function">put</span>(currency, day1Rates.<span class="code-token-function">get</span>(initialCurrency).<span class="code-token-function">get</span>(currency));
+            }
+        }
+        day1Amounts.<span class="code-token-function">put</span>(initialCurrency, 1.0);
+        
+        <span class="code-token-keyword">double</span> maxAmount = 1.0;
+        <span class="code-token-keyword">for</span> (Map.Entry&lt;String, Double&gt; entry : day1Amounts.<span class="code-token-function">entrySet</span>()) {
+            String currency = entry.<span class="code-token-function">getKey</span>();
+            <span class="code-token-keyword">double</span> amount = entry.<span class="code-token-function">getValue</span>();
+            <span class="code-token-keyword">if</span> (day2Rates.<span class="code-token-function">containsKey</span>(currency)) {
+                maxAmount = Math.<span class="code-token-function">max</span>(maxAmount, amount * day2Rates.<span class="code-token-function">get</span>(currency).<span class="code-token-function">get</span>(initialCurrency));
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> maxAmount;
+    }
+    
+    <span class="code-token-keyword">private</span> Map&lt;String, Map&lt;String, Double&gt;&gt; <span class="code-token-function">buildGraph</span>(String[][] pairs, <span class="code-token-keyword">double</span>[] rates) {
+        Map&lt;String, Map&lt;String, Double&gt;&gt; graph = <span class="code-token-keyword">new</span> HashMap&lt;&gt;();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; pairs.length; i++) {
+            String from = pairs[i][0];
+            String to = pairs[i][1];
+            <span class="code-token-keyword">double</span> rate = rates[i];
+            
+            graph.<span class="code-token-function">putIfAbsent</span>(from, <span class="code-token-keyword">new</span> HashMap&lt;&gt;());
+            graph.<span class="code-token-function">putIfAbsent</span>(to, <span class="code-token-keyword">new</span> HashMap&lt;&gt;());
+            
+            graph.<span class="code-token-function">get</span>(from).<span class="code-token-function">put</span>(to, rate);
+            graph.<span class="code-token-function">get</span>(to).<span class="code-token-function">put</span>(from, 1.0 / rate);
+        }
+        <span class="code-token-keyword">return</span> graph;
+    }
+    
+    <span class="code-token-keyword">private</span> Map&lt;String, Map&lt;String, Double&gt;&gt; <span class="code-token-function">floydWarshall</span>(Map&lt;String, Map&lt;String, Double&gt;&gt; graph) {
+        List&lt;String&gt; currencies = <span class="code-token-keyword">new</span> ArrayList&lt;&gt;(graph.<span class="code-token-function">keySet</span>());
+        Map&lt;String, Map&lt;String, Double&gt;&gt; dist = <span class="code-token-keyword">new</span> HashMap&lt;&gt;();
+        
+        <span class="code-token-comment">// Initialize distances</span>
+        <span class="code-token-keyword">for</span> (String from : currencies) {
+            dist.<span class="code-token-function">put</span>(from, <span class="code-token-keyword">new</span> HashMap&lt;&gt;());
+            <span class="code-token-keyword">for</span> (String to : currencies) {
+                <span class="code-token-keyword">if</span> (from.<span class="code-token-function">equals</span>(to)) {
+                    dist.<span class="code-token-function">get</span>(from).<span class="code-token-function">put</span>(to, 1.0);
+                } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (graph.<span class="code-token-function">get</span>(from).<span class="code-token-function">containsKey</span>(to)) {
+                    dist.<span class="code-token-function">get</span>(from).<span class="code-token-function">put</span>(to, graph.<span class="code-token-function">get</span>(from).<span class="code-token-function">get</span>(to));
+                } <span class="code-token-keyword">else</span> {
+                    dist.<span class="code-token-function">get</span>(from).<span class="code-token-function">put</span>(to, 0.0);
+                }
+            }
+        }
+        
+        <span class="code-token-comment">// Floyd-Warshall algorithm</span>
+        <span class="code-token-keyword">for</span> (String k : currencies) {
+            <span class="code-token-keyword">for</span> (String i : currencies) {
+                <span class="code-token-keyword">for</span> (String j : currencies) {
+                    <span class="code-token-keyword">double</span> newDist = dist.<span class="code-token-function">get</span>(i).<span class="code-token-function">get</span>(k) * dist.<span class="code-token-function">get</span>(k).<span class="code-token-function">get</span>(j);
+                    <span class="code-token-keyword">if</span> (newDist > dist.<span class="code-token-function">get</span>(i).<span class="code-token-function">get</span>(j)) {
+                        dist.<span class="code-token-function">get</span>(i).<span class="code-token-function">put</span>(j, newDist);
+                    }
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> dist;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-fw-tab">
+          <pre><code><span class="code-token-keyword">from</span> collections <span class="code-token-keyword">import</span> defaultdict
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maxAmount</span>(self, initialCurrency: str, pairs1: List[List[str]], rates1: List[float], 
+                 pairs2: List[List[str]], rates2: List[float]) -> float:
+        
+        <span class="code-token-keyword">def</span> <span class="code-token-function">build_graph</span>(pairs, rates):
+            graph = defaultdict(dict)
+            <span class="code-token-keyword">for</span> (from_curr, to_curr), rate <span class="code-token-keyword">in</span> zip(pairs, rates):
+                graph[from_curr][to_curr] = rate
+                graph[to_curr][from_curr] = 1.0 / rate
+            <span class="code-token-keyword">return</span> graph
+        
+        <span class="code-token-keyword">def</span> <span class="code-token-function">floyd_warshall</span>(graph):
+            currencies = list(graph.keys())
+            dist = defaultdict(dict)
+            
+            <span class="code-token-comment"># Initialize distances</span>
+            <span class="code-token-keyword">for</span> from_curr <span class="code-token-keyword">in</span> currencies:
+                <span class="code-token-keyword">for</span> to_curr <span class="code-token-keyword">in</span> currencies:
+                    <span class="code-token-keyword">if</span> from_curr == to_curr:
+                        dist[from_curr][to_curr] = 1.0
+                    <span class="code-token-keyword">elif</span> to_curr <span class="code-token-keyword">in</span> graph[from_curr]:
+                        dist[from_curr][to_curr] = graph[from_curr][to_curr]
+                    <span class="code-token-keyword">else</span>:
+                        dist[from_curr][to_curr] = 0.0
+            
+            <span class="code-token-comment"># Floyd-Warshall algorithm</span>
+            <span class="code-token-keyword">for</span> k <span class="code-token-keyword">in</span> currencies:
+                <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> currencies:
+                    <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> currencies:
+                        dist[i][j] = max(dist[i][j], dist[i][k] * dist[k][j])
+            
+            <span class="code-token-keyword">return</span> dist
+        
+        graph1 = build_graph(pairs1, rates1)
+        graph2 = build_graph(pairs2, rates2)
+        
+        day1_rates = floyd_warshall(graph1)
+        day2_rates = floyd_warshall(graph2)
+        
+        day1_amounts = {}
+        <span class="code-token-keyword">for</span> currency <span class="code-token-keyword">in</span> day1_rates[initialCurrency]:
+            day1_amounts[currency] = day1_rates[initialCurrency][currency]
+        day1_amounts[initialCurrency] = 1.0
+        
+        max_amount = 1.0
+        <span class="code-token-keyword">for</span> currency, amount <span class="code-token-keyword">in</span> day1_amounts.items():
+            <span class="code-token-keyword">if</span> currency <span class="code-token-keyword">in</span> day2_rates:
+                max_amount = max(max_amount, amount * day2_rates[currency][initialCurrency])
+        
+        <span class="code-token-keyword">return</span> max_amount</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> The Floyd-Warshall approach efficiently computes all possible conversion
+        paths by dynamically updating the maximum exchange rates between all currency pairs. This avoids the exponential
+        complexity of the brute force method.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Comparison of Approaches</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+          <th>When to Use</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brute Force</td>
+          <td>O(n^k)</td>
+          <td>O(n)</td>
+          <td>Small input sizes</td>
+          <td>Simple to implement</td>
+          <td>Exponential time complexity</td>
+        </tr>
+        <tr>
+          <td>Floyd-Warshall</td>
+          <td>O(V^3)</td>
+          <td>O(V^2)</td>
+          <td>Optimal solution</td>
+          <td>Efficient for all currency pairs</td>
+          <td>Higher space complexity</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <strong>Interview Tip:</strong> While explaining the Floyd-Warshall solution, emphasize how it efficiently
+      computes all-pairs shortest paths (or in this case, maximum exchange rates) by dynamic programming, avoiding
+      redundant calculations.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Special Considerations</h2>
+    <p>When implementing solutions for this problem, consider these edge cases:</p>
+
+    <h3>1. No Conversion Possible</h3>
+    <pre><code><b>Input:</b> initialCurrency = "USD", pairs1 = [["EUR", "GBP"]], rates1 = [1.2], 
+pairs2 = [["JPY", "AUD"]], rates2 = [1.5]
+<b>Output:</b> 1.0
+<b>Explanation:</b> No path exists to convert USD to other currencies and back.</code></pre>
+
+    <h3>2. Single Currency</h3>
+    <pre><code><b>Input:</b> initialCurrency = "USD", pairs1 = [], rates1 = [], pairs2 = [], rates2 = []
+<b>Output:</b> 1.0
+<b>Explanation:</b> No conversions possible, amount remains the same.</code></pre>
+
+    <h3>3. Circular Conversions</h3>
+    <pre><code><b>Input:</b> initialCurrency = "USD", pairs1 = [["USD", "EUR"], ["EUR", "GBP"], ["GBP", "USD"]], 
+rates1 = [2.0, 3.0, 4.0], pairs2 = [["USD", "EUR"], ["EUR", "GBP"], ["GBP", "USD"]], 
+rates2 = [0.5, 0.333, 0.25]
+<b>Output:</b> 1.0
+<b>Explanation:</b> Circular conversions result in the original amount.</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test your solution with these edge cases to ensure correctness. The examples
+      demonstrate how different conversion paths can affect the final amount.
+    </div>
+
+    <hr />
+
+    <h2>Visualization</h2>
+    <div class="callout">
+      <p>The Floyd-Warshall algorithm works by progressively improving estimates on the maximum exchange rate between
+        currencies:</p>
+      <ol>
+        <li><strong>Initialization:</strong> Direct exchange rates between connected currencies</li>
+        <li><strong>Iteration:</strong> For each intermediate currency k, update rates between i and j if i→k→j is
+          better</li>
+        <li><strong>Result:</strong> Matrix of maximum exchange rates between all currency pairs</li>
+      </ol>
+      <p>This dynamic programming approach efficiently captures all possible conversion paths.</p>
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why use Floyd-Warshall instead of Dijkstra's algorithm?</summary>
+        <p>
+          Floyd-Warshall computes all-pairs maximum rates in O(V^3) time, which is more efficient than running
+          Dijkstra's (O(V^2)) for each currency. It's particularly suited when we need maximum rates between all pairs,
+          not just from a single source.
+        </p>
+      </details>
+
+      <details>
+        <summary>2. How does the algorithm handle reciprocal rates?</summary>
+        <p>
+          The graph construction includes both directions with reciprocal rates (e.g., if USD→EUR = 2.0, then EUR→USD =
+          0.5). This ensures the conversion works both ways with mathematically correct rates.
+        </p>
+      </details>
+
+      <details>
+        <summary>3. What's the significance of initializing diagonal elements to 1.0?</summary>
+        <p>
+          The diagonal (currency to itself) is set to 1.0 because converting a currency to itself should yield the same
+          amount (no change). This is crucial for the dynamic programming approach to work correctly.
+        </p>
+      </details>
+
+      <details>
+        <summary>4. Can negative exchange rates be handled?</summary>
+        <p>
+          This problem assumes positive exchange rates. Negative rates would require different algorithms (like
+          Bellman-Ford for detecting negative cycles) and have different economic implications.
+        </p>
+      </details>
+
+      <details>
+        <summary>5. How would you modify this for more than two days?</summary>
+        <p>
+          For n days, you would apply the Floyd-Warshall algorithm sequentially for each day's rates, using the previous
+          day's result as input to the next. The complexity would be O(nV^3).
+        </p>
+      </details>
+
+      <details>
+        <summary>6. What optimizations are possible for sparse graphs?</summary>
+        <p>
+          For sparse graphs (few currency pairs), Johnson's algorithm (O(V^2 log V + VE)) might be more efficient,
+          though Floyd-Warshall is often preferred for its simplicity and small constant factors.
+        </p>
+      </details>
+
+      <details>
+        <summary>7. How does this compare to matrix exponentiation methods?</summary>
+        <p>
+          Matrix exponentiation can also solve all-pairs problems but is less intuitive for this specific case.
+          Floyd-Warshall's dynamic programming approach is more straightforward for currency conversion scenarios.
+        </p>
+      </details>
+
+      <details>
+        <summary>8. What's the practical limit for the number of currencies?</summary>
+        <p>
+          With V=100 currencies, Floyd-Warshall's O(V^3) = 1,000,000 operations is manageable. For V=1000 (1 billion
+          operations), you might need optimizations or parallel processing.
+        </p>
+      </details>
+
+      <details>
+        <summary>9. How would you handle floating-point precision issues?</summary>
+        <p>
+          For very small/large rates, use logarithms to convert multiplications to additions, reducing floating-point
+          errors. Alternatively, use arbitrary-precision arithmetic libraries if precision is critical.
+        </p>
+      </details>
+
+      <details>
+        <summary>10. Can this be adapted for cryptocurrency arbitrage?</summary>
+        <p>
+          Yes, by looking for cycles where the product of exchange rates is >1 (profit). The same Floyd-Warshall
+          approach can detect such opportunities by checking diagonal entries after log transformation.
+        </p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Thoughts:</strong> This problem demonstrates how graph algorithms can model real-world financial
+      scenarios. The Floyd-Warshall solution provides an elegant way to maximize currency conversions while avoiding
+      exponential complexity.
+    </div>
+  </main>
+
+  <!-- Footer will be inserted by JavaScript -->
+  <div id="footer"></div>
+
+  <script>
+    // Tab functionality with improved mobile support
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize tabs
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Set first tab as active by default if none are active
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        // Add click handlers
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+
+            // Update active tab button
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update active tab content
+            tabContents.forEach(content => content.classList.remove('active'));
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // FAQ highlight when opened
+      document.querySelectorAll('.faq-section details').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (detail.open) {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

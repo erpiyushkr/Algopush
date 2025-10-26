@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3537 | Fill a Special Grid</title>
+  <meta name="description"
+    content="Solve the Special Grid problem using recursive quadrant filling and mathematical patterns. Complete solutions in C++, Java, and Python." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode 3537, Fill a Special Grid, recursive algorithms, matrix manipulation, coding interview preparation, C++ Java Python solutions" />
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3537-fill-a-special-grid.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3537: Fill a Special Grid">
+  <meta property="og:description"
+    content="Complete guide to solving the Special Grid problem using recursive quadrant filling and mathematical patterns.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3537.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3537-fill-a-special-grid.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3537: Fill a Special Grid">
+  <meta name="twitter:description"
+    content="Optimal solutions using recursion and mathematical patterns. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3537.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Fill a Special Grid",
+      "url": "https://algopush.com/Leetcode/3537-fill-a-special-grid.html",
+      "image": "https://algopush.com/Leetcode/Images/3537.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-05",
+      "dateModified": "2025-05-05",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3537. Fill a Special Grid</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3537.png" alt="Special Grid visualization" loading="lazy">
+    </div>
+
+    <h1>3537: Fill a Special Grid</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Recursion, Matrix Manipulation</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Microsoft, Meta, NVIDIA</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> This problem requires understanding of recursive quadrant filling and mathematical
+      patterns. Optimal solutions run in O(4^N) time complexity.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Construct a 2<sup>N</sup> x 2<sup>N</sup> grid where each quadrant follows strict ordering rules recursively.
+      Numbers must range from 0 to 2<sup>2N</sup> - 1.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: N = 1
+Output: [[3,0],[2,1]]
+Explanation: Quadrants ordered as 0 < 1 < 2 < 3</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: N = 2
+Output: [[15,12,3,0],[14,13,2,1],[11,8,7,4],[10,9,6,5]]
+Explanation: Each quadrant maintains required ordering recursively</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/fill-a-special-grid/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Recursive Quadrant Filling</h2>
+    <p>Divide grid into quadrants and fill recursively following the ordering rules.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Base case: 1x1 grid contains 0</li>
+      <li>For larger grids:
+        <ul>
+          <li>Divide into four 2<sup>N-1</sup> x 2<sup>N-1</sup> quadrants</li>
+          <li>Fill quadrants in reverse order (TR → BR → BL → TL)</li>
+          <li>Offset values based on quadrant position</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(4<sup>N</sup>)</td>
+          <td>O(4<sup>N</sup>)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Recursive Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-recursive">C++</button>
+          <button class="tab-button" data-tab="java-recursive">Java</button>
+          <button class="tab-button" data-tab="python-recursive">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-recursive-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt; <span class="code-token-function">specialGrid</span>(<span class="code-token-keyword">int</span> N) {
+        <span class="code-token-keyword">int</span> size = <span class="code-token-function">pow</span>(2, N);
+        vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt; <span class="code-token-function">grid</span>(size, vector&lt;<span class="code-token-keyword">int</span>&gt;(size));
+        <span class="code-token-function">fill</span>(grid, 0, 0, size, 0);
+        <span class="code-token-keyword">return</span> grid;
+    }
+    
+    <span class="code-token-keyword">void</span> <span class="code-token-function">fill</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& grid, <span class="code-token-keyword">int</span> x, <span class="code-token-keyword">int</span> y, <span class="code-token-keyword">int</span> size, <span class="code-token-keyword">int</span> start) {
+        <span class="code-token-keyword">if</span>(size == 1) {
+            grid[x][y] = start;
+            <span class="code-token-keyword">return</span>;
+        }
+        
+        <span class="code-token-keyword">int</span> half = size / 2;
+        <span class="code-token-keyword">int</span> quarter = (size * size) / 4;
+        
+        <span class="code-token-comment">// Fill quadrants in TR → BR → BL → TL order</span>
+        <span class="code-token-function">fill</span>(grid, x, y + half, half, start);                <span class="code-token-comment">// Top-right</span>
+        <span class="code-token-function">fill</span>(grid, x + half, y + half, half, start + quarter);   <span class="code-token-comment">// Bottom-right</span>
+        <span class="code-token-function">fill</span>(grid, x + half, y, half, start + 2*quarter);  <span class="code-token-comment">// Bottom-left</span>
+        <span class="code-token-function">fill</span>(grid, x, y, half, start + 3*quarter);          <span class="code-token-comment">// Top-left</span>
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-recursive-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span>[][] <span class="code-token-function">specialGrid</span>(<span class="code-token-keyword">int</span> N) {
+        <span class="code-token-keyword">int</span> size = (<span class="code-token-keyword">int</span>) Math.<span class="code-token-function">pow</span>(2, N);
+        <span class="code-token-keyword">int</span>[][] grid = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[size][size];
+        <span class="code-token-function">fill</span>(grid, 0, 0, size, 0);
+        <span class="code-token-keyword">return</span> grid;
+    }
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">void</span> <span class="code-token-function">fill</span>(<span class="code-token-keyword">int</span>[][] grid, <span class="code-token-keyword">int</span> x, <span class="code-token-keyword">int</span> y, <span class="code-token-keyword">int</span> size, <span class="code-token-keyword">int</span> start) {
+        <span class="code-token-keyword">if</span>(size == 1) {
+            grid[x][y] = start;
+            <span class="code-token-keyword">return</span>;
+        }
+        
+        <span class="code-token-keyword">int</span> half = size / 2;
+        <span class="code-token-keyword">int</span> quarter = (size * size) / 4;
+        
+        <span class="code-token-function">fill</span>(grid, x, y + half, half, start);              <span class="code-token-comment">// Top-right</span>
+        <span class="code-token-function">fill</span>(grid, x + half, y + half, half, start + quarter); <span class="code-token-comment">// Bottom-right</span>
+        <span class="code-token-function">fill</span>(grid, x + half, y, half, start + 2*quarter);    <span class="code-token-comment">// Bottom-left</span>
+        <span class="code-token-function">fill</span>(grid, x, y, half, start + 3*quarter);          <span class="code-token-comment">// Top-left</span>
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-recursive-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">specialGrid</span>(self, N: int) -> List[List[int]]:
+        size = 2 ** N
+        grid = [[0] * size <span class="code-token-keyword">for</span> _ <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(size)]
+        self.<span class="code-token-function">fill</span>(grid, 0, 0, size, 0)
+        <span class="code-token-keyword">return</span> grid
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">fill</span>(self, grid, x, y, size, start):
+        <span class="code-token-keyword">if</span> size == 1:
+            grid[x][y] = start
+            <span class="code-token-keyword">return</span>
+        
+        half = size // 2
+        quarter = (size * size) // 4
+        
+        self.<span class="code-token-function">fill</span>(grid, x, y + half, half, start)          <span class="code-token-comment"># Top-right</span>
+        self.<span class="code-token-function">fill</span>(grid, x + half, y + half, half, start + quarter) <span class="code-token-comment"># Bottom-right</span>
+        self.<span class="code-token-function">fill</span>(grid, x + half, y, half, start + 2*quarter)  <span class="code-token-comment"># Bottom-left</span>
+        self.<span class="code-token-function">fill</span>(grid, x, y, half, start + 3*quarter)      <span class="code-token-comment"># Top-left</span></code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This recursive approach fills quadrants in reverse order (TR → BR → BL →
+        TL) with appropriate value offsets to maintain ordering.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Mathematical Pattern Construction</h2>
+    <p>Use bit manipulation and coordinate patterns to calculate values directly.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>For each cell (i,j):
+        <ul>
+          <li>Determine quadrant level</li>
+          <li>Calculate value based on quadrant position</li>
+          <li>Use bitwise operations to mirror coordinates</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(4<sup>N</sup>)</td>
+          <td>O(4<sup>N</sup>)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Mathematical Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-math">C++</button>
+          <button class="tab-button" data-tab="java-math">Java</button>
+          <button class="tab-button" data-tab="python-math">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-math-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt; <span class="code-token-function">specialGrid</span>(<span class="code-token-keyword">int</span> N) {
+        <span class="code-token-keyword">int</span> size = <span class="code-token-function">pow</span>(2, N);
+        vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt; <span class="code-token-function">grid</span>(size, vector&lt;<span class="code-token-keyword">int</span>&gt;(size));
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i < size; ++i) {
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j < size; ++j) {
+                <span class="code-token-keyword">int</span> val = 0;
+                <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> k = N-1; k >= 0; --k) {
+                    <span class="code-token-keyword">int</span> mask = 1 << k;
+                    <span class="code-token-keyword">int</span> x = (i & mask) ? 1 : 0;
+                    <span class="code-token-keyword">int</span> y = (j & mask) ? 1 : 0;
+                    val = (val << 2) | ((3 - 2*x - y) & 3);
+                }
+                grid[i][j] = val;
+            }
+        }
+        <span class="code-token-keyword">return</span> grid;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-math-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span>[][] <span class="code-token-function">specialGrid</span>(<span class="code-token-keyword">int</span> N) {
+        <span class="code-token-keyword">int</span> size = (<span class="code-token-keyword">int</span>) Math.<span class="code-token-function">pow</span>(2, N);
+        <span class="code-token-keyword">int</span>[][] grid = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[size][size];
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i < size; ++i) {
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j < size; ++j) {
+                <span class="code-token-keyword">int</span> val = 0;
+                <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> k = N-1; k >= 0; --k) {
+                    <span class="code-token-keyword">int</span> mask = 1 << k;
+                    <span class="code-token-keyword">int</span> x = (i & mask) != 0 ? 1 : 0;
+                    <span class="code-token-keyword">int</span> y = (j & mask) != 0 ? 1 : 0;
+                    val = (val << 2) | ((3 - 2*x - y) & 3);
+                }
+                grid[i][j] = val;
+            }
+        }
+        <span class="code-token-keyword">return</span> grid;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-math-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">specialGrid</span>(self, N: int) -> List[List[int]]:
+        size = 2 ** N
+        grid = [[0] * size <span class="code-token-keyword">for</span> _ <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(size)]
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(size):
+            <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(size):
+                val = 0
+                <span class="code-token-keyword">for</span> k <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(N-1, -1, -1):
+                    mask = 1 << k
+                    x = (i & mask) != 0
+                    y = (j & mask) != 0
+                    val = (val << 2) | ((3 - 2*x - y) & 3)
+                grid[i][j] = val
+        <span class="code-token-keyword">return</span> grid</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This mathematical approach uses bitwise operations to calculate cell
+        values directly based on their coordinates, avoiding recursion.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Special Considerations</h2>
+    <p>Key edge cases to consider when implementing your solution:</p>
+
+    <h3>1. Base Case (N=0)</h3>
+    <pre><code><b>Input:</b> 0 → <b>Output:</b> [[0]]
+<b>Explanation:</b> Single cell grid with value 0</code></pre>
+
+    <h3>2. N=1 Verification</h3>
+    <pre><code><b>Input:</b> 1 → <b>Output:</b> [[3,0],[2,1]]
+<b>Explanation:</b> Verify quadrant ordering TR=0, BR=1, BL=2, TL=3</code></pre>
+
+    <h3>3. Large N Values</h3>
+    <pre><code><b>Input:</b> 3 → <b>Output:</b> 8x8 grid
+<b>Explanation:</b> Ensure recursive pattern holds for deep nesting</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Test all quadrant boundaries and ensure recursive calls maintain proper offset
+      calculations.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why does the recursive approach work?</summary>
+        <p>The recursive approach maintains the quadrant ordering by assigning value ranges that ensure each quadrant's
+          maximum is less than the next quadrant's minimum.</p>
+      </details>
+
+      <details>
+        <summary>2. How does the mathematical solution work?</summary>
+        <p>It encodes quadrant positions at each level using bit patterns, calculating the value through bitwise
+          operations that mirror the recursive structure.</p>
+      </details>
+
+      <details>
+        <summary>3. Can we optimize further?</summary>
+        <p>Both approaches are optimal for their paradigms. The mathematical solution avoids recursion stack overhead
+          but may be harder to understand.</p>
+      </details>
+
+      <details>
+        <summary>4. How to handle very large N?</summary>
+        <p>Both approaches work up to N=15 (32768x32768 grid) within memory limits. For N>15, consider iterative
+          approaches with memory optimization.</p>
+      </details>
+
+      <details>
+        <summary>5. Why reverse order in recursion?</summary>
+        <p>Filling TR first ensures smaller values are placed first, followed by larger values in subsequent quadrants
+          to maintain the required ordering.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Thoughts:</strong> This problem demonstrates beautiful recursive patterns and mathematical
+      relationships in grid construction. The recursive approach is more intuitive, while the mathematical solution
+      offers deeper insights into bit manipulation patterns.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    // Tab functionality with improved mobile support
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize tabs
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Set first tab as active by default if none are active
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        // Add click handlers
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+
+            // Update active tab button
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update active tab content
+            tabContents.forEach(content => content.classList.remove('active'));
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // FAQ highlight when opened
+      document.querySelectorAll('.faq-section details').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (detail.open) {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

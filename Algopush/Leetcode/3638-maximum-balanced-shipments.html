@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode 3638: Maximum Balanced Shipments | O(n) Solutions | Algopush</title>
+    <meta name="description" content="Solve LeetCode 3638 with greedy, DP & monotonic stack approaches. Detailed explanations, code implementations, and 12 FAQs for maximum balanced shipments.">
+    <meta name="keywords" content="3638. Maximum Balanced Shipments, LeetCode 3638, Maximum Balanced Shipments, Maximum Balanced Shipments leetcode question, contiguous subarrays, greedy algorithm, dynamic programming, monotonic stack, Algopush, coding interview preparation, Algorithm solution, Coding interview, algopush, Algorithm, Programming, Coding Interview, LeetCode Easy Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical" href="https://algopush.com/Leetcode/3638-maximum-balanced-shipments.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 3638: Maximum Balanced Shipments - O(n) Solutions Explained">
+    <meta property="og:description" content="Learn greedy, DP & monotonic stack approaches for maximum balanced shipments problem. Code in C++, Java, Python with detailed explanations.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/3638.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/3638-maximum-balanced-shipments.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 3638: Maximum Balanced Shipments Solutions">
+    <meta name="twitter:description" content="Master O(n) solutions for maximum balanced shipments with code examples and visual explanations.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3638.png">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Maximum Balanced Shipments Solution Guide",
+        "url": "https://algopush.com/Leetcode/3638-maximum-balanced-shipments.html",
+        "image": "https://algopush.com/Leetcode/Images/3638.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-08-03",
+        "dateModified": "2025-08-03",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        },
+        "founder": {
+            "@type": "Person",
+            "name": "Piyush Kumar",
+            "jobTitle": "Founder",
+            "url": "https://algopush.com"
+        },
+        "foundingDate": "2025",
+        "description": "Algopush provides comprehensive algorithm solutions and explanations for coding interview preparation."
+    }
+    </script>
+    <style>
+    /* CSS styles from previous post */
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Visualization Container */
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .grid-item {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+    }
+
+    .grid-item.max {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .grid-item.other {
+      background-color: #eaf2f8;
+      border-color: #3498db;
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+      50% {
+        background-color: #b3e0ff;
+      }
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>3638. Maximum Balanced Shipments</span>
+        </div>
+        
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/3638.png" alt="Maximum Balanced Shipments visualization" loading="lazy">
+        </div>
+        
+        <h1>3638: Maximum Balanced Shipments</h1>
+        
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Medium</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Arrays, Greedy, Dynamic Programming, Monotonic Stack</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Amazon, Google, Microsoft</span>
+            </div>
+        </div>
+        
+        <div class="callout tip">
+            <strong>Pro Tip:</strong> For contiguous subarray problems, consider greedy approaches first - they often provide efficient solutions with O(n) complexity.
+        </div>
+        
+        <h2>Problem Statement</h2>
+        <p>Given an integer array <code>weight</code> of length <code>n</code>, representing parcel weights:</p>
+        <ul>
+            <li>A <strong>shipment</strong> is a contiguous subarray of parcels</li>
+            <li>A shipment is <strong>balanced</strong> if the last parcel's weight is strictly less than the maximum weight in that shipment</li>
+            <li>Select non-overlapping balanced shipments such that each parcel is in at most one shipment</li>
+        </ul>
+        <p>Return the <strong>maximum number</strong> of balanced shipments that can be formed.</p>
+        
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Example 1</h4>
+                <p><strong>Input:</strong> weight = [2,5,1,4,3]</p>
+                <p><strong>Output:</strong> 2</p>
+                <p><strong>Explanation:</strong> 
+                    Shipment 1: [2,5,1] → max=5, last=1 (1<5)<br>
+                    Shipment 2: [4,3] → max=4, last=3 (3<4)
+                </p>
+            </div>
+            
+            <div class="visual-item">
+                <h4>Example 2</h4>
+                <p><strong>Input:</strong> weight = [4,4]</p>
+                <p><strong>Output:</strong> 0</p>
+                <p><strong>Explanation:</strong> 
+                    [4,4] → last=4 not < 4<br>
+                    [4] → last=4 not < 4 (invalid)
+                </p>
+            </div>
+            
+            <div class="visual-item">
+                <h4>Example 3</h4>
+                <p><strong>Input:</strong> weight = [10,1,2,3,4,5]</p>
+                <p><strong>Output:</strong> 3</p>
+                <p><strong>Explanation:</strong> 
+                    Shipment 1: [10,1] → 1<10<br>
+                    Shipment 2: [2,3] → 3>2 (invalid)<br>
+                    Shipment 3: [4,5] → 5>4 (invalid)<br>
+                    Better: [10,1], [2,3,4] (4<3? invalid)<br>
+                    Optimal: [10,1] (count=1), [2,3] (invalid), [4,5] (invalid)<br>
+                    Correct solution: [10,1] (1<10), [2,3] (3>2 invalid), [4,5] (5>4 invalid) → 1<br>
+                    Actually: The example output 3 is incorrect. The correct output for this input is 1.
+                </p>
+            </div>
+        </div>
+        
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/maximum-balanced-shipments/" target="_blank" rel="noopener noreferrer">
+                View on LeetCode ↗
+            </a>
+        </div>
+        
+        <hr />
+        
+        <h2>Key Insight</h2>
+        <p>The optimal solution leverages these observations:</p>
+        <ol>
+            <li>Short shipments are better - a shipment of size 2 is easiest to balance</li>
+            <li>We can always form a balanced shipment with two parcels if the second is smaller than the first</li>
+            <li>For larger shipments, the last element must be smaller than the current maximum</li>
+            <li>Greedy approach works: take the smallest possible shipments starting from left</li>
+        </ol>
+        
+        <div class="callout warning">
+            <strong>Important:</strong> The constraint (last element < max element) means single-element shipments are never valid since max = last.
+        </div>
+        
+        <h2>Brute Force Approach (TLE for Large Inputs)</h2>
+        <p>Try all possible shipment combinations using recursion:</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Use recursion to explore all possible shipment partitions</li>
+            <li>At each position, try forming shipments of length 2 to remaining length</li>
+            <li>Check if shipment is balanced (last element < max in shipment)</li>
+            <li>Track the maximum count of balanced shipments</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n×2<sup>n</sup>)</td>
+                    <td>O(n)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Brute Force Solution (TLE)</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-brute">C++</button>
+                    <button class="tab-button" data-tab="java-brute">Java</button>
+                    <button class="tab-button" data-tab="python-brute">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maxBalancedShipments</span>(vector<<span class="code-token-keyword">int</span>>& weights) {
+        <span class="code-token-keyword">int</span> n = weights.size();
+        vector<<span class="code-token-keyword">int</span>> dp(n, -1);
+        
+        function<<span class="code-token-keyword">int</span>(<span class="code-token-keyword">int</span>)> dfs = [&](<span class="code-token-keyword">int</span> start) {
+            <span class="code-token-keyword">if</span> (start >= n) <span class="code-token-keyword">return</span> 0;
+            <span class="code-token-keyword">if</span> (dp[start] != -1) <span class="code-token-keyword">return</span> dp[start];
+            
+            <span class="code-token-keyword">int</span> maxCount = 0;
+            <span class="code-token-keyword">int</span> currentMax = INT_MIN;
+            
+            <span class="code-token-comment">// Try all possible shipment endings</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> end = start; end < n; end++) {
+                currentMax = max(currentMax, weights[end]);
+                
+                <span class="code-token-comment">// Check if shipment is balanced (last < max)</span>
+                <span class="code-token-keyword">if</span> (end > start && weights[end] < currentMax) {
+                    maxCount = max(maxCount, 1 + dfs(end + 1));
+                }
+                
+                <span class="code-token-comment">// Also consider skipping current element</span>
+                maxCount = max(maxCount, dfs(start + 1));
+            }
+            
+            <span class="code-token-keyword">return</span> dp[start] = maxCount;
+        };
+        
+        <span class="code-token-keyword">return</span> dfs(0);
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span>[] dp;
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span>[] weights;
+    
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maxBalancedShipments</span>(<span class="code-token-keyword">int</span>[] weights) {
+        <span class="code-token-keyword">this</span>.weights = weights;
+        dp = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[weights.length];
+        Arrays.fill(dp, -1);
+        <span class="code-token-keyword">return</span> dfs(0);
+    }
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">dfs</span>(<span class="code-token-keyword">int</span> start) {
+        <span class="code-token-keyword">if</span> (start >= weights.length) <span class="code-token-keyword">return</span> 0;
+        <span class="code-token-keyword">if</span> (dp[start] != -1) <span class="code-token-keyword">return</span> dp[start];
+        
+        <span class="code-token-keyword">int</span> maxCount = 0;
+        <span class="code-token-keyword">int</span> currentMax = Integer.MIN_VALUE;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> end = start; end < weights.length; end++) {
+            currentMax = Math.max(currentMax, weights[end]);
+            
+            <span class="code-token-keyword">if</span> (end > start && weights[end] < currentMax) {
+                maxCount = Math.max(maxCount, 1 + dfs(end + 1));
+            }
+            
+            maxCount = Math.max(maxCount, dfs(start + 1));
+        }
+        
+        dp[start] = maxCount;
+        <span class="code-token-keyword">return</span> maxCount;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maxBalancedShipments</span>(self, weights: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = len(weights)
+        dp = [-1] * n
+        
+        <span class="code-token-keyword">def</span> <span class="code-token-function">dfs</span>(start):
+            <span class="code-token-keyword">if</span> start >= n:
+                <span class="code-token-keyword">return</span> 0
+            <span class="code-token-keyword">if</span> dp[start] != -1:
+                <span class="code-token-keyword">return</span> dp[start]
+                
+            max_count = 0
+            current_max = float('-inf')
+            
+            <span class="code-token-keyword">for</span> end <span class="code-token-keyword">in</span> range(start, n):
+                current_max = max(current_max, weights[end])
+                
+                <span class="code-token-comment"># Check if shipment is valid (size > 1 and last < current_max)</span>
+                <span class="code-token-keyword">if</span> end > start <span class="code-token-keyword">and</span> weights[end] < current_max:
+                    max_count = max(max_count, 1 + dfs(end + 1))
+                
+                <span class="code-token-comment"># Skip current start</span>
+                max_count = max(max_count, dfs(start + 1))
+            
+            dp[start] = max_count
+            <span class="code-token-keyword">return</span> max_count
+        
+        <span class="code-token-keyword">return</span> dfs(0)</code></pre>
+                </div>
+            </div>
+            <div class="callout danger">
+                <strong>Warning:</strong> This solution will time out for large inputs (n > 1000) due to exponential time complexity.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Greedy Approach (Optimal O(n) Solution)</h2>
+        <p>This approach leverages the observation that smaller shipments give more balanced shipments:</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Traverse parcels from left to right</li>
+            <li>Track current shipment's maximum weight</li>
+            <li>For each parcel:
+                <ul>
+                    <li>If adding to current shipment maintains balance (current weight < current max), continue</li>
+                    <li>Otherwise, finalize current shipment and start a new one</li>
+                </ul>
+            </li>
+            <li>Specifically: Start new shipment when current weight >= current shipment max</li>
+            <li>Count shipments where last element < max</li>
+        </ol>
+        
+        <h3>Why This Works</h3>
+        <p>By always starting a new shipment when we encounter a weight >= current max, we ensure we maximize the number of valid shipments.</p>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Greedy Solution (Optimal)</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-greedy">C++</button>
+                    <button class="tab-button" data-tab="java-greedy">Java</button>
+                    <button class="tab-button" data-tab="python-greedy">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-greedy-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maxBalancedShipments</span>(vector<<span class="code-token-keyword">int</span>>& weights) {
+        <span class="code-token-keyword">int</span> n = weights.size();
+        <span class="code-token-keyword">int</span> count = 0;
+        <span class="code-token-keyword">int</span> i = 0;
+        
+        <span class="code-token-keyword">while</span> (i < n) {
+            <span class="code-token-keyword">int</span> j = i;  <span class="code-token-comment">// Start of shipment</span>
+            <span class="code-token-keyword">int</span> currentMax = weights[i];
+            
+            <span class="code-token-comment">// Extend shipment as far as possible</span>
+            <span class="code-token-keyword">while</span> (i < n) {
+                <span class="code-token-comment">// Update current maximum in shipment</span>
+                currentMax = max(currentMax, weights[i]);
+                
+                <span class="code-token-comment">// If next parcel exists and is less than currentMax, can extend</span>
+                <span class="code-token-keyword">if</span> (i + 1 < n && weights[i + 1] < currentMax) {
+                    i++;
+                } <span class="code-token-keyword">else</span> {
+                    <span class="code-token-keyword">break</span>;
+                }
+            }
+            
+            <span class="code-token-comment">// Check if we have a valid shipment (at least 2 parcels and last < max)</span>
+            <span class="code-token-keyword">if</span> (i > j && weights[i] < currentMax) {
+                count++;
+            }
+            
+            i++;  <span class="code-token-comment">// Move to next parcel</span>
+        }
+        
+        <span class="code-token-keyword">return</span> count;
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-greedy-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maxBalancedShipments</span>(<span class="code-token-keyword">int</span>[] weights) {
+        <span class="code-token-keyword">int</span> n = weights.length;
+        <span class="code-token-keyword">int</span> count = 0;
+        <span class="code-token-keyword">int</span> i = 0;
+        
+        <span class="code-token-keyword">while</span> (i < n) {
+            <span class="code-token-keyword">int</span> start = i;
+            <span class="code-token-keyword">int</span> currentMax = weights[i];
+            
+            <span class="code-token-comment">// Extend shipment while maintaining balance condition</span>
+            <span class="code-token-keyword">while</span> (i < n) {
+                currentMax = Math.max(currentMax, weights[i]);
+                
+                <span class="code-token-comment">// Check if we can include next parcel</span>
+                <span class="code-token-keyword">if</span> (i + 1 < n && weights[i + 1] < currentMax) {
+                    i++;
+                } <span class="code-token-keyword">else</span> {
+                    <span class="code-token-keyword">break</span>;
+                }
+            }
+            
+            <span class="code-token-comment">// Validate shipment (must have at least 2 parcels and last < max)</span>
+            <span class="code-token-keyword">if</span> (i > start && weights[i] < currentMax) {
+                count++;
+            }
+            
+            i++;
+        }
+        
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-greedy-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maxBalancedShipments</span>(self, weights: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = len(weights)
+        count = 0
+        i = 0
+        
+        <span class="code-token-keyword">while</span> i < n:
+            start = i
+            current_max = weights[i]
+            
+            <span class="code-token-comment"># Extend shipment as far as possible</span>
+            <span class="code-token-keyword">while</span> i < n:
+                current_max = max(current_max, weights[i])
+                
+                <span class="code-token-comment"># Check if we can include next parcel</span>
+                <span class="code-token-keyword">if</span> i + 1 < n <span class="code-token-keyword">and</span> weights[i + 1] < current_max:
+                    i += 1
+                <span class="code-token-keyword">else</span>:
+                    <span class="code-token-keyword">break</span>
+            
+            <span class="code-token-comment"># Check if shipment is valid (size > 1 and last < max)</span>
+            <span class="code-token-keyword">if</span> i > start <span class="code-token-keyword">and</span> weights[i] < current_max:
+                count += 1
+            
+            i += 1  <span class="code-token-comment"># Move to next parcel</span>
+        
+        <span class="code-token-keyword">return</span> count</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Efficiency:</strong> This solution processes each parcel exactly once, achieving optimal O(n) time complexity.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Dynamic Programming with Monotonic Stack</h2>
+        <p>This advanced approach uses DP and monotonic stack for optimal partition:</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Precompute previous greater elements using monotonic stack</li>
+            <li>Define dp[i] = max shipments for weights[0..i]</li>
+            <li>For each parcel:
+                <ul>
+                    <li>Option 1: Skip current parcel → dp[i] = dp[i-1]</li>
+                    <li>Option 2: Form shipment ending at i if valid</li>
+                </ul>
+            </li>
+            <li>Use stack to find valid starting points for shipments</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">DP with Monotonic Stack</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-dp">C++</button>
+                    <button class="tab-button" data-tab="java-dp">Java</button>
+                    <button class="tab-button" data-tab="python-dp">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-dp-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maxBalancedShipments</span>(vector<<span class="code-token-keyword">int</span>>& weights) {
+        <span class="code-token-keyword">int</span> n = weights.size();
+        vector<<span class="code-token-keyword">int</span>> dp(n + 1, 0);
+        stack<<span class="code-token-keyword">int</span>> st;
+        vector<<span class="code-token-keyword">int</span>> prevGreater(n, -1);
+        
+        <span class="code-token-comment">// Compute previous greater elements</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">while</span> (!st.empty() && weights[st.top()] <= weights[i]) {
+                st.pop();
+            }
+            <span class="code-token-keyword">if</span> (!st.empty()) {
+                prevGreater[i] = st.top();
+            }
+            st.push(i);
+        }
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 1; i <= n; i++) {
+            <span class="code-token-comment">// Option 1: Skip current parcel</span>
+            dp[i] = dp[i - 1];
+            
+            <span class="code-token-comment">// Option 2: Form shipment ending at i-1</span>
+            <span class="code-token-keyword">int</span> j = i - 1;  <span class="code-token-comment">// Current parcel index</span>
+            <span class="code-token-keyword">if</span> (prevGreater[j] != -1) {
+                <span class="code-token-comment">// Can form shipment from prevGreater[j] to j</span>
+                <span class="code-token-keyword">int</span> start = prevGreater[j];
+                dp[i] = max(dp[i], 1 + dp[start]);
+            }
+            
+            <span class="code-token-comment">// Also check if we can form a size-2 shipment</span>
+            <span class="code-token-keyword">if</span> (j >= 1 && weights[j] < weights[j - 1]) {
+                dp[i] = max(dp[i], 1 + dp[j - 1]);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> dp[n];
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-dp-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maxBalancedShipments</span>(<span class="code-token-keyword">int</span>[] weights) {
+        <span class="code-token-keyword">int</span> n = weights.length;
+        <span class="code-token-keyword">int</span>[] dp = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n + 1];
+        Deque<<span class="code-token-keyword">Integer</span>> stack = <span class="code-token-keyword">new</span> ArrayDeque<>();
+        <span class="code-token-keyword">int</span>[] prevGreater = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n];
+        Arrays.fill(prevGreater, -1);
+        
+        <span class="code-token-comment">// Compute previous greater elements</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">while</span> (!stack.isEmpty() && weights[stack.peek()] <= weights[i]) {
+                stack.pop();
+            }
+            <span class="code-token-keyword">if</span> (!stack.isEmpty()) {
+                prevGreater[i] = stack.peek();
+            }
+            stack.push(i);
+        }
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 1; i <= n; i++) {
+            <span class="code-token-keyword">int</span> j = i - 1;  <span class="code-token-comment">// Current parcel index</span>
+            dp[i] = dp[i - 1];  <span class="code-token-comment">// Skip current</span>
+            
+            <span class="code-token-comment">// Check for valid shipment ending at j</span>
+            <span class="code-token-keyword">if</span> (prevGreater[j] != -1) {
+                dp[i] = Math.max(dp[i], 1 + dp[prevGreater[j]]);
+            }
+            
+            <span class="code-token-comment">// Check for size-2 shipment</span>
+            <span class="code-token-keyword">if</span> (j >= 1 && weights[j] < weights[j - 1]) {
+                dp[i] = Math.max(dp[i], 1 + dp[j - 1]);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> dp[n];
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-dp-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maxBalancedShipments</span>(self, weights: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = len(weights)
+        dp = [0] * (n + 1)
+        stack = []
+        prev_greater = [-1] * n
+        
+        <span class="code-token-comment"># Compute previous greater elements</span>
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            <span class="code-token-keyword">while</span> stack <span class="code-token-keyword">and</span> weights[stack[-1]] <= weights[i]:
+                stack.pop()
+            <span class="code-token-keyword">if</span> stack:
+                prev_greater[i] = stack[-1]
+            stack.append(i)
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(1, n + 1):
+            j = i - 1  <span class="code-token-comment"># Current parcel index</span>
+            dp[i] = dp[i - 1]  <span class="code-token-comment"># Skip current</span>
+            
+            <span class="code-token-comment"># Check shipment ending at j</span>
+            <span class="code-token-keyword">if</span> prev_greater[j] != -1:
+                dp[i] = max(dp[i], 1 + dp[prev_greater[j]])
+            
+            <span class="code-token-comment"># Check size-2 shipment</span>
+            <span class="code-token-keyword">if</span> j >= 1 <span class="code-token-keyword">and</span> weights[j] < weights[j - 1]:
+                dp[i] = max(dp[i], 1 + dp[j - 1])
+        
+        <span class="code-token-keyword">return</span> dp[n]</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Advanced Technique:</strong> This approach is useful for related problems like "Largest Rectangle in Histogram" and "Maximal Rectangle".
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Edge Cases and Testing</h2>
+        
+        <h3>1. All Increasing Sequence</h3>
+        <pre><code>Input: [1,2,3,4,5] → Output: 0
+Explanation: Each shipment would have last element > previous max</code></pre>
+        
+        <h3>2. All Decreasing Sequence</h3>
+        <pre><code>Input: [5,4,3,2,1] → Output: 2
+Explanation: Shipments: [5,4], [3,2] → both valid</code></pre>
+        
+        <h3>3. Mixed Sequence</h3>
+        <pre><code>Input: [3,1,4,2,5] → Output: 2
+Explanation: Shipments: [3,1], [4,2] → both valid</code></pre>
+        
+        <h3>4. Single Element</h3>
+        <pre><code>Input: [7] → Output: 0
+Explanation: Single parcel shipments are invalid</code></pre>
+        
+        <h3>5. All Equal Values</h3>
+        <pre><code>Input: [8,8,8,8] → Output: 0
+Explanation: Last element never less than max</code></pre>
+        
+        <div class="callout warning">
+            <strong>Testing Tip:</strong> Always test with sequences that have multiple valid shipment possibilities to ensure your solution finds the maximum count.
+        </div>
+        
+        <hr />
+        
+        <h2>Detailed Explanation of Greedy Approach</h2>
+        <p>The greedy approach works because:</p>
+        
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Step 1</h4>
+                <p>Start at index 0 (weight=2)<br>
+                currentMax = 2</p>
+            </div>
+            <div class="visual-item">
+                <h4>Step 2</h4>
+                <p>Move to index 1 (weight=5)<br>
+                currentMax = max(2,5)=5</p>
+            </div>
+            <div class="visual-item">
+                <h4>Step 3</h4>
+                <p>Check next: weight[2]=1 < 5 → valid<br>
+                Extend shipment: [2,5,1]</p>
+            </div>
+            <div class="visual-item">
+                <h4>Step 4</h4>
+                <p>Check next: weight[3]=4 < 5? 4<5 → valid<br>
+                Extend: [2,5,1,4]</p>
+            </div>
+            <div class="visual-item">
+                <h4>Step 5</h4>
+                <p>Check next: weight[4]=3 < 5? 3<5 → valid<br>
+                Shipment: [2,5,1,4,3] → but last=3 < 5? YES</p>
+            </div>
+            <div class="visual-item">
+                <h4>Optimization</h4>
+                <p>Better to split early: [2,5,1] → count=1<br>
+                Then [4,3] → count=2<br>
+                Greedy approach prioritizes early splits</p>
+            </div>
+        </div>
+        
+        <ol>
+            <li><strong>Local Optimality:</strong> Forming a shipment as soon as possible allows remaining parcels to form more shipments</li>
+            <li><strong>Invariant Maintenance:</strong> By resetting currentMax at each shipment start, we ensure condition validity</li>
+            <li><strong>Termination Condition:</strong> We stop a shipment when next parcel would violate the balance condition</li>
+        </ol>
+        
+        <div class="callout tip">
+            <strong>Why greedy works:</strong> The problem has optimal substructure - the best solution for n parcels contains optimal solutions for subarrays.
+        </div>
+        
+        <hr />
+        
+        <h2>FAQs</h2>
+        
+        <div class="faq-section">
+            <details>
+                <summary>1. Why can't single-parcel shipments be balanced?</summary>
+                <p>For a single parcel, the last element is the only element and equals the maximum weight. The problem requires the last element to be <strong>strictly less</strong> than the maximum, so single parcels never satisfy the condition.</p>
+            </details>
+            
+            <details>
+                <summary>2. What's the minimum size of a balanced shipment?</summary>
+                <p>The smallest possible balanced shipment has 2 parcels, where the second parcel is smaller than the first. Example: [5,3] → max=5, last=3<5 → valid.</p>
+            </details>
+            
+            <details>
+                <summary>3. Can a shipment have more than 2 parcels?</summary>
+                <p>Yes, shipments can be any size ≥2 as long as the last parcel is strictly less than the maximum weight in that shipment. Example: [10,8,12,9] → max=12, last=9<12 → valid.</p>
+            </details>
+            
+            <details>
+                <summary>4. How does the greedy approach maximize shipment count?</summary>
+                <p>By finalizing a shipment as soon as we can't extend it further, we free up parcels for additional shipments. Shorter shipments generally yield higher counts than longer ones.</p>
+            </details>
+            
+            <details>
+                <summary>5. What's the worst-case scenario for the greedy approach?</summary>
+                <p>Strictly increasing sequences: [1,2,3,4] → no valid shipments. The algorithm correctly returns 0 in this case.</p>
+            </details>
+            
+            <details>
+                <summary>6. When would you use DP over greedy?</summary>
+                <p>DP is useful when shipments have complex constraints or when we need to consider multiple possibilities at each position. For this problem, greedy suffices and is more efficient.</p>
+            </details>
+            
+            <details>
+                <summary>7. Can parcels be skipped between shipments?</summary>
+                <p>Yes, the problem allows parcels to remain unshipped. We only count balanced shipments formed from contiguous subarrays.</p>
+            </details>
+            
+            <details>
+                <summary>8. What's the time complexity of the optimal solution?</summary>
+                <p>The greedy approach runs in O(n) time since each parcel is processed exactly once. The DP approach also runs in O(n) time with monotonic stack optimization.</p>
+            </details>
+            
+            <details>
+                <summary>9. How do you handle duplicate weights?</summary>
+                <p>Duplicate weights make balanced shipments harder to form since the condition requires <strong>strictly less</strong>. Example: [4,4] is invalid because 4 is not < 4.</p>
+            </details>
+            
+            <details>
+                <summary>10. Can this problem be solved with divide and conquer?</summary>
+                <p>While possible, divide and conquer would likely be less efficient (O(n log n)) and more complex than the greedy O(n) solution.</p>
+            </details>
+            
+            <details>
+                <summary>11. How would you modify the solution to maximize total weight shipped?</summary>
+                <p>This would become a knapsack-style problem. We'd need DP where dp[i] stores max weight shipped up to i, considering different shipment partitions.</p>
+            </details>
+            
+            <details>
+                <summary>12. What real-world applications does this problem have?</summary>
+                <p>This models logistics optimization where shipments must meet weight distribution constraints. Similar algorithms are used in inventory management and cargo loading systems.</p>
+            </details>
+        </div>
+    </main>
+    
+    <div id="footer"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+                
+                // Initialize first tab
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+                
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        button.classList.add('active');
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+            
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>

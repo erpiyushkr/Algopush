@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 1695 | Maximum Erasure Value</title>
+  <meta name="description"
+    content="Discover optimal solutions for LeetCode 1695: Maximum Erasure Value using sliding window and prefix sum techniques. Detailed explanations and implementations." />
+  <meta name="keywords"
+    content="leetcode, leetcode 1695, maximum erasure value, sliding window algorithm, prefix sum, two pointers, unique subarray, array problems, coding interview preparation, , leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, algorithm optimization, leetcode premium problem, , leetcode array question, leetcode contest question, leetcode contest" />
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/1695-maximum-erasure-value.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 1695: Maximum Erasure Value">
+  <meta property="og:description"
+    content="Optimal O(n) solutions using sliding window and prefix sum techniques. Complete guide with detailed implementations and complexity analysis.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/1695.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/1695-maximum-erasure-value.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 1695: Maximum Erasure Value">
+  <meta name="twitter:description"
+    content="Solve maximum unique subarray sum problems efficiently. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/1695.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Maximum Erasure Value",
+      "url": "https://algopush.com/Leetcode/1695-maximum-erasure-value.html",
+      "image": "https://algopush.com/Leetcode/Images/1695.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-07-22",
+      "dateModified": "2025-07-22",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Visualization Container */
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+
+    /* Animation for prime visualization */
+    @keyframes highlightPrime {
+      0% {
+        background-color: transparent;
+      }
+
+      50% {
+        background-color: rgba(25, 99, 145, 0.3);
+      }
+
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    .prime-highlight {
+      animation: highlightPrime 1.5s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>1695. Maximum Erasure Value</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/1695.png" alt="Maximum erasure value visualization" loading="lazy">
+    </div>
+
+    <h1>1695: Maximum Erasure Value</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Sliding Window, Hash Table</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> For subarray problems with unique elements, the sliding window technique is often the
+      most efficient solution. Maintain a window with unique elements and adjust it dynamically when duplicates appear.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>You are given an array of positive integers <code>nums</code>. You need to find the maximum sum of any contiguous
+      subarray containing only unique elements. Return the maximum score achievable by erasing exactly one such
+      subarray.</p>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> nums = [4,2,4,5,6]</p>
+        <p><strong>Output:</strong> 17</p>
+        <p><strong>Explanation:</strong> The optimal subarray is [2,4,5,6] with sum 2+4+5+6=17</p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 2</h4>
+        <p><strong>Input:</strong> nums = [5,2,1,2,5,2,1,2,5]</p>
+        <p><strong>Output:</strong> 8</p>
+        <p><strong>Explanation:</strong> The optimal subarrays are [5,2,1] or [1,2,5] with sum 8</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/maximum-erasure-value/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Key Insight</h2>
+    <p>The problem requires finding a contiguous subarray with all unique elements that has the maximum possible sum.
+      The optimal solutions leverage:</p>
+    <ol>
+      <li><strong>Sliding Window Technique</strong>: Maintain a window of unique elements by expanding with new elements
+        and contracting when duplicates appear</li>
+      <li><strong>Efficient Tracking</strong>: Use a set or map to track elements in the current window</li>
+      <li><strong>Sum Optimization</strong>: Maintain a running sum that adjusts dynamically as the window changes</li>
+    </ol>
+
+    <div class="callout warning">
+      <strong>Important:</strong> The solution must efficiently handle arrays up to 10<sup>5</sup> elements, requiring
+      O(n) time complexity.
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Sliding Window with Set</h2>
+    <p>Maintain a window [i, j) of unique elements using two pointers and a hash set.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize two pointers i=0, j=0 and maxSum = 0</li>
+      <li>Initialize a set to track elements in current window</li>
+      <li>Initialize currentSum = 0</li>
+      <li>While j < length: <ul>
+      <li>If nums[j] not in set:
+        <ul>
+          <li>Add nums[j] to set</li>
+          <li>Add nums[j] to currentSum</li>
+          <li>Update maxSum = max(maxSum, currentSum)</li>
+          <li>j++</li>
+        </ul>
+      </li>
+      <li>Else:
+        <ul>
+          <li>Remove nums[i] from set</li>
+          <li>Subtract nums[i] from currentSum</li>
+          <li>i++</li>
+        </ul>
+      </li>
+      </ul>
+      </li>
+      <li>Return maxSum</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Each element is processed at most twice (once by each pointer). The set uses O(n) space.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Sliding Window with Set</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-set">C++</button>
+          <button class="tab-button" data-tab="java-set">Java</button>
+          <button class="tab-button" data-tab="python-set">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-set-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maximumUniqueSubarray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        unordered_set<<span class="code-token-keyword">int</span>> unique;
+        <span class="code-token-keyword">int</span> maxSum = 0, currentSum = 0;
+        <span class="code-token-keyword">int</span> i = 0, j = 0;
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        
+        <span class="code-token-keyword">while</span> (j < n) {
+            <span class="code-token-keyword">if</span> (unique.<span class="code-token-function">find</span>(nums[j]) == unique.<span class="code-token-function">end</span>()) {
+                unique.<span class="code-token-function">insert</span>(nums[j]);
+                currentSum += nums[j];
+                maxSum = <span class="code-token-function">max</span>(maxSum, currentSum);
+                j++;
+            } <span class="code-token-keyword">else</span> {
+                unique.<span class="code-token-function">erase</span>(nums[i]);
+                currentSum -= nums[i];
+                i++;
+            }
+        }
+        <span class="code-token-keyword">return</span> maxSum;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-set-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maximumUniqueSubarray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        Set&lt;Integer> unique = <span class="code-token-keyword">new</span> HashSet&lt;>();
+        <span class="code-token-keyword">int</span> maxSum = 0, currentSum = 0;
+        <span class="code-token-keyword">int</span> i = 0, j = 0;
+        <span class="code-token-keyword">int</span> n = nums.length;
+        
+        <span class="code-token-keyword">while</span> (j < n) {
+            <span class="code-token-keyword">if</span> (!unique.<span class="code-token-function">contains</span>(nums[j])) {
+                unique.<span class="code-token-function">add</span>(nums[j]);
+                currentSum += nums[j];
+                maxSum = Math.<span class="code-token-function">max</span>(maxSum, currentSum);
+                j++;
+            } <span class="code-token-keyword">else</span> {
+                unique.<span class="code-token-function">remove</span>(nums[i]);
+                currentSum -= nums[i];
+                i++;
+            }
+        }
+        <span class="code-token-keyword">return</span> maxSum;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-set-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maximumUniqueSubarray</span>(self, nums: List[int]) -> int:
+        unique = set()
+        max_sum = current_sum = i = 0
+        n = len(nums)
+        
+        <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(n):
+            <span class="code-token-keyword">while</span> nums[j] <span class="code-token-keyword">in</span> unique:
+                unique.remove(nums[i])
+                current_sum -= nums[i]
+                i += 1
+            unique.add(nums[j])
+            current_sum += nums[j]
+            max_sum = max(max_sum, current_sum)
+            
+        <span class="code-token-keyword">return</span> max_sum</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach efficiently maintains a window of unique elements. The
+        Python version uses a different loop structure to avoid redundant checks.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Prefix Sum with HashMap</h2>
+    <p>Use prefix sums for efficient range sum calculation and a hashmap to track last seen indices.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Compute prefix sum array where prefix[i] = sum of nums[0..i-1]</li>
+      <li>Initialize maxSum = 0 and start = 0</li>
+      <li>Use a map to store last occurrence index of each value</li>
+      <li>For each index i:
+        <ul>
+          <li>If nums[i] exists in map and last index ≥ start: update start to last_index + 1</li>
+          <li>Update current sum = prefix[i+1] - prefix[start]</li>
+          <li>Update maxSum = max(maxSum, current sum)</li>
+          <li>Update map with current index</li>
+        </ul>
+      </li>
+      <li>Return maxSum</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Requires one pass through the array and O(n) space for prefix sums and map.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Prefix Sum with HashMap</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-prefix">C++</button>
+          <button class="tab-button" data-tab="java-prefix">Java</button>
+          <button class="tab-button" data-tab="python-prefix">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-prefix-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maximumUniqueSubarray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        vector<<span class="code-token-keyword">int</span>> <span class="code-token-function">prefix</span>(n+1, 0);
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            prefix[i+1] = prefix[i] + nums[i];
+        }
+        
+        unordered_map<<span class="code-token-keyword">int</span>, <span class="code-token-keyword">int</span>> last_seen;
+        <span class="code-token-keyword">int</span> maxSum = 0;
+        <span class="code-token-keyword">int</span> start = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (last_seen.<span class="code-token-function">count</span>(nums[i]) && last_seen[nums[i]] >= start) {
+                start = last_seen[nums[i]] + 1;
+            }
+            last_seen[nums[i]] = i;
+            <span class="code-token-keyword">int</span> currentSum = prefix[i+1] - prefix[start];
+            maxSum = <span class="code-token-function">max</span>(maxSum, currentSum);
+        }
+        <span class="code-token-keyword">return</span> maxSum;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-prefix-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maximumUniqueSubarray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">int</span>[] prefix = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n+1];
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            prefix[i+1] = prefix[i] + nums[i];
+        }
+        
+        Map&lt;Integer, Integer> lastSeen = <span class="code-token-keyword">new</span> HashMap&lt;>();
+        <span class="code-token-keyword">int</span> maxSum = 0;
+        <span class="code-token-keyword">int</span> start = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (lastSeen.<span class="code-token-function">containsKey</span>(nums[i]) && lastSeen.<span class="code-token-function">get</span>(nums[i]) >= start) {
+                start = lastSeen.<span class="code-token-function">get</span>(nums[i]) + 1;
+            }
+            lastSeen.<span class="code-token-function">put</span>(nums[i], i);
+            <span class="code-token-keyword">int</span> currentSum = prefix[i+1] - prefix[start];
+            maxSum = Math.<span class="code-token-function">max</span>(maxSum, currentSum);
+        }
+        <span class="code-token-keyword">return</span> maxSum;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-prefix-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maximumUniqueSubarray</span>(self, nums: List[int]) -> int:
+        n = len(nums)
+        prefix = [0] * (n+1)
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            prefix[i+1] = prefix[i] + nums[i]
+            
+        last_seen = {}
+        max_sum = start = 0
+        
+        <span class="code-token-keyword">for</span> i, num <span class="code-token-keyword">in</span> enumerate(nums):
+            <span class="code-token-keyword">if</span> num <span class="code-token-keyword">in</span> last_seen <span class="code-token-keyword">and</span> last_seen[num] >= start:
+                start = last_seen[num] + 1
+            last_seen[num] = i
+            current_sum = prefix[i+1] - prefix[start]
+            max_sum = max(max_sum, current_sum)
+            
+        <span class="code-token-keyword">return</span> max_sum</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach efficiently calculates subarray sums using prefix sums and
+        handles duplicates by updating the start index based on last seen positions.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Optimized Sliding Window with Frequency Array</h2>
+    <p>Use an array to track character frequency for O(1) lookups, optimized for given constraints.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize frequency array of size max_value+1 (max_value=10<sup>4</sup> per constraints)</li>
+      <li>Initialize left=0, currentSum=0, maxSum=0</li>
+      <li>For right in [0, n):
+        <ul>
+          <li>Increment frequency of nums[right]</li>
+          <li>Add nums[right] to currentSum</li>
+          <li>While frequency[nums[right]] > 1:
+            <ul>
+              <li>Decrement frequency of nums[left]</li>
+              <li>Subtract nums[left] from currentSum</li>
+              <li>left++</li>
+            </ul>
+          </li>
+          <li>Update maxSum = max(maxSum, currentSum)</li>
+        </ul>
+      </li>
+      <li>Return maxSum</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(max_value)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>More efficient than set-based approach for constrained value ranges.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Frequency Array Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-freq">C++</button>
+          <button class="tab-button" data-tab="java-freq">Java</button>
+          <button class="tab-button" data-tab="python-freq">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-freq-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maximumUniqueSubarray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        vector<<span class="code-token-keyword">bool</span>> freq(10001, false);
+        <span class="code-token-keyword">int</span> maxSum = 0, currentSum = 0;
+        <span class="code-token-keyword">int</span> left = 0, n = nums.<span class="code-token-function">size</span>();
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> right = 0; right < n; right++) {
+            <span class="code-token-keyword">while</span> (freq[nums[right]]) {
+                freq[nums[left]] = false;
+                currentSum -= nums[left];
+                left++;
+            }
+            freq[nums[right]] = true;
+            currentSum += nums[right];
+            maxSum = <span class="code-token-function">max</span>(maxSum, currentSum);
+        }
+        <span class="code-token-keyword">return</span> maxSum;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-freq-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maximumUniqueSubarray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">boolean</span>[] freq = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[10001];
+        <span class="code-token-keyword">int</span> maxSum = 0, currentSum = 0;
+        <span class="code-token-keyword">int</span> left = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> right = 0; right < nums.length; right++) {
+            <span class="code-token-keyword">while</span> (freq[nums[right]]) {
+                freq[nums[left]] = false;
+                currentSum -= nums[left];
+                left++;
+            }
+            freq[nums[right]] = true;
+            currentSum += nums[right];
+            maxSum = Math.<span class="code-token-function">max</span>(maxSum, currentSum);
+        }
+        <span class="code-token-keyword">return</span> maxSum;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-freq-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maximumUniqueSubarray</span>(self, nums: List[int]) -> int:
+        freq = [False] * 10001
+        max_sum = current_sum = left = 0
+        
+        <span class="code-token-keyword">for</span> right <span class="code-token-keyword">in</span> range(len(nums)):
+            <span class="code-token-keyword">while</span> freq[nums[right]]:
+                freq[nums[left]] = False
+                current_sum -= nums[left]
+                left += 1
+            freq[nums[right]] = True
+            current_sum += nums[right]
+            max_sum = max(max_sum, current_sum)
+            
+        <span class="code-token-keyword">return</span> max_sum</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach is optimized for the problem constraints where nums[i] ≤
+        10,000. It uses a boolean array for O(1) lookups.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Best For</th>
+          <th>Time</th>
+          <th>Space</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sliding Window with Set</td>
+          <td>General case with no value constraints</td>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+        <tr>
+          <td>Prefix Sum with HashMap</td>
+          <td>When range sums are needed frequently</td>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+        <tr>
+          <td>Frequency Array</td>
+          <td>Constrained value ranges (nums[i] ≤ 10<sup>4</sup>)</td>
+          <td>O(n)</td>
+          <td>O(max_value)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Important:</strong> For the given constraints (n ≤ 10<sup>5</sup>, nums[i] ≤ 10<sup>4</sup>), the
+      frequency array approach is most efficient.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+    <h3>1. All Unique Elements</h3>
+    <pre><code>Input: [1,2,3,4,5] → Output: 15 (sum of entire array)</code></pre>
+
+    <h3>2. All Elements Identical</h3>
+    <pre><code>Input: [3,3,3,3] → Output: 3 (single element)</code></pre>
+
+    <h3>3. Alternating Duplicates</h3>
+    <pre><code>Input: [1,2,1,2,1,2] → Output: 3 (subarray [1,2] or [2,1])</code></pre>
+
+    <h3>4. Large Input Size</h3>
+    <pre><code>Input: Array of 10<sup>5</sup> distinct elements → Output: sum of entire array</code></pre>
+
+    <h3>5. Single Element</h3>
+    <pre><code>Input: [5] → Output: 5</code></pre>
+
+    <div class="callout danger">
+      <strong>Warning:</strong> Always test with maximum size input to ensure O(n) performance and avoid timeouts.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why is the sliding window approach efficient?</summary>
+        <p>The sliding window approach processes each element at most twice (once by each pointer), resulting in O(n)
+          time complexity - optimal for large inputs.</p>
+      </details>
+
+      <details>
+        <summary>2. How does the frequency array improve performance?</summary>
+        <p>By using direct array indexing instead of hash operations, it reduces constant factors in time complexity,
+          especially beneficial for constrained value ranges.</p>
+      </details>
+
+      <details>
+        <summary>3. Can we use a bitset instead of boolean array?</summary>
+        <p>Yes, but boolean arrays are more space-efficient in most languages. A bitset would save space but add minor
+          access overhead.</p>
+      </details>
+
+      <details>
+        <summary>4. Why use prefix sums in Approach 2?</summary>
+        <p>Prefix sums allow O(1) range sum queries, making it efficient to calculate subarray sums when we know the
+          start and end indices.</p>
+      </details>
+
+      <details>
+        <summary>5. How to handle negative numbers?</summary>
+        <p>The problem specifies positive integers only, so negative cases don't need handling. For general integers,
+          we'd need different approaches.</p>
+      </details>
+
+      <details>
+        <summary>6. Is the subarray contiguous?</summary>
+        <p>Yes, the problem requires a contiguous subarray with unique elements that has the maximum sum.</p>
+      </details>
+
+      <details>
+        <summary>7. Why is the answer unique?</summary>
+        <p>While there might be multiple subarrays with the same maximum sum, the problem guarantees the maximum sum is
+          unique.</p>
+      </details>
+
+      <details>
+        <summary>8. Can we solve this with dynamic programming?</summary>
+        <p>Possible but less efficient. DP would typically require O(n²) time, which is infeasible for n=10<sup>5</sup>.
+        </p>
+      </details>
+
+      <details>
+        <summary>9. What if there are multiple duplicates?</summary>
+        <p>The algorithms naturally handle multiple duplicates by adjusting the window start to the last occurrence
+          index + 1.</p>
+      </details>
+
+      <details>
+        <summary>10. How to modify for longest unique subarray?</summary>
+        <p>Instead of tracking sum, track window length: maxLen = max(maxLen, right-left+1). The core sliding window
+          logic remains similar.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Insight:</strong> This problem demonstrates how different implementations of the sliding window
+      technique can optimize for various constraints. The frequency array approach is particularly efficient for bounded
+      value ranges common in programming problems.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

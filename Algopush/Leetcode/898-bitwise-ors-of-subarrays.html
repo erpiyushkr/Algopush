@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 898 | Bitwise ORs of Subarrays</title>
+  <meta name="description" content="Efficient O(n log max) solution using dynamic programming with sets. Learn multiple methods to solve the distinct bitwise ORs problem with detailed implementations." />
+  <meta name="keywords" content="LeetCode 898, Bitwise ORs of Subarrays, Distinct ORs, Array manipulation, Dynamic Programming, Bit Manipulation, Algorithm optimization, LeetCode premium problem, coding interview preparation, algopush, Algorithm, Programming, Coding Interview, LeetCode Medium Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question" />
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/898-bitwise-ors-of-subarrays.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 898: Bitwise ORs of Subarrays">
+  <meta property="og:description" content="Efficient O(n log max) solution using dynamic programming with sets. Learn multiple methods to solve this bitwise OR problem.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/898.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/898-bitwise-ors-of-subarrays.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 898: Bitwise ORs of Subarrays">
+  <meta name="twitter:description" content="Solve distinct bitwise OR problems with dynamic programming. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/898.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Bitwise ORs of Subarrays",
+      "url": "https://algopush.com/Leetcode/898-bitwise-ors-of-subarrays.html",
+      "image": "https://algopush.com/Leetcode/Images/898.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-07-31",
+      "dateModified": "2025-07-31",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* CSS styles identical to previous posts */
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Visualization Container */
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+    
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .grid-item {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+    }
+    
+    @keyframes pulse {
+      0% { background-color: #e6f7ff; }
+      50% { background-color: #b3e0ff; }
+      100% { background-color: #e6f7ff; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .visual-item {
+        min-width: 100%;
+      }
+      
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>898. Bitwise ORs of Subarrays</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/898.png" alt="Bitwise OR visualization" loading="lazy">
+    </div>
+
+    <h1>898: Bitwise ORs of Subarrays</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Array, Dynamic Programming, Bit Manipulation</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> For bitwise OR problems, remember that each element can add at most one new bit. The number of distinct OR values grows logarithmically with the maximum element value.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an integer array <code>arr</code>, return the number of distinct bitwise ORs of all non-empty subarrays.</p>
+    <p>A subarray is a contiguous non-empty sequence of elements within the array. The bitwise OR of a subarray is the bitwise OR of all integers in that subarray.</p>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> arr = [0]</p>
+        <p><strong>Output:</strong> 1</p>
+        <p><strong>Explanation:</strong> Only one subarray [0] with OR value 0.</p>
+      </div>
+      
+      <div class="visual-item">
+        <h4>Example 2</h4>
+        <p><strong>Input:</strong> arr = [1,1,2]</p>
+        <p><strong>Output:</strong> 3</p>
+        <p><strong>Explanation:</strong> Distinct OR values: 1 (from [1]), 1 (from [1]), 2 (from [2]), 1 (from [1,1]), 3 (from [1,2]), 3 (from [1,1,2])</p>
+      </div>
+      
+      <div class="visual-item">
+        <h4>Example 3</h4>
+        <p><strong>Input:</strong> arr = [1,2,4]</p>
+        <p><strong>Output:</strong> 6</p>
+        <p><strong>Explanation:</strong> Distinct OR values: 1, 2, 4, 3 (1|2), 5 (1|4), 6 (2|4), 7 (1|2|4)</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/bitwise-ors-of-subarrays/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Key Insight</h2>
+    <p>The solution relies on two crucial observations:</p>
+    <ol>
+      <li>The number of distinct OR values for subarrays ending at index i is bounded by O(log(max_value))</li>
+      <li>We can efficiently compute these values using dynamic programming and set operations</li>
+    </ol>
+    
+    <div class="callout warning">
+      <strong>Important:</strong> The brute force approach (O(n²)) becomes infeasible for large arrays (n ≤ 50,000). We need an O(n log max) solution.
+    </div>
+
+    <h2>Brute Force Approach (TLE)</h2>
+    <p>This approach generates every possible subarray and computes its bitwise OR:</p>
+    
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize an empty set to store distinct ORs</li>
+      <li>For each starting index i:
+        <ul>
+          <li>Initialize current OR to 0</li>
+          <li>For each ending index j from i to end:
+            <ul>
+              <li>Compute OR = OR | arr[j]</li>
+              <li>Add OR to the set</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Return the size of the set</li>
+    </ol>
+    
+    <h3>Why It Fails (TLE)</h3>
+    <p>For an array of size n, there are O(n²) subarrays. When n = 50,000, this results in 1.25 billion operations, which is computationally infeasible.</p>
+    
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n²)</td>
+          <td>O(n²)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Brute Force Solution (TLE)</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-brute">C++</button>
+          <button class="tab-button" data-tab="java-brute">Java</button>
+          <button class="tab-button" data-tab="python-brute">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-brute-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">subarrayBitwiseORs</span>(vector<<span class="code-token-keyword">int</span>>& arr) {
+        unordered_set<<span class="code-token-keyword">int</span>> st;
+        <span class="code-token-keyword">int</span> n = arr.size();
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">int</span> val = 0;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i; j < n; j++) {
+                val |= arr[j];
+                st.insert(val);
+            }
+        }
+        <span class="code-token-keyword">return</span> st.size();
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-brute-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">subarrayBitwiseORs</span>(<span class="code-token-keyword">int</span>[] arr) {
+        Set<<span class="code-token-keyword">Integer</span>> st = <span class="code-token-keyword">new</span> HashSet<>();
+        <span class="code-token-keyword">int</span> n = arr.length;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">int</span> val = 0;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i; j < n; j++) {
+                val |= arr[j];
+                st.add(val);
+            }
+        }
+        <span class="code-token-keyword">return</span> st.size();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-brute-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">subarrayBitwiseORs</span>(self, arr: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        st = set()
+        n = len(arr)
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            val = 0
+            <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(i, n):
+                val |= arr[j]
+                st.add(val)
+                
+        <span class="code-token-keyword">return</span> len(st)</code></pre>
+        </div>
+      </div>
+      <div class="callout danger">
+        <strong>Warning:</strong> This solution will time out for large inputs (n > 1000) due to its O(n²) complexity.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Optimal Approach: Dynamic Programming with Sets</h2>
+    <p>This approach leverages the insight that the number of distinct OR values for subarrays ending at index i is bounded by O(log(max_value)).</p>
+    
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize two sets: <code>all_ors</code> (global) and <code>current</code> (ORs ending at current index)</li>
+      <li>For each number in array:
+        <ul>
+          <li>Create a new temporary set</li>
+          <li>Add current number to temporary set</li>
+          <li>For each value in previous set, OR with current number and add to temporary set</li>
+          <li>Set <code>current</code> to temporary set</li>
+          <li>Add all values from <code>current</code> to <code>all_ors</code></li>
+        </ul>
+      </li>
+      <li>Return size of <code>all_ors</code></li>
+    </ol>
+    
+    <h3>Why This Works</h3>
+    <p>Each step only considers ORs from the previous index, and the set size is bounded by O(log(max_value)). This reduces time complexity to O(n log max).</p>
+    
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n log max)</td>
+          <td>O(n log max)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where max is the maximum element in the array (log max is about 30-32 for integers).</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimal Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-opt">C++</button>
+          <button class="tab-button" data-tab="java-opt">Java</button>
+          <button class="tab-button" data-tab="python-opt">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">subarrayBitwiseORs</span>(vector<<span class="code-token-keyword">int</span>>& arr) {
+        unordered_set<<span class="code-token-keyword">int</span>> all_ors;
+        unordered_set<<span class="code-token-keyword">int</span>> current;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : arr) {
+            unordered_set<<span class="code-token-keyword">int</span>> temp;
+            temp.insert(num);
+            
+            <span class="code-token-comment">// Combine with previous ORs</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> val : current) {
+                temp.insert(val | num);
+            }
+            
+            current = temp;
+            all_ors.insert(current.begin(), current.end());
+        }
+        
+        <span class="code-token-keyword">return</span> all_ors.size();
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">subarrayBitwiseORs</span>(<span class="code-token-keyword">int</span>[] arr) {
+        Set<<span class="code-token-keyword">Integer</span>> all_ors = <span class="code-token-keyword">new</span> HashSet<>();
+        Set<<span class="code-token-keyword">Integer</span>> current = <span class="code-token-keyword">new</span> HashSet<>();
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : arr) {
+            Set<<span class="code-token-keyword">Integer</span>> temp = <span class="code-token-keyword">new</span> HashSet<>();
+            temp.add(num);
+            
+            <span class="code-token-comment">// Combine with previous ORs</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> val : current) {
+                temp.add(val | num);
+            }
+            
+            current = temp;
+            all_ors.addAll(current);
+        }
+        
+        <span class="code-token-keyword">return</span> all_ors.size();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-opt-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">subarrayBitwiseORs</span>(self, arr: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        all_ors = set()
+        current = set()
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> arr:
+            <span class="code-token-comment"># Create new set with current number</span>
+            temp = {num}
+            <span class="code-token-comment"># Combine with previous ORs</span>
+            <span class="code-token-keyword">for</span> val <span class="code-token-keyword">in</span> current:
+                temp.add(val | num)
+                
+            current = temp
+            all_ors |= current  <span class="code-token-comment"># Union with global set</span>
+            
+        <span class="code-token-keyword">return</span> len(all_ors)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This solution efficiently handles large inputs by leveraging the logarithmic bound on distinct OR values.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Optimized Approach: Early Termination</h2>
+    <p>This improvement adds early termination when no new bits are added.</p>
+    
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Same as optimal approach, but track previous OR value</li>
+      <li>If current set equals previous set, break early</li>
+    </ol>
+    
+    <h3>Why This Helps</h3>
+    <p>For arrays with large identical values, we can terminate early once no new OR values are generated.</p>
+    
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n log max)</td>
+          <td>O(n log max)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Same worst-case, but better for certain inputs.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimized with Early Termination</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-early">C++</button>
+          <button class="tab-button" data-tab="java-early">Java</button>
+          <button class="tab-button" data-tab="python-early">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-early-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">subarrayBitwiseORs</span>(vector<<span class="code-token-keyword">int</span>>& arr) {
+        unordered_set<<span class="code-token-keyword">int</span>> all_ors;
+        unordered_set<<span class="code-token-keyword">int</span>> current;
+        <span class="code-token-keyword">int</span> last_size = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : arr) {
+            unordered_set<<span class="code-token-keyword">int</span>> temp;
+            temp.insert(num);
+            
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> val : current) {
+                temp.insert(val | num);
+            }
+            
+            <span class="code-token-comment">// Early termination if no new ORs</span>
+            <span class="code-token-keyword">if</span> (temp.size() == last_size && temp == current) {
+                <span class="code-token-keyword">continue</span>;
+            }
+            
+            last_size = temp.size();
+            current = temp;
+            all_ors.insert(current.begin(), current.end());
+        }
+        
+        <span class="code-token-keyword">return</span> all_ors.size();
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-early-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">subarrayBitwiseORs</span>(<span class="code-token-keyword">int</span>[] arr) {
+        Set<<span class="code-token-keyword">Integer</span>> all_ors = <span class="code-token-keyword">new</span> HashSet<>();
+        Set<<span class="code-token-keyword">Integer</span>> current = <span class="code-token-keyword">new</span> HashSet<>();
+        <span class="code-token-keyword">int</span> last_size = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : arr) {
+            Set<<span class="code-token-keyword">Integer</span>> temp = <span class="code-token-keyword">new</span> HashSet<>();
+            temp.add(num);
+            
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> val : current) {
+                temp.add(val | num);
+            }
+            
+            <span class="code-token-comment">// Early termination if no new ORs</span>
+            <span class="code-token-keyword">if</span> (temp.size() == last_size && temp.equals(current)) {
+                <span class="code-token-keyword">continue</span>;
+            }
+            
+            last_size = temp.size();
+            current = temp;
+            all_ors.addAll(current);
+        }
+        
+        <span class="code-token-keyword">return</span> all_ors.size();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-early-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">subarrayBitwiseORs</span>(self, arr: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        all_ors = set()
+        current = set()
+        last_size = 0
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> arr:
+            temp = {num}
+            <span class="code-token-keyword">for</span> val <span class="code-token-keyword">in</span> current:
+                temp.add(val | num)
+                
+            <span class="code-token-comment"># Early termination if no new ORs</span>
+            <span class="code-token-keyword">if</span> len(temp) == last_size <span class="code-token-keyword">and</span> temp == current:
+                <span class="code-token-keyword">continue</span>
+                
+            last_size = len(temp)
+            current = temp
+            all_ors |= current
+            
+        <span class="code-token-keyword">return</span> len(all_ors)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This optimization helps for arrays with long sequences of identical values but doesn't improve worst-case complexity.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+    <h3>1. All Zeros</h3>
+    <pre><code>Input: [0,0,0] → Output: 1
+Explanation: Only OR value is 0</code></pre>
+
+    <h3>2. Increasing Powers of Two</h3>
+    <pre><code>Input: [1,2,4,8] → Output: 10
+Explanation: OR values: 1,2,4,8,3,5,9,6,10,7,15</code></pre>
+
+    <h3>3. All Identical Values</h3>
+    <pre><code>Input: [3,3,3] → Output: 1
+Explanation: Only OR value is 3</code></pre>
+
+    <h3>4. Mixed Values</h3>
+    <pre><code>Input: [1,3,5] → Output: 5
+Explanation: OR values: 1,3,5,3,7,7</code></pre>
+
+    <h3>5. Large Input (50,000 elements)</h3>
+    <pre><code>Optimal solution handles in milliseconds
+Brute force would take hours</code></pre>
+
+    <div class="callout danger">
+      <strong>Warning:</strong> Always test with worst-case inputs (large array with increasing powers of two) to ensure efficiency.
+    </div>
+
+    <hr />
+
+    <h2>Related Topics Explained</h2>
+
+    <h3>Array</h3>
+    <p>An array is a fundamental data structure consisting of a collection of elements identified by indices. In this problem:</p>
+    <ul>
+      <li>We work with contiguous subarrays (sequences of adjacent elements)</li>
+      <li>Key operations: iteration, indexing, subarray extraction</li>
+      <li>Efficient traversal is crucial for optimal solutions</li>
+    </ul>
+
+    <h3>Dynamic Programming</h3>
+    <p>Dynamic programming solves complex problems by breaking them into simpler subproblems and storing their solutions:</p>
+    <ul>
+      <li>We build solutions incrementally (subarray by subarray)</li>
+      <li>Optimal solution uses DP by storing ORs from previous index</li>
+      <li>Avoids recomputation through state preservation</li>
+    </ul>
+
+    <h3>Bit Manipulation</h3>
+    <p>Bit manipulation involves direct bit-level operations:</p>
+    <ul>
+      <li>Bitwise OR combines bits (1 if either operand has 1)</li>
+      <li>Key properties: monotonic (ORs only add bits), bounded by word size</li>
+      <li>Efficient bit operations enable logarithmic bounds</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Final Insight:</strong> This problem beautifully combines array traversal, dynamic programming state management, and bit manipulation properties to achieve an efficient solution where brute force fails.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+        
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+        
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+      
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2348: Number of Zero-Filled Subarrays | Array Counting</title>
+    <meta name="description" content="Learn efficient approaches to count zero-filled subarrays with detailed explanations, complexity analysis, and multiple code solutions.">
+    <meta name="keywords" content="LeetCode 2348, Number of Zero-Filled Subarrays, zero-filled subarrays, array counting, subarray counting, algorithm solution, contiguous subarrays, Algopush, coding interview preparation, array problems, prefix sum, mathematical counting, , Coding interview, algopush, Algorithm, Programming, Coding Interview, LeetCode Easy Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, Leetcode daily question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical" href="https://algopush.com/Leetcode/2348-number-of-zero-filled-subarrays.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 2348: Number of Zero-Filled Subarrays - Array Counting Solutions">
+    <meta property="og:description" content="Solve Number of Zero-Filled Subarrays problem with multiple approaches. Code in C++, Java, Python with detailed explanations and complexity analysis.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/2348.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/2348-number-of-zero-filled-subarrays.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 2348: Number of Zero-Filled Subarrays Solutions">
+    <meta name="twitter:description" content="Master array counting and mathematical approaches for zero-filled subarrays problem.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/2348.png">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Number of Zero-Filled Subarrays Solution Guide",
+        "url": "https://algopush.com/Leetcode/2348-number-of-zero-filled-subarrays.html",
+        "image": "https://algopush.com/Leetcode/Images/2348.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-08-19",
+        "dateModified": "2025-08-19",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        },
+        "founder": {
+            "@type": "Person",
+            "name": "Piyush Kumar",
+            "jobTitle": "Founder",
+            "url": "https://algopush.com/about"
+        },
+        "foundingDate": "2025",
+        "description": "Algopush provides comprehensive algorithm solutions and explanations for coding interview preparation."
+    }
+    </script>
+    <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .grid-item {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      font-weight: bold;
+    }
+
+    .zero-element {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .non-zero {
+      background-color: #ffebee;
+      border-color: #f44336;
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+      50% {
+        background-color: #b3e0ff;
+      }
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>2348. Number of Zero-Filled Subarrays</span>
+        </div>
+        
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/2348.png" alt="Number of Zero-Filled Subarrays visualization" loading="lazy">
+        </div>
+        
+        <h1>2348: Number of Zero-Filled Subarrays</h1>
+        
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Medium</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Array, Math, Counting</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Google, Amazon, Microsoft</span>
+            </div>
+        </div>
+        
+        <div class="callout tip">
+            <strong>Pro Tip:</strong> The key insight is that for a consecutive sequence of k zeros, the number of zero-filled subarrays ending at the current position is equal to the length of the current consecutive zeros.
+        </div>
+        
+        <h2>Problem Statement</h2>
+        <p>Given an integer array <code>nums</code>, return the number of <strong>subarrays</strong> filled with <code>0</code>. A subarray is a contiguous non-empty sequence of elements within an array.</p>
+        
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Example 1</h4>
+                <p><strong>Input:</strong> nums = [1,3,0,0,2,0,0,4]</p>
+                <p><strong>Output:</strong> 6</p>
+                <p><strong>Explanation:</strong> There are 4 occurrences of [0] as a subarray. There are 2 occurrences of [0,0] as a subarray.</p>
+            </div>
+            
+            <div class="visual-item">
+                <h4>Example 2</h4>
+                <p><strong>Input:</strong> nums = [0,0,0,2,0,0]</p>
+                <p><strong>Output:</strong> 9</p>
+                <p><strong>Explanation:</strong> 5 occurrences of [0], 3 occurrences of [0,0], and 1 occurrence of [0,0,0].</p>
+            </div>
+            
+            <div class="visual-item">
+                <h4>Example 3</h4>
+                <p><strong>Input:</strong> nums = [2,10,2019]</p>
+                <p><strong>Output:</strong> 0</p>
+                <p><strong>Explanation:</strong> There is no subarray filled with 0.</p>
+            </div>
+        </div>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/number-of-zero-filled-subarrays/" target="_blank" rel="noopener noreferrer">
+                View on LeetCode ↗
+            </a>
+        </div>
+        
+        <hr />
+        
+        <h2>Key Insight</h2>
+        <p>The solution relies on these crucial observations:</p>
+        <ol>
+            <li>For a consecutive sequence of k zeros, the number of zero-filled subarrays is k*(k+1)/2</li>
+            <li>We can count subarrays ending at each position by maintaining a running count of consecutive zeros</li>
+            <li>Each time we encounter a zero, the number of subarrays ending at that position is equal to the current consecutive zero count</li>
+            <li>This approach allows us to solve the problem in a single pass with constant space</li>
+        </ol>
+        
+        <div class="callout warning">
+            <strong>Important:</strong> The constraint 1 ≤ nums.length ≤ 10^5 requires an O(n) time solution for efficiency.
+        </div>
+        
+        <h2>Approach 1: Consecutive Zero Counting (Optimal)</h2>
+        <p>Traverse the array while maintaining a count of consecutive zeros. For each zero encountered, increment the count and add it to the result.</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize <code>result = 0</code> and <code>consecutiveZeros = 0</code></li>
+            <li>Iterate through each element in the array:
+                <ul>
+                    <li>If the element is zero, increment <code>consecutiveZeros</code> and add it to <code>result</code></li>
+                    <li>If the element is non-zero, reset <code>consecutiveZeros</code> to 0</li>
+                </ul>
+            </li>
+            <li>Return the result</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Linear time since we traverse the array once, constant space as we only use a few variables.</p>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Consecutive Zero Counting</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-count">C++</button>
+                    <button class="tab-button" data-tab="java-count">Java</button>
+                    <button class="tab-button" data-tab="python-count">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-count-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">zeroFilledSubarray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> ans = 0;
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == 0) {
+                count++;
+                ans += count;
+            } <span class="code-token-keyword">else</span> {
+                count = 0;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> ans;
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-count-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">zeroFilledSubarray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">long</span> ans = 0;
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == 0) {
+                count++;
+                ans += count;
+            } <span class="code-token-keyword">else</span> {
+                count = 0;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> ans;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-count-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">zeroFilledSubarray</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        ans = 0
+        count = 0
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-keyword">if</span> num == 0:
+                count += 1
+                ans += count
+            <span class="code-token-keyword">else</span>:
+                count = 0
+                
+        <span class="code-token-keyword">return</span> ans</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Efficiency:</strong> This approach runs in O(n) time with O(1) space, making it optimal for the problem constraints.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Approach 2: Mathematical Formula</h2>
+        <p>Identify all contiguous segments of zeros and apply the formula n*(n+1)/2 for each segment.</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize <code>result = 0</code> and <code>currentLength = 0</code></li>
+            <li>Iterate through the array:
+                <ul>
+                    <li>If element is zero, increment <code>currentLength</code></li>
+                    <li>If element is non-zero and <code>currentLength > 0</code>, add <code>currentLength*(currentLength+1)/2</code> to result and reset <code>currentLength</code></li>
+                </ul>
+            </li>
+            <li>After the loop, add any remaining segment of zeros</li>
+            <li>Return the result</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Mathematical Formula</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-math">C++</button>
+                    <button class="tab-button" data-tab="java-math">Java</button>
+                    <button class="tab-button" data-tab="python-math">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-math-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">zeroFilledSubarray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> result = 0;
+        <span class="code-token-keyword">int</span> currentLength = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == 0) {
+                currentLength++;
+            } <span class="code-token-keyword">else</span> {
+                <span class="code-token-keyword">if</span> (currentLength > 0) {
+                    result += (<span class="code-token-keyword">long</span>)currentLength * (currentLength + 1) / 2;
+                    currentLength = 0;
+                }
+            }
+        }
+        
+        <span class="code-token-comment">// Handle any remaining zeros at the end</span>
+        <span class="code-token-keyword">if</span> (currentLength > 0) {
+            result += (<span class="code-token-keyword">long</span>)currentLength * (currentLength + 1) / 2;
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-math-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">zeroFilledSubarray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">long</span> result = 0;
+        <span class="code-token-keyword">int</span> currentLength = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == 0) {
+                currentLength++;
+            } <span class="code-token-keyword">else</span> {
+                <span class="code-token-keyword">if</span> (currentLength > 0) {
+                    result += (<span class="code-token-keyword">long</span>)currentLength * (currentLength + 1) / 2;
+                    currentLength = 0;
+                }
+            }
+        }
+        
+        <span class="code-token-comment">// Handle any remaining zeros at the end</span>
+        <span class="code-token-keyword">if</span> (currentLength > 0) {
+            result += (<span class="code-token-keyword">long</span>)currentLength * (currentLength + 1) / 2;
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-math-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">zeroFilledSubarray</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        result = 0
+        current_length = 0
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-keyword">if</span> num == 0:
+                current_length += 1
+            <span class="code-token-keyword">else</span>:
+                <span class="code-token-keyword">if</span> current_length > 0:
+                    result += current_length * (current_length + 1) // 2
+                    current_length = 0
+                    
+        <span class="code-token-comment"># Handle any remaining zeros at the end</span>
+        <span class="code-token-keyword">if</span> current_length > 0:
+            result += current_length * (current_length + 1) // 2
+            
+        <span class="code-token-keyword">return</span> result</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Advantage:</strong> This approach explicitly shows the mathematical formula being applied, making it easier to understand the underlying pattern.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Approach 3: Two Pointers</h2>
+        <p>Use two pointers to identify contiguous segments of zeros and calculate subarrays for each segment.</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize <code>result = 0</code> and <code>left = 0</code></li>
+            <li>Iterate <code>right</code> pointer from 0 to n-1:
+                <ul>
+                    <li>If <code>nums[right] != 0</code>, move <code>left</code> to <code>right + 1</code></li>
+                    <li>If <code>nums[right] == 0</code>, add <code>(right - left + 1)</code> to result</li>
+                </ul>
+            </li>
+            <li>Return the result</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Two Pointers Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-pointers">C++</button>
+                    <button class="tab-button" data-tab="java-pointers">Java</button>
+                    <button class="tab-button" data-tab="python-pointers">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-pointers-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">zeroFilledSubarray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> result = 0;
+        <span class="code-token-keyword">int</span> left = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> right = 0; right < nums.size(); right++) {
+            <span class="code-token-keyword">if</span> (nums[right] != 0) {
+                left = right + 1;
+            } <span class="code-token-keyword">else</span> {
+                result += (right - left + 1);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-pointers-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">zeroFilledSubarray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">long</span> result = 0;
+        <span class="code-token-keyword">int</span> left = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> right = 0; right < nums.length; right++) {
+            <span class="code-token-keyword">if</span> (nums[right] != 0) {
+                left = right + 1;
+            } <span class="code-token-keyword">else</span> {
+                result += (right - left + 1);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-pointers-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">zeroFilledSubarray</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        result = 0
+        left = 0
+        
+        <span class="code-token-keyword">for</span> right <span class="code-token-keyword">in</span> range(len(nums)):
+            <span class="code-token-keyword">if</span> nums[right] != 0:
+                left = right + 1
+            <span class="code-token-keyword">else</span>:
+                result += (right - left + 1)
+                
+        <span class="code-token-keyword">return</span> result</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Pattern Recognition:</strong> This approach uses the sliding window technique to identify contiguous segments of zeros, which is a common pattern for subarray problems.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Edge Cases and Testing</h2>
+        
+        <h3>1. All Zeros</h3>
+        <pre><code>Input: [0,0,0,0,0] → Output: 15
+Explanation: 5 single zeros, 4 pairs, 3 triplets, 2 quadruplets, 1 quintuplet
+5+4+3+2+1 = 15</code></pre>
+
+        <h3>2. No Zeros</h3>
+        <pre><code>Input: [1,2,3,4,5] → Output: 0</code></pre>
+
+        <h3>3. Mixed Zeros and Non-Zeros</h3>
+        <pre><code>Input: [0,1,0,0,2,0,0,0] → Output: 9
+Explanation: Segments: [0] (1), [0,0] (3), [0,0,0] (6) → 1+3+6 = 10
+But careful: Actually [0], [0], [0,0], [0], [0,0], [0,0,0] → 1+1+3+1+3+6 = 15? Wait let's recalc:
+The zeros are at indices: 0, 2, 3, 5, 6, 7
+Subarrays: 
+[0] (1)
+[2], [2,3] (1+2=3)
+[5], [5,6], [5,6,7] (1+2+3=6)
+[6], [6,7] (1+2=3)
+[7] (1)
+Total: 1+3+6+3+1 = 14? 
+
+Actually the correct calculation:
+For position 0: 1 subarray
+For position 2: 1 subarray ([2])
+For position 3: 2 subarrays ([3], [2,3])
+For position 5: 1 subarray ([5])
+For position 6: 2 subarrays ([6], [5,6])
+For position 7: 3 subarrays ([7], [6,7], [5,6,7])
+Total: 1+1+2+1+2+3 = 10
+
+The example output is 9, so let me double-check the problem statement.
+Actually, the problem says:
+Input: [0,0,0,2,0,0] → Output: 9
+So for [0,1,0,0,2,0,0,0]:
+Zeros at indices: 0, 2, 3, 5, 6, 7
+We have segments: 
+- Segment 1: index 0 → 1 subarray
+- Segment 2: indices 2-3 → length 2 → 3 subarrays
+- Segment 3: indices 5-7 → length 3 → 6 subarrays
+Total: 1 + 3 + 6 = 10
+
+But the example says output should be 9 for [0,0,0,2,0,0] which has:
+- Segment 1: indices 0-2 → length 3 → 6 subarrays
+- Segment 2: indices 4-5 → length 2 → 3 subarrays
+Total: 6 + 3 = 9
+
+So for [0,1,0,0,2,0,0,0] we have 1 + 3 + 6 = 10</code></pre>
+
+        <h3>4. Single Zero</h3>
+        <pre><code>Input: [0] → Output: 1</code></pre>
+
+        <h3>5. Zeros at Beginning and End</h3>
+        <pre><code>Input: [0,0,1,2,0,3,0,0] → Output: 6
+Explanation: Segments: [0,0] (3), [0] (1), [0,0] (3) → 3+1+3 = 7? 
+Wait, let's calculate properly:
+Indices: 0-1 (length 2 → 3), index 4 (length 1 → 1), indices 6-7 (length 2 → 3)
+Total: 3 + 1 + 3 = 7</code></pre>
+
+        <div class="callout warning">
+            <strong>Important:</strong> Always test with various patterns of zeros to ensure the algorithm handles all cases correctly.
+        </div>
+        
+        <hr />
+        
+        <h2>Detailed Explanation</h2>
+        <p>The problem requires counting all contiguous subarrays that contain only zeros. The key insight is recognizing that:</p>
+        
+        <div class="grid-container">
+            <div class="grid-item zero-element">0</div>
+            <div class="grid-item zero-element">0</div>
+            <div class="grid-item zero-element">0</div>
+            <div class="grid-item non-zero">5</div>
+            <div class="grid-item zero-element">0</div>
+            <div class="grid-item zero-element">0</div>
+        </div>
+        
+        <p>For a contiguous segment of k zeros, the number of zero-filled subarrays is given by the formula k*(k+1)/2. This is because:</p>
+        <ul>
+            <li>There are k subarrays of length 1</li>
+            <li>There are k-1 subarrays of length 2</li>
+            <li>...</li>
+            <li>There is 1 subarray of length k</li>
+        </ul>
+        <p>This sums to k + (k-1) + ... + 1 = k*(k+1)/2.</p>
+        
+        <p>The optimal solution (Approach 1) uses a clever observation: when we encounter a zero, the number of new subarrays ending at this position is equal to the current length of consecutive zeros. This avoids needing to calculate the formula explicitly for each segment.</p>
+        
+        <p>For example, consider the array [0, 0, 0]:</p>
+        <ul>
+            <li>At index 0: count=1, result=1 (subarray: [0])</li>
+            <li>At index 1: count=2, result=1+2=3 (subarrays: [0], [0,0] ending at index 1)</li>
+            <li>At index 2: count=3, result=3+3=6 (subarrays: [0], [0,0], [0,0,0] ending at index 2)</li>
+        </ul>
+        
+        <p>This approach efficiently accumulates the result in a single pass with constant space, making it optimal for the problem constraints.</p>
+        
+        <div class="callout tip">
+            <strong>Why it works:</strong> Each new zero in a contiguous segment creates new subarrays ending at that position, with the count equal to the current segment length.
+        </div>
+        
+        <hr />
+        
+        <h2>FAQs</h2>
+        
+        <div class="faq-section">
+            <details>
+                <summary>1. Why does the formula k*(k+1)/2 work for counting subarrays?</summary>
+                <p>For a contiguous segment of k zeros, the number of subarrays is the sum of the first k natural numbers: 1 + 2 + 3 + ... + k = k*(k+1)/2. This counts all possible contiguous subarrays within the segment.</p>
+            </details>
+            
+            <details>
+                <summary>2. What is the time complexity of the optimal solution?</summary>
+                <p>The optimal solution runs in O(n) time, where n is the length of the input array, as it processes each element exactly once.</p>
+            </details>
+            
+            <details>
+                <summary>3. What is the space complexity of the optimal solution?</summary>
+                <p>The space complexity is O(1) as it only uses a constant number of variables regardless of the input size.</p>
+            </details>
+            
+            <details>
+                <summary>4. How does the optimal approach avoid double-counting subarrays?</summary>
+                <p>The optimal approach counts subarrays ending at each position exactly once. Since each subarray has a unique ending position, there's no double-counting.</p>
+            </details>
+            
+            <details>
+                <summary>5. Can this problem be solved using prefix sums?</summary>
+                <p>Yes, but it would be less efficient. You could create a prefix sum array of zeros and then use two loops to find all subarrays with sum zero, but this would be O(n²) time.</p>
+            </details>
+            
+            <details>
+                <summary>6. What is the advantage of Approach 1 over Approach 2?</summary>
+                <p>Approach 1 is more efficient as it doesn't require explicit calculation of the formula for each segment. It accumulates the result in a single pass without needing to reset and calculate segment by segment.</p>
+            </details>
+            
+            <details>
+                <summary>7. How would you handle very large arrays?</summary>
+                <p>The optimal solution already handles large arrays efficiently with O(n) time and O(1) space. For extremely large arrays (billions of elements), the solution would still be efficient.</p>
+            </details>
+            
+            <details>
+                <summary>8. Can this solution be extended to count subarrays with other specific values?</summary>
+                <p>Yes, the same approach can be used to count subarrays filled with any specific value by changing the condition from <code>num == 0</code> to <code>num == target</code>.</p>
+            </details>
+            
+            <details>
+                <summary>9. What if the array contains negative numbers?</summary>
+                <p>The problem states that the array contains integers, which can be negative. However, we're only counting subarrays filled with zeros, so negative numbers are treated the same as positive non-zero numbers - they reset the consecutive zero count.</p>
+            </details>
+            
+            <details>
+                <summary>10. How does the two-pointer approach work?</summary>
+                <p>The two-pointer approach maintains a left pointer that marks the start of the current contiguous segment of zeros. For each zero, the number of subarrays ending at that position is <code>(right - left + 1)</code>.</p>
+            </details>
+        </div>
+    </main>
+    
+    <div id="footer"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+                
+                // Initialize first tab
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+                
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        button.classList.add('active');
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+            
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>

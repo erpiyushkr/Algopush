@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Primary Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeetCode | Algorithm Problem Solving Guide - Algopush</title>
+  <meta name="description"
+    content="Comprehensive LeetCode solutions with detailed explanations, time complexity analysis, and multiple approaches. Master coding interview questions.">
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode solutions, coding interview preparation, algorithm problems, data structures, time complexity, space complexity, problem solving">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode Solutions | Algorithm Problem Solving Guide - Algopush">
+  <meta property="og:description" content="Detailed LeetCode solutions with explanations and complexity analysis">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://algopush.com/Leetcode/leetcode.html">
+  <meta property="og:image" content="https://algopush.com/components/MainImage1.png">
+  <meta property="og:site_name" content="Algopush">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode Solutions | Algorithm Problem Solving Guide - Algopush">
+  <meta name="twitter:description" content="Detailed LeetCode solutions with explanations and complexity analysis">
+  <meta name="twitter:image" content="https://algopush.com/components/MainImage1.png">
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://algopush.com/Leetcode/leetcode.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --light-bg: #f5f9fc;
+      --text-color: #333;
+      --base-font-size: 1rem;
+      --spacing-unit: 1rem;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.5;
+      font-size: var(--base-font-size);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .leetcode-container {
+      width: 95%;
+      max-width: 90rem;
+      margin: 0 auto;
+      padding: calc(var(--spacing-unit) * 1.5);
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      border-bottom: 0.125rem solid var(--primary-color);
+      padding-bottom: calc(var(--spacing-unit) * 0.75);
+      margin-bottom: calc(var(--spacing-unit) * 1.5);
+      font-size: clamp(1.5rem, 5vw, 2.25rem);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(var(--spacing-unit) * 1);
+      margin-bottom: calc(var(--spacing-unit) * 1.5);
+      align-items: center;
+    }
+
+    .search-container {
+      flex: 1 1 20rem;
+      min-width: 60%;
+      order: 1;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1);
+      border: 0.0625rem solid #ddd;
+      border-radius: 0.375rem;
+      font-size: calc(var(--base-font-size) * 1);
+      box-sizing: border-box;
+    }
+
+    .difficulty-filters {
+      display: flex;
+      gap: calc(var(--spacing-unit) * 0.75);
+      flex-wrap: wrap;
+      order: 2;
+    }
+
+    .filter-btn {
+      padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 1);
+      border: none;
+      border-radius: 1.25rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: calc(var(--base-font-size) * 0.875);
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      transform: scale(1.05);
+      box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.2);
+    }
+
+    .filter-btn.all {
+      background: #e0e0e0;
+    }
+
+    .filter-btn.easy {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .filter-btn.medium {
+      background: #fff8e1;
+      color: #ff8f00;
+    }
+
+    .filter-btn.hard {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .leetcode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+      gap: calc(var(--spacing-unit) * 1.5);
+      margin-top: calc(var(--spacing-unit) * 1.5);
+    }
+
+    .leetcode-card {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 0.1875rem 0.625rem rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border-left: 0.25rem solid var(--accent-color);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .leetcode-card:hover {
+      transform: translateY(-0.1875rem);
+      box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.15);
+    }
+
+    .leetcode-card:hover .problem-title {
+      text-decoration: underline;
+    }
+
+    .card-content {
+      padding: calc(var(--spacing-unit) * 1.125);
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .problem-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: calc(var(--spacing-unit) * 0.625);
+    }
+
+    .problem-number {
+      font-size: calc(var(--base-font-size) * 0.875);
+      background: var(--primary-color);
+      color: white;
+      padding: calc(var(--spacing-unit) * 0.1875) calc(var(--spacing-unit) * 0.625);
+      border-radius: 0.75rem;
+    }
+
+    .problem-difficulty {
+      font-size: calc(var(--base-font-size) * 0.75);
+      font-weight: 600;
+      padding: calc(var(--spacing-unit) * 0.1875) calc(var(--spacing-unit) * 0.625);
+      border-radius: 0.25rem;
+      white-space: nowrap;
+    }
+
+    .easy {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .medium {
+      background: #fff8e1;
+      color: #ff8f00;
+    }
+
+    .hard {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .problem-title {
+      font-size: calc(var(--base-font-size) * 1.125);
+      margin: calc(var(--spacing-unit) * 0.3125) 0 calc(var(--spacing-unit) * 0.625);
+      color: var(--primary-color);
+      line-height: 1.3;
+      text-decoration: none;
+    }
+
+    .problem-description {
+      font-size: calc(var(--base-font-size) * 0.875);
+      color: #555;
+      margin: calc(var(--spacing-unit) * 0.625) 0;
+      flex-grow: 1;
+    }
+
+    /* Breadcrumb navigation for SEO */
+    .breadcrumb {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Improved mobile layout */
+    @media (max-width: 62rem) {
+      .leetcode-grid {
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+      }
+    }
+
+    @media (max-width: 48rem) {
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: calc(var(--spacing-unit) * 0.75);
+      }
+
+      .search-container {
+        min-width: 100%;
+        order: 1;
+      }
+
+      .difficulty-filters {
+        justify-content: flex-start;
+        order: 2;
+      }
+
+      .leetcode-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+        gap: calc(var(--spacing-unit) * 1);
+      }
+
+      .leetcode-card {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 30rem) {
+      .leetcode-container {
+        width: 100%;
+        padding: calc(var(--spacing-unit) * 1);
+      }
+
+      .filter-btn {
+        padding: calc(var(--spacing-unit) * 0.375) calc(var(--spacing-unit) * 0.75);
+        font-size: calc(var(--base-font-size) * 0.8125);
+      }
+
+      .card-content {
+        padding: calc(var(--spacing-unit) * 0.9375);
+      }
+
+      .problem-title {
+        font-size: calc(var(--base-font-size) * 1);
+      }
+    }
+
+    @media (max-width: 23.4375rem) {
+      :root {
+        --base-font-size: 0.9375rem;
+      }
+    }
+
+    /* Ensure footer stays at bottom */
+    #footer {
+      margin-top: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <div class="leetcode-container">
+    <!-- Breadcrumb navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">Leetcode</a> &gt;
+      <span>LeetCode Problems</span>
+    </div>
+
+    <h1>LeetCode Solutions</h1>
+
+    <div class="controls">
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search problems by number or title..."
+          aria-label="Search LeetCode problems">
+      </div>
+      <div class="difficulty-filters">
+        <button class="filter-btn all active" data-difficulty="all">All</button>
+        <button class="filter-btn easy" data-difficulty="easy">Easy</button>
+        <button class="filter-btn medium" data-difficulty="medium">Medium</button>
+        <button class="filter-btn hard" data-difficulty="hard">Hard</button>
+      </div>
+    </div>
+
+    <div class="leetcode-grid">
+
+      <!-- Easy -->
+
+      <!-- Problem 1 -->
+      <a href="1-two-sum.html" class="leetcode-card" data-number="1"
+        data-difficulty="easy" data-title="Two Sum">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Two Sum</h2>
+          <p class="problem-description">
+            Complete solution for LeetCode Two Sum problem with efficient algorithms, multiple approaches, and code implementations in C++, Java, and Python.
+          </p>
+        </div>
+      </a>
+
+        <!-- Problem 1290 -->
+      <a href="1290-convert-binary-number-in-linked-list-to-integer.html" class="leetcode-card" data-number="1290"
+        data-difficulty="easy" data-title="Convert Binary Number in a Linked List to Integer">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1290</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Convert Binary Number in a Linked List to Integer</h2>
+          <p class="problem-description">
+            Convert a binary number represented as a linked list (with each node containing 0 or 1) to its equivalent decimal integer.
+          </p>
+        </div>
+      </a> 
+
+      <!-- Problem 1295 -->
+      <a href="1295-find-numbers-with-even-number-of-digits.html" class="leetcode-card" data-number="1295"
+        data-difficulty="easy" data-title="Find Numbers with Even Number of Digits">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1295</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Find Numbers with Even Number of Digits</h2>
+          <p class="problem-description">
+            Count numbers which has even number of digits.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 1920 -->
+      <a href="1920-build-array-from-permutation.html" class="leetcode-card" data-number="1920"
+        data-difficulty="easy" data-title="Build Array from Permutation">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1920</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Build Array from Permutation</h2>
+          <p class="problem-description">
+            You will learn in-place array transformations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 1957 -->
+      <a href="1957-delete-characters-to-make-fancy-string.html" class="leetcode-card" data-number="1957"
+        data-difficulty="easy" data-title="Delete Characters to Make Fancy String">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1957</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Delete Characters to Make Fancy String</h2>
+          <p class="problem-description">
+            Learn the optimal solution for LeetCode 1957: Delete minimum characters to prevent three consecutive identical characters. Code Implementations included.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 2094 -->
+      <a href="2094-finding-3-digit-even-numbers.html" class="leetcode-card" data-number="2094"
+        data-difficulty="easy" data-title="Finding 3-Digit Even Numbers">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2094</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Finding 3-Digit Even Numbers</h2>
+          <p class="problem-description">
+            Efficient approaches to find all unique 3-digit even numbers from digits.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 2138 -->
+      <a href="2138-divide-a-string-into-groups-of-size-k.html" class="leetcode-card" data-number="2138"
+        data-difficulty="easy" data-title="Divide a String Into Groups of Size k">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2138</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Divide a String Into Groups of Size k</h2>
+          <p class="problem-description">
+            Multiple approaches including Substring with Padding, Two-Pointer Technique, Iterative Character Collection, and Mathematical Grouping with C++, Java, Python.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3024 -->
+      <a href="3024-type-of-triangle.html" class="leetcode-card" data-number="3024"
+        data-difficulty="easy" data-title="Type of Triangle">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3024</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Type of Triangle</h2>
+          <p class="problem-description">
+            Determine triangle type using multiple approaches including direct comparison, sorting optimization, and set-based type detection.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3136 -->
+      <a href="3136-valid-word.html" class="leetcode-card" data-number="3136"
+        data-difficulty="easy" data-title="Valid Word">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3136</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Valid Word</h2>
+          <p class="problem-description">
+            Complete solution for LeetCode 3136 Valid Word problem with multiple approaches, detailed explanations, and code implementations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3392 -->
+      <a href="3392-count-subarrays-of-length-three-with-condition.html" class="leetcode-card" data-number="3392"
+        data-difficulty="easy" data-title="Count Subarrays of Length Three">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3392</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Count Subarrays of Length Three With Condition</h2>
+          <p class="problem-description">
+            Count subarrays where sum of first and third elements equals half of the second element.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3432 -->
+      <a href="3432-count-partitions-with-even-sum-difference.html" class="leetcode-card" data-number="3432"
+        data-difficulty="easy" data-title="Count Partitions with Even Sum Difference">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3432</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Count Partitions with Even Sum Difference</h2>
+          <p class="problem-description">
+            Count when sum of the left and right subarrays is even.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3442 -->
+      <a href="3442-maximum-difference-even-odd-frequency.html" class="leetcode-card" data-number="3442"
+        data-difficulty="easy" data-title="Count Partitions with Even Sum Difference">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3442</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Maximum Difference Between Even and Odd Frequency I</h2>
+          <p class="problem-description">
+            Efficient approaches to find maximum difference between even and odd character frequencies in strings, including optimized single-pass methods.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3487 -->
+      <a href="3487-maximum-unique-subarray-sum-after-deletion.html" class="leetcode-card" data-number="3487"
+        data-difficulty="easy" data-title="Maximum Unique Subarray Sum After Deletion">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3487</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Maximum Unique Subarray Sum After Deletion</h2>
+          <p class="problem-description">
+            Optimal O(n) solution with distinct positives approach. Learn multiple methods to solve the maximum unique subarray sum problem after deletion.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3536 -->
+      <a href="3536-maximum-product-of-two-digits.html" class="leetcode-card" data-number="3536"
+        data-difficulty="easy" data-title="Maximum Product of Two Digits">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3536</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Maximum Product of Two Digits</h2>
+          <p class="problem-description">
+            Maximum Product using digit extraction and sorting.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3541 -->
+      <a href="3541-find-most-frequent-vowel-and-consonant.html" class="leetcode-card" data-number="3541"
+        data-difficulty="easy" data-title="Find Most Frequent Vowel and Consonant">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3541</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Find Most Frequent Vowel and Consonant</h2>
+          <p class="problem-description">
+            Discover optimal methods to find maximum vowel and consonant frequencies.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3545 -->
+      <a href="3545-minimum-deletions-for-at-most-k-distinct-characters.html" class="leetcode-card" data-number="3545"
+        data-difficulty="easy" data-title="Minimum Deletions for At Most K Distinct Characters">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3545</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Minimum Deletions for At Most K Distinct Characters</h2>
+          <p class="problem-description">
+            Learn optimal strategies to minimize deletions while maintaining character diversity.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3550 -->
+      <a href="3550-smallest-index-with-digit-sum-equal-to-index.html" class="leetcode-card" data-number="3550"
+        data-difficulty="easy" data-title="Smallest Index With Digit Sum Equal to Index">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3550</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Smallest Index With Digit Sum Equal to Index</h2>
+          <p class="problem-description">
+            Multiple approaches like Modulo Division, String Conversion Method, Precomputed Digit Sums.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3591 -->
+      <a href="3591-check-if-any-element-has-prime-frequency.html" class="leetcode-card" data-number="3591"
+        data-difficulty="easy" data-title="Check if Any Element Has Prime Frequency">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3591</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Check if Any Element Has Prime Frequency</h2>
+          <p class="problem-description">
+            Multiple approaches to check if any array element has prime frequency using Frequency Map, Frequency Array with Prime Precomputation, Set of Prime Frequencies.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3622 -->
+      <a href="3622-check-divisibility-by-digit-sum-and-product.html" class="leetcode-card" data-number="3622"
+        data-difficulty="easy" data-title="Check Divisibility by Digit Sum and Product">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3622</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Check Divisibility by Digit Sum and Product</h2>
+          <p class="problem-description">
+            Learn efficient digit extraction techniques and multiple approaches to solve divisibility problems with detailed implementations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3637 -->
+      <a href="3637-trionic-array.html" class="leetcode-card" data-number="3637"
+        data-difficulty="easy" data-title="Trionic Array I">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3637</span>
+            <span class="problem-difficulty easy">Easy</span>
+          </div>
+          <h2 class="problem-title">Trionic Array I</h2>
+          <p class="problem-description">
+            Learn how to solve the Trionic Array problem with multiple approaches.
+          </p>
+        </div>
+      </a>
+
+      <!-- Medium -->
+
+      <!-- Problem 73 -->
+      <a href="73-set-matrix-zeroes.html" class="leetcode-card" data-number="73"
+        data-difficulty="medium" data-title="Set Matrix Zeroes">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#73</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Set Matrix Zeroes</h2>
+          <p class="problem-description">
+            Efficient approaches to set matrix zeroes in-place including O(1) space optimization and various implementation methods.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 838 -->
+      <a href="838-push-dominoes.html" class="leetcode-card" data-number="838"
+        data-difficulty="medium" data-title="Push Dominoes">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#838</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Push Dominoes</h2>
+          <p class="problem-description">
+            Two efficient approaches: Force Propagation and BFS Simulation.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 869 -->
+      <a href="869-reordered-power-of-2.html" class="leetcode-card" data-number="869"
+        data-difficulty="medium" data-title="Reordered Power of 2">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#869</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Reordered Power of 2</h2>
+          <p class="problem-description">
+            Detailed explanations of digit permutation, frequency counting, and power of two verification.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 898 -->
+      <a href="898-bitwise-ors-of-subarrays.html" class="leetcode-card" data-number="898"
+        data-difficulty="medium" data-title="Bitwise ORs of Subarrays">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#898</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Bitwise ORs of Subarrays</h2>
+          <p class="problem-description">
+            Efficient O(n log max) solution using dynamic programming with sets.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 1432 -->
+      <a href="1432-max-difference-you-can-get-from-changing-an-integer.html" class="leetcode-card" data-number="1432"
+        data-difficulty="medium" data-title="Push Dominoes">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1432</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Max Difference You Can Get From Changing an Integer</h2>
+          <p class="problem-description">
+            Efficient approaches to find maximum difference from digit replacement operations, including greedy algorithms and optimized methods.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 1695 -->
+      <a href="1695-maximum-erasure-value.html" class="leetcode-card" data-number="1695"
+        data-difficulty="medium" data-title="Maximum Erasure Value">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1695</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Maximum Erasure Value</h2>
+          <p class="problem-description">
+            LeetCode 1695: Maximum Erasure Value using sliding window and prefix sum techniques. Detailed explanations and implementations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 1829 -->
+      <a href="1829-maximum-xor-for-each-query.html" class="leetcode-card"
+        data-number="1829" data-difficulty="medium"
+        data-title="Maximum XOR for Each Query">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#1829</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Maximum XOR for Each Query</h2>
+          <p class="problem-description">
+            Find the maximum XOR result for each query on an array.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 2348 -->
+      <a href="2348-number-of-zero-filled-subarrays.html" class="leetcode-card"
+        data-number="2348" data-difficulty="medium"
+        data-title="Number of Zero-Filled Subarrays">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2348</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Number of Zero-Filled Subarrays</h2>
+          <p class="problem-description">
+            Learn efficient approaches of Count Zero-Filled Subarrays with detailed explanations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 2419 -->
+      <a href="2419-longest-subarray-with-maximum-bitwise-and.html" class="leetcode-card"
+        data-number="2419" data-difficulty="medium"
+        data-title="Longest Subarray With Maximum Bitwise AND">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2419</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Longest Subarray With Maximum Bitwise AND</h2>
+          <p class="problem-description">
+            Learn multiple methods to solve the maximum bitwise AND subarray problem with detailed implementations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 2799 -->
+      <a href="2799-count-complete-subarrays-in-an-array.html" class="leetcode-card" data-number="2799"
+        data-difficulty="medium" data-title="Count Complete Subarrays in an Array">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2799</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Count Complete Subarrays in an Array</h2>
+          <p class="problem-description">
+            Count how many subarrays contain all distinct elements present in the original array.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 2918 -->
+      <a href="2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros.html" class="leetcode-card" data-number="2918"
+        data-difficulty="medium" data-title="Minimum Equal Sum of Two Arrays After Replacing Zeros">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2918</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Minimum Equal Sum of Two Arrays After Replacing Zeros</h2>
+          <p class="problem-description">
+            Learn optimal strategies to balance array sums by replacing zeros.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 2962 -->
+      <a href="2962-count-subarrays-where-max-element-appears-at-least-k-times.html" class="leetcode-card"
+        data-number="2962" data-difficulty="medium"
+        data-title="Count Subarrays Where Max Element Appears at Least K Times">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2962</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Count Subarrays Where Max Element Appears at Least K Times</h2>
+          <p class="problem-description">
+            Count all subarrays where the maximum element appears at least k times
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3223 -->
+      <a href="3223-minimum-length-of-string-after-operations.html" class="leetcode-card"
+        data-number="3223" data-difficulty="medium"
+        data-title="Minimum Length of String After Operations">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3223</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Minimum Length of String After Operations</h2>
+          <p class="problem-description">
+            Find the minimum possible length of string after performing operations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3387 -->
+      <a href="3387-maximize-amount-after-two-days-of-conversions.html" class="leetcode-card"
+        data-number="3387" data-difficulty="medium"
+        data-title="Maximize Amount After Two Days of Conversions">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3387</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Maximize Amount After Two Days of Conversions</h2>
+          <p class="problem-description">
+            This problem requires understanding of graph algorithms and dynamic programming.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3335 -->
+      <a href="3335-total-characters-after-transformations.html" class="leetcode-card" data-number="3335"
+        data-difficulty="medium" data-title="Total Characters in String After Transformations I">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3335</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Total Characters in String After Transformations I</h2>
+          <p class="problem-description">
+            Efficient approaches to calculate string length after transformations using frequency mapping and mathematical optimization.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3542 
+      <a href="3542-minimum-operations-to-convert-all-elements-to-zero.html" class="leetcode-card" data-number="3542"
+        data-difficulty="medium" data-title="Minimum Operations to Convert All Elements to Zero">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3542</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Minimum Operations to Convert All Elements to Zero</h2>
+          <p class="problem-description">
+            Minimum operations to zero arrays using greedy strategies.
+          </p>
+        </div>
+      </a>  -->
+
+      <!-- Problem 3537 -->
+      <a href="3537-fill-a-special-grid.html" class="leetcode-card" data-number="3537"
+        data-difficulty="medium" data-title="Fill a Special Grid">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3537</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Fill a Special Grid</h2>
+          <p class="problem-description">
+            Construct a 2<sup>N</sup> x 2<sup>N</sup> grid where each quadrant follows strict ordering rules recursively.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3546 -->
+      <a href="https://algopush.com/Leetcode/3546-equal-sum-grid-partition-i.html" class="leetcode-card" data-number="3546"
+        data-difficulty="medium" data-title="Equal Sum Grid Partition I">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3546</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Equal Sum Grid Partition I</h2>
+          <p class="problem-description">
+            Learn efficient methods to partition grids into equal sums.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3551 -->
+      <a href="https://algopush.com/Leetcode/3551-minimum-swaps-to-sort-by-digit-sum.html" class="leetcode-card" data-number="3551"
+        data-difficulty="medium" data-title="Minimum Swaps to Sort by Digit Sum">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3551</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Minimum Swaps to Sort by Digit Sum</h2>
+          <p class="problem-description">
+            Efficient approaches to calculate minimum swaps for digit-sum sorting using cycle detection and custom comparators.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3566 -->
+      <a href="https://algopush.com/Leetcode/3566-partition-array-into-two-equal-product-subsets.html" class="leetcode-card" data-number="3566"
+        data-difficulty="medium" data-title="Partition Array into Two Equal Product Subsets">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3566</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Partition Array into Two Equal Product Subsets</h2>
+          <p class="problem-description">
+            Efficient approaches to partition an array into two subsets with equal product, including prime factorization and bitmasking techniques.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3587 -->
+      <a href="https://algopush.com/Leetcode/3587-minimum-adjacent-swaps-to-alternate-parity.html" class="leetcode-card" data-number="3587"
+        data-difficulty="medium" data-title="Minimum Adjacent Swaps to Alternate Parity">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3587</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Minimum Adjacent Swaps to Alternate Parity</h2>
+          <p class="problem-description">
+            LeetCode 3587 with efficient algorithms, multiple approaches, and code implementations in C++, Java, and Python.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3618 -->
+      <a href="3618-split-array-by-prime-indices.html" class="leetcode-card" data-number="3618"
+        data-difficulty="medium" data-title="Split Array by Prime Indices">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3618</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Split Array by Prime Indices</h2>
+          <p class="problem-description">
+            Learn efficient prime identification techniques and multiple approaches to solve the array splitting problem.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3619 -->
+      <a href="3618-split-array-by-prime-indices.html" class="leetcode-card" data-number="3619"
+        data-difficulty="medium" data-title="Count Islands With Total Value Divisible by K">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3619</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Count Islands With Total Value Divisible by K</h2>
+          <p class="problem-description">
+            Learn efficient island counting techniques using DFS, BFS, and iterative methods with detailed implementations.
+          </p>
+        </div>
+      </a>
+
+      <!-- Problem 3638 -->
+      <a href="3638-maximum-balanced-shipments.html" class="leetcode-card" data-number="3638"
+        data-difficulty="medium" data-title="Count Islands With Total Value Divisible by K">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#3638</span>
+            <span class="problem-difficulty medium">Medium</span>
+          </div>
+          <h2 class="problem-title">Maximum Balanced Shipments</h2>
+          <p class="problem-description">
+            Solve LeetCode 3638 with greedy, DP & monotonic stack approaches.
+          </p>
+        </div>
+      </a>
+
+      <!-- Hard -->
+
+      <!-- Problem 2302 -->
+      <a href="2302-count-subarrays-with-score-less-than-k.html" class="leetcode-card" data-number="2302"
+        data-difficulty="hard" data-title="Count Subarrays With Score Less Than K">
+        <div class="card-content">
+          <div class="problem-header">
+            <span class="problem-number">#2302</span>
+            <span class="problem-difficulty hard">Hard</span>
+          </div>
+          <h2 class="problem-title">Count Subarrays With Score Less Than K</h2>
+          <p class="problem-description">
+            Count all the subarrays where product of sum and length is less than k
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Load header and footer
+      fetch('../components/header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header').innerHTML = data;
+        });
+
+      fetch('../components/footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer').innerHTML = data;
+        });
+
+      // Search and filter functionality
+      const searchInput = document.getElementById('search-input');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.leetcode-card');
+      let currentDifficulty = 'all';
+
+      function filterCards() {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        cards.forEach(card => {
+          const number = card.getAttribute('data-number');
+          const title = card.getAttribute('data-title').toLowerCase();
+          const difficulty = card.getAttribute('data-difficulty');
+
+          const matchesSearch = number.includes(searchTerm) || title.includes(searchTerm);
+          const matchesDifficulty = currentDifficulty === 'all' || difficulty === currentDifficulty;
+
+          card.style.display = (matchesSearch && matchesDifficulty) ? 'flex' : 'none';
+        });
+      }
+
+      searchInput.addEventListener('input', filterCards);
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          currentDifficulty = this.getAttribute('data-difficulty');
+          filterCards();
+        });
+      });
+
+      // Schema markup injection
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "LeetCode Solutions",
+        "url": "https://algopush.com/Leetcode/leetcode.html",
+        "numberOfItems": 6,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Article",
+              "name": "Count Subarrays of Length Three With Condition",
+              "url": "https://algopush.com/Leetcode/3392-count-subarrays-of-length-three-with-condition.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Article",
+              "name": "Count Subarrays Where Max Element Appears at Least K Times",
+              "url": "https://algopush.com/Leetcode/2962-count-subarrays-where-max-element-appears-at-least-k-times.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Article",
+              "name": "Count Subarrays With Score Less Than K",
+              "url": "https://algopush.com/Leetcode/2302-count-subarrays-with-score-less-than-k.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "Article",
+              "name": "Find Numbers with Even Number of Digits",
+              "url": "https://algopush.com/Leetcode/1295-find-numbers-with-even-number-of-digits.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@type": "Article",
+              "name": "Maximum XOR for Each Query",
+              "url": "https://algopush.com/Leetcode/1829-maximum-xor-for-each-query.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "Article",
+              "name": "Count Complete Subarrays in an Array",
+              "url": "https://algopush.com/Leetcode/2799-count-complete-subarrays-in-an-array.html"
+            }
+          }
+        ]
+      });
+      document.head.appendChild(script);
+    });
+  </script>
+
+</body>
+
+</html>

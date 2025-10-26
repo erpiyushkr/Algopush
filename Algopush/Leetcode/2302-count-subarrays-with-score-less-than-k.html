@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    LeetCode 2302 | Count Subarrays With Score Less Than K
+  </title>
+  <meta name="description"
+    content="Learn to solve LeetCode 2302 with C++, Java, and Python using the sliding window technique. Count subarrays where score is less than k, step by step." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode 2302, Count Subarrays With Score Less Than K, Sliding Window, Array problems, Coding interview prep, C++ Java Python solutions, Algopush tutorials" />
+  <meta name="author" content="Algopush" />
+  <meta property="og:title" content="LeetCode 2302 Solution | Count Subarrays With Score Less Than K" />
+  <meta property="og:description"
+    content="Master the sliding window approach to solve LeetCode 2302 efficiently. Complete guide with multiple implementations and complexity analysis." />
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/2302.png" />
+  <meta property="og:url" content="https://algopush.com/Leetcode/2302-count-subarrays-with-score-less-than-k.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LeetCode 2302 Solution | Count Subarrays With Score Less Than K" />
+  <meta name="twitter:description"
+    content="Optimal sliding window solution for LeetCode 2302 with detailed explanations and code implementations." />
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/2302.png" />
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/2302-count-subarrays-with-score-less-than-k.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Preload important resources -->
+  <link rel="preload" href="../script.js" as="script" />
+  <link rel="preload" href="https://algopush.com/styles.css" as="style" />
+
+  <!-- Structured Data for enhanced SEO -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "LeetCode 2302 Solution: Count Subarrays With Score Less Than K",
+        "author": {
+          "@type": "Organization",
+          "name": "Algopush",
+          "url": "https://algopush.com"
+        },
+        "image": "https://algopush.com/Leetcode/Images/2302.png",
+        "datePublished": "2025-04-28",
+        "dateModified": "2025-04-28",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Algopush",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://algopush.com/components/logo.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://algopush.com/Leetcode/2302-count-subarrays-with-score-less-than-k.html"
+        },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "xPath": [
+            "/html/head/title"
+          ],
+          "cssSelector": ["h1", "main p:first-of-type"]
+        }
+      }
+    </script>
+
+  <script>
+    // Function to handle tab switching
+    function openTab(evt, tabName) {
+      // Get all elements with class="tab-content" and hide them
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+      }
+
+      // Get all elements with class="tab-button" and remove the "active" class
+      const tabButtons = document.getElementsByClassName("tab-button");
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+      }
+
+      // Show the current tab and add the "active" class to the button that opened the tab
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Initialize the first tab as active by default
+    document.addEventListener("DOMContentLoaded", function () {
+      const defaultTab = document.querySelector(".tab-button");
+      if (defaultTab) {
+        defaultTab.click();
+      }
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.5rem;
+      outline: none;
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding-left: 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .callout.note {
+      background-color: #eaf2f8;
+      border-color: #3498db;
+    }
+
+    .callout.warning {
+      background-color: #fef5e7;
+      border-color: #f39c12;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-buttons {
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        flex: 1 0 auto;
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header will be inserted by JavaScript -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>Problem 2302</span>
+    </div>
+
+    <!-- Problem Visualization Image -->
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/2302.png" alt="Count Subarrays With Score Less Than K"
+        loading="lazy">
+    </div>
+
+    <h1>2302: Count Subarrays With Score Less Than K</h1>
+
+    <!-- Problem Metadata -->
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Hard</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Sliding Window</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Meta</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> This problem is an excellent example of when to use the sliding window technique for
+      optimizing subarray calculations. Mastering this pattern will help you solve many array manipulation problems
+      efficiently.
+    </div>
+
+    <p>
+      The problem "Count Subarrays With Score Less Than K" (LeetCode 2302) requires us to count the number of non-empty
+      subarrays where the product of the subarray's sum and its length is strictly less than a given integer
+      <code>k</code>. This problem tests our ability to optimize subarray calculations and is a classic example of when
+      the sliding window technique shines.
+    </p>
+
+    <h2>Problem Statement</h2>
+    <p>
+      The <strong>score</strong> of an array is defined as the <strong>product of its sum and its length</strong>.
+    </p>
+    <p>
+      Given a positive integer array <code>nums</code> and an integer <code>k</code>, return the number of non-empty
+      subarrays of <code>nums</code> whose score is strictly less than <code>k</code>.
+    </p>
+    <p>
+      A subarray is a contiguous sequence of elements within an array.
+    </p>
+
+    <div class="highlight">
+      <code>score = (sum of subarray elements) × (length of subarray)</code>
+    </div>
+
+    <h3>Constraints</h3>
+    <ul>
+      <li><code>1 ≤ nums.length ≤ 10<sup>5</sup></code></li>
+      <li><code>1 ≤ nums[i] ≤ 10<sup>5</sup></code></li>
+      <li><code>1 ≤ k ≤ 10<sup>15</sup></code></li>
+    </ul>
+
+    <h2>Problem Link</h2>
+    <p>
+      <a href="https://leetcode.com/problems/count-subarrays-with-score-less-than-k/" target="_blank"
+        rel="noopener noreferrer">View on LeetCode ↗</a>
+    </p>
+
+    <h3>Example 1</h3>
+    <pre><code><b>Input:</b> nums = [2,1,4,3,5], k = 10
+<b>Output:</b> 6
+<b>Explanation:</b>
+The 6 subarrays having scores less than 10 are:
+- [2] → score = 2 × 1 = 2
+- [1] → 1 × 1 = 1
+- [4] → 4 × 1 = 4
+- [3] → 3 × 1 = 3
+- [5] → 5 × 1 = 5
+- [2,1] → (2+1) × 2 = 6
+Note that subarrays like [1,4] and [4,3,5] have scores of 10 and 36 respectively,
+which are not less than 10.</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code><b>Input:</b> nums = [1,1,1], k = 5
+<b>Output:</b> 5
+<b>Explanation:</b>
+Every subarray except [1,1,1] has a score less than 5:
+- [1] → 1 × 1 = 1
+- [1] → 1 × 1 = 1
+- [1] → 1 × 1 = 1
+- [1,1] → (1+1) × 2 = 4
+- [1,1] → (1+1) × 2 = 4
+The subarray [1,1,1] has score (1+1+1) × 3 = 9, which is not less than 5.</code></pre>
+
+    <div class="callout note">
+      <strong>Note:</strong> Since all elements are positive, longer subarrays will generally have higher scores, which
+      is why we can optimize using the sliding window approach.
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Brute Force (TLE)</h2>
+    <p>
+      The brute force approach checks every possible subarray and calculates its score. While straightforward, this
+      approach results in O(n²) time complexity, which is too slow for the upper constraint of n ≤ 10⁵.
+    </p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li><strong>Initialize</strong> a counter to zero</li>
+      <li><strong>Iterate</strong> through all possible starting indices</li>
+      <li><strong>For each starting index</strong>, expand the subarray to the right</li>
+      <li><strong>Calculate</strong> the score for each subarray</li>
+      <li><strong>Increment</strong> counter if score &lt; k</li>
+      <li><strong>Break</strong> early if score ≥ k (since longer subarrays will have higher scores)</li>
+      <li><strong>Return</strong> the final count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n²)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Why it fails:</strong> For n = 10<sup>5</sup>, the number of operations would be around 10<sup>10</sup>,
+      which is way beyond what's acceptable (typically need to stay under 10<sup>6</sup> operations).
+    </p>
+
+    <h3>Implementation</h3>
+
+    <div class="code-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'cpp-brute')">
+          C++
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'java-brute')">
+          Java
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'python-brute')">
+          Python
+        </button>
+      </div>
+
+      <div id="cpp-brute" class="tab-content active">
+        <pre><code>
+class Solution {
+public:
+    long long countSubarrays(vector&lt;int&gt;& nums, long long k) {
+        int n = nums.size();
+        long long count = 0;
+        
+        for(int i = 0; i &lt; n; i++) {
+            long long sum = 0;
+            for(int j = i; j &lt; n; j++) {
+                sum += nums[j];
+                long long score = sum * (j - i + 1);
+                
+                if(score &lt; k) {
+                    count++;
+                } else {
+                    break; // Longer subarrays will have higher scores
+                }
+            }
+        }
+        
+        return count;
+    }
+};
+                </code></pre>
+      </div>
+
+      <div id="java-brute" class="tab-content">
+        <pre><code>
+class Solution {
+    public long countSubarrays(int[] nums, long k) {
+        int n = nums.length;
+        long count = 0;
+        
+        for(int i = 0; i &lt; n; i++) {
+            long sum = 0;
+            for(int j = i; j &lt; n; j++) {
+                sum += nums[j];
+                long score = sum * (j - i + 1);
+                
+                if(score &lt; k) {
+                    count++;
+                } else {
+                    break; // Longer subarrays will have higher scores
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+                </code></pre>
+      </div>
+
+      <div id="python-brute" class="tab-content">
+        <pre><code>
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        count = 0
+        
+        for i in range(n):
+            current_sum = 0
+            for j in range(i, n):
+                current_sum += nums[j]
+                score = current_sum * (j - i + 1)
+                
+                if score &lt; k:
+                    count += 1
+                else:
+                    break  # Longer subarrays will have higher scores
+                    
+        return count
+                </code></pre>
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <strong>Note:</strong> This solution will result in Time Limit Exceeded (TLE) for large inputs due to its O(n²)
+      time complexity.
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Sliding Window (Optimal)</h2>
+    <p>
+      The optimal solution uses a sliding window technique to maintain a window where the score is less than
+      <code>k</code>. This approach works because with positive numbers, expanding the window increases the score, and
+      shrinking it decreases the score.
+    </p>
+
+    <h3>Key Insights</h3>
+    <ul>
+      <li>All elements are positive, so expanding window increases score</li>
+      <li>For each right pointer, find the smallest left where window is valid</li>
+      <li>Number of valid subarrays ending at right is <code>window length</code></li>
+    </ul>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li><strong>Initialize</strong> left pointer, sum, and count to 0</li>
+      <li><strong>Iterate</strong> with right pointer from 0 to n-1</li>
+      <li><strong>Add</strong> nums[right] to the current sum</li>
+      <li><strong>While</strong> score (sum × window length) ≥ k:
+        <ul>
+          <li>Subtract nums[left] from sum</li>
+          <li>Move left pointer forward</li>
+        </ul>
+      </li>
+      <li><strong>Add</strong> window length to count (all subarrays ending at right)</li>
+      <li><strong>Return</strong> the total count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Explanation:</strong> Each element is processed exactly twice (added once when window expands and removed
+      once when window contracts), resulting in O(n) time complexity.
+    </p>
+
+    <h3>Implementation</h3>
+
+    <div class="code-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'cpp-optimal')">
+          C++
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'java-optimal')">
+          Java
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'python-optimal')">
+          Python
+        </button>
+      </div>
+
+      <div id="cpp-optimal" class="tab-content active">
+        <pre><code>
+class Solution {
+public:
+    long long countSubarrays(vector&lt;int&gt;& nums, long long k) {
+        long long count = 0;
+        long long sum = 0;
+        int left = 0;
+        int n = nums.size();
+        
+        for(int right = 0; right &lt; n; right++) {
+            sum += nums[right];
+            
+            // Shrink the window from left while condition is invalid
+            while(sum * (right - left + 1) >= k) {
+                sum -= nums[left];
+                left++;
+            }
+            
+            // All subarrays ending at 'right' with start >= left are valid
+            count += (right - left + 1);
+        }
+        
+        return count;
+    }
+};
+                </code></pre>
+      </div>
+
+      <div id="java-optimal" class="tab-content">
+        <pre><code>
+class Solution {
+    public long countSubarrays(int[] nums, long k) {
+        long count = 0;
+        long sum = 0;
+        int left = 0;
+        int n = nums.length;
+        
+        for(int right = 0; right &lt; n; right++) {
+            sum += nums[right];
+            
+            // Shrink the window from left while condition is invalid
+            while(sum * (right - left + 1) >= k) {
+                sum -= nums[left];
+                left++;
+            }
+            
+            // All subarrays ending at 'right' with start >= left are valid
+            count += (right - left + 1);
+        }
+        
+        return count;
+    }
+}
+                </code></pre>
+      </div>
+
+      <div id="python-optimal" class="tab-content">
+        <pre><code>
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        count = 0
+        current_sum = 0
+        left = 0
+        
+        for right in range(len(nums)):
+            current_sum += nums[right]
+            
+            # Shrink the window from left while condition is invalid
+            while current_sum * (right - left + 1) >= k:
+                current_sum -= nums[left]
+                left += 1
+                
+            # All subarrays ending at 'right' with start >= left are valid
+            count += (right - left + 1)
+            
+        return count
+                </code></pre>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Why This Works:</strong> For each right pointer, we find the smallest left such that the window
+      [left..right] has score &lt; k. All subarrays ending at right with start ≥ left are valid, and there are exactly
+      (right - left + 1) of them.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Special Considerations</h2>
+    <p>
+      When implementing solutions for this problem, consider these edge cases:
+    </p>
+
+    <h3>1. Single Element Arrays</h3>
+    <pre><code><b>Input:</b> nums = [5], k = 10
+<b>Output:</b> 1 (5 × 1 = 5 &lt; 10)
+
+<b>Input:</b> nums = [10], k = 5
+<b>Output:</b> 0 (10 × 1 = 10 ≥ 5)</code></pre>
+
+    <h3>2. All Elements Equal</h3>
+    <pre><code><b>Input:</b> nums = [2,2,2,2], k = 10
+<b>Output:</b> 4
+[2]×1=2, [2]×1=2, [2]×1=2, [2]×1=2
+No subarrays of length ≥2 have score &lt; 10:
+[2,2]×2=8, [2,2,2]×3=18, etc.</code></pre>
+
+    <h3>3. Large k Values</h3>
+    <pre><code><b>Input:</b> nums = [1,2,3,...,100000], k = 10<sup>15</sup>
+<b>Output:</b> n*(n+1)/2 ≈ 5×10<sup>9</sup> (all possible subarrays)
+Must handle large counts efficiently</code></pre>
+
+    <h3>4. Minimum/Maximum Values</h3>
+    <pre><code><b>Input:</b> nums = [1,1,1,...,1] (10<sup>5</sup> elements), k = 2
+<b>Output:</b> 10<sup>5</sup> (only single-element subarrays qualify)</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test with the upper constraint limits (n=10⁵) to ensure your solution handles
+      large inputs efficiently.
+    </div>
+
+    <hr />
+
+    <h2>Comparison of Approaches</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+          <th>When to Use</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brute Force</td>
+          <td>O(n²)</td>
+          <td>O(1)</td>
+          <td>Small inputs (n &lt; 1000)</td>
+          <td>Simple to implement</td>
+          <td>Fails for large n</td>
+        </tr>
+        <tr>
+          <td>Sliding Window</td>
+          <td>O(n)</td>
+          <td>O(1)</td>
+          <td>All cases, especially large n</td>
+          <td>Optimal for constraints</td>
+          <td>Slightly more complex logic</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <strong>Interview Tip:</strong> When you see subarray problems with positive numbers and product/sum conditions,
+      the sliding window technique should be your first thought. This pattern is common in coding interviews.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>
+          1. Why does the sliding window approach work for this problem?
+        </summary>
+        <p>
+          The sliding window approach works because all numbers are positive. This means that expanding the window
+          always increases the score (sum × length), and shrinking the window always decreases it. This monotonic
+          property allows us to efficiently find valid windows by adjusting the left pointer.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          2. Would this solution work if the array contained negative numbers?
+        </summary>
+        <p>
+          No, the sliding window approach wouldn't work directly with negative numbers because expanding the window
+          could potentially decrease the sum (and thus the score). For arrays with negative numbers, we would need a
+          different approach like prefix sums with a hash map.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          3. How does the count += (right - left + 1) work?
+        </summary>
+        <p>
+          This counts all valid subarrays ending at the current right pointer. For a window [left..right], there are
+          exactly (right - left + 1) subarrays ending at right: [left..right], [left+1..right], ..., [right..right].
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          4. What's the space complexity of the optimal solution?
+        </summary>
+        <p>
+          The space complexity is O(1) because we only use a constant amount of additional space (for variables like
+          sum, count, left, right) regardless of the input size.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          5. Can this problem be solved using prefix sums?
+        </summary>
+        <p>
+          While prefix sums could help calculate subarray sums quickly, they wouldn't directly help with the score
+          calculation (sum × length) or the sliding window optimization. The sliding window approach is more suitable
+          for this specific problem.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          6. How would you modify the solution if the condition was ≤ k instead of &lt; k?
+        </summary>
+        <p>
+          We would simply change the while loop condition from <code>>= k</code> to <code>> k</code>. This would make
+          the window include subarrays with score equal to k in our count.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          7. What's the best way to test this code?
+        </summary>
+        <p>
+          Test with: single-element arrays, all elements equal, strictly increasing/decreasing arrays, minimum/maximum
+          values, and the upper constraint limits. Also verify edge cases where k is very small or very large compared
+          to array values.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          8. Is there a mathematical formula to solve this without iteration?
+        </summary>
+        <p>
+          No general formula exists because the solution depends on the specific values in the array. The sliding window
+          approach is optimal for this problem with O(n) time complexity.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          9. How does this problem relate to real-world applications?
+        </summary>
+        <p>
+          Similar algorithms are used in data streaming applications where we need to monitor subsets of data that meet
+          certain statistical criteria (like average × duration below a threshold). It's also useful in financial
+          analysis for finding periods with certain performance metrics.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          10. What similar problems should I practice to master this pattern?
+        </summary>
+        <p>
+          Recommended problems: 209 (Minimum Size Subarray Sum), 713 (Subarray Product Less Than K), 904 (Fruit Into
+          Baskets), 1004 (Max Consecutive Ones III), and 1658 (Minimum Operations to Reduce X to Zero). These all use
+          variations of the sliding window technique.
+        </p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Thoughts:</strong> This problem beautifully demonstrates the power of the sliding window technique
+      for optimizing subarray calculations. The key insight is recognizing that with positive numbers, window expansion
+      and contraction have predictable effects on the score. Mastering this pattern will help you solve many array
+      manipulation problems efficiently.
+    </div>
+  </main>
+
+  <!-- Footer will be inserted by JavaScript -->
+  <div id="footer"></div>
+
+</body>
+
+</html>

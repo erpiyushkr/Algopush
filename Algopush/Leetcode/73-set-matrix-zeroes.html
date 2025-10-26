@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode 73 | Set Matrix Zeroes</title>
+    <meta name="description"
+        content="LeetCode 73 solution: Efficient approaches to set matrix zeroes in-place including O(1) space optimization and various implementation methods.">
+    <meta name="keywords"
+        content="LeetCode 73, Set Matrix Zeroes, In-place Algorithm, Matrix Manipulation, Constant Space Solution, LeetCode Medium Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical" href="https://algopush.com/Leetcode/73-set-matrix-zeroes.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 73 | Set Matrix Zeroes">
+    <meta property="og:description"
+        content="LeetCode 73 solution: Efficient approaches to set matrix zeroes in-place including O(1) space optimization and various implementation methods.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/73.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/73-set-matrix-zeroes.html">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 73 | Set Matrix Zeroes">
+    <meta name="twitter:description"
+        content="LeetCode 73 solution: Efficient approaches to set matrix zeroes in-place including O(1) space optimization and various implementation methods.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/73.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Set Matrix Zeroes Solution Guide",
+        "url": "https://algopush.com/Leetcode/73-set-matrix-zeroes.html",
+        "image": "https://algopush.com/Leetcode/Images/73.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-05-22",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Main Content Container */
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        /* Problem Visualization Image */
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            }
+
+            .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        /* Code Blocks */
+        /* Code Blocks */
+        pre {
+            background: #f8f9fa;
+            margin-top: 0.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        /* LeetCode-like Syntax Highlighting with Light Theme */
+        .code-token-keyword {
+            color: #007acc;
+            /* LeetCode's blue for keywords */
+        }
+
+        .code-token-function {
+            color: #795e26;
+            /* LeetCode's function yellowish-brown */
+        }
+
+        .code-token-number {
+            color: #098658;
+            /* LeetCode's number green */
+        }
+
+        .code-token-string {
+            color: #a31515;
+            /* Typical red strings (LeetCode-like) */
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        /* Highlight Callouts */
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Code Container */
+        .code-container {
+            position: relative;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        /* Tabs */
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Problem Metadata */
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>73. Set Matrix Zeroes</span>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/73.png" alt="Set Matrix Zeroes Visualization">
+        </div>
+
+        <h1>73: Set Matrix Zeroes</h1>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Medium</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Arrays, Matrix, In-place Operations</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Amazon, Microsoft, Facebook</span>
+            </div>
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>Given an m x n integer matrix, set entire row and column to zeros if an element is 0. Must be done in-place.
+        </p>
+
+        <h3>Example 1</h3>
+        <pre><code>Input: [[1,1,1],[1,0,1],[1,1,1]] → Output: [[1,0,1],[0,0,0],[1,0,1]]</code></pre>
+
+        <h3>Example 2</h3>
+        <pre><code>Input: [[0,1,2,0],[3,4,5,2],[1,3,1,5]] → Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]</code></pre>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/set-matrix-zeroes/" target="_blank">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr>
+
+        <h2>Approach 1: Brute Force (O(mn) Space)</h2>
+        <p>Use additional matrix to track zero positions, then update original matrix.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Create copy of original matrix</li>
+            <li>Mark zeros in copy based on original matrix</li>
+            <li>Update original matrix using copy</li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Brute Force Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-brute">C++</button>
+                    <button class="tab-button" data-tab="java-brute">Java</button>
+                    <button class="tab-button" data-tab="python-brute">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+  <span class="code-token-keyword">void</span> <span class="code-token-function">setZeroes</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& matrix) {
+    <span class="code-token-keyword">int</span> m = matrix.size();
+    <span class="code-token-keyword">int</span> n = matrix[0].size();
+    vector&lt;vector&lt;<span class="code-token-keyword">bool</span>&gt;&gt; copy(m, vector&lt;<span class="code-token-keyword">bool</span>&gt;(n, <span class="code-token-keyword">false</span>));
+
+    <span class="code-token-comment">// Mark zeros in copy</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][j] == 0) {
+          <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> k = 0; k &lt; n; k++) copy[i][k] = <span class="code-token-keyword">true</span>;
+          <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> k = 0; k &lt; m; k++) copy[k][j] = <span class="code-token-keyword">true</span>;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Apply zeros</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(copy[i][j]) matrix[i][j] = 0;
+      }
+    }
+  }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+  <span class="code-token-keyword">public</span> <span class="code-token-keyword">void</span> <span class="code-token-function">setZeroes</span>(<span class="code-token-keyword">int</span>[][] matrix) {
+    <span class="code-token-keyword">int</span> m = matrix.length;
+    <span class="code-token-keyword">int</span> n = matrix[0].length;
+    <span class="code-token-keyword">boolean</span>[][] copy = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[m][n];
+
+    <span class="code-token-comment">// Mark zeros in copy</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][j] == 0) {
+          Arrays.fill(copy[i], <span class="code-token-keyword">true</span>);
+          <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> k = 0; k &lt; m; k++) copy[k][j] = <span class="code-token-keyword">true</span>;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Apply zeros</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(copy[i][j]) matrix[i][j] = 0;
+      }
+    }
+  }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-brute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+  <span class="code-token-keyword">def</span> <span class="code-token-function">setZeroes</span>(self, matrix: List[List[<span class="code-token-keyword">int</span>]]) -> <span class="code-token-keyword">None</span>:
+    m, n = <span class="code-token-keyword">len</span>(matrix), <span class="code-token-keyword">len</span>(matrix[0])
+    copy = [[<span class="code-token-keyword">False</span>] * n <span class="code-token-keyword">for</span> _ <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m)]
+
+    <span class="code-token-comment"># Mark zeros</span>
+    <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m):
+      <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+        <span class="code-token-keyword">if</span> matrix[i][j] == 0:
+          <span class="code-token-keyword">for</span> k <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n): copy[i][k] = <span class="code-token-keyword">True</span>
+          <span class="code-token-keyword">for</span> k <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m): copy[k][j] = <span class="code-token-keyword">True</span>
+
+    <span class="code-token-comment"># Apply zeros</span>
+    <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m):
+      <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+        <span class="code-token-keyword">if</span> copy[i][j]:
+          matrix[i][j] = 0</code></pre>
+                </div>
+            </div>
+
+            <div class="callout warning">
+                <strong>Drawback:</strong> Uses O(mn) space which is prohibited by problem constraints for optimal
+                solutions.
+            </div>
+        </div>
+
+
+        <hr>
+
+        <h2>Approach 2: Linear Space (O(m + n))</h2>
+        <p>Use separate arrays to track rows and columns containing zeros.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Linear Space Solution</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-linear">C++</button>
+                    <button class="tab-button" data-tab="java-linear">Java</button>
+                    <button class="tab-button" data-tab="python-linear">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-linear-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+  <span class="code-token-keyword">void</span> <span class="code-token-function">setZeroes</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& matrix) {
+    <span class="code-token-keyword">int</span> m = matrix.size(), n = matrix[0].size();
+    vector&lt;<span class="code-token-keyword">bool</span>&gt; rows(m, <span class="code-token-keyword">false</span>), cols(n, <span class="code-token-keyword">false</span>);
+
+    <span class="code-token-comment">// Mark rows and columns</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][j] == 0) {
+          rows[i] = <span class="code-token-keyword">true</span>;
+          cols[j] = <span class="code-token-keyword">true</span>;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Set zeros</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(rows[i] || cols[j]) {
+          matrix[i][j] = 0;
+        }
+      }
+    }
+  }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-linear-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+  <span class="code-token-keyword">public</span> <span class="code-token-keyword">void</span> <span class="code-token-function">setZeroes</span>(<span class="code-token-keyword">int</span>[][] matrix) {
+    <span class="code-token-keyword">int</span> m = matrix.length, n = matrix[0].length;
+    <span class="code-token-keyword">boolean</span>[] rows = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[m];
+    <span class="code-token-keyword">boolean</span>[] cols = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[n];
+
+    <span class="code-token-comment">// Mark rows and columns</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][j] == 0) {
+          rows[i] = <span class="code-token-keyword">true</span>;
+          cols[j] = <span class="code-token-keyword">true</span>;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Set zeros</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(rows[i] || cols[j]) {
+          matrix[i][j] = 0;
+        }
+      }
+    }
+  }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-linear-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+  <span class="code-token-keyword">def</span> <span class="code-token-function">setZeroes</span>(self, matrix: List[List[<span class="code-token-keyword">int</span>]]) -> <span class="code-token-keyword">None</span>:
+    m, n = <span class="code-token-function">len</span>(matrix), <span class="code-token-function">len</span>(matrix[0])
+    rows = [<span class="code-token-keyword">False</span>] * m
+    cols = [<span class="code-token-keyword">False</span>] * n
+
+    <span class="code-token-comment"># Mark rows and columns</span>
+    <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m):
+      <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+        <span class="code-token-keyword">if</span> matrix[i][j] == 0:
+          rows[i] = <span class="code-token-keyword">True</span>
+          cols[j] = <span class="code-token-keyword">True</span>
+
+    <span class="code-token-comment"># Apply zeros</span>
+    <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m):
+      <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+        <span class="code-token-keyword">if</span> rows[i] <span class="code-token-keyword">or</span> cols[j]:
+          matrix[i][j] = 0</code></pre>
+                </div>
+            </div>
+
+            <div class="callout warning">
+                <strong>Limitation:</strong> Still uses O(m + n) space which doesn't meet follow-up requirements.
+            </div>
+        </div>
+
+
+        <hr>
+
+        <h2>Approach 3: Optimal In-Place (O(1) Space)</h2>
+        <p>Use first row and column as markers, with special handling for first row/column.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Constant Space Solution</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-optimal">C++</button>
+                    <button class="tab-button" data-tab="java-optimal">Java</button>
+                    <button class="tab-button" data-tab="python-optimal">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-optimal-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+  <span class="code-token-keyword">void</span> <span class="code-token-function">setZeroes</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& matrix) {
+    <span class="code-token-keyword">int</span> m = matrix.size(), n = matrix[0].size();
+    <span class="code-token-keyword">bool</span> firstRow = <span class="code-token-keyword">false</span>;
+
+    <span class="code-token-comment">// Markers</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][j] == 0) {
+          matrix[0][j] = 0;
+          <span class="code-token-keyword">if</span>(i == 0) firstRow = <span class="code-token-keyword">true</span>;
+          <span class="code-token-keyword">else</span> matrix[i][0] = 0;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Process inner matrix</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 1; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 1; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][0] == 0 || matrix[0][j] == 0) {
+          matrix[i][j] = 0;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Handle first column</span>
+    <span class="code-token-keyword">if</span>(matrix[0][0] == 0) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) matrix[i][0] = 0;
+    }
+
+    <span class="code-token-comment">// Handle first row</span>
+    <span class="code-token-keyword">if</span>(firstRow) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) matrix[0][j] = 0;
+    }
+  }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-optimal-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+  <span class="code-token-keyword">public</span> <span class="code-token-keyword">void</span> <span class="code-token-function">setZeroes</span>(<span class="code-token-keyword">int</span>[][] matrix) {
+    <span class="code-token-keyword">int</span> m = matrix.length, n = matrix[0].length;
+    <span class="code-token-keyword">boolean</span> firstRow = <span class="code-token-keyword">false</span>;
+
+    <span class="code-token-comment">// Markers</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][j] == 0) {
+          matrix[0][j] = 0;
+          <span class="code-token-keyword">if</span>(i == 0) firstRow = <span class="code-token-keyword">true</span>;
+          <span class="code-token-keyword">else</span> matrix[i][0] = 0;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Process inner matrix</span>
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 1; i &lt; m; i++) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> j = 1; j &lt; n; j++) {
+        <span class="code-token-keyword">if</span>(matrix[i][0] == 0 || matrix[0][j] == 0) {
+          matrix[i][j] = 0;
+        }
+      }
+    }
+
+    <span class="code-token-comment">// Handle first column</span>
+    <span class="code-token-keyword">if</span>(matrix[0][0] == 0) {
+      <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) matrix[i][0] = 0;
+    }
+
+    <span class="code-token-comment">// Handle first row</span>
+    <span class="code-token-keyword">if</span>(firstRow) {
+      Arrays.fill(matrix[0], 0);
+    }
+  }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-optimal-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+  <span class="code-token-keyword">def</span> <span class="code-token-function">setZeroes</span>(self, matrix: List[List[<span class="code-token-keyword">int</span>]]) -> <span class="code-token-keyword">None</span>:
+    m, n = <span class="code-token-function">len</span>(matrix), <span class="code-token-function">len</span>(matrix[0])
+    first_row = <span class="code-token-keyword">False</span>
+
+    <span class="code-token-comment"># Markers</span>
+    <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m):
+      <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+        <span class="code-token-keyword">if</span> matrix[i][j] == 0:
+          matrix[0][j] = 0
+          <span class="code-token-keyword">if</span> i == 0:
+            first_row = <span class="code-token-keyword">True</span>
+          <span class="code-token-keyword">else</span>:
+            matrix[i][0] = 0
+
+    <span class="code-token-comment"># Process inner matrix</span>
+    <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(1, m):
+      <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(1, n):
+        <span class="code-token-keyword">if</span> matrix[i][0] == 0 <span class="code-token-keyword">or</span> matrix[0][j] == 0:
+          matrix[i][j] = 0
+
+    <span class="code-token-comment"># Handle first column</span>
+    <span class="code-token-keyword">if</span> matrix[0][0] == 0:
+      <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(m):
+        matrix[i][0] = 0
+
+    <span class="code-token-comment"># Handle first row</span>
+    <span class="code-token-keyword">if</span> first_row:
+      <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+        matrix[0][j] = 0</code></pre>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                <strong>Optimization:</strong> Achieves O(1) space by reusing matrix's first row/column as markers.
+            </div>
+        </div>
+
+
+        <hr>
+
+        <h2>Approach Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time</th>
+                    <th>Space</th>
+                    <th>Readability</th>
+                    <th>Optimal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Brute Force</td>
+                    <td>O(mn(m + n))</td>
+                    <td>O(mn)</td>
+                    <td>Simple</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td>Linear Space</td>
+                    <td>O(mn)</td>
+                    <td>O(m + n)</td>
+                    <td>Good</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td>Constant Space</td>
+                    <td>O(mn)</td>
+                    <td>O(1)</td>
+                    <td>Complex</td>
+                    <td>✅</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout warning">
+            <strong>Important:</strong> Optimal approach requires careful handling of first row/column edge cases.
+        </div>
+
+        <hr>
+
+        <h2>Edge Cases</h2>
+        <h3>1. Zero in First Row/Column</h3>
+        <pre><code>Input: [[0,1],[1,1]] → Output: [[0,0],[0,1]]</code></pre>
+
+        <h3>2. Matrix with No Zeros</h3>
+        <pre><code>Input: [[1,2],[3,4]] → Output: [[1,2],[3,4]]</code></pre>
+
+        <h3>3. All Elements Zero</h3>
+        <pre><code>Input: [[0,0],[0,0]] → Output: [[0,0],[0,0]]</code></pre>
+
+        <div class="callout tip">
+            <strong>Testing Tip:</strong> Always verify cases where first row/column contains zeros initially.
+        </div>
+
+        <hr>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <details>
+                <summary>Why not use O(mn) space approach?</summary>
+                <p>For large matrices (200x200), it would require 40,000 storage units which is memory inefficient.</p>
+            </details>
+
+            <details>
+                <summary>How does the optimal approach handle overlapping zeros?</summary>
+                <p>Markers are set first before modification, preventing interference with subsequent zero detection.
+                </p>
+            </details>
+
+            <details>
+                <summary>Why separate handling for first row/column?</summary>
+                <p>The first row/column serve as markers and need special treatment to avoid overwriting marker
+                    information.</p>
+            </details>
+
+            <details>
+                <summary>Can we use boolean variables instead of markers?</summary>
+                <p>Yes, but requires additional variables for first row/column state tracking as shown in the optimal
+                    approach.</p>
+            </details>
+
+            <details>
+                <summary>What if a zero appears in marker row/column?</summary>
+                <p>It's handled naturally through the marker system - zeros in markers will trigger corresponding
+                    row/column clears.</p>
+            </details>
+
+            <details>
+                <summary>How to handle negative numbers?</summary>
+                <p>Marker system works regardless of values since we only care about zero positions.</p>
+            </details>
+
+            <details>
+                <summary>Why process inner matrix first?</summary>
+                <p>To prevent marker row/column modification from affecting inner matrix processing.</p>
+            </details>
+
+            <details>
+                <summary>Can this be extended to 3D matrices?</summary>
+                <p>Yes, but would require more complex marker tracking across multiple dimensions.</p>
+            </details>
+
+            <details>
+                <summary>What's the time complexity?</summary>
+                <p>O(mn) for all approaches, as we need to scan entire matrix at least once.</p>
+            </details>
+
+            <details>
+                <summary>How to verify in-place modification?</summary>
+                <p>Check that matrix reference remains same, only element values change.</p>
+            </details>
+
+            <details>
+                <summary>Why not use separate marker values?</summary>
+                <p>Problem constraints allow any integer values, so special markers could conflict with existing values.
+                </p>
+            </details>
+
+            <details>
+                <summary>What if matrix is empty?</summary>
+                <p>Constraints guarantee 1 <= m, n <=200, so empty matrix isn't possible.</p>
+            </details>
+        </div>
+
+        <div class="callout">
+            <strong>Final Recommendation:</strong> The optimal in-place approach provides the best space efficiency
+            while maintaining O(mn) time complexity.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Tab functionality with improved mobile support
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize tabs
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                // Set first tab as active by default if none are active
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                // Add click handlers
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+
+                        // Update active tab button
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        // Update active tab content
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // FAQ highlight when opened
+            document.querySelectorAll('.faq-section details').forEach(detail => {
+                detail.addEventListener('toggle', () => {
+                    if (detail.open) {
+                        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>

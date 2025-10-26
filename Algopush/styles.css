@@ -1,0 +1,132 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #000;
+  scroll-behavior: smooth;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #102c41;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+ul.feature-list {
+  list-style: none;
+  padding-left: 1rem;
+  margin-top: 10px;
+}
+
+ul.feature-list li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+ul.feature-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #102c41;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 50px;
+}
+
+.intro {
+  text-align: center;
+  margin-top: 30px;
+}
+
+blockquote {
+  margin-top: 20px;
+  font-style: italic;
+  color: #555;
+  padding-left: 15px;
+  border-left: 4px solid #2584a1;
+}
+
+.highlight {
+  color: #2584a1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p,
+  ul.feature-list li {
+    font-size: 0.95rem;
+  }
+
+  .cta {
+    padding: 20px 15px;
+  }
+}

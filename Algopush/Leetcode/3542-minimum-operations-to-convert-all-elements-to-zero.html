@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3542 | Minimum Operations to Convert All Elements to Zero</title>
+  <meta name="description"
+    content="LeetCode 3542: Minimum operations to zero arrays using greedy strategies. Detailed analysis with complexity comparison and multiple implementations.">
+  <meta name="keywords"
+    content="LeetCode 3542, Minimum Operations to Zero, Array Manipulation, Greedy Algorithms, Subarray Operations, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question">
+  <meta name="author" content="Algopush" />
+  <link rel="canonical"
+    href="https://algopush.com/Leetcode/3542-minimum-operations-to-convert-all-elements-to-zero.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3542: Minimum Operations to Convert All Elements to Zero">
+  <meta property="og:description"
+    content="Master efficient greedy approaches to minimize operations for array zero conversion. Complete guide with mathematical proofs and code implementations.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3542.png">
+  <meta property="og:url"
+    content="https://algopush.com/Leetcode/3542-minimum-operations-to-convert-all-elements-to-zero.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3542: Minimum Operations to Convert All Elements to Zero">
+  <meta name="twitter:description"
+    content="Optimal greedy solution for converting arrays to zero with minimal operations. Code examples in Python, Java, and C++.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3542.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Minimum Operations to Convert All Elements to Zero",
+      "url": "https://algopush.com/Leetcode/3542-minimum-operations-to-convert-all-elements-to-zero.html",
+      "image": "https://algopush.com/Leetcode/Images/3542.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-11",
+      "dateModified": "2025-05-11",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3542. Minimum Operations to Convert All Elements to Zero</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3542.png" alt="Array operations visualization" loading="lazy">
+    </div>
+
+    <h1>3542: Minimum Operations to Convert All Elements to Zero</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Greedy Algorithms, Counting</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Meta, Amazon</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Key Insight:</strong> The optimal strategy requires processing elements in sorted order and counting
+      contiguous value groups.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an array of non-negative integers, determine the minimum number of operations needed to make all elements
+      zero. Each operation lets you select a subarray and set all occurrences of its minimum value to zero.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: nums = [0,2]
+Output: 1
+Explanation: Target subarray [1,1] containing 2</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: nums = [3,1,2,1]
+Output: 3
+Explanation: Requires three targeted operations</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/minimum-operations-to-convert-all-elements-to-zero/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Greedy Group Counting (Optimal)</h2>
+    <p>Process elements in sorted order, counting contiguous groups for each value.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Sort unique values in ascending order</li>
+      <li>For each value v:
+        <ul>
+          <li>Count contiguous groups of v separated by higher values/zeros</li>
+          <li>Add group count to total operations</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n log n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimal Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-sol">C++</button>
+          <button class="tab-button" data-tab="java-sol">Java</button>
+          <button class="tab-button" data-tab="python-sol">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-sol-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minOperations</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+        set&lt;<span class="code-token-keyword">int</span>&gt; unique(nums.<span class="code-token-function">begin</span>(), nums.<span class="code-token-function">end</span>());
+        vector&lt;<span class="code-token-keyword">int</span>&gt; sorted(unique.<span class="code-token-function">begin</span>(), unique.<span class="code-token-function">end</span>());
+        <span class="code-token-keyword">int</span> total = 0;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> v : sorted) {
+            <span class="code-token-keyword">if</span>(v == 0) <span class="code-token-keyword">continue</span>;
+            <span class="code-token-keyword">int</span> count = 0;
+            <span class="code-token-keyword">bool</span> inGroup = false;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums) {
+                <span class="code-token-keyword">if</span>(num >= v) {
+                    <span class="code-token-keyword">if</span>(num == v && !inGroup) {
+                        count++;
+                        inGroup = true;
+                    }
+                    <span class="code-token-keyword">if</span>(num != v) inGroup = false;
+                } <span class="code-token-keyword">else</span> {
+                    inGroup = false;
+                }
+            }
+            total += count;
+        }
+        <span class="code-token-keyword">return</span> total;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-sol-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minOperations</span>(<span class="code-token-keyword">int</span>[] nums) {
+        Set&lt;Integer&gt; unique = <span class="code-token-keyword">new</span> HashSet&lt;&gt;();
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums) unique.<span class="code-token-function">add</span>(num);
+        List&lt;Integer&gt; sorted = <span class="code-token-keyword">new</span> ArrayList&lt;&gt;(unique);
+        Collections.<span class="code-token-function">sort</span>(sorted);
+        <span class="code-token-keyword">int</span> total = 0;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> v : sorted) {
+            <span class="code-token-keyword">if</span>(v == 0) <span class="code-token-keyword">continue</span>;
+            <span class="code-token-keyword">int</span> count = 0;
+            <span class="code-token-keyword">boolean</span> inGroup = false;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums) {
+                <span class="code-token-keyword">if</span>(num >= v) {
+                    <span class="code-token-keyword">if</span>(num == v && !inGroup) {
+                        count++;
+                        inGroup = true;
+                    }
+                    <span class="code-token-keyword">if</span>(num != v) inGroup = false;
+                } <span class="code-token-keyword">else</span> {
+                    inGroup = false;
+                }
+            }
+            total += count;
+        }
+        <span class="code-token-keyword">return</span> total;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-sol-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minOperations</span>(self, nums: List[int]) -> int:
+        unique = sorted(set(nums))
+        total = 0
+        <span class="code-token-keyword">for</span> v <span class="code-token-keyword">in</span> unique:
+            <span class="code-token-keyword">if</span> v == 0:
+                <span class="code-token-keyword">continue</span>
+            count = 0
+            in_group = False
+            <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+                <span class="code-token-keyword">if</span> num >= v:
+                    <span class="code-token-keyword">if</span> num == v <span class="code-token-keyword">and</span> <span class="code-token-keyword">not</span> in_group:
+                        count += 1
+                        in_group = True
+                    <span class="code-token-keyword">if</span> num != v:
+                        in_group = False
+                <span class="code-token-keyword">else</span>:
+                    in_group = False
+            total += count
+        <span class="code-token-keyword">return</span> total</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Insight:</strong> This solution efficiently counts value groups without modifying the
+        original array, achieving O(n log n) time through sorting and linear scans.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time</th>
+          <th>Space</th>
+          <th>Use Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Greedy Group Counting</td>
+          <td>O(n log n)</td>
+          <td>O(n)</td>
+          <td>General case, optimal solution</td>
+        </tr>
+        <tr>
+          <td>Frequency Map</td>
+          <td>O(n²)</td>
+          <td>O(n)</td>
+          <td>Theoretical alternative</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Important:</strong> The optimal approach leverages sorting and linear scanning to achieve efficiency,
+      crucial for handling large input sizes up to 10⁵ elements.
+    </div>
+
+    <hr />
+
+    <h2>Edge Case Analysis</h2>
+    <h3>1. All Elements Zero</h3>
+    <pre><code>Input: [0,0,0] → Output: 0</code></pre>
+
+    <h3>2. Strictly Increasing</h3>
+    <pre><code>Input: [1,2,3,4] → Output: 4</code></pre>
+
+    <h3>3. Alternating Values</h3>
+    <pre><code>Input: [2,1,2,1] → Output: 2</code></pre>
+
+    <div class="callout danger">
+      <strong>Pitfall Alert:</strong> Always handle zero values explicitly to avoid unnecessary operations.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why process values in sorted order?</summary>
+        <p>Smaller values can be eliminated first, creating segments that reduce operations needed for larger values.
+        </p>
+      </details>
+
+      <details>
+        <summary>2. How does group counting work?</summary>
+        <p>Contiguous blocks of the same value separated by higher values/zeros each require one operation.</p>
+      </details>
+
+      <details>
+        <summary>3. Why O(n log n) complexity?</summary>
+        <p>Due to sorting unique values. Linear scans afterward maintain efficiency.</p>
+      </details>
+
+      <details>
+        <summary>4. Can we optimize further?</summary>
+        <p>This is already optimal for constraints. Further optimization would require different mathematical modeling.
+        </p>
+      </details>
+
+      <details>
+        <summary>5. How handle duplicate values?</summary>
+        <p>Duplicates in the same contiguous group are handled in a single operation.</p>
+      </details>
+
+      <details>
+        <summary>6. Why use set for unique values?</summary>
+        <p>Ensures we process each value exactly once, avoiding redundant calculations.</p>
+      </details>
+
+      <details>
+        <summary>7. What if all elements are same?</summary>
+        <p>Requires exactly 1 operation regardless of array size.</p>
+      </details>
+
+      <details>
+        <summary>8. How verify correctness?</summary>
+        <p>Check that each operation reduces the maximum value until all elements are zero.</p>
+      </details>
+
+      <details>
+        <summary>9. Why track 'inGroup' state?</summary>
+        <p>Prevents overcounting by tracking contiguous value sequences efficiently.</p>
+      </details>
+
+      <details>
+        <summary>10. Real-world applications?</summary>
+        <p>Resource deallocation, memory management, and optimization problems in distributed systems.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Insight:</strong> This problem demonstrates how careful value processing order and group counting
+      can lead to efficient solutions for seemingly complex array transformation challenges.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    // Reuse the same JavaScript from previous post
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

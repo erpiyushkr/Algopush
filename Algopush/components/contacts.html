@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Algopush | Coding Solutions & Algorithm Resources</title>
+  <meta name="description"
+    content="Get in touch with Algopush for questions, partnerships, or feedback. We're here to help with your coding and algorithm needs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+
+  <meta name="keywords"
+    content="LeetCode solutions, coding interview preparation, algorithm problems, data structures, time complexity, space complexity, problem solving">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode Solutions | Algorithm Problem Solving Guide - Algopush">
+  <meta property="og:description" content="Detailed LeetCode solutions with explanations and complexity analysis">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://algopush.com/Leetcode/leetcode.html">
+  <meta property="og:image" content="https://algopush.com/components/MainImage1.png">
+  <meta property="og:site_name" content="Algopush">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode Solutions | Algorithm Problem Solving Guide - Algopush">
+  <meta name="twitter:description" content="Detailed LeetCode solutions with explanations and complexity analysis">
+  <meta name="twitter:image" content="https://algopush.com/components/MainImage1.png">
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://algopush.com/Leetcode/contacts.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #f0c39f;
+      --text-color: #222;
+      --light-text: #6b7280;
+      --background-color: #f5f9fc;
+      --card-bg: #ffffff;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+      --spacing-unit: 1rem;
+      --transition: all 0.2s ease;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .content-container {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      padding: 0 var(--spacing-unit);
+    }
+
+    .contact-content {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .contact-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .contact-card {
+      background: var(--background-color);
+      padding: 1rem;
+      padding-bottom: 0.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 0rem;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input,
+    textarea {
+      width: 94%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition);
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 2px rgba(25, 99, 145, 0.2);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: 500;
+      display: block;
+      margin: 0 auto;
+      transition: var(--transition);
+    }
+
+    button:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .legal-notice {
+      font-size: 0.9rem;
+      color: var(--light-text);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+      text-align: center;
+    }
+
+    a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .contact-content {
+        padding: 1.5rem;
+      }
+
+      .contact-methods {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header-container"></div>
+
+  <main class="content-container">
+    <article class="contact-content">
+      <h1>Contact Algopush</h1>
+      <p style="text-align: center;">Have questions or feedback? Reach out through any of these methods:</p>
+
+      <div class="contact-methods">
+        <div class="contact-card">
+          <div class="contact-icon">📧 Email Support</div>
+          <p><a href="mailto:contact@algopush.com">contact@algopush.com</a></p>
+        </div>
+
+        <!-- <div class="contact-card">
+          <div class="contact-icon">🔗 LinkedIn</div>
+          <p><a href="https://www.linkedin.com/in/piyushkumarnsut/" target="_blank" rel="noopener">Connect with us</a>
+          </p>
+        </div> -->
+      </div>
+
+      <h2 style="text-align: center;">Send a Message</h2>
+      <form id="contactForm" action="https://formsubmit.co/ermrpiyushkumar@gmail.com" method="POST">
+        <!-- reCAPTCHA Integration -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_recaptcha" value="6LcjxicrAAAAAIWavH5vtjAOQZOzOJzcNVQ4BQsl">
+
+        <!-- FormSubmit Settings -->
+        <input type="hidden" name="_subject" value="Algopush Contact Mail">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://algopush.com/components/thank-you.html">
+
+        <!-- Form Fields -->
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <button class="g-recaptcha" data-sitekey="6LcjxicrAAAAAJrF0gX1u9uz_VcFS6y1fSE5HIHq" data-callback="onSubmit"
+          data-action="submit" type="submit">
+          Send Message
+        </button>
+      </form>
+
+      <div class="legal-notice">
+        <p>By contacting us, you agree to our <a href="./privacy-policy.html" target="_blank">Privacy Policy</a>. We'll
+          respond within 7 business days.</p>
+      </div>
+    </article>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script>
+    // Form submission handler
+    function onSubmit(token) {
+      document.getElementById("contactForm").submit();
+    }
+
+    // Load header and footer
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-container').innerHTML = data)
+      .catch(error => console.error('Error loading header:', error));
+
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-container').innerHTML = data)
+      .catch(error => console.error('Error loading footer:', error));
+  </script>
+</body>
+
+</html>

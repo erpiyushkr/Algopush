@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3545 | Minimum Deletions for At Most K Distinct Characters</title>
+  <meta name="description"
+    content="Complete solution for LeetCode 3545: Learn optimal strategies to minimize deletions while maintaining character diversity. Frequency optimization approaches.">
+  <meta name="keywords"
+    content="LeetCode 3545, Minimum Deletions, Character Frequency, Greedy Algorithm, Combinatorial Optimization, String Manipulation, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, Leetcode company dsa problem">
+  <meta name="author" content="Algopush" />
+  <link rel="canonical"
+    href="https://algopush.com/Leetcode/3545-minimum-deletions-for-at-most-k-distinct-characters.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3545: Minimum Deletions for At Most K Distinct Characters">
+  <meta property="og:description"
+    content="Master frequency-based optimization for string deletion problems. Complete guide with greedy and combinatorial approaches.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3545.png">
+  <meta property="og:url"
+    content="https://algopush.com/Leetcode/3545-minimum-deletions-for-at-most-k-distinct-characters.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3545: Minimum Deletions for At Most K Distinct Characters">
+  <meta name="twitter:description"
+    content="Optimal solutions using frequency analysis and subset selection. Code examples in Python, Java, and C++.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3545.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Minimum Deletions for At Most K Distinct Characters",
+      "url": "https://algopush.com/Leetcode/3545-minimum-deletions-for-at-most-k-distinct-characters.html",
+      "image": "https://algopush.com/Leetcode/Images/3545.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-15",
+      "dateModified": "2025-05-15",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3545. Minimum Deletions for At Most K Distinct Characters</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3545.png" alt="Character deletion visualization" loading="lazy">
+    </div>
+
+    <h1>3545: Minimum Deletions for At Most K Distinct Characters</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Easy</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Strings, Greedy Algorithms, Frequency Counting</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Meta, Amazon</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Key Insight:</strong> Optimal solution requires keeping the most frequent characters and removing others.
+      Frequency prioritization is crucial for minimal deletions.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given a string and maximum allowed distinct characters (k), determine the minimum deletions needed to achieve at
+      most k unique characters.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: s = "abc", k = 2
+Output: 1
+Explanation: Remove one character (e.g., 'c')</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: s = "aabb", k = 2
+Output: 0
+Explanation: Already has 2 distinct characters</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/minimum-deletions-for-at-most-k-distinct-characters/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Frequency-Based Greedy Algorithm</h2>
+    <p>Prioritize keeping characters with highest frequencies to minimize deletions.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Calculate character frequencies</li>
+      <li>Sort frequencies in descending order</li>
+      <li>Keep top k frequencies, sum remaining</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n + m log m)</td>
+          <td>O(m)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimal Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-greedy">C++</button>
+          <button class="tab-button" data-tab="java-greedy">Java</button>
+          <button class="tab-button" data-tab="python-greedy">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-greedy-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minDeletions</span>(string s, <span class="code-token-keyword">int</span> k) {
+        unordered_map&lt;<span class="code-token-keyword">char</span>, <span class="code-token-keyword">int</span>&gt; freq;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">char</span> c : s) freq[c]++;
+        
+        vector&lt;<span class="code-token-keyword">int</span>&gt; counts;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">auto</span>& [ch, cnt] : freq) counts.push_back(cnt);
+        
+        sort(counts.rbegin(), counts.rend());
+        
+        <span class="code-token-keyword">int</span> total = 0;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = k; i < counts.size(); ++i) {
+            total += counts[i];
+        }
+        <span class="code-token-keyword">return</span> total;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-greedy-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minDeletions</span>(String s, <span class="code-token-keyword">int</span> k) {
+        Map&lt;Character, Integer&gt; freq = <span class="code-token-keyword">new</span> HashMap<>();
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">char</span> c : s.toCharArray()) {
+            freq.put(c, freq.getOrDefault(c, 0) + 1);
+        }
+        
+        List&lt;Integer&gt; counts = <span class="code-token-keyword">new</span> ArrayList<>(freq.values());
+        Collections.sort(counts, Collections.reverseOrder());
+        
+        <span class="code-token-keyword">int</span> total = 0;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = k; i < counts.size(); i++) {
+            total += counts.get(i);
+        }
+        <span class="code-token-keyword">return</span> total;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-greedy-tab">
+          <pre><code><span class="code-token-keyword">from</span> collections <span class="code-token-keyword">import</span> Counter
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minDeletions</span>(self, s: str, k: int) -> int:
+        freq = Counter(s)
+        counts = sorted(freq.values(), reverse=True)
+        <span class="code-token-keyword">return</span> sum(counts[k:]) <span class="code-token-keyword">if</span> len(counts) > k <span class="code-token-keyword">else</span> 0</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Optimization Insight:</strong> Sorting frequencies in descending order ensures we keep the most
+        impactful characters first.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Combinatorial Subset Selection</h2>
+    <p>Brute-force approach suitable for small input constraints (n ≤ 16).</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Generate all possible character subsets</li>
+      <li>Filter subsets with size ≤ k</li>
+      <li>Calculate deletions for each valid subset</li>
+      <li>Track minimum deletions across all subsets</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(2<sup>m</sup> * m)</td>
+          <td>O(m)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Brute Force Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-brute">C++</button>
+          <button class="tab-button" data-tab="java-brute">Java</button>
+          <button class="tab-button" data-tab="python-brute">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-brute-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minDeletions</span>(string s, <span class="code-token-keyword">int</span> k) {
+        unordered_map&lt;<span class="code-token-keyword">char</span>, <span class="code-token-keyword">int</span>&gt; freq;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">char</span> c : s) freq[c]++;
+        
+        vector&lt;<span class="code-token-keyword">char</span>&gt; chars;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">auto</span>& [ch, _] : freq) chars.push_back(ch);
+        
+        <span class="code-token-keyword">int</span> min_del = INT_MAX;
+        <span class="code-token-keyword">int</span> m = chars.size();
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> mask = 0; mask < (1 << m); ++mask) {
+            <span class="code-token-keyword">int</span> bits = __builtin_popcount(mask);
+            <span class="code-token-keyword">if</span>(bits > k) <span class="code-token-keyword">continue</span>;
+            
+            <span class="code-token-keyword">int</span> sum = 0;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i < m; ++i) {
+                <span class="code-token-keyword">if</span>(mask & (1 << i)) sum += freq[chars[i]];
+            }
+            min_del = min(min_del, (<span class="code-token-keyword">int</span>)s.size() - sum);
+        }
+        <span class="code-token-keyword">return</span> min_del;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-brute-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minDeletions</span>(String s, <span class="code-token-keyword">int</span> k) {
+        Map&lt;Character, Integer&gt; freq = <span class="code-token-keyword">new</span> HashMap<>();
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">char</span> c : s.toCharArray()) {
+            freq.put(c, freq.getOrDefault(c, 0) + 1);
+        }
+        
+        List&lt;Character&gt; chars = <span class="code-token-keyword">new</span> ArrayList<>(freq.keySet());
+        <span class="code-token-keyword">int</span> m = chars.size();
+        <span class="code-token-keyword">int</span> minDel = Integer.MAX_VALUE;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> mask = 0; mask < (1 << m); mask++) {
+            <span class="code-token-keyword">int</span> bits = Integer.bitCount(mask);
+            <span class="code-token-keyword">if</span>(bits > k) <span class="code-token-keyword">continue</span>;
+            
+            <span class="code-token-keyword">int</span> sum = 0;
+            <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> i = 0; i < m; i++) {
+                <span class="code-token-keyword">if</span>((mask & (1 << i)) != 0) {
+                    sum += freq.get(chars.get(i));
+                }
+            }
+            minDel = Math.min(minDel, s.length() - sum);
+        }
+        <span class="code-token-keyword">return</span> minDel;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-brute-tab">
+          <pre><code><span class="code-token-keyword">from</span> itertools <span class="code-token-keyword">import</span> combinations
+<span class="code-token-keyword">from</span> collections <span class="code-token-keyword">import</span> Counter
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minDeletions</span>(self, s: str, k: int) -> int:
+        freq = Counter(s)
+        distinct = list(freq.keys())
+        min_del = float('inf')
+        
+        <span class="code-token-keyword">for</span> r <span class="code-token-keyword">in</span> range(0, k+1):
+            <span class="code-token-keyword">for</span> subset <span class="code-token-keyword">in</span> combinations(distinct, r):
+                current = sum(freq[c] <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> subset)
+                min_del = min(min_del, len(s) - current)
+                
+        <span class="code-token-keyword">return</span> min_del</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Use Case:</strong> This approach is feasible due to small constraints (n ≤ 16), demonstrating
+        brute-force optimization potential.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time</th>
+          <th>Space</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Greedy Frequency</td>
+          <td>O(n + m log m)</td>
+          <td>O(m)</td>
+          <td>General case, large inputs</td>
+        </tr>
+        <tr>
+          <td>Combinatorial</td>
+          <td>O(2<sup>m</sup> * m)</td>
+          <td>O(m)</td>
+          <td>Small inputs (m ≤ 16)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Greedy approach is exponentially faster for larger character sets, while combinatorial
+      works for constraint-limited cases.
+    </div>
+
+    <hr />
+
+    <h2>Edge Case Analysis</h2>
+    <h3>1. All Characters Identical</h3>
+    <pre><code>Input: "aaaaa", k = 1 → Output: 0</code></pre>
+
+    <h3>2. k Equal to Distinct Count</h3>
+    <pre><code>Input: "abcde", k = 5 → Output: 0</code></pre>
+
+    <h3>3. Empty String Requirement</h3>
+    <pre><code>Input: "aab", k = 0 → Impossible (per constraints)</code></pre>
+
+    <div class="callout danger">
+      <strong>Critical Note:</strong> Always verify if distinct count ≤ k before processing.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why does sorting frequencies guarantee optimal solution?</summary>
+        <p>Sorting lets us prioritize characters contributing most to the string length, minimizing needed deletions.
+        </p>
+      </details>
+
+      <details>
+        <summary>2. How does the combinatorial approach handle duplicates?</summary>
+        <p>It considers distinct characters only, as duplicates are handled through frequency counts.</p>
+      </details>
+
+      <details>
+        <summary>3. What if k exceeds distinct character count?</summary>
+        <p>Immediate return 0 since no deletions needed (already satisfies condition).</p>
+      </details>
+
+      <details>
+        <summary>4. Why use bitmask in combinatorial approach?</summary>
+        <p>Efficiently represents character subsets through binary encoding (each bit = character presence).</p>
+      </details>
+
+      <details>
+        <summary>5. Can we use dynamic programming here?</summary>
+        <p>Possible but unnecessary due to effective greedy solution. DP would add complexity without benefit.</p>
+      </details>
+
+      <details>
+        <summary>6. How to handle frequency ties?</summary>
+        <p>Arbitrary selection works since tied frequencies contribute equally to total length.</p>
+      </details>
+
+      <details>
+        <summary>7. What's the worst-case scenario for greedy approach?</summary>
+        <p>When all characters have equal frequency (still O(m log m) sorting time).</p>
+      </details>
+
+      <details>
+        <summary>8. Why calculate sum(counts[k:])?</summary>
+        <p>Represents frequencies of characters excluded after keeping top k frequent ones.</p>
+      </details>
+
+      <details>
+        <summary>9. How does input size affect approach choice?</summary>
+        <p>Greedy works for all sizes, combinatorial only viable for m ≤ 16 due to exponential growth.</p>
+      </details>
+
+      <details>
+        <summary>10. Can we optimize space further?</summary>
+        <p>Yes, by storing frequencies in-place without sorting, but time efficiency would suffer.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Analysis:</strong> This problem demonstrates the power of frequency analysis in string manipulation
+      problems. The greedy approach provides an optimal O(n) space solution while the combinatorial method offers
+      insight into brute-force possibilities for constrained inputs.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    // Reuse the same JavaScript from previous post
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

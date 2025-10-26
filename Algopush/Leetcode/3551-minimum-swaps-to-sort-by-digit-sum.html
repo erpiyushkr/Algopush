@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leetcode 3551 | Minimum Swaps to Sort by Digit Sum</title>
+  <meta name="description"
+    content="LeetCode 3551 solution: Efficient approaches to calculate minimum swaps for digit-sum sorting using cycle detection and custom comparators.">
+  <meta name="keywords"
+    content="LeetCode 3551, Minimum Swaps, Cycle Detection, Digit Sum Sorting, Graph Theory, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question">
+  <meta name="author" content="Algopush">
+  <link rel="canonical" href="https://algopush.com/Leetcode/3551-minimum-swaps-to-sort-by-digit-sum.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3551 | Minimum Swaps to Sort by Digit Sum">
+  <meta property="og:description"
+    content="Optimal solutions using cycle detection and custom sorting with detailed complexity analysis and multiple implementations.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3551.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3551-minimum-swaps-to-sort-by-digit-sum.html">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3551 | Minimum Swaps to Sort by Digit Sum">
+  <meta name="twitter:description"
+    content="Complete guide to solving digit-sum sorting with minimum swaps using cycle detection algorithm and position mapping.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3551.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Minimum Swaps to Sort by Digit Sum",
+    "url": "https://algopush.com/Leetcode/3551-minimum-swaps-to-sort-by-digit-sum.html",
+    "image": "https://algopush.com/Leetcode/Images/3551.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Algopush",
+      "url": "https://algopush.com"
+    },
+    "datePublished": "2025-05-19",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Algopush",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://algopush.com/components/logo.png"
+      }
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    /* LeetCode-like Syntax Highlighting with Light Theme */
+    .code-token-keyword {
+      color: #007acc;
+      /* LeetCode's blue for keywords */
+    }
+
+    .code-token-function {
+      color: #795e26;
+      /* LeetCode's function yellowish-brown */
+    }
+
+    .code-token-number {
+      color: #098658;
+      /* LeetCode's number green */
+    }
+
+    .code-token-string {
+      color: #a31515;
+      /* Typical red strings (LeetCode-like) */
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    /* Highlight Callouts */
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3551. Minimum Swaps to Sort by Digit Sum</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3551.png" alt="Minimum Swaps to Sort by Digit Sum">
+    </div>
+
+    <h1>3551: Minimum Swaps to Sort by Digit Sum</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Sorting, Cycle Detection, Graph Theory</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Goldman Sachs</span>
+      </div>
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an array of distinct positive integers, sort them based on digit sums (ascending). For equal sums, maintain
+      original order of smaller numbers. Return minimum swaps needed.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: [37,100] → Output: 1
+Explanation: Swap 37 and 100 after computing sums (10 vs 1)</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: [22,14,33,7] → Output: 0
+Explanation: Already in correct order</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/minimum-swaps-to-sort-by-digit-sum/" target="_blank">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr>
+
+    <h2>Approach 1: Cycle Detection (Optimal)</h2>
+    <p>Identify cycles in element positions after sorting to calculate minimum swaps.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create augmented array with original indices</li>
+      <li>Sort based on digit sum and value</li>
+      <li>Track visited nodes to detect cycles</li>
+      <li>Calculate swaps using cycle size formula: (cycle length - 1)</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n log n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Cycle Detection Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-cycle">C++</button>
+          <button class="tab-button" data-tab="java-cycle">Java</button>
+          <button class="tab-button" data-tab="python-cycle">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-cycle-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">digitSum</span>(<span class="code-token-keyword">int</span> x) {
+        <span class="code-token-keyword">int</span> sum = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (x) {
+            sum += x % <span class="code-token-number">10</span>;
+            x /= <span class="code-token-number">10</span>;
+        }
+        <span class="code-token-keyword">return</span> sum;
+    }
+
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        vector&lt;pair&lt;<span class="code-token-keyword">int</span>, <span class="code-token-keyword">int</span>&gt;&gt; sortedNums;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; n; ++i)
+            sortedNums.<span class="code-token-function">emplace_back</span>(nums[i], i);
+        
+        <span class="code-token-function">sort</span>(sortedNums.<span class="code-token-function">begin</span>(), sortedNums.<span class="code-token-function">end</span>(), [&](<span class="code-token-keyword">auto</span>& a, <span class="code-token-keyword">auto</span>& b) {
+            <span class="code-token-keyword">int</span> sumA = <span class="code-token-function">digitSum</span>(a.first);
+            <span class="code-token-keyword">int</span> sumB = <span class="code-token-function">digitSum</span>(b.first);
+            <span class="code-token-keyword">return</span> sumA != sumB ? sumA &lt; sumB : a.first &lt; b.first;
+        });
+
+        vector&lt;<span class="code-token-keyword">bool</span>&gt; visited(n, <span class="code-token-keyword">false</span>);
+        <span class="code-token-keyword">int</span> swaps = <span class="code-token-number">0</span>;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; n; ++i) {
+            <span class="code-token-keyword">if</span> (visited[i] || sortedNums[i].second == i)
+                <span class="code-token-keyword">continue</span>;
+            
+            <span class="code-token-keyword">int</span> cycleSize = <span class="code-token-number">0</span>;
+            <span class="code-token-keyword">int</span> j = i;
+            <span class="code-token-keyword">while</span> (!visited[j]) {
+                visited[j] = <span class="code-token-keyword">true</span>;
+                j = sortedNums[j].second;
+                cycleSize++;
+            }
+            swaps += (cycleSize - <span class="code-token-number">1</span>);
+        }
+        <span class="code-token-keyword">return</span> swaps;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-cycle-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">digitSum</span>(<span class="code-token-keyword">int</span> x) {
+        <span class="code-token-keyword">int</span> sum = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (x &gt; <span class="code-token-number">0</span>) {
+            sum += x % <span class="code-token-number">10</span>;
+            x /= <span class="code-token-number">10</span>;
+        }
+        <span class="code-token-keyword">return</span> sum;
+    }
+
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">int</span>[][] sortedNums = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n][<span class="code-token-number">2</span>];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; n; i++) {
+            sortedNums[i][<span class="code-token-number">0</span>] = nums[i];
+            sortedNums[i][<span class="code-token-number">1</span>] = i;
+        }
+        
+        Arrays.<span class="code-token-function">sort</span>(sortedNums, (a, b) -&gt; {
+            <span class="code-token-keyword">int</span> sumA = <span class="code-token-function">digitSum</span>(a[<span class="code-token-number">0</span>]);
+            <span class="code-token-keyword">int</span> sumB = <span class="code-token-function">digitSum</span>(b[<span class="code-token-number">0</span>]);
+            <span class="code-token-keyword">if</span> (sumA != sumB) <span class="code-token-keyword">return</span> sumA - sumB;
+            <span class="code-token-keyword">return</span> a[<span class="code-token-number">0</span>] - b[<span class="code-token-number">0</span>];
+        });
+
+        <span class="code-token-keyword">boolean</span>[] visited = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[n];
+        <span class="code-token-keyword">int</span> swaps = <span class="code-token-number">0</span>;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; n; i++) {
+            <span class="code-token-keyword">if</span> (visited[i] || sortedNums[i][<span class="code-token-number">1</span>] == i) <span class="code-token-keyword">continue</span>;
+            
+            <span class="code-token-keyword">int</span> cycleSize = <span class="code-token-number">0</span>;
+            <span class="code-token-keyword">int</span> j = i;
+            <span class="code-token-keyword">while</span> (!visited[j]) {
+                visited[j] = <span class="code-token-keyword">true</span>;
+                j = sortedNums[j][<span class="code-token-number">1</span>];
+                cycleSize++;
+            }
+            swaps += (cycleSize - <span class="code-token-number">1</span>);
+        }
+        <span class="code-token-keyword">return</span> swaps;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-cycle-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">digit_sum</span>(self, x: <span class="code-token-keyword">int</span>) -&gt; <span class="code-token-keyword">int</span>:
+        s = <span class="code-token-number">0</span>
+        <span class="code-token-keyword">while</span> x &gt; <span class="code-token-number">0</span>:
+            s += x % <span class="code-token-number">10</span>
+            x //= <span class="code-token-number">10</span>
+        <span class="code-token-keyword">return</span> s
+
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minSwaps</span>(self, nums: <span class="code-token-function">List</span>[<span class="code-token-keyword">int</span>]) -&gt; <span class="code-token-keyword">int</span>:
+        n = <span class="code-token-function">len</span>(nums)
+        sorted_nums = <span class="code-token-function">sorted</span>(
+            [(num, i) <span class="code-token-keyword">for</span> i, num <span class="code-token-keyword">in</span> <span class="code-token-function">enumerate</span>(nums)],
+            key=<span class="code-token-keyword">lambda</span> x: (self.<span class="code-token-function">digit_sum</span>(x[<span class="code-token-number">0</span>]), x[<span class="code-token-number">0</span>])
+        )
+
+        visited = [<span class="code-token-keyword">False</span>] * n
+        swaps = <span class="code-token-number">0</span>
+
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+            <span class="code-token-keyword">if</span> visited[i] <span class="code-token-keyword">or</span> sorted_nums[i][<span class="code-token-number">1</span>] == i:
+                <span class="code-token-keyword">continue</span>
+
+            cycle_size = <span class="code-token-number">0</span>
+            j = i
+            <span class="code-token-keyword">while</span> <span class="code-token-keyword">not</span> visited[j]:
+                visited[j] = <span class="code-token-keyword">True</span>
+                j = sorted_nums[j][<span class="code-token-number">1</span>]
+                cycle_size += <span class="code-token-number">1</span>
+
+            swaps += (cycle_size - <span class="code-token-number">1</span>)
+
+        <span class="code-token-keyword">return</span> swaps</code></pre>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <strong>Optimization Insight:</strong> Cycle detection reduces the problem to counting permutation cycles,
+        providing O(n) time complexity after sorting.
+      </div>
+    </div>
+
+
+    <hr>
+
+    <h2>Approach 2: Position Mapping with Hash Table</h2>
+    <p>Alternative implementation using hash map for position tracking and in-place swaps.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create a sorted copy with original indices</li>
+      <li>Build position map from original to sorted indices</li>
+      <li>Perform swaps until elements reach correct positions</li>
+      <li>Count swaps during correction process</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n log n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Hash Map Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-hash">C++</button>
+          <button class="tab-button" data-tab="java-hash">Java</button>
+          <button class="tab-button" data-tab="python-hash">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-hash-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+  <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+    vector&lt;pair&lt;<span class="code-token-keyword">int</span>, <span class="code-token-keyword">int</span>&gt;&gt; arr;
+    <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; nums.<span class="code-token-function">size</span>(); ++i) {
+      <span class="code-token-keyword">int</span> sum = <span class="code-token-number">0</span>, n = nums[i];
+      <span class="code-token-keyword">while</span> (n) {
+        sum += n % <span class="code-token-number">10</span>;
+        n /= <span class="code-token-number">10</span>;
+      }
+      arr.<span class="code-token-function">emplace_back</span>(sum, nums[i]);
+    }
+
+    <span class="code-token-function">sort</span>(arr.<span class="code-token-function">begin</span>(), arr.<span class="code-token-function">end</span>(), [](<span class="code-token-keyword">auto</span>& a, <span class="code-token-keyword">auto</span>& b) {
+      <span class="code-token-keyword">return</span> a.first == b.first ? a.second &lt; b.second : a.first &lt; b.first;
+    });
+
+    unordered_map&lt;<span class="code-token-keyword">int</span>, <span class="code-token-keyword">int</span>&gt; posMap;
+    <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; arr.<span class="code-token-function">size</span>(); ++i)
+      posMap[arr[i].second] = i;
+
+    <span class="code-token-keyword">int</span> swaps = <span class="code-token-number">0</span>;
+    <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; nums.<span class="code-token-function">size</span>(); ++i) {
+      <span class="code-token-keyword">while</span> (posMap[nums[i]] != i) {
+        <span class="code-token-function">swap</span>(nums[i], nums[posMap[nums[i]]]);
+        swaps++;
+      }
+    }
+    <span class="code-token-keyword">return</span> swaps;
+  }
+};</code></pre>
+        </div>
+
+        <!-- Java & Python blocks follow the same pattern -->
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-hash-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+  <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(<span class="code-token-keyword">int</span>[] nums) {
+    <span class="code-token-keyword">int</span>[][] arr = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[nums.length][<span class="code-token-number">2</span>];
+    <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; nums.length; i++) {
+      <span class="code-token-keyword">int</span> sum = <span class="code-token-number">0</span>, n = nums[i];
+      <span class="code-token-keyword">while</span> (n &gt; <span class="code-token-number">0</span>) {
+        sum += n % <span class="code-token-number">10</span>;
+        n /= <span class="code-token-number">10</span>;
+      }
+      arr[i] = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[] { sum, nums[i] };
+    }
+
+    Arrays.<span class="code-token-function">sort</span>(arr, (a, b) -> {
+      <span class="code-token-keyword">if</span> (a[<span class="code-token-number">0</span>] == b[<span class="code-token-number">0</span>])
+        <span class="code-token-keyword">return</span> a[<span class="code-token-number">1</span>] - b[<span class="code-token-number">1</span>];
+      <span class="code-token-keyword">return</span> a[<span class="code-token-number">0</span>] - b[<span class="code-token-number">0</span>];
+    });
+
+    Map&lt;<span class="code-token-keyword">Integer</span>, <span class="code-token-keyword">Integer</span>&gt; posMap = <span class="code-token-keyword">new</span> <span class="code-token-function">HashMap</span>();
+    <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; arr.length; i++)
+      posMap.<span class="code-token-function">put</span>(arr[i][<span class="code-token-number">1</span>], i);
+
+    <span class="code-token-keyword">int</span> swaps = <span class="code-token-number">0</span>;
+    <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i &lt; nums.length; i++) {
+      <span class="code-token-keyword">while</span> (posMap.<span class="code-token-function">get</span>(nums[i]) != i) {
+        <span class="code-token-keyword">int</span> target = posMap.<span class="code-token-function">get</span>(nums[i]);
+        <span class="code-token-keyword">int</span> temp = nums[i];
+        nums[i] = nums[target];
+        nums[target] = temp;
+        swaps++;
+      }
+    }
+    <span class="code-token-keyword">return</span> swaps;
+  }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-hash-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+  <span class="code-token-keyword">def</span> <span class="code-token-function">minSwaps</span>(self, nums: List[int]) -> int:
+    arr = []
+    <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+      s = <span class="code-token-function">sum</span>(<span class="code-token-function">int</span>(d) <span class="code-token-keyword">for</span> d <span class="code-token-keyword">in</span> <span class="code-token-function">str</span>(num))
+      arr.append((s, num))
+
+    arr.sort(key=lambda x: (x[<span class="code-token-number">0</span>], x[<span class="code-token-number">1</span>]))
+    pos_map = {num: i <span class="code-token-keyword">for</span> i, (_, num) <span class="code-token-keyword">in</span> <span class="code-token-function">enumerate</span>(arr)}
+
+    swaps = <span class="code-token-number">0</span>
+    <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(<span class="code-token-function">len</span>(nums)):
+      <span class="code-token-keyword">while</span> pos_map[nums[i]] != i:
+        j = pos_map[nums[i]]
+        nums[i], nums[j] = nums[j], nums[i]
+        swaps += <span class="code-token-number">1</span>
+    <span class="code-token-keyword">return</span> swaps</code></pre>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <strong>Note:</strong> This approach modifies the original array and has higher constant factors due to hash map
+        operations.
+      </div>
+    </div>
+
+
+    <hr>
+
+    <h2>Approach Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time</th>
+          <th>Space</th>
+          <th>Best Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cycle Detection</td>
+          <td>O(n log n)</td>
+          <td>O(n)</td>
+          <td>Large n with many cycles</td>
+        </tr>
+        <tr>
+          <td>Position Mapping</td>
+          <td>O(n log n)</td>
+          <td>O(n)</td>
+          <td>Small n with few swaps</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout danger">
+      <strong>Important:</strong> Both approaches have same asymptotic complexity but cycle detection is generally more
+      efficient for large inputs.
+    </div>
+
+    <hr>
+
+    <h2>Edge Cases</h2>
+    <h3>1. Single Element</h3>
+    <pre><code>Input: [5] → Output: 0</code></pre>
+
+    <h3>2. All Elements in Reverse Order</h3>
+    <pre><code>Input: [100, 37] → Output: 1</code></pre>
+
+    <h3>3. Multiple Same Digit Sums</h3>
+    <pre><code>Input: [19, 28, 37] → Output: 0 (sorted by value)</code></pre>
+
+    <div class="callout tip">
+      <strong>Testing Tip:</strong> Always verify cases where multiple elements have identical digit sums but different
+      values.
+    </div>
+
+    <hr>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-section">
+      <details>
+        <summary>Why does cycle detection work for swaps?</summary>
+        <p>Each cycle of length k requires (k-1) swaps to fix, as elements can be rotated into place.</p>
+      </details>
+
+      <details>
+        <summary>How to handle numbers with leading zeros?</summary>
+        <p>Problem states nums[i] are positive integers, so leading zeros don't exist in inputs.</p>
+      </details>
+
+      <details>
+        <summary>Can we optimize digit sum calculation?</summary>
+        <p>Memoization can help if numbers repeat, but problem states distinct numbers.</p>
+      </details>
+
+      <details>
+        <summary>What if multiple elements have same value?</summary>
+        <p>Constraints specify distinct positive integers, so values are unique.</p>
+      </details>
+
+      <details>
+        <summary>Why use original index tracking?</summary>
+        <p>To map where each element needs to go in the sorted permutation.</p>
+      </details>
+
+      <details>
+        <summary>How does the hash map approach differ?</summary>
+        <p>It performs actual swaps but has higher constant factors due to map lookups.</p>
+      </details>
+
+      <details>
+        <summary>What's the maximum possible swaps?</summary>
+        <p>Worst case is n-1 swaps (single cycle of length n).</p>
+      </details>
+
+      <details>
+        <summary>Can we use Union-Find for cycle detection?</summary>
+        <p>Possible but unnecessary complexity for this problem.</p>
+      </details>
+
+      <details>
+        <summary>How to handle very large numbers?</summary>
+        <p>Digit sum calculation remains O(digits) which is manageable for 1e9 (max 10 digits).</p>
+      </details>
+
+      <details>
+        <summary>Why sort by value for equal sums?</summary>
+        <p>Problem requires smaller numbers to appear first when sums are equal.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Analysis:</strong> The cycle detection method provides the most efficient and elegant solution,
+      leveraging sorting and graph theory concepts to achieve optimal performance.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Same JavaScript as previous posts -->
+  <script>
+    // Tab functionality with improved mobile support
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize tabs
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Set first tab as active by default if none are active
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        // Add click handlers
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+
+            // Update active tab button
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update active tab content
+            tabContents.forEach(content => content.classList.remove('active'));
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // FAQ highlight when opened
+      document.querySelectorAll('.faq-section details').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (detail.open) {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

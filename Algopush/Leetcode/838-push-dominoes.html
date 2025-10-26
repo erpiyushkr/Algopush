@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 838 | Push Dominoes | Algopush</title>
+  <meta name="description"
+    content="Master LeetCode 838 Push Dominoes with two efficient approaches: Force Propagation and BFS Simulation. Complete solutions in C++, Java, and Python." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, LeetCode 838, Push Dominoes solution, Force propagation algorithm, BFS approach, Domino effect problem, Coding interview preparation, Algorithm optimization, LeetCode medium problems, C++ Java Python solutions, Time complexity analysis, Google interview questions, Amazon coding problems" />
+  <meta name="author" content="Algopush" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 838 Solution | Push Dominoes | Brute Force to Optimized">
+  <meta property="og:description"
+    content="Complete guide to solving LeetCode 838 Push Dominoes with multiple approaches and code examples.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/838.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/838-push-dominoes.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 838 Solution | Push Dominoes | Brute Force to Optimized">
+  <meta name="twitter:description"
+    content="Multiple approaches to solve LeetCode 838 with detailed explanations and code implementations.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/838.png">
+
+  <!-- Google News / Publisher Meta Tags -->
+  <meta name="news_keywords" content="LeetCode, Push Dominoes, Algorithm, Coding Interview, Programming">
+  <meta name="standout" content="https://algopush.com/Leetcode/838-push-dominoes.html">
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/838-push-dominoes.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Structured Data for enhanced SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "LeetCode 838 Solution: Push Dominoes",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "image": "https://algopush.com/Leetcode/Images/838.png",
+      "datePublished": "2025-05-02",
+      "dateModified": "2025-05-02",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://algopush.com/Leetcode/838-push-dominoes.html"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xPath": [
+          "/html/head/title"
+        ],
+        "cssSelector": ["h1", "main p:first-of-type"]
+      }
+    }
+  </script>
+
+  <script>
+    // Tab functionality with improved mobile support
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize tabs
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Set first tab as active by default if none are active
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        // Add click handlers
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+
+            // Update active tab button
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update active tab content
+            tabContents.forEach(content => content.classList.remove('active'));
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // FAQ highlight when opened
+      document.querySelectorAll('.faq-section details').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (detail.open) {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header will be inserted by JavaScript -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>Problem 838</span>
+    </div>
+
+    <!-- Problem Visualization Image -->
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/838.png" alt="Push Dominoes" loading="lazy">
+    </div>
+
+    <h1>838: Push Dominoes</h1>
+
+    <!-- Problem Metadata -->
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Two Pointers, Simulation, BFS</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> This problem requires understanding force propagation in both directions. The optimal
+      solution runs in O(n) time with O(n) space.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>There are n dominoes in a line, and we place each domino vertically upright. We push some dominoes either left
+      ('L') or right ('R'), while others remain standing ('.'). Return the final state after all forces propagate.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: dominoes = "RR.L"
+Output: "RR.L"
+Explanation: The first domino expends no additional force on the second domino.</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: dominoes = ".L.R...LR..L.."
+Output: "LL.RR.LLRRLL.."</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/push-dominoes/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Force Propagation (Optimal)</h2>
+    <p>Calculate net forces acting on each domino by traversing left-to-right (for 'R' forces) and right-to-left (for
+      'L' forces).</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize a force array with zeros</li>
+      <li>Left-to-right pass: Calculate rightward forces (decreasing by 1 each step)</li>
+      <li>Right-to-left pass: Calculate leftward forces (decreasing by 1 each step)</li>
+      <li>Determine final state based on net force at each position</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Force Propagation Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-force">C++</button>
+          <button class="tab-button" data-tab="java-force">Java</button>
+          <button class="tab-button" data-tab="python-force">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-force-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    string <span class="code-token-function">pushDominoes</span>(string dominoes) {
+        <span class="code-token-keyword">int</span> n = dominoes.<span class="code-token-function">size</span>();
+        vector&lt;<span class="code-token-keyword">int</span>&gt; <span class="code-token-function">forces</span>(n, 0);
+        
+        <span class="code-token-comment">// Rightward force propagation</span>
+        <span class="code-token-keyword">int</span> force = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n; ++i) {
+            <span class="code-token-keyword">if</span> (dominoes[i] == <span class="code-token-string">'R'</span>) force = n;
+            <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (dominoes[i] == <span class="code-token-string">'L'</span>) force = 0;
+            <span class="code-token-keyword">else</span> force = <span class="code-token-function">max</span>(force - 1, 0);
+            forces[i] += force;
+        }
+        
+        <span class="code-token-comment">// Leftward force propagation</span>
+        force = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n-1; i &gt;= 0; --i) {
+            <span class="code-token-keyword">if</span> (dominoes[i] == <span class="code-token-string">'L'</span>) force = n;
+            <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (dominoes[i] == <span class="code-token-string">'R'</span>) force = 0;
+            <span class="code-token-keyword">else</span> force = <span class="code-token-function">max</span>(force - 1, 0);
+            forces[i] -= force;
+        }
+        
+        <span class="code-token-comment">// Build final result</span>
+        string result;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> f : forces) {
+            result += f &gt; 0 ? <span class="code-token-string">'R'</span> : f &lt; 0 ? <span class="code-token-string">'L'</span> : <span class="code-token-string">'.'</span>;
+        }
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-force-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> String <span class="code-token-function">pushDominoes</span>(String dominoes) {
+        <span class="code-token-keyword">int</span> n = dominoes.<span class="code-token-function">length</span>();
+        <span class="code-token-keyword">int</span>[] forces = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n];
+        
+        <span class="code-token-comment">// Rightward force</span>
+        <span class="code-token-keyword">int</span> force = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n; ++i) {
+            <span class="code-token-keyword">if</span> (dominoes.<span class="code-token-function">charAt</span>(i) == <span class="code-token-string">'R'</span>) force = n;
+            <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (dominoes.<span class="code-token-function">charAt</span>(i) == <span class="code-token-string">'L'</span>) force = 0;
+            <span class="code-token-keyword">else</span> force = Math.<span class="code-token-function">max</span>(force - 1, 0);
+            forces[i] += force;
+        }
+        
+        <span class="code-token-comment">// Leftward force</span>
+        force = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n-1; i &gt;= 0; --i) {
+            <span class="code-token-keyword">if</span> (dominoes.<span class="code-token-function">charAt</span>(i) == <span class="code-token-string">'L'</span>) force = n;
+            <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (dominoes.<span class="code-token-function">charAt</span>(i) == <span class="code-token-string">'R'</span>) force = 0;
+            <span class="code-token-keyword">else</span> force = Math.<span class="code-token-function">max</span>(force - 1, 0);
+            forces[i] -= force;
+        }
+        
+        <span class="code-token-comment">// Build result</span>
+        StringBuilder sb = <span class="code-token-keyword">new</span> StringBuilder();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> f : forces) {
+            sb.append(f &gt; 0 ? <span class="code-token-string">'R'</span> : f &lt; 0 ? <span class="code-token-string">'L'</span> : <span class="code-token-string">'.'</span>);
+        }
+        <span class="code-token-keyword">return</span> sb.toString();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-force-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">pushDominoes</span>(self, dominoes: str) -> str:
+        n = <span class="code-token-function">len</span>(dominoes)
+        forces = [0] * n
+        
+        <span class="code-token-comment"># Rightward force</span>
+        force = 0
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+            <span class="code-token-keyword">if</span> dominoes[i] == <span class="code-token-string">'R'</span>:
+                force = n
+            <span class="code-token-keyword">elif</span> dominoes[i] == <span class="code-token-string">'L'</span>:
+                force = 0
+            <span class="code-token-keyword">else</span>:
+                force = <span class="code-token-function">max</span>(force - 1, 0)
+            forces[i] += force
+        
+        <span class="code-token-comment"># Leftward force</span>
+        force = 0
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n-1, -1, -1):
+            <span class="code-token-keyword">if</span> dominoes[i] == <span class="code-token-string">'L'</span>:
+                force = n
+            <span class="code-token-keyword">elif</span> dominoes[i] == <span class="code-token-string">'R'</span>:
+                force = 0
+            <span class="code-token-keyword">else</span>:
+                force = <span class="code-token-function">max</span>(force - 1, 0)
+            forces[i] -= force
+        
+        <span class="code-token-comment"># Build result</span>
+        result = []
+        <span class="code-token-keyword">for</span> f <span class="code-token-keyword">in</span> forces:
+            <span class="code-token-keyword">if</span> f > 0:
+                result.append(<span class="code-token-string">'R'</span>)
+            <span class="code-token-keyword">elif</span> f < 0:
+                result.append(<span class="code-token-string">'L'</span>)
+            <span class="code-token-keyword">else</span>:
+                result.append(<span class="code-token-string">'.'</span>)
+        <span class="code-token-keyword">return</span> <span class="code-token-string">''</span>.join(result)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> The force propagation approach is elegant because it processes the
+        dominoes in two passes (left-to-right and right-to-left), then combines the results. This avoids the need for
+        complex simulation while maintaining optimal time complexity.
+      </div>
+    </div>
+
+
+
+    <hr />
+
+    <h2>Approach 2: BFS Simulation</h2>
+    <p>Simulate the domino effect using BFS to process forces level by level (second by second).</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize a queue with all initially pushed dominoes</li>
+      <li>Process dominoes level by level, tracking time of impact</li>
+      <li>For each domino, push adjacent dominoes if not already falling</li>
+      <li>Handle collisions where forces meet</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">BFS Simulation Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-bfs">C++</button>
+          <button class="tab-button" data-tab="java-bfs">Java</button>
+          <button class="tab-button" data-tab="python-bfs">Python</button>
+        </div>
+
+        <!-- C++ BFS Code -->
+        <div class="tab-content active" id="cpp-bfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    string <span class="code-token-function">pushDominoes</span>(string dominoes) {
+        <span class="code-token-keyword">int</span> n = dominoes.<span class="code-token-function">size</span>();
+        queue&lt;<span class="code-token-keyword">int</span>&gt; q;
+        vector&lt;<span class="code-token-keyword">int</span>&gt; time(n, -1);
+        vector&lt;<span class="code-token-keyword">char</span>&gt; force(n, '.');
+        
+        <span class="code-token-comment">// Initialize queue with pushed dominoes</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n; ++i) {
+            <span class="code-token-keyword">if</span> (dominoes[i] != '.') {
+                q.<span class="code-token-function">push</span>(i);
+                time[i] = 0;
+                force[i] = dominoes[i];
+            }
+        }
+        
+        <span class="code-token-comment">// Process dominoes level by level</span>
+        <span class="code-token-keyword">while</span> (!q.<span class="code-token-function">empty</span>()) {
+            <span class="code-token-keyword">int</span> i = q.<span class="code-token-function">front</span>();
+            q.<span class="code-token-function">pop</span>();
+            
+            <span class="code-token-keyword">if</span> (force[i] == 'L' && i > 0) {
+                <span class="code-token-keyword">if</span> (time[i-1] == -1) {
+                    time[i-1] = time[i] + 1;
+                    force[i-1] = 'L';
+                    q.<span class="code-token-function">push</span>(i-1);
+                } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (time[i-1] == time[i] + 1) {
+                    force[i-1] = '.';
+                }
+            } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (force[i] == 'R' && i &lt; n-1) {
+                <span class="code-token-keyword">if</span> (time[i+1] == -1) {
+                    time[i+1] = time[i] + 1;
+                    force[i+1] = 'R';
+                    q.<span class="code-token-function">push</span>(i+1);
+                } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (time[i+1] == time[i] + 1) {
+                    force[i+1] = '.';
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> string(force.<span class="code-token-function">begin</span>(), force.<span class="code-token-function">end</span>());
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java BFS Code -->
+        <div class="tab-content" id="java-bfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> String <span class="code-token-function">pushDominoes</span>(String dominoes) {
+        <span class="code-token-keyword">int</span> n = dominoes.<span class="code-token-function">length</span>();
+        Queue&lt;Integer&gt; q = <span class="code-token-keyword">new</span> LinkedList&lt;&gt;();
+        <span class="code-token-keyword">int</span>[] time = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n];
+        <span class="code-token-keyword">char</span>[] force = <span class="code-token-keyword">new</span> <span class="code-token-keyword">char</span>[n];
+        Arrays.<span class="code-token-function">fill</span>(time, -1);
+        Arrays.<span class="code-token-function">fill</span>(force, '.');
+        
+        <span class="code-token-comment">// Initialize queue</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; n; i++) {
+            <span class="code-token-keyword">if</span> (dominoes.<span class="code-token-function">charAt</span>(i) != '.') {
+                q.<span class="code-token-function">offer</span>(i);
+                time[i] = 0;
+                force[i] = dominoes.<span class="code-token-function">charAt</span>(i);
+            }
+        }
+        
+        <span class="code-token-comment">// Process dominoes</span>
+        <span class="code-token-keyword">while</span> (!q.<span class="code-token-function">isEmpty</span>()) {
+            <span class="code-token-keyword">int</span> i = q.<span class="code-token-function">poll</span>();
+            <span class="code-token-keyword">if</span> (force[i] == 'L' && i > 0) {
+                <span class="code-token-keyword">if</span> (time[i-1] == -1) {
+                    time[i-1] = time[i] + 1;
+                    force[i-1] = 'L';
+                    q.<span class="code-token-function">offer</span>(i-1);
+                } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (time[i-1] == time[i] + 1) {
+                    force[i-1] = '.';
+                }
+            } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (force[i] == 'R' && i &lt; n-1) {
+                <span class="code-token-keyword">if</span> (time[i+1] == -1) {
+                    time[i+1] = time[i] + 1;
+                    force[i+1] = 'R';
+                    q.<span class="code-token-function">offer</span>(i+1);
+                } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (time[i+1] == time[i] + 1) {
+                    force[i+1] = '.';
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-keyword">new</span> String(force);
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python BFS Code -->
+        <div class="tab-content" id="python-bfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">pushDominoes</span>(self, dominoes: str) -> str:
+        n = <span class="code-token-function">len</span>(dominoes)
+        q = collections.deque()
+        time = [-1] * n
+        force = ['.'] * n
+        
+        <span class="code-token-comment"># Initialize queue</span>
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> <span class="code-token-function">range</span>(n):
+            <span class="code-token-keyword">if</span> dominoes[i] != '.':
+                q.append(i)
+                time[i] = 0
+                force[i] = dominoes[i]
+        
+        <span class="code-token-comment"># Process dominoes</span>
+        <span class="code-token-keyword">while</span> q:
+            i = q.popleft()
+            <span class="code-token-keyword">if</span> force[i] == 'L' <span class="code-token-keyword">and</span> i > 0:
+                <span class="code-token-keyword">if</span> time[i-1] == -1:
+                    time[i-1] = time[i] + 1
+                    force[i-1] = 'L'
+                    q.append(i-1)
+                <span class="code-token-keyword">elif</span> time[i-1] == time[i] + 1:
+                    force[i-1] = '.'
+            <span class="code-token-keyword">elif</span> force[i] == 'R' <span class="code-token-keyword">and</span> i &lt; n-1:
+                <span class="code-token-keyword">if</span> time[i+1] == -1:
+                    time[i+1] = time[i] + 1
+                    force[i+1] = 'R'
+                    q.append(i+1)
+                <span class="code-token-keyword">elif</span> time[i+1] == time[i] + 1:
+                    force[i+1] = '.'
+        
+        <span class="code-token-keyword">return</span> ''.join(force)</code></pre>
+        </div>
+      </div>
+      <div class="callout tip">
+        <strong>When to Use BFS:</strong> The BFS approach is particularly useful when you need to simulate the domino
+        effect step-by-step. It's more intuitive for understanding the propagation process but has the same time
+        complexity as the force propagation method.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Comparison of Approaches</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+          <th>When to Use</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Force Propagation</td>
+          <td>O(n)</td>
+          <td>O(n)</td>
+          <td>Optimal solution, clean implementation</td>
+          <td>Elegant two-pass solution, easy to understand</td>
+          <td>Less intuitive than simulation</td>
+        </tr>
+        <tr>
+          <td>BFS Simulation</td>
+          <td>O(n)</td>
+          <td>O(n)</td>
+          <td>When simulation is preferred</td>
+          <td>More intuitive, models physical process</td>
+          <td>Slightly more complex implementation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <strong>Interview Tip:</strong> While both approaches are valid, interviewers often appreciate candidates who can
+      explain multiple solutions and discuss their trade-offs. The force propagation method is usually preferred for its
+      elegance.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Special Considerations</h2>
+    <p>
+      When implementing solutions for this problem, it's crucial to consider various edge cases that might affect the
+      correctness of your code:
+    </p>
+
+    <h3>1. All Dominoes Standing</h3>
+    <pre><code><b>Input:</b> "....."
+<b>Output:</b> "....."
+<b>Explanation:</b> No forces are applied, all dominoes remain standing.</code></pre>
+
+    <h3>2. All Dominoes Pushed Right</h3>
+    <pre><code><b>Input:</b> "RRRRR"
+<b>Output:</b> "RRRRR"
+<b>Explanation:</b> All dominoes are already falling to the right.</code></pre>
+
+    <h3>3. All Dominoes Pushed Left</h3>
+    <pre><code><b>Input:</b> "LLLLL"
+<b>Output:</b> "LLLLL"
+<b>Explanation:</b> All dominoes are already falling to the left.</code></pre>
+
+    <h3>4. Alternating Forces</h3>
+    <pre><code><b>Input:</b> "R.L.R"
+<b>Output:</b> "R.L.R"
+<b>Explanation:</b> Forces cancel each other in the middle.</code></pre>
+
+    <h3>5. Complex Force Interactions</h3>
+    <pre><code><b>Input:</b> ".L.R...LR..L.."
+<b>Output:</b> "LL.RR.LLRRLL.."
+<b>Explanation:</b> Demonstrates multiple force interactions.</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test your solution with these edge cases to ensure correctness. The examples
+      above demonstrate how subtle force interactions can affect your results.
+    </div>
+
+    <hr />
+
+    <h2>Visualization</h2>
+    <div class="callout">
+      <p>The steps below demonstrates how forces propagate through the dominoes:</p>
+      <ol>
+        <li><strong>Initial state:</strong> .L.R...LR..L..</li>
+        <li><strong>After 1 second:</strong> LL.RR.LLRRLL..</li>
+        <li><strong>Final state:</strong> LL.RR.LLRRLL..</li>
+      </ol>
+      <p>Notice how forces cancel each other when they meet at the same time.</p>
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why does the force propagation approach work?</summary>
+        <p>
+          It calculates net forces by considering both left and right influences separately then combining them, similar
+          to how physical forces interact. The rightward pass captures all 'R' forces diminishing over distance, while
+          the leftward pass does the same for 'L' forces.
+        </p>
+      </details>
+
+      <details>
+        <summary>2. How does the BFS approach handle collisions?</summary>
+        <p>
+          When two forces meet at the same time (same BFS level), the domino remains upright ('.') due to balanced
+          forces. The BFS naturally processes all dominoes at each time step before moving to the next step.
+        </p>
+      </details>
+
+      <details>
+        <summary>3. What's the intuition behind the force values decreasing by 1?</summary>
+        <p>
+          It represents how force diminishes with distance from the original push (like real physics). Each domino
+          further from the initial push receives less force, captured by decrementing the force value by 1 for each
+          position away.
+        </p>
+      </details>
+
+      <details>
+        <summary>4. Can this be solved with constant space?</summary>
+        <p>
+          No, we need O(n) space to track intermediate states or forces. Both approaches require additional storage -
+          the force array in the first approach and the queue/time arrays in the BFS approach.
+        </p>
+      </details>
+
+      <details>
+        <summary>5. How would you handle circular domino arrangements?</summary>
+        <p>
+          This problem assumes linear arrangement. Circular would require modulo arithmetic on indices and special
+          handling for forces that wrap around. The force propagation approach would need to be adjusted to account for
+          circular dependencies.
+        </p>
+      </details>
+
+      <details>
+        <summary>6. What's the worst-case scenario for BFS?</summary>
+        <p>
+          When dominoes alternate (R.L.R.L), requiring O(n) levels. However, since each domino is processed exactly
+          once, the time complexity remains O(n).
+        </p>
+      </details>
+
+      <details>
+        <summary>7. Why is the force initialized to 'n'?</summary>
+        <p>
+          It ensures the force can propagate the maximum possible distance (n-1 steps). This guarantees the force will
+          reach all dominoes in the direction it's propagating, decreasing by 1 at each step.
+        </p>
+      </details>
+
+      <details>
+        <summary>8. How does the solution handle consecutive 'R's?</summary>
+        <p>
+          Each 'R' resets the force to maximum, creating a continuous rightward push. Subsequent 'R's will override
+          previous forces, maintaining the maximum propagation distance from the most recent 'R'.
+        </p>
+      </details>
+
+      <details>
+        <summary>9. Can we use DFS instead of BFS?</summary>
+        <p>
+          No, BFS is needed to process effects level by level (time steps). DFS would incorrectly simulate the
+          propagation by going depth-first rather than processing all dominoes at each time step together.
+        </p>
+      </details>
+
+      <details>
+        <summary>10. What's the key insight for the optimal solution?</summary>
+        <p>
+          Forces can be calculated independently then combined, avoiding simulation. By separating the rightward and
+          leftward force calculations, we can determine the net effect on each domino without explicitly modeling each
+          time step.
+        </p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Thoughts:</strong> This problem beautifully demonstrates how physical systems can be modeled
+      algorithmically. The force propagation approach is particularly elegant, showing how careful analysis can lead to
+      optimal solutions that avoid unnecessary simulation.
+    </div>
+  </main>
+
+  <!-- Footer will be inserted by JavaScript -->
+  <div id="footer"></div>
+</body>
+
+</html>

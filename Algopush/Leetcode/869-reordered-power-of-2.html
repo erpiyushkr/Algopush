@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode 869: Reordered Power of 2 | Digit Permutation | Algopush</title>
+    <meta name="description" content="Learn multiple approaches to solve Reordered Power of 2 problem. Detailed explanations of digit permutation, frequency counting, and power of two verification.">
+    <meta name="keywords" content="LeetCode 869: Reordered Power of 2, LeetCode 869, Reordered Power of 2, digit permutation, power of two, algorithm solution, hash table, digit frequency, Algopush, coding interview preparation, dynamic programming, monotonic stack, Algopush, coding interview preparation, Algorithm solution, Coding interview, algopush, Algorithm, Programming, Coding Interview, LeetCode Easy Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical" href="https://algopush.com/Leetcode/869-reordered-power-of-2.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 869: Reordered Power of 2 - Digit Permutation Solutions">
+    <meta property="og:description" content="Solve Reordered Power of 2 problem with multiple approaches. Code in C++, Java, Python with detailed explanations and complexity analysis.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/869.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/869-reordered-power-of-2.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 869: Reordered Power of 2 Solutions">
+    <meta name="twitter:description" content="Master digit permutation and frequency counting approaches for Reordered Power of 2 problem.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/869.png">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Reordered Power of 2 Solution Guide",
+        "url": "https://algopush.com/Leetcode/869-reordered-power-of-2.html",
+        "image": "https://algopush.com/Leetcode/Images/869.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-08-09",
+        "dateModified": "2025-08-09",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        },
+        "founder": {
+            "@type": "Person",
+            "name": "Piyush Kumar",
+            "jobTitle": "Founder",
+            "url": "https://algopush.com/about"
+        },
+        "foundingDate": "2025",
+        "description": "Algopush provides comprehensive algorithm solutions and explanations for coding interview preparation."
+    }
+    </script>
+    <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .grid-item {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      font-weight: bold;
+    }
+
+    .power-of-two {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .not-power {
+      background-color: #ffebee;
+      border-color: #f44336;
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+      50% {
+        background-color: #b3e0ff;
+      }
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>869. Reordered Power of 2</span>
+        </div>
+        
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/869.png" alt="Reordered Power of 2 visualization" loading="lazy">
+        </div>
+        
+        <h1>869: Reordered Power of 2</h1>
+        
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Medium</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Hash Table, Math, Sorting, Counting, Enumeration</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Google, Amazon, Microsoft</span>
+            </div>
+        </div>
+        
+        <div class="callout tip">
+            <strong>Pro Tip:</strong> The key insight is that there are only 30 possible powers of 2 within the integer range. Compare digit frequencies instead of generating all permutations.
+        </div>
+        
+        <h2>Problem Statement</h2>
+        <p>Given an integer <code>n</code>, return <code>true</code> if and only if you can rearrange its digits to form a power of two (without leading zeros).</p>
+        
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Example 1</h4>
+                <p><strong>Input:</strong> n = 1</p>
+                <p><strong>Output:</strong> true</p>
+                <p><strong>Explanation:</strong> 1 is already a power of 2 (2⁰)</p>
+            </div>
+            
+            <div class="visual-item">
+                <h4>Example 2</h4>
+                <p><strong>Input:</strong> n = 10</p>
+                <p><strong>Output:</strong> false</p>
+                <p><strong>Explanation:</strong> Rearrangements are "10" or "01". "01" has a leading zero and is invalid.</p>
+            </div>
+            
+            <div class="visual-item">
+                <h4>Example 3</h4>
+                <p><strong>Input:</strong> n = 46</p>
+                <p><strong>Output:</strong> true</p>
+                <p><strong>Explanation:</strong> Rearrange to 64 → 64 is 2⁶ (a power of two)</p>
+            </div>
+        </div>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/reordered-power-of-2/" target="_blank" rel="noopener noreferrer">
+                View on LeetCode ↗
+            </a>
+        </div>
+        
+        <hr />
+        
+        <h2>Key Insight</h2>
+        <p>The solution relies on these crucial observations:</p>
+        <ol>
+            <li>There are only 30 powers of 2 within the integer range (0 to 10⁹)</li>
+            <li>Two numbers with the same digit frequencies can be rearranged to form each other</li>
+            <li>Instead of generating all permutations (O(n!)), compare digit frequencies</li>
+            <li>Leading zeros are not allowed in the rearranged number</li>
+        </ol>
+        
+        <div class="callout warning">
+            <strong>Important:</strong> The constraint 1 ≤ n ≤ 10⁹ means we have at most 10 digits, making digit frequency comparison efficient.
+        </div>
+        
+        <h2>Approach 1: Precomputation with Sorted Strings</h2>
+        <p>Precompute all powers of 2 and store their sorted digit strings for comparison.</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Precompute all powers of 2 from 2⁰ to 2²⁹</li>
+            <li>Convert each power to a string and sort its characters</li>
+            <li>Store these sorted strings in a set</li>
+            <li>Convert input n to sorted string</li>
+            <li>Check if the sorted string exists in the set</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Constant time since 30 powers × 10 digits = fixed computation</p>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Sorted String Precomputation</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-precompute">C++</button>
+                    <button class="tab-button" data-tab="java-precompute">Java</button>
+                    <button class="tab-button" data-tab="python-precompute">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-precompute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">reorderedPowerOf2</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-comment">// Precompute all powers of 2 from 2^0 to 2^29</span>
+        set<<span class="code-token-keyword">string</span>> powerSet;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i <= 29; i++) {
+            <span class="code-token-keyword">long</span> num = <span class="code-token-number">1L</span> << i;
+            <span class="code-token-keyword">string</span> s = to_string(num);
+            sort(s.begin(), s.end());
+            powerSet.insert(s);
+        }
+        
+        <span class="code-token-comment">// Process input n</span>
+        <span class="code-token-keyword">string</span> t = to_string(n);
+        sort(t.begin(), t.end());
+        <span class="code-token-keyword">return</span> powerSet.find(t) != powerSet.end();
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-precompute-tab">
+                    <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">reorderedPowerOf2</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-comment">// Precompute all powers of 2 from 2^0 to 2^29</span>
+        Set<<span class="code-token-keyword">String</span>> powerSet = <span class="code-token-keyword">new</span> HashSet<>();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i <= 29; i++) {
+            <span class="code-token-keyword">long</span> num = 1L << i;
+            <span class="code-token-keyword">char</span>[] chars = String.valueOf(num).toCharArray();
+            Arrays.sort(chars);
+            powerSet.add(<span class="code-token-keyword">new</span> String(chars));
+        }
+        
+        <span class="code-token-comment">// Process input n</span>
+        <span class="code-token-keyword">char</span>[] arr = String.valueOf(n).toCharArray();
+        Arrays.sort(arr);
+        <span class="code-token-keyword">return</span> powerSet.contains(<span class="code-token-keyword">new</span> String(arr));
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-precompute-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">reorderedPowerOf2</span>(self, n: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        <span class="code-token-comment"># Precompute all powers of 2 from 2^0 to 2^29</span>
+        power_set = set()
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(30):
+            num = 1 << i
+            s = sorted(str(num))
+            power_set.add(tuple(s))
+        
+        <span class="code-token-comment"># Process input n</span>
+        t = tuple(sorted(str(n)))
+        <span class="code-token-keyword">return</span> t <span class="code-token-keyword">in</span> power_set</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Efficiency:</strong> This approach runs in constant time since it processes a fixed number (30) of powers of 2.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Approach 2: Digit Frequency Counting</h2>
+        <p>Compare the digit frequency of the input with all possible powers of 2.</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Create a frequency array for digits in input n</li>
+            <li>For each power of 2 from 2⁰ to 2²⁹:
+                <ul>
+                    <li>Create a frequency array for its digits</li>
+                    <li>Compare with input's frequency array</li>
+                    <li>Return true if they match</li>
+                </ul>
+            </li>
+            <li>Return false if no match found</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Constant time since we compare at most 30 values with fixed digit counts (max 10 digits)</p>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Digit Frequency Comparison</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-freq">C++</button>
+                    <button class="tab-button" data-tab="java-freq">Java</button>
+                    <button class="tab-button" data-tab="python-freq">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-freq-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">reorderedPowerOf2</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-comment">// Get digit frequency of input n</span>
+        vector<<span class="code-token-keyword">int</span>> freqN(10, 0);
+        <span class="code-token-keyword">string</span> s = to_string(n);
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : s) {
+            freqN[c - '0']++;
+        }
+        
+        <span class="code-token-comment">// Compare with all powers of 2</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i <= 29; i++) {
+            <span class="code-token-keyword">long</span> power = 1L << i;
+            <span class="code-token-keyword">string</span> t = to_string(power);
+            <span class="code-token-keyword">if</span> (t.size() != s.size()) <span class="code-token-keyword">continue</span>;
+            
+            vector<<span class="code-token-keyword">int</span>> freqPower(10, 0);
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : t) {
+                freqPower[c - '0']++;
+            }
+            
+            <span class="code-token-keyword">if</span> (freqN == freqPower) <span class="code-token-keyword">return</span> true;
+        }
+        
+        <span class="code-token-keyword">return</span> false;
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-freq-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">reorderedPowerOf2</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-comment">// Get digit frequency of input n</span>
+        <span class="code-token-keyword">int</span>[] freqN = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[10];
+        String s = String.valueOf(n);
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : s.toCharArray()) {
+            freqN[c - '0']++;
+        }
+        
+        <span class="code-token-comment">// Compare with all powers of 2</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i <= 29; i++) {
+            <span class="code-token-keyword">long</span> power = 1L << i;
+            String t = String.valueOf(power);
+            <span class="code-token-keyword">if</span> (t.length() != s.length()) <span class="code-token-keyword">continue</span>;
+            
+            <span class="code-token-keyword">int</span>[] freqPower = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[10];
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : t.toCharArray()) {
+                freqPower[c - '0']++;
+            }
+            
+            <span class="code-token-keyword">if</span> (Arrays.equals(freqN, freqPower)) <span class="code-token-keyword">return</span> true;
+        }
+        
+        <span class="code-token-keyword">return</span> false;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-freq-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">reorderedPowerOf2</span>(self, n: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        <span class="code-token-comment"># Get digit frequency of input n</span>
+        s = str(n)
+        freq_n = [0] * 10
+        <span class="code-token-keyword">for</span> char <span class="code-token-keyword">in</span> s:
+            freq_n[<span class="code-token-keyword">int</span>(char)] += 1
+        
+        <span class="code-token-comment"># Compare with all powers of 2</span>
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(30):
+            power = 1 << i
+            t = str(power)
+            <span class="code-token-keyword">if</span> len(t) != len(s):
+                <span class="code-token-keyword">continue</span>
+                
+            freq_power = [0] * 10
+            <span class="code-token-keyword">for</span> char <span class="code-token-keyword">in</span> t:
+                freq_power[<span class="code-token-keyword">int</span>(char)] += 1
+                
+            <span class="code-token-keyword">if</span> freq_n == freq_power:
+                <span class="code-token-keyword">return</span> True
+                
+        <span class="code-token-keyword">return</span> False</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Advantage:</strong> More efficient than string sorting for large numbers since comparing arrays is O(10) = constant time.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Approach 3: Digit Frequency Hashing</h2>
+        <p>Create a unique hash for digit frequencies and compare with power-of-two hashes.</p>
+        
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Create a unique value representing the digit frequency of input n</li>
+            <li>For each digit, add 10<sup>digit</sup> to a running sum</li>
+            <li>Repeat for all powers of 2 from 2⁰ to 2²⁹</li>
+            <li>Return true if any power has the same hash value</li>
+        </ol>
+        
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Frequency Hashing</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-hash">C++</button>
+                    <button class="tab-button" data-tab="java-hash">Java</button>
+                    <button class="tab-button" data-tab="python-hash">Python</button>
+                </div>
+                
+                <div class="tab-content active" id="cpp-hash-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">reorderedPowerOf2</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-comment">// Create frequency hash for input n</span>
+        <span class="code-token-keyword">long</span> hashN = 0;
+        <span class="code-token-keyword">while</span> (n) {
+            hashN += pow(10, n % 10);
+            n /= 10;
+        }
+        
+        <span class="code-token-comment">// Compare with all powers of 2</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i <= 29; i++) {
+            <span class="code-token-keyword">long</span> num = 1L << i;
+            <span class="code-token-keyword">long</span> hashPower = 0;
+            <span class="code-token-keyword">while</span> (num) {
+                hashPower += pow(10, num % 10);
+                num /= 10;
+            }
+            <span class="code-token-keyword">if</span> (hashN == hashPower) <span class="code-token-keyword">return</span> true;
+        }
+        <span class="code-token-keyword">return</span> false;
+    }
+};</code></pre>
+                </div>
+                
+                <div class="tab-content" id="java-hash-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">reorderedPowerOf2</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-comment">// Create frequency hash for input n</span>
+        <span class="code-token-keyword">long</span> hashN = 0;
+        <span class="code-token-keyword">int</span> temp = n;
+        <span class="code-token-keyword">while</span> (temp != 0) {
+            <span class="code-token-keyword">int</span> digit = temp % 10;
+            hashN += Math.pow(10, digit);
+            temp /= 10;
+        }
+        
+        <span class="code-token-comment">// Compare with all powers of 2</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i <= 29; i++) {
+            <span class="code-token-keyword">long</span> num = 1L << i;
+            <span class="code-token-keyword">long</span> hashPower = 0;
+            <span class="code-token-keyword">long</span> tempNum = num;
+            <span class="code-token-keyword">while</span> (tempNum != 0) {
+                <span class="code-token-keyword">int</span> digit = (<span class="code-token-keyword">int</span>)(tempNum % 10);
+                hashPower += Math.pow(10, digit);
+                tempNum /= 10;
+            }
+            <span class="code-token-keyword">if</span> (hashN == hashPower) <span class="code-token-keyword">return</span> true;
+        }
+        <span class="code-token-keyword">return</span> false;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="tab-content" id="python-hash-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">reorderedPowerOf2</span>(self, n: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        <span class="code-token-comment"># Create frequency hash for input n</span>
+        hash_n = 0
+        temp = n
+        <span class="code-token-keyword">while</span> temp:
+            digit = temp % 10
+            hash_n += 10 ** digit
+            temp //= 10
+        
+        <span class="code-token-comment"># Compare with all powers of 2</span>
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(30):
+            num = 1 << i
+            hash_power = 0
+            temp_num = num
+            <span class="code-token-keyword">while</span> temp_num:
+                digit = temp_num % 10
+                hash_power += 10 ** digit
+                temp_num //= 10
+                
+            <span class="code-token-keyword">if</span> hash_n == hash_power:
+                <span class="code-token-keyword">return</span> True
+                
+        <span class="code-token-keyword">return</span> False</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Optimization:</strong> This method avoids storing entire frequency arrays and uses a single numeric value for comparison.
+            </div>
+        </div>
+        
+        <hr />
+        
+        <h2>Edge Cases and Testing</h2>
+        
+        <h3>1. Single Digit Numbers</h3>
+        <pre><code>Input: 1 → Output: true (2⁰ = 1)
+Input: 8 → Output: true (2³ = 8)
+Input: 3 → Output: false</code></pre>
+
+        <h3>2. Numbers with Leading Zero Potential</h3>
+        <pre><code>Input: 10 → Output: false (only permutations: 10 and 01, both invalid)
+Input: 102 → Output: false (201 and 021 have leading zeros)</code></pre>
+
+        <h3>3. Valid Rearrangements</h3>
+        <pre><code>Input: 46 → Output: true (64 = 2⁶)
+Input: 61 → Output: true (16 = 2⁴)
+Input: 812 → Output: true (128 = 2⁷)</code></pre>
+
+        <h3>4. Large Numbers</h3>
+        <pre><code>Input: 2147483647 → Output: false
+Input: 1048576 → Output: true (2²⁰ = 1048576)</code></pre>
+
+        <div class="callout warning">
+            <strong>Important:</strong> Always verify that the solution correctly handles numbers that would have leading zeros when rearranged.
+        </div>
+        
+        <hr />
+        
+        <h2>Detailed Explanation</h2>
+        <p>The problem requires checking if a number can be rearranged (permuted) to form a power of two. The key insight is recognizing that:</p>
+        
+        <div class="grid-container">
+            <div class="grid-item power-of-two">1</div>
+            <div class="grid-item power-of-two">2</div>
+            <div class="grid-item power-of-two">4</div>
+            <div class="grid-item power-of-two">8</div>
+            <div class="grid-item power-of-two">16</div>
+            <div class="grid-item power-of-two">32</div>
+            <div class="grid-item power-of-two">64</div>
+            <div class="grid-item power-of-two">128</div>
+            <div class="grid-item power-of-two">256</div>
+            <div class="grid-item power-of-two">512</div>
+        </div>
+        
+        <p>Since there are only 30 powers of 2 in the integer range (2⁰ to 2²⁹), we can efficiently check against all of them. Instead of generating all permutations of the input number (which would be O(n!) and infeasible), we compare digit frequencies.</p>
+        
+        <p>The solution approaches work as follows:</p>
+        <ol>
+            <li><strong>Precomputation:</strong> Store sorted strings or digit counts of all powers of 2</li>
+            <li><strong>Comparison:</strong> For the input number, compute its sorted string or digit frequency</li>
+            <li><strong>Matching:</strong> Check if any power of 2 has the same digit representation</li>
+        </ol>
+        
+        <p>This approach efficiently solves the problem in constant time and space since the number of powers of 2 is fixed (30) and the digit count is limited (max 10 digits).</p>
+        
+        <div class="callout tip">
+            <strong>Why it works:</strong> Two numbers can be rearranged to form each other if and only if they have identical digit frequencies.
+        </div>
+        
+        <hr />
+        
+        <h2>FAQs</h2>
+        
+        <div class="faq-section">
+            <details>
+                <summary>1. Why are there only 30 powers of 2 to consider?</summary>
+                <p>Since n ≤ 10⁹, the largest power of 2 we need to consider is 2²⁹ = 536,870,912 (which is under 10⁹). 2³⁰ = 1,073,741,824 is still ≤ 10⁹, but 2³⁰ has 10 digits while 2²⁹ has 9 digits. We consider powers from 2⁰ to 2³⁰ (31 total).</p>
+            </details>
+            
+            <details>
+                <summary>2. How does the solution avoid numbers with leading zeros?</summary>
+                <p>The digit frequency comparison naturally avoids leading zeros because we're comparing the actual digits present in the number. If a permutation would have a leading zero, it would require a '0' in the most significant position, but our comparison doesn't consider position, only digit presence.</p>
+            </details>
+            
+            <details>
+                <summary>3. What is the time complexity of generating all permutations?</summary>
+                <p>Generating all permutations of a number with d digits would be O(d!), which is O(10!) = 3,628,800 for 10-digit numbers. This is acceptable for small d but inefficient compared to our O(1) solution.</p>
+            </details>
+            
+            <details>
+                <summary>4. Can this approach be extended to powers of other numbers?</summary>
+                <p>Yes, the same digit frequency comparison technique can be used to check if a number can be rearranged to form a power of any given base. You would generate powers of that base within the number range and compare digit frequencies.</p>
+            </details>
+            
+            <details>
+                <summary>5. What is the advantage of the hashing approach?</summary>
+                <p>The hashing approach (Approach 3) converts the digit frequency into a single numeric value. This allows for O(1) comparisons using primitive values instead of comparing arrays or strings.</p>
+            </details>
+            
+            <details>
+                <summary>6. How many digit combinations are possible for a d-digit number?</summary>
+                <p>There are 10^d possible digit combinations, but many are invalid (like those with leading zeros). Our solution efficiently checks only the valid possibilities that are powers of two.</p>
+            </details>
+            
+            <details>
+                <summary>7. What is the largest power of 2 we need to consider?</summary>
+                <p>For n ≤ 10⁹, the largest power of 2 is 2²⁹ = 536,870,912 (9 digits) and 2³⁰ = 1,073,741,824 (10 digits). We need to consider powers from 2⁰ to 2³⁰ inclusive.</p>
+            </details>
+            
+            <details>
+                <summary>8. Can negative numbers be handled?</summary>
+                <p>The problem states that n is positive (1 ≤ n ≤ 10⁹), so we don't need to handle negative numbers. Powers of 2 are always positive.</p>
+            </details>
+            
+            <details>
+                <summary>9. Is the digit frequency method accurate for numbers with repeated digits?</summary>
+                <p>Yes, the digit frequency method accurately captures repeated digits. For example, 338 would have two 3's and one 8, and would match a power of 2 with the same digit counts.</p>
+            </details>
+            
+            <details>
+                <summary>10. What is the space complexity of storing digit frequencies?</summary>
+                <p>The space complexity is O(1) since we only store an array of 10 integers (for digits 0-9) or a single numeric hash value, regardless of input size.</p>
+            </details>
+        </div>
+    </main>
+    
+    <div id="footer"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+                
+                // Initialize first tab
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+                
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        button.classList.add('active');
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+            
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>

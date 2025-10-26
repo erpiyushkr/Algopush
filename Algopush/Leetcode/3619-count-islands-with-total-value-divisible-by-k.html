@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3619 | Count Islands With Total Value Divisible by K</title>
+  <meta name="description"
+    content="Complete solutions for LeetCode 3619: Learn efficient island counting techniques using DFS, BFS, and iterative methods with detailed implementations." />
+  <meta name="keywords"
+    content="leetcode, leetcode 3619, count islands, matrix traversal, DFS, BFS, flood fill, grid problems, leetcode premium problem, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, leetcode array question, leetcode contest question, leetcode contest, leetcoide dfs questions, leetcode bfs question, leetcode grid question" />
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3619-count-islands-with-total-value-divisible-by-k.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3619: Count Islands With Total Value Divisible by K">
+  <meta property="og:description"
+    content="Optimal solutions with O(mn) time complexity. Complete guide with DFS, BFS, and iterative approaches.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3619.png">
+  <meta property="og:url"
+    content="https://algopush.com/Leetcode/3619-count-islands-with-total-value-divisible-by-k.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3619: Count Islands With Total Value Divisible by K">
+  <meta name="twitter:description"
+    content="Solve island counting problems with flood fill algorithms. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3619.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Count Islands With Total Value Divisible by K",
+      "url": "https://algopush.com/Leetcode/3619-count-islands-with-total-value-divisible-by-k.html",
+      "image": "https://algopush.com/Leetcode/Images/3619.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-07-20",
+      "dateModified": "2025-07-20",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Visualization Container */
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+
+      50% {
+        background-color: #b3e0ff;
+      }
+
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3619. Count Islands With Total Value Divisible by K</span>
+    </div>
+
+    <h1>3619: Count Islands With Total Value Divisible by K</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Matrix, DFS, BFS, Flood Fill</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Amazon, Google, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3619.png"
+        alt="Count Islands With Total Value Divisible by K visualization" loading="lazy">
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> For grid problems with connectivity, always consider using DFS, BFS, or Union-Find. DFS
+      is simpler for small grids, but BFS is safer for large grids to avoid stack overflow.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an m x n matrix <code>grid</code> and a positive integer <code>k</code>, count the number of islands where:
+    </p>
+    <ol>
+      <li>An island is a group of positive integers (land) connected 4-directionally (up, down, left, right)</li>
+      <li>The total value of an island is the sum of all its land cells</li>
+      <li>The island count is incremented when total_value % k == 0</li>
+    </ol>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> grid = [[0,2,1,0,0],[0,5,0,0,5],[0,0,1,0,0],[0,1,4,7,0],[0,2,0,0,8]], k = 5</p>
+        <p><strong>Output:</strong> 2</p>
+        <p>Island sums: 1+5+1+1+4+7+2 = 21 (not divisible by 5), 5 = 5 (divisible), 8 = 8 (not divisible)</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/count-islands-with-total-value-divisible-by-k/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Key Insight</h2>
+    <p>The problem requires:</p>
+    <ol>
+      <li>Identifying connected components (islands) in a grid</li>
+      <li>Calculating the sum of values for each island</li>
+      <li>Counting islands where the sum is divisible by k</li>
+    </ol>
+
+    <div class="callout warning">
+      <strong>Note:</strong> Water cells (0) are not part of any island and should be skipped during traversal.
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Depth-First Search (DFS)</h2>
+    <p>Recursively explore each island starting from unvisited land cells.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create a visited matrix to track visited cells</li>
+      <li>Iterate through each cell in the grid</li>
+      <li>If cell is land (value > 0) and not visited:
+        <ul>
+          <li>Initialize sum to 0</li>
+          <li>Perform DFS to explore all connected land cells</li>
+          <li>Add current cell's value to sum</li>
+          <li>Mark cell as visited</li>
+          <li>Recursively visit all 4-directional neighbors</li>
+        </ul>
+      </li>
+      <li>After DFS completes, check if sum % k == 0</li>
+      <li>If yes, increment island count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(mn)</td>
+          <td>O(mn)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Each cell is visited once. Space is used for visited matrix and recursion stack.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">DFS Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-dfs">C++</button>
+          <button class="tab-button" data-tab="java-dfs">Java</button>
+          <button class="tab-button" data-tab="python-dfs">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-dfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> m, n;
+    vector&lt;vector&lt;<span class="code-token-keyword">bool</span>&gt;&gt; visited;
+    
+    <span class="code-token-keyword">long</span> <span class="code-token-function">dfs</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& grid, <span class="code-token-keyword">int</span> r, <span class="code-token-keyword">int</span> c) {
+        <span class="code-token-keyword">if</span> (r &lt; 0 || r >= m || c &lt; 0 || c >= n || visited[r][c] || grid[r][c] == 0)
+            <span class="code-token-keyword">return</span> 0;
+            
+        visited[r][c] = true;
+        <span class="code-token-keyword">long</span> sum = grid[r][c];
+        sum += <span class="code-token-function">dfs</span>(grid, r+1, c);
+        sum += <span class="code-token-function">dfs</span>(grid, r-1, c);
+        sum += <span class="code-token-function">dfs</span>(grid, r, c+1);
+        sum += <span class="code-token-function">dfs</span>(grid, r, c-1);
+        <span class="code-token-keyword">return</span> sum;
+    }
+    
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countIslands</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& grid, <span class="code-token-keyword">int</span> k) {
+        m = grid.<span class="code-token-function">size</span>();
+        n = grid[0].<span class="code-token-function">size</span>();
+        visited = vector&lt;vector&lt;<span class="code-token-keyword">bool</span>&gt;&gt;(m, vector&lt;<span class="code-token-keyword">bool</span>&gt;(n, false));
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+                <span class="code-token-keyword">if</span> (!visited[i][j] && grid[i][j] > 0) {
+                    <span class="code-token-keyword">long</span> islandSum = <span class="code-token-function">dfs</span>(grid, i, j);
+                    <span class="code-token-keyword">if</span> (islandSum % k == 0) count++;
+                }
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-dfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> m, n;
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">boolean</span>[][] visited;
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">long</span> <span class="code-token-function">dfs</span>(<span class="code-token-keyword">int</span>[][] grid, <span class="code-token-keyword">int</span> r, <span class="code-token-keyword">int</span> c) {
+        <span class="code-token-keyword">if</span> (r &lt; 0 || r >= m || c &lt; 0 || c >= n || visited[r][c] || grid[r][c] == 0)
+            <span class="code-token-keyword">return</span> 0;
+            
+        visited[r][c] = true;
+        <span class="code-token-keyword">long</span> sum = grid[r][c];
+        sum += <span class="code-token-function">dfs</span>(grid, r+1, c);
+        sum += <span class="code-token-function">dfs</span>(grid, r-1, c);
+        sum += <span class="code-token-function">dfs</span>(grid, r, c+1);
+        sum += <span class="code-token-function">dfs</span>(grid, r, c-1);
+        <span class="code-token-keyword">return</span> sum;
+    }
+    
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countIslands</span>(<span class="code-token-keyword">int</span>[][] grid, <span class="code-token-keyword">int</span> k) {
+        m = grid.length;
+        n = grid[0].length;
+        visited = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[m][n];
+        <span class="code-token-keyword">int</span> count = 0;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+                <span class="code-token-keyword">if</span> (!visited[i][j] && grid[i][j] > 0) {
+                    <span class="code-token-keyword">long</span> islandSum = <span class="code-token-function">dfs</span>(grid, i, j);
+                    <span class="code-token-keyword">if</span> (islandSum % k == 0) count++;
+                }
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-dfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">countIslands</span>(self, grid: List[List[int]], k: int) -> int:
+        m, n = len(grid), len(grid[0])
+        visited = [[False] * n <span class="code-token-keyword">for</span> _ <span class="code-token-keyword">in</span> range(m)]
+        count = 0
+        
+        <span class="code-token-keyword">def</span> <span class="code-token-function">dfs</span>(r, c):
+            <span class="code-token-keyword">if</span> r &lt; 0 or r >= m or c &lt; 0 or c >= n or visited[r][c] or grid[r][c] == 0:
+                <span class="code-token-keyword">return</span> 0
+            visited[r][c] = True
+            total = grid[r][c]
+            total += dfs(r+1, c)
+            total += dfs(r-1, c)
+            total += dfs(r, c+1)
+            total += dfs(r, c-1)
+            <span class="code-token-keyword">return</span> total
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(m):
+            <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(n):
+                <span class="code-token-keyword">if</span> not visited[i][j] and grid[i][j] > 0:
+                    island_sum = dfs(i, j)
+                    <span class="code-token-keyword">if</span> island_sum % k == 0:
+                        count += 1
+        <span class="code-token-keyword">return</span> count</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> DFS is concise but may cause stack overflow for large grids. Use iterative
+        DFS or BFS for production systems.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Breadth-First Search (BFS)</h2>
+    <p>Iteratively explore each island using a queue to avoid recursion depth issues.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create a visited matrix to track visited cells</li>
+      <li>Iterate through each cell in the grid</li>
+      <li>If cell is land (value > 0) and not visited:
+        <ul>
+          <li>Initialize sum to 0</li>
+          <li>Create a queue and add current cell</li>
+          <li>Mark cell as visited</li>
+          <li>While queue is not empty:
+            <ul>
+              <li>Dequeue a cell</li>
+              <li>Add its value to sum</li>
+              <li>Check all 4-directional neighbors</li>
+              <li>If neighbor is valid land cell, add to queue</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>After BFS completes, check if sum % k == 0</li>
+      <li>If yes, increment island count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(mn)</td>
+          <td>O(mn)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Same as DFS but avoids recursion stack limitations.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">BFS Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-bfs">C++</button>
+          <button class="tab-button" data-tab="java-bfs">Java</button>
+          <button class="tab-button" data-tab="python-bfs">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-bfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countIslands</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& grid, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> m = grid.<span class="code-token-function">size</span>(), n = grid[0].<span class="code-token-function">size</span>();
+        vector&lt;vector&lt;<span class="code-token-keyword">bool</span>&gt;&gt; <span class="code-token-function">visited</span>(m, vector&lt;<span class="code-token-keyword">bool</span>&gt;(n, false));
+        <span class="code-token-keyword">int</span> count = 0;
+        vector&lt;pair&lt;<span class="code-token-keyword">int</span>,<span class="code-token-keyword">int</span>&gt;&gt; directions = {{1,0},{-1,0},{0,1},{0,-1}};
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+                <span class="code-token-keyword">if</span> (!visited[i][j] && grid[i][j] > 0) {
+                    <span class="code-token-keyword">long</span> islandSum = 0;
+                    queue&lt;pair&lt;<span class="code-token-keyword">int</span>,<span class="code-token-keyword">int</span>&gt;&gt; q;
+                    q.<span class="code-token-function">push</span>({i, j});
+                    visited[i][j] = true;
+                    
+                    <span class="code-token-keyword">while</span> (!q.<span class="code-token-function">empty</span>()) {
+                        <span class="code-token-keyword">auto</span> [r, c] = q.<span class="code-token-function">front</span>();
+                        q.<span class="code-token-function">pop</span>();
+                        islandSum += grid[r][c];
+                        
+                        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span> [dr, dc] : directions) {
+                            <span class="code-token-keyword">int</span> nr = r + dr, nc = c + dc;
+                            <span class="code-token-keyword">if</span> (nr >= 0 && nr &lt; m && nc >= 0 && nc &lt; n && !visited[nr][nc] && grid[nr][nc] > 0) {
+                                visited[nr][nc] = true;
+                                q.<span class="code-token-function">push</span>({nr, nc});
+                            }
+                        }
+                    }
+                    <span class="code-token-keyword">if</span> (islandSum % k == 0) count++;
+                }
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-bfs-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countIslands</span>(<span class="code-token-keyword">int</span>[][] grid, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> m = grid.length, n = grid[0].length;
+        <span class="code-token-keyword">boolean</span>[][] visited = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[m][n];
+        <span class="code-token-keyword">int</span> count = 0;
+        <span class="code-token-keyword">int</span>[][] directions = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+                <span class="code-token-keyword">if</span> (!visited[i][j] && grid[i][j] > 0) {
+                    <span class="code-token-keyword">long</span> islandSum = 0;
+                    Queue&lt;<span class="code-token-keyword">int</span>[]> q = <span class="code-token-keyword">new</span> LinkedList&lt;&gt;();
+                    q.<span class="code-token-function">offer</span>(<span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[]{i, j});
+                    visited[i][j] = true;
+                    
+                    <span class="code-token-keyword">while</span> (!q.<span class="code-token-function">isEmpty</span>()) {
+                        <span class="code-token-keyword">int</span>[] cell = q.<span class="code-token-function">poll</span>();
+                        <span class="code-token-keyword">int</span> r = cell[0], c = cell[1];
+                        islandSum += grid[r][c];
+                        
+                        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span>[] d : directions) {
+                            <span class="code-token-keyword">int</span> nr = r + d[0], nc = c + d[1];
+                            <span class="code-token-keyword">if</span> (nr >= 0 && nr &lt; m && nc >= 0 && nc &lt; n && !visited[nr][nc] && grid[nr][nc] > 0) {
+                                visited[nr][nc] = true;
+                                q.<span class="code-token-function">offer</span>(<span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[]{nr, nc});
+                            }
+                        }
+                    }
+                    <span class="code-token-keyword">if</span> (islandSum % k == 0) count++;
+                }
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-bfs-tab">
+          <pre><code><span class="code-token-keyword">from</span> collections <span class="code-token-keyword">import</span> deque
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">countIslands</span>(self, grid: List[List[int]], k: int) -> int:
+        m, n = len(grid), len(grid[0])
+        visited = [[False] * n <span class="code-token-keyword">for</span> _ <span class="code-token-keyword">in</span> range(m)]
+        count = 0
+        directions = [(1,0), (-1,0), (0,1), (0,-1)]
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(m):
+            <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(n):
+                <span class="code-token-keyword">if</span> not visited[i][j] and grid[i][j] > 0:
+                    island_sum = 0
+                    q = deque()
+                    q.append((i, j))
+                    visited[i][j] = True
+                    
+                    <span class="code-token-keyword">while</span> q:
+                        r, c = q.popleft()
+                        island_sum += grid[r][c]
+                        <span class="code-token-keyword">for</span> dr, dc <span class="code-token-keyword">in</span> directions:
+                            nr, nc = r + dr, c + dc
+                            <span class="code-token-keyword">if</span> 0 <= nr < m and 0 <= nc < n and not visited[nr][nc] and grid[nr][nc] > 0:
+                                visited[nr][nc] = True
+                                q.append((nr, nc))
+                    
+                    <span class="code-token-keyword">if</span> island_sum % k == 0:
+                        count += 1
+        <span class="code-token-keyword">return</span> count</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> BFS is iterative and avoids recursion depth issues, making it suitable for
+        large grids (m*n ≤ 10^5).
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Iterative DFS with Stack</h2>
+    <p>Implement DFS iteratively using a stack for better memory control.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create a visited matrix to track visited cells</li>
+      <li>Iterate through each cell in the grid</li>
+      <li>If cell is land (value > 0) and not visited:
+        <ul>
+          <li>Initialize sum to 0</li>
+          <li>Create a stack and push current cell</li>
+          <li>Mark cell as visited</li>
+          <li>While stack is not empty:
+            <ul>
+              <li>Pop a cell</li>
+              <li>Add its value to sum</li>
+              <li>Check all 4-directional neighbors</li>
+              <li>If neighbor is valid land cell, push to stack</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>After DFS completes, check if sum % k == 0</li>
+      <li>If yes, increment island count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(mn)</td>
+          <td>O(mn)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Same as BFS but uses stack instead of queue.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Iterative DFS Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-iterative">C++</button>
+          <button class="tab-button" data-tab="java-iterative">Java</button>
+          <button class="tab-button" data-tab="python-iterative">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-iterative-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countIslands</span>(vector&lt;vector&lt;<span class="code-token-keyword">int</span>&gt;&gt;& grid, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> m = grid.<span class="code-token-function">size</span>(), n = grid[0].<span class="code-token-function">size</span>();
+        vector&lt;vector&lt;<span class="code-token-keyword">bool</span>&gt;&gt; <span class="code-token-function">visited</span>(m, vector&lt;<span class="code-token-keyword">bool</span>&gt;(n, false));
+        <span class="code-token-keyword">int</span> count = 0;
+        vector&lt;pair&lt;<span class="code-token-keyword">int</span>,<span class="code-token-keyword">int</span>&gt;&gt; directions = {{1,0},{-1,0},{0,1},{0,-1}};
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+                <span class="code-token-keyword">if</span> (!visited[i][j] && grid[i][j] > 0) {
+                    <span class="code-token-keyword">long</span> islandSum = 0;
+                    stack&lt;pair&lt;<span class="code-token-keyword">int</span>,<span class="code-token-keyword">int</span>&gt;&gt; st;
+                    st.<span class="code-token-function">push</span>({i, j});
+                    visited[i][j] = true;
+                    
+                    <span class="code-token-keyword">while</span> (!st.<span class="code-token-function">empty</span>()) {
+                        <span class="code-token-keyword">auto</span> [r, c] = st.<span class="code-token-function">top</span>();
+                        st.<span class="code-token-function">pop</span>();
+                        islandSum += grid[r][c];
+                        
+                        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">auto</span> [dr, dc] : directions) {
+                            <span class="code-token-keyword">int</span> nr = r + dr, nc = c + dc;
+                            <span class="code-token-keyword">if</span> (nr >= 0 && nr &lt; m && nc >= 0 && nc &lt; n && !visited[nr][nc] && grid[nr][nc] > 0) {
+                                visited[nr][nc] = true;
+                                st.<span class="code-token-function">push</span>({nr, nc});
+                            }
+                        }
+                    }
+                    <span class="code-token-keyword">if</span> (islandSum % k == 0) count++;
+                }
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-iterative-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countIslands</span>(<span class="code-token-keyword">int</span>[][] grid, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> m = grid.length, n = grid[0].length;
+        <span class="code-token-keyword">boolean</span>[][] visited = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[m][n];
+        <span class="code-token-keyword">int</span> count = 0;
+        <span class="code-token-keyword">int</span>[][] directions = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i &lt; m; i++) {
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j &lt; n; j++) {
+                <span class="code-token-keyword">if</span> (!visited[i][j] && grid[i][j] > 0) {
+                    <span class="code-token-keyword">long</span> islandSum = 0;
+                    Stack&lt;<span class="code-token-keyword">int</span>[]> stack = <span class="code-token-keyword">new</span> Stack&lt;&gt;();
+                    stack.<span class="code-token-function">push</span>(<span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[]{i, j});
+                    visited[i][j] = true;
+                    
+                    <span class="code-token-keyword">while</span> (!stack.<span class="code-token-function">isEmpty</span>()) {
+                        <span class="code-token-keyword">int</span>[] cell = stack.<span class="code-token-function">pop</span>();
+                        <span class="code-token-keyword">int</span> r = cell[0], c = cell[1];
+                        islandSum += grid[r][c];
+                        
+                        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span>[] d : directions) {
+                            <span class="code-token-keyword">int</span> nr = r + d[0], nc = c + d[1];
+                            <span class="code-token-keyword">if</span> (nr >= 0 && nr &lt; m && nc >= 0 && nc &lt; n && !visited[nr][nc] && grid[nr][nc] > 0) {
+                                visited[nr][nc] = true;
+                                stack.<span class="code-token-function">push</span>(<span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[]{nr, nc});
+                            }
+                        }
+                    }
+                    <span class="code-token-keyword">if</span> (islandSum % k == 0) count++;
+                }
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-iterative-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">countIslands</span>(self, grid: List[List[int]], k: int) -> int:
+        m, n = len(grid), len(grid[0])
+        visited = [[False] * n <span class="code-token-keyword">for</span> _ <span class="code-token-keyword">in</span> range(m)]
+        count = 0
+        directions = [(1,0), (-1,0), (0,1), (0,-1)]
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(m):
+            <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(n):
+                <span class="code-token-keyword">if</span> not visited[i][j] and grid[i][j] > 0:
+                    island_sum = 0
+                    stack = [(i, j)]
+                    visited[i][j] = True
+                    
+                    <span class="code-token-keyword">while</span> stack:
+                        r, c = stack.pop()
+                        island_sum += grid[r][c]
+                        <span class="code-token-keyword">for</span> dr, dc <span class="code-token-keyword">in</span> directions:
+                            nr, nc = r + dr, c + dc
+                            <span class="code-token-keyword">if</span> 0 <= nr < m and 0 <= nc < n and not visited[nr][nc] and grid[nr][nc] > 0:
+                                visited[nr][nc] = True
+                                stack.append((nr, nc))
+                    
+                    <span class="code-token-keyword">if</span> island_sum % k == 0:
+                        count += 1
+        <span class="code-token-keyword">return</span> count</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> Iterative DFS gives DFS-like traversal with BFS-like memory
+        characteristics, avoiding recursion limits.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Pros</th>
+          <th>Cons</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Recursive DFS</td>
+          <td>Concise code, easy to understand</td>
+          <td>Stack overflow risk for large grids</td>
+          <td>Small grids (m,n &lt; 100)</td>
+        </tr>
+        <tr>
+          <td>BFS</td>
+          <td>No recursion limits, predictable memory</td>
+          <td>Slightly more code</td>
+          <td>Large grids (m*n ≤ 10^5)</td>
+        </tr>
+        <tr>
+          <td>Iterative DFS</td>
+          <td>DFS traversal without recursion</td>
+          <td>Uses stack, memory similar to BFS</td>
+          <td>When DFS order is important</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Important:</strong> For production systems, always prefer BFS or iterative DFS to avoid stack overflow
+      exceptions.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+    <h3>1. Single Cell Islands</h3>
+    <pre><code>Input: [[5]], k = 5 → Output: 1</code></pre>
+
+    <h3>2. No Islands</h3>
+    <pre><code>Input: [[0,0],[0,0]], k = 5 → Output: 0</code></pre>
+
+    <h3>3. All Cells Form One Island</h3>
+    <pre><code>Input: [[3,3],[3,3]], k = 3 → Output: 1 (since 12%3==0)</code></pre>
+
+    <h3>4. Large Values</h3>
+    <pre><code>Input: [[1000000]], k = 1000000 → Output: 1</code></pre>
+
+    <div class="callout danger">
+      <strong>Warning:</strong> Always use long for sum calculations to prevent integer overflow with large values (up
+      to 10^6 per cell).
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. What defines an "island" in this problem?</summary>
+        <p>An island is a group of positive integers (values > 0) connected 4-directionally (up, down, left, right).
+          Water cells (0) are not part of any island.</p>
+      </details>
+
+      <details>
+        <summary>2. Why use visited matrix instead of modifying grid?</summary>
+        <p>Modifying the grid might be acceptable in some cases, but using a visited matrix preserves input data and is
+          cleaner for production code.</p>
+      </details>
+
+      <details>
+        <summary>3. How to handle large sums that might overflow?</summary>
+        <p>Use long (64-bit integer) for sum calculations since maximum sum could be 10^5 cells * 10^6 value = 10^11,
+          which fits in long but not in 32-bit int.</p>
+      </details>
+
+      <details>
+        <summary>4. Can we use Union-Find for this problem?</summary>
+        <p>Union-Find is possible but less efficient for this scenario since we need to compute the sum for each island.
+          DFS/BFS are more straightforward.</p>
+      </details>
+
+      <details>
+        <summary>5. Why are we using 4-directional instead of 8-directional?</summary>
+        <p>The problem specifies 4-directional connectivity (horizontal and vertical). Diagonal connections are not
+          considered.</p>
+      </details>
+
+      <details>
+        <summary>6. How does BFS avoid stack overflow?</summary>
+        <p>BFS uses a queue and iterative processing, avoiding deep recursion stacks that can cause overflow in large
+          grids.</p>
+      </details>
+
+      <details>
+        <summary>7. What is the maximum grid size we can handle?</summary>
+        <p>With O(mn) space complexity, we can handle grids up to 10^5 cells (as per constraints). For larger grids,
+          we'd need more optimized approaches.</p>
+      </details>
+
+      <details>
+        <summary>8. Can we optimize the space further?</summary>
+        <p>We could modify the grid to mark visited cells (e.g., set to 0 or negative), reducing space to O(1), but this
+          alters input data.</p>
+      </details>
+
+      <details>
+        <summary>9. How to handle k=1?</summary>
+        <p>Since any integer mod 1 is 0, all islands would be counted. The solution naturally handles this case.</p>
+      </details>
+
+      <details>
+        <summary>10. Why use directions array?</summary>
+        <p>Using a directions array makes code cleaner and easier to modify if 8-directional movement is needed later.
+        </p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Insight:</strong> This problem combines grid traversal with mathematical checks. Understanding flood
+      fill algorithms is crucial for solving similar matrix connectivity problems efficiently.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

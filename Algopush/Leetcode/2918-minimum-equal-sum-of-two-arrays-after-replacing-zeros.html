@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2918 | Minimum Equal Sum of Two Arrays After Replacing Zeros</title>
+  <meta name="description"
+    content="Complete solution for LeetCode 2918: Learn optimal strategies to balance array sums by replacing zeros. Detailed analysis with mathematical proofs.">
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode 2918, Minimum Equal Sum, Array Manipulation, Zero Replacement Problem, Algorithm Optimization, Competitive Programming, LeetCode Hard Problem">
+  <meta name="author" content="Algopush" />
+  <link rel="canonical"
+    href="https://algopush.com/Leetcode/2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros.html">
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 2918: Minimum Equal Sum of Two Arrays After Replacing Zeros">
+  <meta property="og:description"
+    content="Master the mathematical approach to balance array sums through zero replacement. Complete guide with multiple optimization strategies and code implementations.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/2918.png">
+  <meta property="og:url"
+    content="https://algopush.com/Leetcode/2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 2918: Minimum Equal Sum of Two Arrays After Replacing Zeros">
+  <meta name="twitter:description"
+    content="Optimal solution for balancing array sums with zero replacement constraints. Code examples in Python, Java, and C++.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/2918.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Minimum Equal Sum of Two Arrays After Replacing Zeros",
+      "url": "https://algopush.com/Leetcode/2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros.html",
+      "image": "https://algopush.com/Leetcode/Images/2918.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-11",
+      "dateModified": "2025-05-11",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>2918. Minimum Equal Sum of Two Arrays After Replacing Zeros</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/2918.png" alt="Array sum balancing visualization" loading="lazy">
+    </div>
+
+    <h1>2918: Minimum Equal Sum of Two Arrays After Replacing Zeros</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Greedy Algorithms, Mathematics</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Bloomberg</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Key Insight:</strong> The optimal solution requires calculating base sums and understanding the
+      mathematical relationship between zero counts in both arrays.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given two arrays containing positive integers and zeros, replace all zeros with positive integers such that both
+      arrays have equal sums. Return the minimum possible equal sum or -1 if impossible.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: nums1 = [3,2,0,1,0], nums2 = [6,5,0]
+Output: 12
+Explanation: Replace zeros with [2,4] in nums1 and [1] in nums2</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: nums1 = [2,0,2,0], nums2 = [1,4]
+Output: -1
+Explanation: Impossible to balance sums</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Mathematical Analysis</h2>
+    <p>Calculate base sums and zero counts to determine minimal possible sum.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Calculate sum1 (sum of non-zero elements in nums1) + count of zeros</li>
+      <li>Calculate sum2 (sum of non-zero elements in nums2) + count of zeros</li>
+      <li>Determine valid minimal sum based on relationships:
+        <ul>
+          <li>sum1 < sum2 → Check if sum2 ≤ sum1 + zeros1*inf</li>
+          <li>sum2 < sum1 → Check if sum1 ≤ sum2 + zeros2*inf</li>
+          <li>If both have zeros → max(base_sum1 + 1, base_sum2 + 1)</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n + m)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimal Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-sol">C++</button>
+          <button class="tab-button" data-tab="java-sol">Java</button>
+          <button class="tab-button" data-tab="python-sol">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-sol-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minSum</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums1, vector&lt;<span class="code-token-keyword">int</span>&gt;& nums2) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> sum1 = 0, sum2 = 0;
+        <span class="code-token-keyword">int</span> zero1 = 0, zero2 = 0;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums1) {
+            <span class="code-token-keyword">if</span>(num == 0) zero1++;
+            sum1 += num;
+        }
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums2) {
+            <span class="code-token-keyword">if</span>(num == 0) zero2++;
+            sum2 += num;
+        }
+        
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> base1 = sum1 + zero1;
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> base2 = sum2 + zero2;
+        
+        <span class="code-token-keyword">if</span>(zero1 == 0 && base1 < base2) <span class="code-token-keyword">return</span> -1;
+        <span class="code-token-keyword">if</span>(zero2 == 0 && base2 < base1) <span class="code-token-keyword">return</span> -1;
+        
+        <span class="code-token-keyword">if</span>(zero1 == 0 && zero2 == 0) {
+            <span class="code-token-keyword">return</span> sum1 == sum2 ? sum1 : -1;
+        }
+        
+        <span class="code-token-keyword">return</span> max(base1, base2);
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-sol-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minSum</span>(<span class="code-token-keyword">int</span>[] nums1, <span class="code-token-keyword">int</span>[] nums2) {
+        <span class="code-token-keyword">long</span> sum1 = 0, sum2 = 0;
+        <span class="code-token-keyword">int</span> zero1 = 0, zero2 = 0;
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums1) {
+            <span class="code-token-keyword">if</span>(num == 0) zero1++;
+            sum1 += num;
+        }
+        
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums2) {
+            <span class="code-token-keyword">if</span>(num == 0) zero2++;
+            sum2 += num;
+        }
+        
+        <span class="code-token-keyword">long</span> base1 = sum1 + zero1;
+        <span class="code-token-keyword">long</span> base2 = sum2 + zero2;
+        
+        <span class="code-token-keyword">if</span>(zero1 == 0 && base1 < base2) <span class="code-token-keyword">return</span> -1;
+        <span class="code-token-keyword">if</span>(zero2 == 0 && base2 < base1) <span class="code-token-keyword">return</span> -1;
+        
+        <span class="code-token-keyword">if</span>(zero1 == 0 && zero2 == 0) {
+            <span class="code-token-keyword">return</span> sum1 == sum2 ? sum1 : -1;
+        }
+        
+        <span class="code-token-keyword">return</span> Math.max(base1, base2);
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-sol-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minSum</span>(self, nums1: List[int], nums2: List[int]) -> int:
+        sum1, zero1 = 0, 0
+        sum2, zero2 = 0, 0
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums1:
+            <span class="code-token-keyword">if</span> num == 0:
+                zero1 += 1
+            sum1 += num
+            
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums2:
+            <span class="code-token-keyword">if</span> num == 0:
+                zero2 += 1
+            sum2 += num
+            
+        base1 = sum1 + zero1
+        base2 = sum2 + zero2
+        
+        <span class="code-token-keyword">if</span> zero1 == 0 <span class="code-token-keyword">and</span> base1 < base2:
+            <span class="code-token-keyword">return</span> -1
+        <span class="code-token-keyword">if</span> zero2 == 0 <span class="code-token-keyword">and</span> base2 < base1:
+            <span class="code-token-keyword">return</span> -1
+            
+        <span class="code-token-keyword">if</span> zero1 == 0 <span class="code-token-keyword">and</span> zero2 == 0:
+            <span class="code-token-keyword">return</span> sum1 <span class="code-token-keyword">if</span> sum1 == sum2 <span class="code-token-keyword">else</span> -1
+            
+        <span class="code-token-keyword">return</span> max(base1, base2)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Insight:</strong> The solution leverages mathematical constraints to determine the
+        minimal possible sum without explicit simulation of replacements.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Key Mathematical Observations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Condition</th>
+          <th>Calculation</th>
+          <th>Reasoning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Both arrays have zeros</td>
+          <td>max(base1, base2)</td>
+          <td>Each zero adds at least 1, take maximum base</td>
+        </tr>
+        <tr>
+          <td>One array has zeros</td>
+          <td>Check feasibility</td>
+          <td>Non-zero array's sum must ≤ potential sum</td>
+        </tr>
+        <tr>
+          <td>No zeros</td>
+          <td>Compare sums</td>
+          <td>Direct equality check required</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Critical Edge Case:</strong> When one array has no zeros, its sum must be ≤ the other array's potential
+      minimal sum.
+    </div>
+
+    <hr />
+
+    <h2>Edge Case Analysis</h2>
+    <h3>1. All Zeros</h3>
+    <pre><code>nums1 = [0,0], nums2 = [0] → min sum = 3</code></pre>
+
+    <h3>2. No Zeros</h3>
+    <pre><code>nums1 = [5,5], nums2 = [10] → sum = 10</code></pre>
+
+    <h3>3. One Array Dominant</h3>
+    <pre><code>nums1 = [10,0], nums2 = [5,5] → min sum = 11</code></pre>
+
+    <div class="callout danger">
+      <strong>Pitfall Alert:</strong> Always check if arrays without zeros have matching sums before other calculations.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why add 1 for each zero in base sum?</summary>
+        <p>Each zero must be replaced by at least 1, contributing minimally to the sum.</p>
+      </details>
+
+      <details>
+        <summary>2. How does the solution handle large numbers?</summary>
+        <p>Uses long integers to prevent overflow, crucial for arrays with 1e5 elements.</p>
+      </details>
+
+      <details>
+        <summary>3. Why use max(base1, base2)?</summary>
+        <p>Both arrays must reach the same sum, so we need to satisfy the higher base requirement.</p>
+      </details>
+
+      <details>
+        <summary>4. What if one array has higher non-zero sum but more zeros?</summary>
+        <p>The algorithm automatically selects the maximum base sum to ensure both can reach it.</p>
+      </details>
+
+      <details>
+        <summary>5. Can zeros be replaced with values greater than 1?</summary>
+        <p>Yes, but the minimal sum requires using the smallest possible replacements (1s).</p>
+      </details>
+
+      <details>
+        <summary>6. How to verify solution correctness?</summary>
+        <p>Check that: 1) Final sums match, 2) All replacements are positive, 3) No better solution exists.</p>
+      </details>
+
+      <details>
+        <summary>7. What's the time complexity breakdown?</summary>
+        <p>O(n + m) for array traversal + O(1) calculations. Optimal for large inputs.</p>
+      </details>
+
+      <details>
+        <summary>8. Why return -1 for some cases?</summary>
+        <p>When constraints make balancing impossible (e.g., fixed sum already too high).</p>
+      </details>
+
+      <details>
+        <summary>9. How to handle multiple zero replacements?</summary>
+        <p>All zeros must be ≥1, but optimal solution uses exactly 1 for minimal contribution.</p>
+      </details>
+
+      <details>
+        <summary>10. Practical applications of this problem?</summary>
+        <p>Resource allocation, data balancing, and constraint satisfaction problems.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Analysis:</strong> This problem teaches essential skills in constraint analysis and mathematical
+      optimization for array manipulation. The solution demonstrates how careful mathematical reasoning can lead to O(n)
+      time algorithms even for seemingly complex problems.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    // Reuse the same JavaScript from previous post
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

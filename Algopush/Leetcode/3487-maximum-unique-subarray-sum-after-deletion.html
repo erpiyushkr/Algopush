@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3487 | Maximum Unique Subarray Sum After Deletion</title>
+  <meta name="description"
+    content="Optimal O(n) solution with distinct positives approach. Learn multiple methods to solve the maximum unique subarray sum problem after deletion." />
+  <meta name="keywords"
+    content="LeetCode 3487, maximum unique subarray sum, array deletion, distinct positives, sliding window, algorithm optimization, leetcode premium problem, leetcode, leetcode problem of the day" />
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3487-maximum-unique-subarray-sum-after-deletion.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3487: Maximum Unique Subarray Sum After Deletion">
+  <meta property="og:description"
+    content="Optimal O(n) solution with distinct positives approach. Learn multiple methods to solve this array deletion problem.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3487.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3487-maximum-unique-subarray-sum-after-deletion.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3487: Maximum Unique Subarray Sum After Deletion">
+  <meta name="twitter:description"
+    content="Solve array deletion problems with distinct positives technique. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3487.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Maximum Unique Subarray Sum After Deletion",
+      "url": "https://algopush.com/Leetcode/3487-maximum-unique-subarray-sum-after-deletion.html",
+      "image": "https://algopush.com/Leetcode/Images/3487.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-07-26",
+      "dateModified": "2025-07-26",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Visualization Container */
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .grid-item {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+    }
+
+    .grid-item.positive {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .grid-item.negative {
+      background-color: #ffebee;
+      border-color: #f44336;
+    }
+
+    .grid-item.zero {
+      background-color: #eaf2f8;
+      border-color: #3498db;
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+
+      50% {
+        background-color: #b3e0ff;
+      }
+
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3487. Maximum Unique Subarray Sum After Deletion</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3487.png" alt="Array deletion visualization" loading="lazy">
+    </div>
+
+    <h1>3487: Maximum Unique Subarray Sum After Deletion</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Easy</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Array, Hash Set, Sliding Window</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Amazon, Google, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> When dealing with array deletion problems, always consider what elements are beneficial
+      to keep. Positive numbers increase your sum, while duplicates and negatives typically reduce it.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>You're given an integer array <code>nums</code>. You can delete any number of elements (but not all). After
+      deletion, select a contiguous subarray of the remaining elements where:</p>
+    <ol>
+      <li>All elements in the subarray are unique</li>
+      <li>The sum of elements is maximized</li>
+    </ol>
+    <p>Return the maximum possible sum of such a subarray.</p>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> nums = [1,2,3,4,5]</p>
+        <p><strong>Output:</strong> 15</p>
+        <p><strong>Explanation:</strong> Keep the entire array (all elements are unique) and the sum is 1+2+3+4+5=15.
+        </p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 2</h4>
+        <p><strong>Input:</strong> nums = [1,1,0,1,1]</p>
+        <p><strong>Output:</strong> 1</p>
+        <p><strong>Explanation:</strong> Delete all but one 1. The subarray [1] has the maximum sum of 1.</p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 3</h4>
+        <p><strong>Input:</strong> nums = [1,2,-1,-2,1,0,-1]</p>
+        <p><strong>Output:</strong> 3</p>
+        <p><strong>Explanation:</strong> Delete negatives and duplicates to get [2,1] with sum 3.</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Key Insight</h2>
+    <p>The problem requires maximizing the sum of a contiguous subarray with unique elements after deletion. The key
+      insights are:</p>
+    <ol>
+      <li><strong>Negative numbers reduce the sum</strong> - They never increase the maximum sum, so we should delete
+        them</li>
+      <li><strong>Duplicates can't coexist</strong> - Only one instance of each number can be included in the subarray
+      </li>
+      <li><strong>Positive distinct values are optimal</strong> - The maximum sum comes from including all distinct
+        positive numbers</li>
+      <li><strong>Contiguous arrangement is possible</strong> - By deleting non-essential elements, we can make distinct
+        positives contiguous</li>
+    </ol>
+
+    <div class="grid-container">
+      <div class="grid-item positive">10</div>
+      <div class="grid-item negative">-5</div>
+      <div class="grid-item positive">20</div>
+      <div class="grid-item negative">-3</div>
+      <div class="grid-item positive">30</div>
+    </div>
+    <p class="callout">After deleting negatives and duplicates, we can form a contiguous subarray [10,20,30] with sum 60
+    </p>
+
+    <div class="callout warning">
+      <strong>Important:</strong> When there are no positive numbers, the solution is the maximum element (which will be
+      negative or zero).
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Distinct Positives (Optimal)</h2>
+    <p>The most efficient approach leverages the insight that the maximum sum comes from all distinct positive numbers:
+    </p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create a set to store distinct positive numbers</li>
+      <li>Iterate through the array:
+        <ul>
+          <li>Add positive numbers to the set (duplicates automatically handled)</li>
+        </ul>
+      </li>
+      <li>Sum all distinct positive numbers</li>
+      <li>If the sum is positive, return it</li>
+      <li>Otherwise, return the maximum element in the array</li>
+    </ol>
+
+    <h3>Why This Works</h3>
+    <p>By deleting all negative numbers and duplicates, we can form a contiguous subarray containing all distinct
+      positive numbers. Since positives increase the sum and duplicates/negatives reduce it, this approach guarantees
+      maximum sum. For arrays with no positives, the best we can do is select the largest element (least negative or
+      zero).</p>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where <code>n</code> is the length of the array. We traverse the array once and store distinct positives.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Distinct Positives Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-distinct">C++</button>
+          <button class="tab-button" data-tab="java-distinct">Java</button>
+          <button class="tab-button" data-tab="python-distinct">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-distinct-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maxSum</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        unordered_set<<span class="code-token-keyword">int</span>> distinctPositives;
+        <span class="code-token-keyword">int</span> maxElement = INT_MIN;
+        
+        <span class="code-token-comment">// Collect distinct positives and track maximum element</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-comment">// Update max element for negative case handling</span>
+            <span class="code-token-keyword">if</span> (num > maxElement) maxElement = num;
+            
+            <span class="code-token-comment">// Add positive numbers to set</span>
+            <span class="code-token-keyword">if</span> (num > 0) {
+                distinctPositives.insert(num);
+            }
+        }
+        
+        <span class="code-token-comment">// Calculate sum of distinct positives</span>
+        <span class="code-token-keyword">int</span> total = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : distinctPositives) {
+            total += num;
+        }
+        
+        <span class="code-token-comment">// Return sum if positive, else return max element</span>
+        <span class="code-token-keyword">return</span> total > 0 ? total : maxElement;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-distinct-tab">
+          <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maxSum</span>(<span class="code-token-keyword">int</span>[] nums) {
+        Set<<span class="code-token-keyword">Integer</span>> distinctPositives = <span class="code-token-keyword">new</span> HashSet<>();
+        <span class="code-token-keyword">int</span> maxElement = Integer.MIN_VALUE;
+        
+        <span class="code-token-comment">// Process each number in the array</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-comment">// Update maximum element for negative case</span>
+            <span class="code-token-keyword">if</span> (num > maxElement) maxElement = num;
+            
+            <span class="code-token-comment">// Add positive numbers to set</span>
+            <span class="code-token-keyword">if</span> (num > 0) {
+                distinctPositives.add(num);
+            }
+        }
+        
+        <span class="code-token-comment">// Calculate sum of distinct positives</span>
+        <span class="code-token-keyword">int</span> total = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : distinctPositives) {
+            total += num;
+        }
+        
+        <span class="code-token-comment">// Return sum if positive, else max element</span>
+        <span class="code-token-keyword">return</span> total > 0 ? total : maxElement;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-distinct-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maxSum</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        distinct_positives = set()
+        max_element = float('-inf')
+        
+        <span class="code-token-comment"># Process each number in the array</span>
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-comment"># Update max element for negative case handling</span>
+            <span class="code-token-keyword">if</span> num > max_element:
+                max_element = num
+                
+            <span class="code-token-comment"># Add positive numbers to set</span>
+            <span class="code-token-keyword">if</span> num > 0:
+                distinct_positives.add(num)
+        
+        <span class="code-token-comment"># Calculate sum of distinct positives</span>
+        total = sum(distinct_positives)
+        
+        <span class="code-token-comment"># Return sum if positive, else max element</span>
+        <span class="code-token-keyword">return</span> total <span class="code-token-keyword">if</span> total > 0 <span class="code-token-keyword">else</span> max_element</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach efficiently solves the problem in O(n) time and O(n) space.
+        It handles all edge cases including all-negative arrays and arrays with zeros.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Brute Force (For Comparison)</h2>
+    <p>While not optimal, this approach helps understand the problem by checking all possible contiguous subarrays in
+      the original array:</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize <code>max_sum</code> to smallest integer</li>
+      <li>For each starting index <code>i</code>:
+        <ul>
+          <li>Create a set to track seen numbers</li>
+          <li>Initialize current sum to 0</li>
+          <li>For each ending index <code>j</code> from <code>i</code> to end:
+            <ul>
+              <li>If number at <code>j</code> is already in set, break (not unique)</li>
+              <li>Add number to set and update current sum</li>
+              <li>Update <code>max_sum</code> if current sum is larger</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Return <code>max_sum</code></li>
+    </ol>
+
+    <h3>Why This Is Limited</h3>
+    <p>This approach only considers contiguous segments in the <strong>original array</strong>. It doesn't account for
+      non-contiguous segments that can be made contiguous after deletion. For example, in [10, -1, 20], it would find
+      [10,-1,20] (sum 29) but miss [10,20] (sum 30).</p>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n²)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where <code>n</code> is the length of the array. For each starting index, we scan the rest of the array.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Brute Force Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-brute">C++</button>
+          <button class="tab-button" data-tab="java-brute">Java</button>
+          <button class="tab-button" data-tab="python-brute">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-brute-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">maxSum</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">int</span> max_sum = INT_MIN;
+        <span class="code-token-keyword">int</span> n = nums.size();
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            unordered_set<<span class="code-token-keyword">int</span>> seen;
+            <span class="code-token-keyword">int</span> current_sum = 0;
+            
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i; j < n; j++) {
+                <span class="code-token-comment">// Break if duplicate found</span>
+                <span class="code-token-keyword">if</span> (seen.find(nums[j]) != seen.end()) {
+                    <span class="code-token-keyword">break</span>;
+                }
+                
+                seen.insert(nums[j]);
+                current_sum += nums[j];
+                
+                <span class="code-token-comment">// Update max_sum if current_sum is greater</span>
+                <span class="code-token-keyword">if</span> (current_sum > max_sum) {
+                    max_sum = current_sum;
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> max_sum;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-brute-tab">
+          <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">maxSum</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> maxSum = Integer.MIN_VALUE;
+        <span class="code-token-keyword">int</span> n = nums.length;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            Set<<span class="code-token-keyword">Integer</span>> seen = <span class="code-token-keyword">new</span> HashSet<>();
+            <span class="code-token-keyword">int</span> currentSum = 0;
+            
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i; j < n; j++) {
+                <span class="code-token-comment">// Break if duplicate found</span>
+                <span class="code-token-keyword">if</span> (seen.contains(nums[j])) {
+                    <span class="code-token-keyword">break</span>;
+                }
+                
+                seen.add(nums[j]);
+                currentSum += nums[j];
+                
+                <span class="code-token-comment">// Update maxSum if currentSum is greater</span>
+                <span class="code-token-keyword">if</span> (currentSum > maxSum) {
+                    maxSum = currentSum;
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> maxSum;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-brute-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">maxSum</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        max_sum = float('-inf')
+        n = len(nums)
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            seen = set()
+            current_sum = 0
+            
+            <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(i, n):
+                <span class="code-token-comment"># Break if duplicate found</span>
+                <span class="code-token-keyword">if</span> nums[j] <span class="code-token-keyword">in</span> seen:
+                    <span class="code-token-keyword">break</span>
+                    
+                seen.add(nums[j])
+                current_sum += nums[j]
+                
+                <span class="code-token-comment"># Update max_sum if current_sum is greater</span>
+                <span class="code-token-keyword">if</span> current_sum > max_sum:
+                    max_sum = current_sum
+                    
+        <span class="code-token-keyword">return</span> max_sum</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Educational Value:</strong> This approach helps understand the problem constraints but is not optimal.
+        The distinct positives method is preferred for efficiency.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+    <h3>1. All Negative Numbers</h3>
+    <pre><code>Input: [-5, -3, -1, -2]
+Output: -1
+Explanation: No positives, so return the maximum element (-1)</code></pre>
+
+    <h3>2. With Zeros</h3>
+    <pre><code>Input: [0, -1, 0, 2, -3]
+Output: 2
+Explanation: Distinct positives are {2}, sum=2</code></pre>
+
+    <h3>3. Duplicate Positives</h3>
+    <pre><code>Input: [5, 3, 5, 4, 3]
+Output: 12
+Explanation: Distinct positives {5,3,4} sum to 12</code></pre>
+
+    <h3>4. Mixed with Negatives</h3>
+    <pre><code>Input: [10, -5, 8, -3, 6]
+Output: 24
+Explanation: Distinct positives {10,8,6} sum to 24</code></pre>
+
+    <h3>5. All Zeros</h3>
+    <pre><code>Input: [0, 0, 0, 0]
+Output: 0
+Explanation: No positives, maximum element is 0</code></pre>
+
+    <div class="callout danger">
+      <strong>Warning:</strong> Always initialize max_element to the smallest possible integer to handle negative arrays
+      correctly.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why can we include all distinct positive numbers?</summary>
+        <p>After deleting negatives and duplicates, we can arrange distinct positives in a contiguous subarray by
+          preserving their relative order. Since positives only increase the sum, this gives the maximum possible sum.
+        </p>
+      </details>
+
+      <details>
+        <summary>2. Why not include negative numbers?</summary>
+        <p>Negative numbers reduce the sum. Even if they're unique, including them decreases the total, so we should
+          always delete them to maximize the sum.</p>
+      </details>
+
+      <details>
+        <summary>3. How do we handle arrays with no positive numbers?</summary>
+        <p>When there are no positives, we return the maximum element in the array. This will be the least negative
+          number or zero, which is the best possible subarray sum in this case.</p>
+      </details>
+
+      <details>
+        <summary>4. Why is the distinct positives approach O(n)?</summary>
+        <p>We traverse the array once to collect distinct positives and find the maximum element. The set operations
+          (insert and check) are O(1) on average, making the overall complexity O(n).</p>
+      </details>
+
+      <details>
+        <summary>5. Can zeros be included in the subarray?</summary>
+        <p>Zeros don't increase the sum, but they don't decrease it either. However, they're not positive so they're
+          excluded. But in all-negative arrays, zero would be selected if present since it's greater than negatives.</p>
+      </details>
+
+      <details>
+        <summary>6. Why doesn't the brute force approach work for non-contiguous segments?</summary>
+        <p>The brute force only checks contiguous segments in the original array. After deletion, we can form contiguous
+          segments from non-adjacent elements, which requires a different approach.</p>
+      </details>
+
+      <details>
+        <summary>7. How large can the input array be?</summary>
+        <p>According to constraints, the array length is at most 100, so even O(n²) solutions are acceptable. But O(n)
+          is more efficient.</p>
+      </details>
+
+      <details>
+        <summary>8. What if the array has both positive and negative numbers?</summary>
+        <p>We only keep distinct positive numbers. Negatives are deleted as they reduce the sum. For example, in [5, -2,
+          3], we delete -2 and keep [5,3] with sum 8.</p>
+      </details>
+
+      <details>
+        <summary>9. How does deletion affect the contiguous subarray?</summary>
+        <p>Deletion removes unwanted elements, allowing us to form a contiguous subarray from non-adjacent elements in
+          the original array. The relative order of kept elements is preserved.</p>
+      </details>
+
+      <details>
+        <summary>10. Is the distinct positives approach always optimal?</summary>
+        <p>Yes, because including any negative would reduce the sum, and duplicates can't be included due to the
+          uniqueness constraint. Thus, the sum of distinct positives is always maximal.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Insight:</strong> This problem demonstrates the power of logical deduction in algorithm design. By
+      analyzing what elements benefit the sum and leveraging the flexibility of deletion, we arrive at an elegant O(n)
+      solution that outperforms brute force methods.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    LeetCode 1829 | Maximum XOR for Each Query | Algopush
+  </title>
+  <meta name="description"
+    content="Solve LeetCode 1829 with C++, Java, and Python. Learn cumulative XOR and bit manipulation to maximize XOR for each query. Step-by-step guide." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, LeetCode 1829, Maximum XOR for Each Query, Bit manipulation, XOR optimization, Array problems, Coding interview prep, C++ Java Python solutions, Algopush tutorials" />
+  <meta name="author" content="Algopush" />
+  <meta property="og:title" content="LeetCode 1829 Solution | Maximum XOR for Each Query - Optimized Solution" />
+  <meta property="og:description"
+    content="Master the XOR bit manipulation approach to solve LeetCode 1829 efficiently. Complete guide with multiple implementations and complexity analysis." />
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/1829.png" />
+  <meta property="og:url" content="https://algopush.com/Leetcode/1829-maximum-xor-for-each-query.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LeetCode 1829 Solution | Maximum XOR for Each Query - Optimized Solution" />
+  <meta name="twitter:description"
+    content="Optimal bit manipulation solution for LeetCode 1829 with detailed explanations and code implementations." />
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/1829.png" />
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/1829-maximum-xor-for-each-query.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Preload important resources -->
+  <link rel="preload" href="../script.js" as="script" />
+  <link rel="preload" href="https://algopush.com/styles.css" as="style" />
+
+  <!-- Structured Data for enhanced SEO -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "LeetCode 1829 Solution: Maximum XOR for Each Query",
+        "author": {
+          "@type": "Organization",
+          "name": "Algopush",
+          "url": "https://algopush.com"
+        },
+        "image": "https://algopush.com/Leetcode/Images/1829.png",
+        "datePublished": "2025-04-29",
+        "dateModified": "2025-04-29",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Algopush",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://algopush.com/components/logo.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://algopush.com/Leetcode/1829-maximum-xor-for-each-query.html"
+        },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "xPath": [
+            "/html/head/title"
+          ],
+          "cssSelector": ["h1", "main p:first-of-type"]
+        }
+      }
+    </script>
+
+  <script>
+    // Function to handle tab switching
+    function openTab(evt, tabName) {
+      // Get all elements with class="tab-content" and hide them
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+      }
+
+      // Get all elements with class="tab-button" and remove the "active" class
+      const tabButtons = document.getElementsByClassName("tab-button");
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+      }
+
+      // Show the current tab and add the "active" class to the button that opened the tab
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Initialize the first tab as active by default
+    document.addEventListener("DOMContentLoaded", function () {
+      const defaultTab = document.querySelector(".tab-button");
+      if (defaultTab) {
+        defaultTab.click();
+      }
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      color: #24292e;
+    }
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: #6a737d;
+    }
+
+    .token.punctuation {
+      color: #24292e;
+    }
+
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      color: #d63384;
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: #22863a;
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      color: #d63384;
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      color: #d63384;
+    }
+
+    .token.function,
+    .token.class-name {
+      color: #6f42c1;
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable {
+      color: #e36209;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.5rem;
+      outline: none;
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding-left: 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .callout.note {
+      background-color: #eaf2f8;
+      border-color: #3498db;
+    }
+
+    .callout.warning {
+      background-color: #fef5e7;
+      border-color: #f39c12;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-buttons {
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        flex: 1 0 auto;
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header will be inserted by JavaScript -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>Problem 1829</span>
+    </div>
+
+    <!-- Problem Visualization Image -->
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/1829.png" alt="Maximum XOR for Each Query" loading="lazy">
+    </div>
+
+    <h1>1829: Maximum XOR for Each Query - Optimized Solution</h1>
+
+    <!-- Problem Metadata -->
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Bit Manipulation, XOR, Arrays, Prefix Sum</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> This problem combines XOR bit manipulation with cumulative operations, making it an
+      excellent problem to master for coding interviews. The optimal solution runs in O(n) time with O(1) space.
+    </div>
+
+    <p>
+      The problem "Maximum XOR for Each Query" (LeetCode 1829) requires us to find the maximum XOR result for each query
+      on an array. Given a sorted array of non-negative integers and a maximumBit value, we need to determine the
+      optimal k for each query that maximizes the XOR operation with the cumulative XOR of the array elements.
+    </p>
+
+    <h2>Problem Statement</h2>
+    <p>
+      You are given a sorted array of non-negative integers <code>nums</code> and an integer <code>maximumBit</code>.
+      You need to perform n queries (where n is the size of the array) where for each query:
+    </p>
+    <ol>
+      <li>Compute the XOR of all elements in the array up to the current position</li>
+      <li>Find a non-negative integer k (where 0 ≤ k < 2<sup>maximumBit</sup>) that maximizes the XOR result</li>
+      <li>After each query, remove the last element from the array</li>
+    </ol>
+
+    <h3>Constraints</h3>
+    <ul>
+      <li><code>1 ≤ nums.length ≤ 10<sup>5</sup></code></li>
+      <li><code>0 ≤ nums[i] ≤ 2<sup>maximumBit</sup> - 1</code></li>
+      <li><code>1 ≤ maximumBit ≤ 20</code></li>
+    </ul>
+
+    <h2>Problem Link</h2>
+    <p>
+      <a href="https://leetcode.com/problems/maximum-xor-for-each-query/" target="_blank" rel="noopener noreferrer">View
+        on LeetCode ↗</a>
+    </p>
+
+    <h3>Example</h3>
+    <pre><code><b>Input:</b> nums = [0, 1, 1, 3], maximumBit = 2
+<b>Output:</b> [0, 3, 2, 3]
+<b>Explanation:</b>
+Query 1: nums = [0,1,1,3], k = 0 → 0 XOR 1 XOR 1 XOR 3 XOR 0 = 3
+Query 2: nums = [0,1,1], k = 3 → 0 XOR 1 XOR 1 XOR 3 = 3
+Query 3: nums = [0,1], k = 2 → 0 XOR 1 XOR 2 = 3
+Query 4: nums = [0], k = 3 → 0 XOR 3 = 3</code></pre>
+
+    <div class="callout note">
+      <strong>Note:</strong> The key insight is that the optimal k is always (1 << maximumBit) - 1 XOR cumulative_xor,
+        which flips all bits to maximize the result. </div>
+
+        <hr />
+
+        <h2>Approach 1: Brute Force (TLE)</h2>
+        <p>
+          The brute force approach checks every possible value of k for each query and calculates the XOR of all
+          elements in the current array. While straightforward, this approach results in O(n² * 2<sup>maximumBit</sup>)
+          time complexity, which is too slow for large inputs.
+        </p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+          <li><strong>Initialize</strong> an empty result array</li>
+          <li><strong>Iterate</strong> through each query (from last element to first)</li>
+          <li><strong>For each query</strong>, compute the XOR of all elements in the current array</li>
+          <li><strong>Try all possible k values</strong> from 0 to 2<sup>maximumBit</sup>-1</li>
+          <li><strong>Find the k</strong> that maximizes the XOR result</li>
+          <li><strong>Add</strong> the best k to the result array</li>
+          <li><strong>Remove</strong> the last element from the array</li>
+        </ol>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Time Complexity</th>
+              <th>Space Complexity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>O(n² * 2<sup>maximumBit</sup>)</td>
+              <td>O(n)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>Why it fails:</strong> For n = 10<sup>5</sup> and maximumBit = 20, the number of operations would be
+          around 10<sup>5</sup> * 10<sup>5</sup> * 2<sup>20</sup> ≈ 10<sup>15</sup>, which is way beyond what's
+          acceptable.
+        </p>
+
+        <h3>Implementation</h3>
+
+        <div class="code-tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" onclick="openTab(event, 'cpp-brute')">
+              C++
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'java-brute')">
+              Java
+            </button>
+            <button class="tab-button" onclick="openTab(event, 'python-brute')">
+              Python
+            </button>
+          </div>
+
+          <div id="cpp-brute" class="tab-content active">
+            <pre><code>
+class Solution {
+public:
+    vector&lt;int&gt; getMaximumXor(vector&lt;int&gt;& nums, int maximumBit) {
+        int n = nums.size();
+        vector&lt;int&gt; ans(n);
+        int maxK = (1 << maximumBit) - 1;
+        
+        for (int i = n - 1; i >= 0; --i) {
+            int currentXor = 0;
+            for (int j = 0; j <= i; ++j) {
+                currentXor ^= nums[j];
+            }
+            
+            int bestK = 0;
+            for (int k = 0; k <= maxK; ++k) {
+                if ((currentXor ^ k) > (currentXor ^ bestK)) {
+                    bestK = k;
+                }
+            }
+            ans[i] = bestK;
+        }
+        
+        return ans;
+    }
+};
+                </code></pre>
+          </div>
+
+          <div id="java-brute" class="tab-content">
+            <pre><code>
+class Solution {
+    public int[] getMaximumXor(int[] nums, int maximumBit) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        int maxK = (1 << maximumBit) - 1;
+        
+        for (int i = n - 1; i >= 0; i--) {
+            int currentXor = 0;
+            for (int j = 0; j <= i; j++) {
+                currentXor ^= nums[j];
+            }
+            
+            int bestK = 0;
+            for (int k = 0; k <= maxK; k++) {
+                if ((currentXor ^ k) > (currentXor ^ bestK)) {
+                    bestK = k;
+                }
+            }
+            ans[n - 1 - i] = bestK;
+        }
+        
+        return ans;
+    }
+}
+                </code></pre>
+          </div>
+
+          <div id="python-brute" class="tab-content">
+            <pre><code>
+class Solution:
+    def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
+        n = len(nums)
+        ans = [0] * n
+        max_k = (1 << maximumBit) - 1
+        
+        for i in range(n-1, -1, -1):
+            current_xor = 0
+            for j in range(i+1):
+                current_xor ^= nums[j]
+                
+            best_k = 0
+            for k in range(max_k + 1):
+                if (current_xor ^ k) > (current_xor ^ best_k):
+                    best_k = k
+            ans[n - 1 - i] = best_k
+            
+        return ans
+                </code></pre>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <strong>Note:</strong> This solution will result in Time Limit Exceeded (TLE) for large inputs due to its high
+          time complexity.
+        </div>
+
+        <hr />
+
+        <h2>Approach 2: Cumulative XOR with Bit Manipulation (Optimal)</h2>
+        <p>
+          The optimal solution uses cumulative XOR and bit manipulation to find the maximum XOR result efficiently. By
+          recognizing that the optimal k is always (1 << maximumBit) - 1 XOR cumulative_xor, we can avoid the nested
+            loops of the brute force approach. </p>
+
+            <h3>Key Insights</h3>
+            <ul>
+              <li>The maximum possible XOR result is always (1 << maximumBit) - 1</li>
+              <li>The optimal k is (max_value XOR cumulative_xor)</li>
+              <li>We can compute cumulative XOR in reverse order to reuse previous computations</li>
+              <li>No need to try all possible k values - we can calculate the optimal k directly</li>
+            </ul>
+
+            <h3>Algorithm Steps</h3>
+            <ol>
+              <li><strong>Compute</strong> the maximum possible value: (1 << maximumBit) - 1</li>
+              <li><strong>Initialize</strong> cumulative XOR to 0 and result array</li>
+              <li><strong>Iterate</strong> through the array in reverse order:
+                <ul>
+                  <li>Update cumulative XOR with current element</li>
+                  <li>Calculate optimal k as (max_value XOR cumulative_xor)</li>
+                  <li>Store k in result array</li>
+                </ul>
+              </li>
+              <li><strong>Return</strong> the result array</li>
+            </ol>
+
+            <h3>Complexity Analysis</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Time Complexity</th>
+                  <th>Space Complexity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>O(n)</td>
+                  <td>O(n)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>
+              <strong>Explanation:</strong> We only traverse the array once, and each XOR operation is O(1). The space
+              is O(n) for the result array.
+            </p>
+
+            <h3>Implementation</h3>
+
+            <div class="code-tabs">
+              <div class="tab-buttons">
+                <button class="tab-button active" onclick="openTab(event, 'cpp-optimal')">
+                  C++
+                </button>
+                <button class="tab-button" onclick="openTab(event, 'java-optimal')">
+                  Java
+                </button>
+                <button class="tab-button" onclick="openTab(event, 'python-optimal')">
+                  Python
+                </button>
+              </div>
+
+              <div id="cpp-optimal" class="tab-content active">
+                <pre><code>
+class Solution {
+public:
+    vector&lt;int&gt; getMaximumXor(vector&lt;int&gt;& nums, int maximumBit) {
+        int n = nums.size();
+        int max_val = (1 << maximumBit) - 1;
+        vector&lt;int&gt; ans(n);
+        int cumulative_xor = 0;
+        
+        for (int i = n - 1; i >= 0; i--) {
+            cumulative_xor ^= nums[n - 1 - i];
+            ans[i] = max_val ^ cumulative_xor;
+        }
+        
+        return ans;
+    }
+};
+                </code></pre>
+              </div>
+
+              <div id="java-optimal" class="tab-content">
+                <pre><code>
+class Solution {
+    public int[] getMaximumXor(int[] nums, int maximumBit) {
+        int n = nums.length;
+        int max_val = (1 << maximumBit) - 1;
+        int[] ans = new int[n];
+        int cumulative_xor = 0;
+        
+        for (int i = 0; i < n; i++) {
+            cumulative_xor ^= nums[n - 1 - i];
+            ans[i] = max_val ^ cumulative_xor;
+        }
+        
+        return ans;
+    }
+}
+                </code></pre>
+              </div>
+
+              <div id="python-optimal" class="tab-content">
+                <pre><code>
+class Solution:
+    def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
+        n = len(nums)
+        max_val = (1 << maximumBit) - 1
+        ans = [0] * n
+        cumulative_xor = 0
+        
+        for i in range(n):
+            cumulative_xor ^= nums[n - 1 - i]
+            ans[i] = max_val ^ cumulative_xor
+            
+        return ans
+                </code></pre>
+              </div>
+            </div>
+
+            <div class="callout tip">
+              <strong>Why This Works:</strong> The XOR operation has special properties where a ^ b ^ b = a. By XOR-ing
+              with (max_val ^ cumulative_xor), we effectively set all bits to 1 in the maximum possible range, giving us
+              the maximum possible result.
+            </div>
+
+            <hr />
+
+            <h2>Approach 3: Prefix XOR (Alternative Optimal Solution)</h2>
+            <p>
+              This alternative solution computes the prefix XOR array first, then calculates the optimal k for each
+              query. It's slightly different in implementation but has the same time complexity.
+            </p>
+
+            <h3>Implementation</h3>
+
+            <div class="code-tabs">
+              <div class="tab-buttons">
+                <button class="tab-button active" onclick="openTab(event, 'cpp-prefix')">
+                  C++
+                </button>
+                <button class="tab-button" onclick="openTab(event, 'java-prefix')">
+                  Java
+                </button>
+                <button class="tab-button" onclick="openTab(event, 'python-prefix')">
+                  Python
+                </button>
+              </div>
+
+              <div id="cpp-prefix" class="tab-content active">
+                <pre><code>
+class Solution {
+public:
+    vector&lt;int&gt; getMaximumXor(vector&lt;int&gt;& nums, int maximumBit) {
+        int n = nums.size();
+        int max_val = (1 << maximumBit) - 1;
+        vector&lt;int&gt; prefix(n + 1, 0);
+        vector&lt;int&gt; ans(n);
+        
+        // Compute prefix XOR
+        for (int i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] ^ nums[i];
+        }
+        
+        // Compute answers in reverse
+        for (int i = 0; i < n; i++) {
+            ans[i] = max_val ^ prefix[n - i];
+        }
+        
+        return ans;
+    }
+};
+                </code></pre>
+              </div>
+
+              <div id="java-prefix" class="tab-content">
+                <pre><code>
+class Solution {
+    public int[] getMaximumXor(int[] nums, int maximumBit) {
+        int n = nums.length;
+        int max_val = (1 << maximumBit) - 1;
+        int[] prefix = new int[n + 1];
+        int[] ans = new int[n];
+        
+        // Compute prefix XOR
+        for (int i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] ^ nums[i];
+        }
+        
+        // Compute answers in reverse
+        for (int i = 0; i < n; i++) {
+            ans[i] = max_val ^ prefix[n - i];
+        }
+        
+        return ans;
+    }
+}
+                </code></pre>
+              </div>
+
+              <div id="python-prefix" class="tab-content">
+                <pre><code>
+class Solution:
+    def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
+        n = len(nums)
+        max_val = (1 << maximumBit) - 1
+        prefix = [0] * (n + 1)
+        ans = [0] * n
+        
+        # Compute prefix XOR
+        for i in range(n):
+            prefix[i + 1] = prefix[i] ^ nums[i]
+            
+        # Compute answers in reverse
+        for i in range(n):
+            ans[i] = max_val ^ prefix[n - i]
+            
+        return ans
+                </code></pre>
+              </div>
+            </div>
+
+            <div class="callout note">
+              <strong>Note:</strong> This approach uses O(n) extra space for the prefix array, while the previous
+              optimal solution uses only O(1) extra space beyond the result array.
+            </div>
+
+            <hr />
+
+            <h2>Edge Cases and Special Considerations</h2>
+            <p>
+              When implementing solutions for this problem, consider these edge cases:
+            </p>
+
+            <h3>1. Single Element Array</h3>
+            <pre><code><b>Input:</b> nums = [5], maximumBit = 3
+<b>Output:</b> [2]
+Explanation: max_val = 7 (2^3-1), k = 7 XOR 5 = 2</code></pre>
+
+            <h3>2. All Elements Zero</h3>
+            <pre><code><b>Input:</b> nums = [0, 0, 0], maximumBit = 2
+<b>Output:</b> [3, 3, 3]
+Explanation: XOR is always 0, so k is always 3 (2^2-1)</code></pre>
+
+            <h3>3. Maximum Bit Value</h3>
+            <pre><code><b>Input:</b> nums = [1, 2, 3], maximumBit = 1
+<b>Output:</b> [0, 1, 1]
+Explanation: max_val = 1 (2^1-1), so k can only be 0 or 1</code></pre>
+
+            <h3>4. Large Input Size</h3>
+            <pre><code><b>Input:</b> nums = [1, 2, 3, ..., 100000], maximumBit = 20
+<b>Output:</b> Array of 100000 elements
+Must handle efficiently with O(n) solution</code></pre>
+
+            <div class="callout warning">
+              <strong>Important:</strong> Always test with the upper constraint limits (n=10⁵) to ensure your solution
+              handles large inputs efficiently.
+            </div>
+
+            <hr />
+
+            <h2>Comparison of Approaches</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Approach</th>
+                  <th>Time Complexity</th>
+                  <th>Space Complexity</th>
+                  <th>When to Use</th>
+                  <th>Pros</th>
+                  <th>Cons</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Brute Force</td>
+                  <td>O(n² * 2<sup>maximumBit</sup>)</td>
+                  <td>O(n)</td>
+                  <td>Small inputs only</td>
+                  <td>Simple to understand</td>
+                  <td>Fails for large n</td>
+                </tr>
+                <tr>
+                  <td>Cumulative XOR</td>
+                  <td>O(n)</td>
+                  <td>O(n)</td>
+                  <td>All cases, optimal</td>
+                  <td>Most efficient</td>
+                  <td>Requires bit manipulation insight</td>
+                </tr>
+                <tr>
+                  <td>Prefix XOR</td>
+                  <td>O(n)</td>
+                  <td>O(n)</td>
+                  <td>When prefix array is useful</td>
+                  <td>Clear separation of steps</td>
+                  <td>Uses extra space</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="callout tip">
+              <strong>Interview Tip:</strong> When you see XOR problems, always consider the properties of XOR (a ^ a =
+              0, a ^ 0 = a) and look for patterns that can help optimize the solution.
+            </div>
+
+            <hr />
+
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-section">
+              <details>
+                <summary>
+                  1. Why does XOR with (1 << maximumBit) - 1 give the maximum result? </summary>
+                    <p>
+                      (1 << maximumBit) - 1 creates a number with all bits set to 1 within the maximumBit range. XOR-ing
+                        with this value flips all bits of the original number, giving the maximum possible value in that
+                        bit range. </p>
+              </details>
+
+              <details>
+                <summary>
+                  2. How does the cumulative XOR approach work in reverse?
+                </summary>
+                <p>
+                  By processing the array in reverse, we can build the cumulative XOR for each query efficiently. The
+                  XOR for nums[0..i] is the same as XOR(nums[0..n-1]) XOR XOR(nums[i+1..n-1]). This allows us to compute
+                  each query's XOR in constant time.
+                </p>
+              </details>
+
+              <details>
+                <summary>
+                  3. Can this problem be solved without bit manipulation?
+                </summary>
+                <p>
+                  While possible, it would be much less efficient. Bit manipulation allows us to compute the optimal k
+                  directly without trying all possibilities. Other approaches would likely result in higher time
+                  complexity.
+                </p>
+              </details>
+
+              <details>
+                <summary>
+                  4. What if the array wasn't sorted?
+                </summary>
+                <p>
+                  The solution doesn't depend on the array being sorted. The order of XOR operations doesn't matter (XOR
+                  is commutative and associative), so the approach works regardless of the array's order.
+                </p>
+              </details>
+
+              <details>
+                <summary>
+                  5. How would you modify the solution if we needed to keep the array intact?
+                </summary>
+                <p>
+                  You could make a copy of the array or use indices to track the current subarray without modifying the
+                  original array. The time and space complexity would remain the same.
+                </p>
+              </details>
+
+              <details>
+                <summary>
+                  6. Is the prefix XOR approach better than the cumulative XOR approach?
+                </summary>
+                <p>
+                  Both have O(n) time complexity. The prefix XOR approach uses slightly more space (O(n) vs O(1)) but
+                  may be more intuitive for some. The cumulative XOR approach is more space-efficient.
+                </p>
+              </details>
+
+              <details>
+                <summary>
+                  7. How does this problem relate to real-world applications?
+                </summary>
+                <p>
+                  XOR operations are fundamental in cryptography, error detection, and data compression. This problem
+                  demonstrates how to maximize XOR results efficiently, which is useful in encryption algorithms and
+                  checksum calculations.
+                </p>
+              </details>
+
+              <details>
+                <summary>
+                  8. What similar problems should I practice to master this pattern?
+                </summary>
+                <p>
+                  Recommended problems: 421 (Maximum XOR of Two Numbers in an Array), 1318 (Minimum Flips to Make a OR b
+                  Equal to c), 1442 (Count Triplets That Can Form Two Arrays of Equal XOR), and 1734 (Decode XORed
+                  Permutation).
+                </p>
+              </details>
+            </div>
+
+            <div class="callout">
+              <strong>Final Thoughts:</strong> This problem demonstrates the power of XOR bit manipulation and
+              cumulative operations. The key insight is recognizing that the optimal k can be computed directly without
+              exhaustive search. Mastering this pattern will help you solve many bit manipulation problems efficiently.
+            </div>
+  </main>
+
+  <!-- Footer will be inserted by JavaScript -->
+  <div id="footer"></div>
+
+</body>
+
+</html>

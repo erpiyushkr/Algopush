@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2962 Count Subarrays Where Max Element Appears at Least K Times</title>
+  <meta name="description"
+    content="Solve LeetCode 2962 with C++, Java, and Python using sliding window technique. Count subarrays where max element appears at least k times." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode 2962, Count Subarrays Where Max Element Appears at Least K Times, Sliding Window, Array problems, Coding interview prep, C++ Java Python solutions, Algopush tutorials" />
+  <meta name="author" content="Algopush" />
+  <meta property="og:title"
+    content="LeetCode 2962 Solution | Count Subarrays Where Max Element Appears at Least K Times" />
+  <meta property="og:description"
+    content="Master the sliding window approach to solve LeetCode 2962 efficiently. Complete guide with multiple implementations and complexity analysis." />
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/2962.png" />
+  <meta property="og:url"
+    content="https://algopush.com/Leetcode/2962-count-subarrays-where-max-element-appears-at-least-k-times.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title"
+    content="LeetCode 2962 Solution | Count Subarrays Where Max Element Appears at Least K Times" />
+  <meta name="twitter:description"
+    content="Optimal sliding window solution for LeetCode 2962 with detailed explanations and code implementations." />
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/2962.png" />
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical"
+    href="https://algopush.com/Leetcode/2962-count-subarrays-where-max-element-appears-at-least-k-times.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Preload important resources -->
+  <link rel="preload" href="../script.js" as="script" />
+  <link rel="preload" href="https://algopush.com/styles.css" as="style" />
+
+  <!-- Structured Data for enhanced SEO -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "LeetCode 2962 Solution: Count Subarrays Where Max Element Appears at Least K Times",
+        "author": {
+          "@type": "Organization",
+          "name": "Algopush",
+          "url": "https://algopush.com"
+        },
+        "image": "https://algopush.com/Leetcode/Images/2962.png",
+        "datePublished": "2025-05-03",
+        "dateModified": "2025-05-03",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Algopush",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://algopush.com/components/logo.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://algopush.com/Leetcode/2962-count-subarrays-where-max-element-appears-at-least-k-times.html"
+        },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "xPath": [
+            "/html/head/title"
+          ],
+          "cssSelector": ["h1", "main p:first-of-type"]
+        }
+      }
+    </script>
+
+  <script>
+    // Function to handle tab switching
+    function openTab(evt, tabName) {
+      // Get all elements with class="tab-content" and hide them
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+      }
+
+      // Get all elements with class="tab-button" and remove the "active" class
+      const tabButtons = document.getElementsByClassName("tab-button");
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+      }
+
+      // Show the current tab and add the "active" class to the button that opened the tab
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Initialize the first tab as active by default
+    document.addEventListener("DOMContentLoaded", function () {
+      const defaultTab = document.querySelector(".tab-button");
+      if (defaultTab) {
+        defaultTab.click();
+      }
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      color: #24292e;
+    }
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: #6a737d;
+    }
+
+    .token.punctuation {
+      color: #24292e;
+    }
+
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      color: #d63384;
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: #22863a;
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      color: #d63384;
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      color: #d63384;
+    }
+
+    .token.function,
+    .token.class-name {
+      color: #6f42c1;
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable {
+      color: #e36209;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.5rem;
+      outline: none;
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding-left: 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .callout.note {
+      background-color: #eaf2f8;
+      border-color: #3498db;
+    }
+
+    .callout.warning {
+      background-color: #fef5e7;
+      border-color: #f39c12;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-buttons {
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        flex: 1 0 auto;
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header will be inserted by JavaScript -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>Problem 2962</span>
+    </div>
+
+    <!-- Problem Visualization Image -->
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/2962.png"
+        alt="Count Subarrays Where Max Element Appears at Least K Times" loading="lazy">
+    </div>
+
+    <h1>2962: Count Subarrays Where Max Element Appears at Least K Times</h1>
+
+    <!-- Problem Metadata -->
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Sliding Window, Hash Map</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Meta</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> This problem combines sliding window technique with frequency counting, making it an
+      excellent problem to master for coding interviews. The optimal solution runs in O(n) time with O(1) space.
+    </div>
+
+    <p>
+      The problem "Count Subarrays Where Max Element Appears at Least K Times" (LeetCode 2962) requires us to count the
+      number of subarrays where the maximum element of the array appears at least <code>k</code> times in that subarray.
+      This problem tests our ability to efficiently count subarrays that meet specific frequency conditions.
+    </p>
+
+    <h2>Problem Statement</h2>
+    <p>
+      Given an integer array <code>nums</code> and a positive integer <code>k</code>, return the number of subarrays
+      where the maximum element of <code>nums</code> appears at least <code>k</code> times in that subarray.
+    </p>
+    <p>
+      A subarray is a contiguous sequence of elements within an array.
+    </p>
+
+    <h3>Constraints</h3>
+    <ul>
+      <li><code>1 ≤ nums.length ≤ 10<sup>5</sup></code></li>
+      <li><code>1 ≤ nums[i] ≤ 10<sup>6</sup></code></li>
+      <li><code>1 ≤ k ≤ 10<sup>5</sup></code></li>
+    </ul>
+
+    <h2>Problem Link</h2>
+    <p>
+      <a href="https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/"
+        target="_blank" rel="noopener noreferrer">View on LeetCode ↗</a>
+    </p>
+
+    <h3>Example 1</h3>
+    <pre><code><b>Input:</b> nums = [1,3,2,3,3], k = 2
+<b>Output:</b> 6
+<b>Explanation:</b>
+The subarrays that contain the element 3 (which is the maximum) at least 2 times are:
+- [1,3,2,3] → contains 3 twice
+- [1,3,2,3,3] → contains 3 three times
+- [3,2,3] → contains 3 twice
+- [3,2,3,3] → contains 3 three times
+- [2,3,3] → contains 3 twice
+- [3,3] → contains 3 twice</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code><b>Input:</b> nums = [1,4,2,1], k = 3
+<b>Output:</b> 0
+<b>Explanation:</b>
+No subarray contains the maximum element (4) at least 3 times.</code></pre>
+
+    <div class="callout note">
+      <strong>Note:</strong> The maximum element of the array will appear in all valid subarrays, so we can focus on
+      counting occurrences of just the maximum element.
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Brute Force (TLE)</h2>
+    <p>
+      The brute force approach checks every possible subarray and counts how many times the maximum element appears in
+      each. While straightforward, this approach results in O(n²) time complexity, which is too slow for the upper
+      constraint of n ≤ 10⁵.
+    </p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li><strong>Find</strong> the maximum element in the array</li>
+      <li><strong>Initialize</strong> a counter to zero</li>
+      <li><strong>Iterate</strong> through all possible starting indices</li>
+      <li><strong>For each starting index</strong>, expand the subarray to the right</li>
+      <li><strong>Count</strong> occurrences of max element in current subarray</li>
+      <li><strong>Increment</strong> counter if count ≥ k</li>
+      <li><strong>Return</strong> the final count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n²)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Why it fails:</strong> For n = 10<sup>5</sup>, the number of operations would be around 10<sup>10</sup>,
+      which is way beyond what's acceptable (typically need to stay under 10<sup>6</sup> operations).
+    </p>
+
+    <h3>Implementation</h3>
+
+    <div class="code-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'cpp-brute')">
+          C++
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'java-brute')">
+          Java
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'python-brute')">
+          Python
+        </button>
+      </div>
+
+      <div id="cpp-brute" class="tab-content active">
+        <pre><code>
+class Solution {
+public:
+    long long countSubarrays(vector&lt;int&gt;& nums, int k) {
+        int max_num = *max_element(nums.begin(), nums.end());
+        long long count = 0;
+        int n = nums.size();
+        
+        for(int i = 0; i &lt; n; i++) {
+            int current_max_count = 0;
+            for(int j = i; j &lt; n; j++) {
+                if(nums[j] == max_num) {
+                    current_max_count++;
+                }
+                if(current_max_count >= k) {
+                    count += (n - j);
+                    break;
+                }
+            }
+        }
+        
+        return count;
+    }
+};
+                </code></pre>
+      </div>
+
+      <div id="java-brute" class="tab-content">
+        <pre><code>
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        int maxNum = Arrays.stream(nums).max().getAsInt();
+        long count = 0;
+        int n = nums.length;
+        
+        for(int i = 0; i &lt; n; i++) {
+            int currentMaxCount = 0;
+            for(int j = i; j &lt; n; j++) {
+                if(nums[j] == maxNum) {
+                    currentMaxCount++;
+                }
+                if(currentMaxCount >= k) {
+                    count += (n - j);
+                    break;
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+                </code></pre>
+      </div>
+
+      <div id="python-brute" class="tab-content">
+        <pre><code>
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        max_num = max(nums)
+        count = 0
+        n = len(nums)
+        
+        for i in range(n):
+            current_max_count = 0
+            for j in range(i, n):
+                if nums[j] == max_num:
+                    current_max_count += 1
+                if current_max_count >= k:
+                    count += (n - j)
+                    break
+                    
+        return count
+                </code></pre>
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <strong>Note:</strong> This solution will result in Time Limit Exceeded (TLE) for large inputs due to its O(n²)
+      time complexity.
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Sliding Window with Frequency Map (Optimal)</h2>
+    <p>
+      The optimal solution uses a sliding window technique combined with a frequency map to track occurrences of the
+      maximum element. This approach works by maintaining a window where the count of the maximum element is at least
+      <code>k</code>.
+    </p>
+
+    <h3>Key Insights</h3>
+    <ul>
+      <li>First find the maximum element in the array (only need to do this once)</li>
+      <li>Use a sliding window to track subarrays containing the max element</li>
+      <li>When the count of max element reaches <code>k</code>, all subarrays ending at current right pointer and
+        starting from current left pointer to any previous valid position will be valid</li>
+      <li>Use a frequency map to efficiently track counts of elements in the current window</li>
+    </ul>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li><strong>Find</strong> the maximum element in the array</li>
+      <li><strong>Initialize</strong> left pointer, count, and result to 0</li>
+      <li><strong>Initialize</strong> a frequency map (or just track count of max element)</li>
+      <li><strong>Iterate</strong> with right pointer from 0 to n-1:
+        <ul>
+          <li>Update frequency of current element</li>
+          <li>If current element is max, update max count</li>
+          <li>While max count ≥ k:
+            <ul>
+              <li>Add all valid subarrays ending at right pointer to result</li>
+              <li>Move left pointer forward and adjust counts</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Return</strong> the total count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Explanation:</strong> Each element is processed exactly twice (added once when window expands and removed
+      once when window contracts), resulting in O(n) time complexity. We only need constant space to track the count of
+      the maximum element.
+    </p>
+
+    <h3>Implementation</h3>
+
+    <div class="code-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'cpp-optimal')">
+          C++
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'java-optimal')">
+          Java
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'python-optimal')">
+          Python
+        </button>
+      </div>
+
+      <div id="cpp-optimal" class="tab-content active">
+        <pre><code>
+class Solution {
+public:
+    long long countSubarrays(vector&lt;int&gt;& nums, int k) {
+        int max_num = *max_element(nums.begin(), nums.end());
+        long long count = 0;
+        int max_count = 0;
+        int left = 0;
+        int n = nums.size();
+        
+        for(int right = 0; right &lt; n; right++) {
+            if(nums[right] == max_num) {
+                max_count++;
+            }
+            
+            while(max_count >= k) {
+                count += (n - right);
+                if(nums[left] == max_num) {
+                    max_count--;
+                }
+                left++;
+            }
+        }
+        
+        return count;
+    }
+};
+                </code></pre>
+      </div>
+
+      <div id="java-optimal" class="tab-content">
+        <pre><code>
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        int maxNum = Arrays.stream(nums).max().getAsInt();
+        long count = 0;
+        int maxCount = 0;
+        int left = 0;
+        int n = nums.length;
+        
+        for(int right = 0; right &lt; n; right++) {
+            if(nums[right] == maxNum) {
+                maxCount++;
+            }
+            
+            while(maxCount >= k) {
+                count += (n - right);
+                if(nums[left] == maxNum) {
+                    maxCount--;
+                }
+                left++;
+            }
+        }
+        
+        return count;
+    }
+}
+                </code></pre>
+      </div>
+
+      <div id="python-optimal" class="tab-content">
+        <pre><code>
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        max_num = max(nums)
+        count = 0
+        max_count = 0
+        left = 0
+        n = len(nums)
+        
+        for right in range(n):
+            if nums[right] == max_num:
+                max_count += 1
+                
+            while max_count >= k:
+                count += (n - right)
+                if nums[left] == max_num:
+                    max_count -= 1
+                left += 1
+                
+        return count
+                </code></pre>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Why This Works:</strong> For each right pointer, when we have at least k occurrences of the max element,
+      all subarrays ending at right with start ≥ left are valid. There are exactly (n - right) such subarrays for each
+      valid window.
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Sliding Window with Map (Alternative Solution)</h2>
+    <p>
+      This alternative solution uses a map to track all elements in the current window, but still focuses on the count
+      of the maximum element. It's slightly more general but has the same time complexity.
+    </p>
+
+    <h3>Implementation</h3>
+
+    <div class="code-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'cpp-map')">
+          C++
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'java-map')">
+          Java
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'python-map')">
+          Python
+        </button>
+      </div>
+
+      <div id="cpp-map" class="tab-content active">
+        <pre><code>
+class Solution {
+public:
+    long long countSubarrays(vector&lt;int&gt;& nums, int k) {
+        map&lt;int, int&gt; mp;
+        long long count = 0;
+        int max_num = *max_element(nums.begin(), nums.end());
+        int left = 0;
+        int n = nums.size();
+        
+        for(int right = 0; right &lt; n; right++) {
+            mp[nums[right]]++;
+            
+            while(mp[max_num] >= k) {
+                count += (n - right);
+                mp[nums[left]]--;
+                left++;
+            }
+        }
+        
+        return count;
+    }
+};
+                </code></pre>
+      </div>
+
+      <div id="java-map" class="tab-content">
+        <pre><code>
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+        long count = 0;
+        int maxNum = Arrays.stream(nums).max().getAsInt();
+        int left = 0;
+        int n = nums.length;
+        
+        for(int right = 0; right &lt; n; right++) {
+            map.put(nums[right], map.getOrDefault(nums[right], 0) + 1);
+            
+            while(map.getOrDefault(maxNum, 0) >= k) {
+                count += (n - right);
+                map.put(nums[left], map.get(nums[left]) - 1);
+                left++;
+            }
+        }
+        
+        return count;
+    }
+}
+                </code></pre>
+      </div>
+
+      <div id="python-map" class="tab-content">
+        <pre><code>
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        from collections import defaultdict
+        
+        mp = defaultdict(int)
+        count = 0
+        max_num = max(nums)
+        left = 0
+        n = len(nums)
+        
+        for right in range(n):
+            mp[nums[right]] += 1
+            
+            while mp.get(max_num, 0) >= k:
+                count += (n - right)
+                mp[nums[left]] -= 1
+                left += 1
+                
+        return count
+                </code></pre>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Note:</strong> While this solution uses a map, it's still O(n) time complexity because each element is
+      processed exactly twice. However, the previous solution is more efficient in practice since it only tracks the
+      count of the maximum element.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Special Considerations</h2>
+    <p>
+      When implementing solutions for this problem, consider these edge cases:
+    </p>
+
+    <h3>1. All Elements Same</h3>
+    <pre><code><b>Input:</b> nums = [3,3,3,3], k = 2
+<b>Output:</b> 6
+All subarrays of length ≥2 contain the max element (3) at least twice:
+[3,3], [3,3], [3,3], [3,3,3], [3,3,3], [3,3,3,3]</code></pre>
+
+    <h3>2. Single Element Array</h3>
+    <pre><code><b>Input:</b> nums = [5], k = 1
+<b>Output:</b> 1 (the single element subarray contains max once)
+
+<b>Input:</b> nums = [5], k = 2
+<b>Output:</b> 0 (can't have count ≥2 in single element array)</code></pre>
+
+    <h3>3. Max Element Doesn't Appear Enough</h3>
+    <pre><code><b>Input:</b> nums = [1,2,1,2], k = 1
+<b>Output:</b> 4 (each single element subarray contains max once)
+
+<b>Input:</b> nums = [1,2,1,2], k = 2
+<b>Output:</b> 0 (max element 2 never appears twice in any subarray)</code></pre>
+
+    <h3>4. Large k Value</h3>
+    <pre><code><b>Input:</b> nums = [1,1,1,...,1] (10<sup>5</sup> elements), k = 10<sup>5</sup>
+<b>Output:</b> 1 (only the full array has count = k)</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test with the upper constraint limits (n=10⁵) to ensure your solution handles
+      large inputs efficiently.
+    </div>
+
+    <hr />
+
+    <h2>Approach 4: Optimized Sliding Window (Without Map)</h2>
+    <p>
+      This is the most efficient implementation of the sliding window approach that doesn't require any additional space
+      for a map. It simply tracks the count of the maximum element in the current window.
+    </p>
+
+    <h3>Key Insights</h3>
+    <ul>
+      <li>Only need to track count of the maximum element, not all elements</li>
+      <li>When max_count reaches k, all subarrays ending at current right and starting from current left are valid</li>
+      <li>No need for extra space - just maintain a counter for max element</li>
+    </ul>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li><strong>Find</strong> the maximum element in the array</li>
+      <li><strong>Initialize</strong> left pointer, max_count, and result count to 0</li>
+      <li><strong>Iterate</strong> with right pointer from 0 to n-1:
+        <ul>
+          <li>If current element is max, increment max_count</li>
+          <li>While max_count ≥ k:
+            <ul>
+              <li>Add (n - right) to count (all valid subarrays ending at right)</li>
+              <li>If left element is max, decrement max_count</li>
+              <li>Move left pointer forward</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Return</strong> the total count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <strong>Optimal Solution:</strong> This is the most space-efficient solution as it only requires constant extra
+      space beyond the input array.
+    </div>
+
+    <h3>Implementation</h3>
+
+    <div class="code-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'cpp-optimal-no-map')">
+          C++
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'java-optimal-no-map')">
+          Java
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'python-optimal-no-map')">
+          Python
+        </button>
+      </div>
+
+      <div id="cpp-optimal-no-map" class="tab-content active">
+        <pre><code>
+class Solution {
+public:
+    long long countSubarrays(vector&lt;int&gt;& nums, int k) {
+        int n = nums.size();
+        long long max_count = 0;
+        long long count = 0;
+        int maxi = *max_element(begin(nums), end(nums));
+        int i = 0;
+        int j = 0;
+
+        while(j &lt; n) {
+            if(nums[j] == maxi)
+                max_count++;
+
+            while(max_count >= k) {
+                count += (n - j);
+                if(nums[i] == maxi)
+                    max_count--;
+                i++;
+            }
+            j++;
+        }
+        return count;
+    }
+};
+                </code></pre>
+      </div>
+
+      <div id="java-optimal-no-map" class="tab-content">
+        <pre><code>
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        int n = nums.length;
+        long maxCount = 0;
+        long count = 0;
+        int maxNum = Arrays.stream(nums).max().getAsInt();
+        int left = 0;
+        
+        for(int right = 0; right &lt; n; right++) {
+            if(nums[right] == maxNum)
+                maxCount++;
+                
+            while(maxCount >= k) {
+                count += (n - right);
+                if(nums[left] == maxNum)
+                    maxCount--;
+                left++;
+            }
+        }
+        return count;
+    }
+}
+                </code></pre>
+      </div>
+
+      <div id="python-optimal-no-map" class="tab-content">
+        <pre><code>
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        max_count = 0
+        count = 0
+        max_num = max(nums)
+        left = 0
+        
+        for right in range(n):
+            if nums[right] == max_num:
+                max_count += 1
+                
+            while max_count >= k:
+                count += (n - right)
+                if nums[left] == max_num:
+                    max_count -= 1
+                left += 1
+                
+        return count
+                </code></pre>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Performance Note:</strong> This solution is optimal in both time (O(n)) and space (O(1)) complexity. It's
+      the recommended approach for this problem as it doesn't require any additional data structures.
+    </div>
+
+    <hr />
+
+    <h2>Approach 5: Index Tracking (Optimal Space)</h2>
+    <p>
+      This approach tracks the indices of all occurrences of the maximum element, then calculates valid subarrays by
+      leveraging these indices. It provides an alternative way to solve the problem with O(n) time and O(m) space (where
+      m is the count of max elements).
+    </p>
+
+    <h3>Key Insights</h3>
+    <ul>
+      <li>Store all indices where the maximum element appears</li>
+      <li>For each occurrence after the k-th one, calculate valid subarrays using the (i-k)th index</li>
+      <li>Efficiently counts subarrays without maintaining a sliding window</li>
+    </ul>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li><strong>Find</strong> the maximum element in the array</li>
+      <li><strong>Initialize</strong> an empty list to store indices of max elements</li>
+      <li><strong>Initialize</strong> count to 0</li>
+      <li><strong>Iterate</strong> through the array:
+        <ul>
+          <li>When encountering the max element, record its index</li>
+          <li>If we have at least k occurrences:
+            <ul>
+              <li>The valid starting points are from 0 to the (i-k)th occurrence index + 1</li>
+              <li>Add these starting points to the count</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Return</strong> the total count</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(m) where m is count of max elements</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <strong>When to Use:</strong> This approach is useful when you need to track specific positions of the max element
+      for other calculations. While it uses O(m) space, it can be more intuitive for some variations of this problem.
+    </div>
+
+    <h3>Implementation</h3>
+
+    <div class="code-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'cpp-index')">
+          C++
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'java-index')">
+          Java
+        </button>
+        <button class="tab-button" onclick="openTab(event, 'python-index')">
+          Python
+        </button>
+      </div>
+
+      <div id="cpp-index" class="tab-content active">
+        <pre><code>
+class Solution {
+public:
+    long long countSubarrays(vector&lt;int&gt;& nums, int k) {
+        long long count = 0;
+        int maxE = *max_element(begin(nums),end(nums));
+        vector&lt;int&gt; indices;
+
+        for(int i = 0; i &lt; nums.size(); i++) {
+            if(nums[i] == maxE) {
+                indices.push_back(i);
+            }
+
+            int size = indices.size();
+            if(size >= k) {
+                int last_index = indices[size-k];
+                count += last_index + 1;
+            }
+        }
+        return count;
+    }
+};
+// TC: O(n) 
+// SC: O(m) where m is number of max elements
+                </code></pre>
+      </div>
+
+      <div id="java-index" class="tab-content">
+        <pre><code>
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        long count = 0;
+        int maxE = Arrays.stream(nums).max().getAsInt();
+        List&lt;Integer&gt; indices = new ArrayList&lt;&gt;();
+
+        for(int i = 0; i &lt; nums.length; i++) {
+            if(nums[i] == maxE) {
+                indices.add(i);
+            }
+
+            int size = indices.size();
+            if(size >= k) {
+                int last_index = indices.get(size - k);
+                count += last_index + 1;
+            }
+        }
+        return count;
+    }
+}
+// TC: O(n) 
+// SC: O(m) where m is number of max elements
+                </code></pre>
+      </div>
+
+      <div id="python-index" class="tab-content">
+        <pre><code>
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        count = 0
+        maxE = max(nums)
+        indices = []
+
+        for i in range(len(nums)):
+            if nums[i] == maxE:
+                indices.append(i)
+
+            size = len(indices)
+            if size >= k:
+                last_index = indices[size - k]
+                count += last_index + 1
+                
+        return count
+# TC: O(n) 
+# SC: O(m) where m is number of max elements
+                </code></pre>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Note:</strong> While this approach uses O(m) space, it's still efficient as m ≤ n. The sliding window
+      approach (Approach 4) remains the most space-efficient with O(1) space.
+    </div>
+
+    <hr />
+
+    <!-- Update the Comparison Table to include the new approach -->
+    <h2>Comparison of Approaches</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+          <th>When to Use</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brute Force</td>
+          <td>O(n²)</td>
+          <td>O(1)</td>
+          <td>Small inputs (n &lt; 1000)</td>
+          <td>Simple to implement</td>
+          <td>Fails for large n</td>
+        </tr>
+        <tr>
+          <td>Sliding Window (Count)</td>
+          <td>O(n)</td>
+          <td>O(1)</td>
+          <td>All cases, optimal</td>
+          <td>Most efficient</td>
+          <td>Requires insight</td>
+        </tr>
+        <tr>
+          <td>Sliding Window (Map)</td>
+          <td>O(n)</td>
+          <td>O(1) or O(m)</td>
+          <td>When tracking multiple elements</td>
+          <td>More general</td>
+          <td>Slightly more overhead</td>
+        </tr>
+        <tr>
+          <td>Optimized Sliding Window</td>
+          <td>O(n)</td>
+          <td>O(1)</td>
+          <td>Best for this problem</td>
+          <td>Most space-efficient</td>
+          <td>Only tracks single element</td>
+        </tr>
+        <tr>
+          <td>Index Tracking</td>
+          <td>O(n)</td>
+          <td>O(m)</td>
+          <td>When positions are needed</td>
+          <td>Intuitive counting</td>
+          <td>Uses more space</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <strong>Interview Tip:</strong> When you see subarray problems with frequency conditions, first consider if you
+      can use a sliding window with simple counting (without a map) for maximum efficiency. This approach works well
+      when you only need to track one specific element's frequency.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>
+          1. Why does the sliding window approach work for this problem?
+        </summary>
+        <p>
+          The sliding window approach works because we're dealing with contiguous subarrays and need to maintain a count
+          of the maximum element. As we expand the window, we can track the count of the max element, and when it
+          reaches k, we know all larger windows ending at the current position will also satisfy the condition. This
+          allows us to efficiently count valid subarrays without checking every possibility.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          2. How does the count += (n - right) work in the optimal solution?
+        </summary>
+        <p>
+          When we have a window where the count of max element is ≥ k, all subarrays that:
+        <ul>
+          <li>Start at any position from left to current position</li>
+          <li>End at current right position and extend to the end of array</li>
+        </ul>
+        will be valid. There are exactly (n - right) such subarrays for each valid window position.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          3. Can this problem be solved using prefix sums?
+        </summary>
+        <p>
+          Prefix sums alone wouldn't help directly with counting frequency conditions. However, you could combine prefix
+          sums with binary search for an O(n log n) solution, but the sliding window approach is more efficient for this
+          problem with O(n) time complexity.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          4. What if the array contains multiple maximum elements?
+        </summary>
+        <p>
+          The problem specifies "the maximum element of nums" (singular), implying there's a single maximum value. If
+          there were multiple max values with the same value, the solution still works as we're counting occurrences of
+          that maximum value.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          5. How would you modify the solution if we needed exactly k occurrences?
+        </summary>
+        <p>
+          You would change the condition from <code>>= k</code> to <code>== k</code> and adjust the counting logic
+          accordingly. You might need to track the positions of max elements to count subarrays where the count equals k
+          exactly.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          6. Is the map-based solution better than the count-based one?
+        </summary>
+        <p>
+          The count-based solution is more efficient in practice since it only tracks the count of the max element (O(1)
+          space). The map-based solution is more general but has slightly more overhead. For this specific problem, the
+          count-based solution is preferred.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          7. How does this problem relate to real-world applications?
+        </summary>
+        <p>
+          Similar algorithms are used in data analysis for finding patterns in time-series data, such as identifying
+          periods where a certain threshold is exceeded. It's also useful in quality control for detecting runs of
+          maximum values in manufacturing processes.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          8. What similar problems should I practice to master this pattern?
+        </summary>
+        <p>
+          Recommended problems: 713 (Subarray Product Less Than K), 904 (Fruit Into Baskets), 1004 (Max Consecutive Ones
+          III), 1358 (Number of Substrings Containing All Three Characters), and 2302 (Count Subarrays With Score Less
+          Than K). These all use variations of the sliding window technique.
+        </p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Thoughts:</strong> This problem demonstrates the power of the sliding window technique for counting
+      subarrays that meet specific conditions. The key insight is recognizing that we only need to track the count of
+      the maximum element and can efficiently count valid subarrays when the condition is met. Mastering this pattern
+      will help you solve many array manipulation problems efficiently.
+    </div>
+  </main>
+
+  <!-- Footer will be inserted by JavaScript -->
+  <div id="footer"></div>
+
+</body>
+
+</html>

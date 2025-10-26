@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3587. Minimum Adjacent Swaps to Alternate Parity | LeetCode</title>
+    <meta name="description"
+        content="Complete solution for LeetCode 3587 with efficient algorithms, multiple approaches, and code implementations in C++, Java, and Python.">
+    <meta name="keywords"
+        content="LeetCode 3587, Minimum Adjacent Swaps to Alternate Parity, Minimum Adjacent Swaps, Parity Alternation, Array Manipulation, Algorithm, Programming, Coding Interview, LeetCode Medium Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical" href="https://algopush.com/Leetcode/3587-minimum-adjacent-swaps-to-alternate-parity.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="3587. Minimum Adjacent Swaps to Alternate Parity | LeetCode Solution">
+    <meta property="og:description"
+        content="Efficient solutions for LeetCode 3587 with multiple approaches and code implementations. Learn how to minimize adjacent swaps for parity alternation.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/3587.png">
+    <meta property="og:url"
+        content="https://algopush.com/Leetcode/3587-minimum-adjacent-swaps-to-alternate-parity.html">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 3587: Minimum Adjacent Swaps Solution">
+    <meta name="twitter:description"
+        content="Complete solution for LeetCode 3587 with efficient algorithms and code implementations for alternating parity arrangement.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3587.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Minimum Adjacent Swaps to Alternate Parity Solution Guide",
+        "url": "https://algopush.com/Leetcode/3587-minimum-adjacent-swaps-to-alternate-parity.html",
+        "image": "https://algopush.com/Leetcode/Images/3587.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-06-22",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        }
+    }
+    </script>
+    <style>
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Main Content Container */
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        /* Problem Visualization Image */
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: #f8f9fa;
+            margin-top: 0.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        /* LeetCode-like Syntax Highlighting with Light Theme */
+        .code-token-keyword {
+            color: #007acc;
+        }
+
+        .code-token-function {
+            color: #795e26;
+        }
+
+        .code-token-number {
+            color: #098658;
+        }
+
+        .code-token-string {
+            color: #a31515;
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        /* Highlight Callouts */
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Code Container */
+        .code-container {
+            position: relative;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        /* Tabs */
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Problem Metadata */
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>3587. Minimum Adjacent Swaps to Alternate Parity</span>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/3587.png" alt="Alternating Parity Visualization">
+        </div>
+
+        <h1>3587. Minimum Adjacent Swaps to Alternate Parity</h1>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Medium</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Array, Greedy Algorithm, Sorting</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Google, Amazon, Microsoft</span>
+            </div>
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>You are given an array <code>nums</code> of distinct integers. In one operation, you can swap any two
+            adjacent elements in the array.</p>
+        <p>An arrangement is valid if the parity of adjacent elements alternates (even-odd or odd-even). Return the
+            minimum number of adjacent swaps required to transform <code>nums</code> into any valid arrangement. If
+            impossible, return -1.</p>
+
+        <h3>Example 1</h3>
+        <pre><code>Input: nums = [2,4,6,5,7]
+Output: 3
+Explanation: 
+Swap 5 and 6: [2,4,5,6,7]
+Swap 4 and 5: [2,5,4,6,7]
+Swap 6 and 7: [2,5,4,7,6] (valid)</code></pre>
+
+        <h3>Example 2</h3>
+        <pre><code>Input: nums = [2,4,5,7]
+Output: 1
+Explanation: 
+Swap 4 and 5: [2,5,4,7] (valid)</code></pre>
+
+        <h3>Example 3</h3>
+        <pre><code>Input: nums = [1,2,3]
+Output: 0
+Explanation: Already valid</code></pre>
+
+        <h3>Example 4</h3>
+        <pre><code>Input: nums = [4,5,6,8]
+Output: -1
+Explanation: No valid arrangement possible</code></pre>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/minimum-adjacent-swaps-to-alternate-parity/" target="_blank">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr>
+
+        <h2>Key Insight</h2>
+        <p>The solution relies on counting even/odd elements and pattern matching:</p>
+        <ol>
+            <li>Count even and odd numbers - their counts must differ by at most 1</li>
+            <li>Two valid patterns: even-odd-even... or odd-even-odd...</li>
+            <li>For each valid pattern:
+                <ul>
+                    <li>Assign target positions to even/odd numbers</li>
+                    <li>Calculate inversion count to determine swap cost</li>
+                </ul>
+            </li>
+            <li>Return the minimal swap cost between patterns</li>
+        </ol>
+
+        <div class="callout tip">
+            <strong>Why this works:</strong> The inversion count (number of out-of-order pairs) equals the minimum
+            adjacent swaps needed to sort elements into their target positions.
+        </div>
+
+        <hr>
+
+        <h2>Approach 1: Brute Force (For Small Inputs Only)</h2>
+        <p>This approach generates all permutations of the array, checks for valid arrangements, and calculates the
+            minimum adjacent swaps required for each valid permutation.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Generate all permutations of the array</li>
+            <li>For each permutation:
+                <ul>
+                    <li>Check if adjacent elements have alternating parity</li>
+                    <li>Calculate adjacent swaps needed using bubble sort simulation</li>
+                </ul>
+            </li>
+            <li>Return the minimum swaps found</li>
+        </ol>
+
+        <div class="callout warning">
+            <strong>Note:</strong> This approach is O(n!) and only practical for very small inputs (n ≤ 10)
+        </div>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Brute Force Solution</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-brute">C++</button>
+                    <button class="tab-button" data-tab="java-brute">Java</button>
+                    <button class="tab-button" data-tab="python-brute">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-brute-tab">
+                    <pre><code><span class="code-token-keyword">#include</span> &lt;vector&gt;
+<span class="code-token-keyword">#include</span> &lt;algorithm&gt;
+<span class="code-token-keyword">#include</span> &lt;climits&gt;
+
+<span class="code-token-keyword">using namespace</span> std;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+        <span class="code-token-keyword">int</span> n = nums.size();
+        <span class="code-token-keyword">int</span> evenCount = 0, oddCount = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num % 2 == 0) evenCount++;
+            <span class="code-token-keyword">else</span> oddCount++;
+        }
+        
+        <span class="code-token-keyword">if</span> (abs(evenCount - oddCount) > 1) <span class="code-token-keyword">return</span> -1;
+        
+        vector&lt;<span class="code-token-keyword">int</span>&gt; indices(n);
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) indices[i] = i;
+        
+        <span class="code-token-keyword">int</span> minSwaps = INT_MAX;
+        <span class="code-token-keyword">do</span> {
+            <span class="code-token-comment">// Check if permutation has alternating parity</span>
+            <span class="code-token-keyword">bool</span> valid = true;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 1; i < n; i++) {
+                <span class="code-token-keyword">int</span> a = nums[indices[i-1]];
+                <span class="code-token-keyword">int</span> b = nums[indices[i]];
+                <span class="code-token-keyword">if</span> ((a % 2) == (b % 2)) {
+                    valid = <span class="code-token-keyword">false</span>;
+                    <span class="code-token-keyword">break</span>;
+                }
+            }
+            <span class="code-token-keyword">if</span> (!valid) <span class="code-token-keyword">continue</span>;
+            
+            <span class="code-token-comment">// Calculate adjacent swaps to achieve this permutation</span>
+            vector&lt;<span class="code-token-keyword">int</span>&gt; arr = indices;
+            <span class="code-token-keyword">int</span> swaps = 0;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+                <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < n - 1 - i; j++) {
+                    <span class="code-token-keyword">if</span> (arr[j] > arr[j+1]) {
+                        swap(arr[j], arr[j+1]);
+                        swaps++;
+                    }
+                }
+            }
+            minSwaps = min(minSwaps, swaps);
+        } <span class="code-token-keyword">while</span> (next_permutation(indices.begin(), indices.end()));
+        
+        <span class="code-token-keyword">return</span> (minSwaps == INT_MAX) ? -1 : minSwaps;
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-brute-tab">
+                    <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">int</span> evenCount = 0, oddCount = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num % 2 == 0) evenCount++;
+            <span class="code-token-keyword">else</span> oddCount++;
+        }
+        
+        <span class="code-token-keyword">if</span> (Math.abs(evenCount - oddCount) > 1) <span class="code-token-keyword">return</span> -1;
+        
+        <span class="code-token-keyword">int</span>[] indices = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n];
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) indices[i] = i;
+        
+        <span class="code-token-keyword">int</span> minSwaps = Integer.MAX_VALUE;
+        <span class="code-token-keyword">do</span> {
+            <span class="code-token-comment">// Check if permutation has alternating parity</span>
+            <span class="code-token-keyword">boolean</span> valid = true;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 1; i < n; i++) {
+                <span class="code-token-keyword">int</span> a = nums[indices[i-1]];
+                <span class="code-token-keyword">int</span> b = nums[indices[i]];
+                <span class="code-token-keyword">if</span> (a % 2 == b % 2) {
+                    valid = <span class="code-token-keyword">false</span>;
+                    <span class="code-token-keyword">break</span>;
+                }
+            }
+            <span class="code-token-keyword">if</span> (!valid) <span class="code-token-keyword">continue</span>;
+            
+            <span class="code-token-comment">// Calculate adjacent swaps to achieve this permutation</span>
+            <span class="code-token-keyword">int</span>[] arr = indices.clone();
+            <span class="code-token-keyword">int</span> swaps = 0;
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+                <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < n - 1 - i; j++) {
+                    <span class="code-token-keyword">if</span> (arr[j] > arr[j+1]) {
+                        <span class="code-token-keyword">int</span> temp = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = temp;
+                        swaps++;
+                    }
+                }
+            }
+            minSwaps = Math.min(minSwaps, swaps);
+        } <span class="code-token-keyword">while</span> (nextPermutation(indices));
+        
+        <span class="code-token-keyword">return</span> (minSwaps == Integer.MAX_VALUE) ? -1 : minSwaps;
+    }
+    
+    <span class="code-token-comment">// Helper function to generate next permutation</span>
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">nextPermutation</span>(<span class="code-token-keyword">int</span>[] array) {
+        <span class="code-token-keyword">int</span> i = array.length - 1;
+        <span class="code-token-keyword">while</span> (i > 0 && array[i-1] >= array[i]) i--;
+        <span class="code-token-keyword">if</span> (i <= 0) <span class="code-token-keyword">return</span> <span class="code-token-keyword">false</span>;
+        
+        <span class="code-token-keyword">int</span> j = array.length - 1;
+        <span class="code-token-keyword">while</span> (array[j] <= array[i-1]) j--;
+        
+        <span class="code-token-keyword">int</span> temp = array[i-1];
+        array[i-1] = array[j];
+        array[j] = temp;
+        
+        j = array.length - 1;
+        <span class="code-token-keyword">while</span> (i < j) {
+            temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            i++;
+            j--;
+        }
+        <span class="code-token-keyword">return</span> <span class="code-token-keyword">true</span>;
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-brute-tab">
+                    <pre><code><span class="code-token-keyword">from</span> itertools <span class="code-token-keyword">import</span> permutations
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minSwaps</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = len(nums)
+        even_count = sum(1 <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums <span class="code-token-keyword">if</span> num % 2 == 0)
+        odd_count = n - even_count
+        
+        <span class="code-token-keyword">if</span> abs(even_count - odd_count) > 1:
+            <span class="code-token-keyword">return</span> -1
+            
+        min_swaps = float('inf')
+        indices = list(range(n))
+        
+        <span class="code-token-keyword">for</span> perm <span class="code-token-keyword">in</span> permutations(indices):
+            <span class="code-token-comment"># Check if permutation has alternating parity</span>
+            valid = True
+            <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(1, n):
+                a = nums[perm[i-1]]
+                b = nums[perm[i]]
+                <span class="code-token-keyword">if</span> (a % 2) == (b % 2):
+                    valid = False
+                    <span class="code-token-keyword">break</span>
+                    
+            <span class="code-token-keyword">if</span> <span class="code-token-keyword">not</span> valid:
+                <span class="code-token-keyword">continue</span>
+                
+            <span class="code-token-comment"># Calculate adjacent swaps using bubble sort</span>
+            arr = list(perm)
+            swaps = 0
+            <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+                <span class="code-token-keyword">for</span> j <span class="code-token-keyword">in</span> range(n-1-i):
+                    <span class="code-token-keyword">if</span> arr[j] > arr[j+1]:
+                        arr[j], arr[j+1] = arr[j+1], arr[j]
+                        swaps += 1
+            min_swaps = min(min_swaps, swaps)
+            
+        <span class="code-token-keyword">return</span> min_swaps <span class="code-token-keyword">if</span> min_swaps != float('inf') <span class="code-token-keyword">else</span> -1</code></pre>
+                </div>
+            </div>
+
+            <div class="callout note">
+                <strong>Complexity:</strong> O(n! * n²) time, O(n) space - impractical for n > 10
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach 2: Optimized Inversion Count</h2>
+        <p>This efficient approach counts inversions to determine swap costs without brute-force permutation checks.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li><strong>Count parities:</strong> Calculate even and odd counts</li>
+            <li><strong>Check feasibility:</strong> If |even - odd| > 1, return -1</li>
+            <li><strong>Determine patterns:</strong>
+                <ul>
+                    <li>Pattern 1: Start with even (if even ≥ odd)</li>
+                    <li>Pattern 2: Start with odd (if odd ≥ even)</li>
+                </ul>
+            </li>
+            <li><strong>For each pattern:</strong>
+                <ul>
+                    <li>Assign target positions to even/odd numbers</li>
+                    <li>Calculate inversion count of position mapping</li>
+                </ul>
+            </li>
+            <li><strong>Return minimal inversion count</strong> between valid patterns</li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Optimal Solution</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-optimal">C++</button>
+                    <button class="tab-button" data-tab="java-optimal">Java</button>
+                    <button class="tab-button" data-tab="python-optimal">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-optimal-tab">
+                    <pre><code><span class="code-token-keyword">#include</span> &lt;vector&gt;
+<span class="code-token-keyword">#include</span> &lt;cmath&gt;
+<span class="code-token-keyword">#include</span> &lt;algorithm&gt;
+<span class="code-token-keyword">#include</span> &lt;climits&gt;
+
+<span class="code-token-keyword">using namespace</span> std;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">private</span>:
+    <span class="code-token-comment">// Merge sort helper to count inversions</span>
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">mergeAndCount</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& arr, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> mid, <span class="code-token-keyword">int</span> right) {
+        vector&lt;<span class="code-token-keyword">int</span>&gt; temp(right - left + 1);
+        <span class="code-token-keyword">int</span> i = left, j = mid + 1, k = 0;
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> inversions = 0;
+        
+        <span class="code-token-keyword">while</span> (i <= mid && j <= right) {
+            <span class="code-token-keyword">if</span> (arr[i] <= arr[j]) {
+                temp[k++] = arr[i++];
+            } <span class="code-token-keyword">else</span> {
+                temp[k++] = arr[j++];
+                inversions += (mid - i + 1);  <span class="code-token-comment">// Count inversions</span>
+            }
+        }
+        
+        <span class="code-token-keyword">while</span> (i <= mid) temp[k++] = arr[i++];
+        <span class="code-token-keyword">while</span> (j <= right) temp[k++] = arr[j++];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> idx = 0; idx < k; idx++) {
+            arr[left + idx] = temp[idx];
+        }
+        
+        <span class="code-token-keyword">return</span> inversions;
+    }
+
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">mergeSortAndCount</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& arr, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> right) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> inversions = 0;
+        <span class="code-token-keyword">if</span> (left < right) {
+            <span class="code-token-keyword">int</span> mid = left + (right - left) / 2;
+            inversions += <span class="code-token-function">mergeSortAndCount</span>(arr, left, mid);
+            inversions += <span class="code-token-function">mergeSortAndCount</span>(arr, mid + 1, right);
+            inversions += <span class="code-token-function">mergeAndCount</span>(arr, left, mid, right);
+        }
+        <span class="code-token-keyword">return</span> inversions;
+    }
+    
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+        <span class="code-token-keyword">int</span> n = nums.size();
+        <span class="code-token-keyword">int</span> evenCount = 0, oddCount = 0;
+        vector&lt;<span class="code-token-keyword">int</span>&gt; evenIndices, oddIndices;
+        
+        <span class="code-token-comment">// Count parities and record indices</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (nums[i] % 2 == 0) {
+                evenCount++;
+                evenIndices.push_back(i);
+            } <span class="code-token-keyword">else</span> {
+                oddCount++;
+                oddIndices.push_back(i);
+            }
+        }
+        
+        <span class="code-token-comment">// Check feasibility</span>
+        <span class="code-token-keyword">if</span> (abs(evenCount - oddCount) > 1) {
+            <span class="code-token-keyword">return</span> -1;
+        }
+        
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> minSwaps = LONG_LONG_MAX;
+        
+        <span class="code-token-comment">// Pattern 1: Start with even (even-odd-even...)</span>
+        <span class="code-token-keyword">if</span> (evenCount >= oddCount) {
+            vector&lt;<span class="code-token-keyword">int</span>&gt; positions(n);
+            <span class="code-token-comment">// Assign even positions: 0, 2, 4,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < evenIndices.size(); j++) {
+                positions[evenIndices[j]] = 2 * j;
+            }
+            <span class="code-token-comment">// Assign odd positions: 1, 3, 5,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < oddIndices.size(); j++) {
+                positions[oddIndices[j]] = 2 * j + 1;
+            }
+            minSwaps = min(minSwaps, <span class="code-token-function">mergeSortAndCount</span>(positions, 0, n-1));
+        }
+        
+        <span class="code-token-comment">// Pattern 2: Start with odd (odd-even-odd...)</span>
+        <span class="code-token-keyword">if</span> (oddCount >= evenCount) {
+            vector&lt;<span class="code-token-keyword">int</span>&gt; positions(n);
+            <span class="code-token-comment">// Assign odd positions: 0, 2, 4,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < oddIndices.size(); j++) {
+                positions[oddIndices[j]] = 2 * j;
+            }
+            <span class="code-token-comment">// Assign even positions: 1, 3, 5,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < evenIndices.size(); j++) {
+                positions[evenIndices[j]] = 2 * j + 1;
+            }
+            minSwaps = min(minSwaps, <span class="code-token-function">mergeSortAndCount</span>(positions, 0, n-1));
+        }
+        
+        <span class="code-token-keyword">return</span> minSwaps;
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-optimal-tab">
+                    <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-comment">// Merge sort helper to count inversions</span>
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">long</span> <span class="code-token-function">mergeAndCount</span>(<span class="code-token-keyword">int</span>[] arr, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> mid, <span class="code-token-keyword">int</span> right) {
+        <span class="code-token-keyword">int</span>[] temp = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[right - left + 1];
+        <span class="code-token-keyword">int</span> i = left, j = mid + 1, k = 0;
+        <span class="code-token-keyword">long</span> inversions = 0;
+        
+        <span class="code-token-keyword">while</span> (i <= mid && j <= right) {
+            <span class="code-token-keyword">if</span> (arr[i] <= arr[j]) {
+                temp[k++] = arr[i++];
+            } <span class="code-token-keyword">else</span> {
+                temp[k++] = arr[j++];
+                inversions += (mid - i + 1);  <span class="code-token-comment">// Count inversions</span>
+            }
+        }
+        
+        <span class="code-token-keyword">while</span> (i <= mid) temp[k++] = arr[i++];
+        <span class="code-token-keyword">while</span> (j <= right) temp[k++] = arr[j++];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> idx = 0; idx < temp.length; idx++) {
+            arr[left + idx] = temp[idx];
+        }
+        
+        <span class="code-token-keyword">return</span> inversions;
+    }
+
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">long</span> <span class="code-token-function">mergeSortAndCount</span>(<span class="code-token-keyword">int</span>[] arr, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> right) {
+        <span class="code-token-keyword">long</span> inversions = 0;
+        <span class="code-token-keyword">if</span> (left < right) {
+            <span class="code-token-keyword">int</span> mid = left + (right - left) / 2;
+            inversions += <span class="code-token-function">mergeSortAndCount</span>(arr, left, mid);
+            inversions += <span class="code-token-function">mergeSortAndCount</span>(arr, mid + 1, right);
+            inversions += <span class="code-token-function">mergeAndCount</span>(arr, left, mid, right);
+        }
+        <span class="code-token-keyword">return</span> inversions;
+    }
+
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minSwaps</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">int</span> evenCount = 0, oddCount = 0;
+        List&lt;Integer&gt; evenIndices = <span class="code-token-keyword">new</span> ArrayList&lt;&gt;();
+        List&lt;Integer&gt; oddIndices = <span class="code-token-keyword">new</span> ArrayList&lt;&gt;();
+        
+        <span class="code-token-comment">// Count parities and record indices</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (nums[i] % 2 == 0) {
+                evenCount++;
+                evenIndices.add(i);
+            } <span class="code-token-keyword">else</span> {
+                oddCount++;
+                oddIndices.add(i);
+            }
+        }
+        
+        <span class="code-token-comment">// Check feasibility</span>
+        <span class="code-token-keyword">if</span> (Math.abs(evenCount - oddCount) > 1) {
+            <span class="code-token-keyword">return</span> -1;
+        }
+        
+        <span class="code-token-keyword">long</span> minSwaps = Long.MAX_VALUE;
+        
+        <span class="code-token-comment">// Pattern 1: Start with even (even-odd-even...)</span>
+        <span class="code-token-keyword">if</span> (evenCount >= oddCount) {
+            <span class="code-token-keyword">int</span>[] positions = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n];
+            <span class="code-token-comment">// Assign even positions: 0, 2, 4,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < evenIndices.size(); j++) {
+                positions[evenIndices.get(j)] = 2 * j;
+            }
+            <span class="code-token-comment">// Assign odd positions: 1, 3, 5,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < oddIndices.size(); j++) {
+                positions[oddIndices.get(j)] = 2 * j + 1;
+            }
+            minSwaps = Math.min(minSwaps, <span class="code-token-function">mergeSortAndCount</span>(positions, 0, n-1));
+        }
+        
+        <span class="code-token-comment">// Pattern 2: Start with odd (odd-even-odd...)</span>
+        <span class="code-token-keyword">if</span> (oddCount >= evenCount) {
+            <span class="code-token-keyword">int</span>[] positions = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[n];
+            <span class="code-token-comment">// Assign odd positions: 0, 2, 4,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < oddIndices.size(); j++) {
+                positions[oddIndices.get(j)] = 2 * j;
+            }
+            <span class="code-token-comment">// Assign even positions: 1, 3, 5,...</span>
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = 0; j < evenIndices.size(); j++) {
+                positions[evenIndices.get(j)] = 2 * j + 1;
+            }
+            minSwaps = Math.min(minSwaps, <span class="code-token-function">mergeSortAndCount</span>(positions, 0, n-1));
+        }
+        
+        <span class="code-token-keyword">return</span> (<span class="code-token-keyword">int</span>) minSwaps;
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-optimal-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minSwaps</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = len(nums)
+        even_count = 0
+        even_indices = []
+        odd_indices = []
+        
+        <span class="code-token-comment"># Count parities and record indices</span>
+        <span class="code-token-keyword">for</span> i, num <span class="code-token-keyword">in</span> enumerate(nums):
+            <span class="code-token-keyword">if</span> num % 2 == 0:
+                even_count += 1
+                even_indices.append(i)
+            <span class="code-token-keyword">else</span>:
+                odd_indices.append(i)
+                
+        odd_count = n - even_count
+        
+        <span class="code-token-comment"># Check feasibility</span>
+        <span class="code-token-keyword">if</span> abs(even_count - odd_count) > 1:
+            <span class="code-token-keyword">return</span> -1
+            
+        <span class="code-token-keyword">def</span> <span class="code-token-function">merge_sort_count</span>(arr):
+            <span class="code-token-keyword">if</span> len(arr) <= 1:
+                <span class="code-token-keyword">return</span> 0
+                
+            mid = len(arr) // 2
+            left_arr = arr[:mid]
+            right_arr = arr[mid:]
+            inversions = merge_sort_count(left_arr) + merge_sort_count(right_arr)
+            
+            i = j = k = 0
+            <span class="code-token-keyword">while</span> i < len(left_arr) <span class="code-token-keyword">and</span> j < len(right_arr):
+                <span class="code-token-keyword">if</span> left_arr[i] <= right_arr[j]:
+                    arr[k] = left_arr[i]
+                    i += 1
+                <span class="code-token-keyword">else</span>:
+                    arr[k] = right_arr[j]
+                    j += 1
+                    inversions += len(left_arr) - i
+                k += 1
+                
+            <span class="code-token-keyword">while</span> i < len(left_arr):
+                arr[k] = left_arr[i]
+                i += 1
+                k += 1
+                
+            <span class="code-token-keyword">while</span> j < len(right_arr):
+                arr[k] = right_arr[j]
+                j += 1
+                k += 1
+                
+            <span class="code-token-keyword">return</span> inversions
+        
+        min_swaps = float('inf')
+        
+        <span class="code-token-comment"># Pattern 1: Start with even (even-odd-even...)</span>
+        <span class="code-token-keyword">if</span> even_count >= odd_count:
+            positions = [0] * n
+            <span class="code-token-comment"># Assign even positions: 0, 2, 4,...</span>
+            <span class="code-token-keyword">for</span> j, idx <span class="code-token-keyword">in</span> enumerate(even_indices):
+                positions[idx] = 2 * j
+            <span class="code-token-comment"># Assign odd positions: 1, 3, 5,...</span>
+            <span class="code-token-keyword">for</span> j, idx <span class="code-token-keyword">in</span> enumerate(odd_indices):
+                positions[idx] = 2 * j + 1
+                
+            count = merge_sort_count(positions.copy())  <span class="code-token-comment"># Use copy to preserve original</span>
+            min_swaps = min(min_swaps, count)
+            
+        <span class="code-token-comment"># Pattern 2: Start with odd (odd-even-odd...)</span>
+        <span class="code-token-keyword">if</span> odd_count >= even_count:
+            positions = [0] * n
+            <span class="code-token-comment"># Assign odd positions: 0, 2, 4,...</span>
+            <span class="code-token-keyword">for</span> j, idx <span class="code-token-keyword">in</span> enumerate(odd_indices):
+                positions[idx] = 2 * j
+            <span class="code-token-comment"># Assign even positions: 1, 3, 5,...</span>
+            <span class="code-token-keyword">for</span> j, idx <span class="code-token-keyword">in</span> enumerate(even_indices):
+                positions[idx] = 2 * j + 1
+                
+            count = merge_sort_count(positions.copy())
+            min_swaps = min(min_swaps, count)
+            
+        <span class="code-token-keyword">return</span> min_swaps</code></pre>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                <strong>Complexity:</strong> O(n log n) time, O(n) space - efficient for large inputs
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time</th>
+                    <th>Space</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Brute Force</td>
+                    <td>O(n! * n²)</td>
+                    <td>O(n)</td>
+                    <td>Small inputs (n ≤ 10)</td>
+                </tr>
+                <tr>
+                    <td>Optimized Inversion</td>
+                    <td>O(n log n)</td>
+                    <td>O(n)</td>
+                    <td>All cases (optimal)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout tip">
+            <strong>Recommendation:</strong> Always use the inversion count approach for real-world problems
+        </div>
+
+        <hr>
+
+        <h2>Edge Cases</h2>
+        <h3>1. Already valid arrangement</h3>
+        <pre><code>Input: [1,2,3] → Output: 0</code></pre>
+
+        <h3>2. Impossible arrangement</h3>
+        <pre><code>Input: [4,5,6,8] → Output: -1 (only even numbers)</code></pre>
+
+        <h3>3. Large input size</h3>
+        <pre><code>Input: [1,3,5,...,2,4,6,...] → Output: Calculated efficiently</code></pre>
+
+        <h3>4. Single element array</h3>
+        <pre><code>Input: [5] → Output: 0 (trivially valid)</code></pre>
+
+        <div class="callout warning">
+            <strong>Important:</strong> Always check the even/odd count difference first to avoid unnecessary
+            computation
+        </div>
+
+        <hr>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <details>
+                <summary>Why do we need two patterns?</summary>
+                <p>There are two possible valid arrangements: starting with even or starting with odd. We must compute
+                    costs for both and choose the minimal one when both are feasible.</p>
+            </details>
+
+            <details>
+                <summary>How does the inversion count relate to adjacent swaps?</summary>
+                <p>The inversion count (number of out-of-order pairs) directly equals the minimum adjacent swaps needed
+                    to sort elements. Each swap fixes exactly one inversion.</p>
+            </details>
+
+            <details>
+                <summary>Why not use bubble sort to count swaps directly?</summary>
+                <p>Bubble sort is O(n²) which is inefficient for large inputs (n=10^5). Merge sort inversion counting is
+                    O(n log n).</p>
+            </details>
+
+            <details>
+                <summary>Can we use a Fenwick tree for inversion counting?</summary>
+                <p>Yes, Fenwick trees can count inversions in O(n log n), but merge sort is simpler and equally
+                    efficient for this problem.</p>
+            </details>
+
+            <details>
+                <summary>How do we handle arrays with duplicate values?</summary>
+                <p>The problem states all elements are distinct, so we don't need to handle duplicates. For duplicates,
+                    we'd need stable sorting.</p>
+            </details>
+
+            <details>
+                <summary>Why is the feasibility check important?</summary>
+                <p>It avoids unnecessary computation. If |even - odd| > 1, no valid arrangement exists and we
+                    immediately return -1.</p>
+            </details>
+
+            <details>
+                <summary>Can we solve with O(1) space?</summary>
+                <p>No, we need O(n) space to store indices and position mappings. The merge sort recursion also uses
+                    O(log n) stack space.</p>
+            </details>
+
+            <details>
+                <summary>What if the array has negative numbers?</summary>
+                <p>Parity (even/odd) is defined for negative integers the same way as positives. The modulus operation
+                    works identically.</p>
+            </details>
+
+            <details>
+                <summary>Why assign positions with 2*j and 2*j+1?</span></summary>
+                <p>This creates a virtual target array where even and odd positions are interleaved. The exact values
+                    don't matter, only their relative ordering.</p>
+            </details>
+
+            <details>
+                <summary>How does this preserve the relative order of elements?</summary>
+                <p>We assign positions based on original indices, maintaining relative order within even and odd groups
+                    to minimize swaps.</p>
+            </details>
+
+            <details>
+                <summary>Can we optimize further?</summary>
+                <p>We could compute the inversion count without building the position array, but it wouldn't change the
+                    O(n log n) complexity.</p>
+            </details>
+
+            <details>
+                <summary>Why use merge sort instead of quicksort?</summary>
+                <p>Merge sort is stable and efficiently counts inversions during the merge process. Quicksort doesn't
+                    naturally count inversions.</p>
+            </details>
+
+            <details>
+                <summary>How would you explain this to a beginner?</summary>
+                <p>Imagine organizing books on a shelf: red covers (even) and blue covers (odd) must alternate. We first
+                    check if counts match (differ by ≤1), then calculate minimum adjacent swaps by tracking how far each
+                    book is from its ideal position.</p>
+            </details>
+        </div>
+
+        <div class="callout">
+            <strong>Final Recommendation:</strong> The inversion count approach provides the optimal solution for this
+            problem, efficiently handling large inputs while minimizing adjacent swaps.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+    <script>
+        // Same as previous solution
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+
+                        // Update active tab button
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        // Update active tab content
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            document.querySelectorAll('.faq-section details').forEach(detail => {
+                detail.addEventListener('toggle', () => {
+                    if (detail.open) {
+                        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>

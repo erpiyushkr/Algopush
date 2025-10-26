@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1290. Convert Binary Number in a Linked List to Integer</title>
+    <meta name="description"
+        content="Complete solution for LeetCode 1290 with efficient algorithms, multiple approaches, and code implementations for converting binary linked list to decimal.">
+    <meta name="keywords"
+        content="LeetCode 1290, Binary Linked List to Integer, Binary to Decimal Conversion, Linked List Problem, Bit Manipulation, Algorithm, Programming, Coding Interview, LeetCode Easy Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode easy question, leetcode daily question, Leetcode interview question, sde interview question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical"
+        href="https://algopush.com/Leetcode/1290-convert-binary-number-in-linked-list-to-integer.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="1290. Convert Binary Number in Linked List to Integer | LeetCode Solution">
+    <meta property="og:description"
+        content="Efficient solutions for LeetCode 1290 with multiple approaches and code implementations for converting binary linked list to decimal number.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/1290.png">
+    <meta property="og:url"
+        content="https://algopush.com/Leetcode/1290-convert-binary-number-in-linked-list-to-integer.html">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 1290: Binary Linked List to Integer Solution">
+    <meta name="twitter:description"
+        content="Complete solution for LeetCode 1290 with efficient algorithms and code implementations for converting binary linked list to decimal.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/1290.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Convert Binary Linked List to Integer Solution Guide",
+        "url": "https://algopush.com/Leetcode/1290-convert-binary-number-in-linked-list-to-integer.html",
+        "image": "https://algopush.com/Leetcode/Images/1290.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-06-22",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        }
+    }
+    </script>
+    <style>
+        /* Same as previous solution */
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        /* Same as previous solution */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        /* Problem Visualization Image */
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        pre {
+            background: #f8f9fa;
+            margin-top: 0.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        .code-token-keyword {
+            color: #007acc;
+        }
+
+        .code-token-function {
+            color: #795e26;
+        }
+
+        .code-token-number {
+            color: #098658;
+        }
+
+        .code-token-string {
+            color: #a31515;
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .code-container {
+            position: relative;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>1290. Convert Binary Number in a Linked List to Integer</span>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/1290.png" alt="Binary Linked List to Integer Visualization">
+        </div>
+
+        <h1>1290. Convert Binary Number in a Linked List to Integer</h1>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Easy</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Linked List, Bit Manipulation, Math</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Amazon, Microsoft, Google</span>
+            </div>
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>Given <code>head</code> which is a reference node to a singly-linked list. The value of each node in the
+            linked list is either 0 or 1. The linked list holds the binary representation of a number.</p>
+        <p>Return the decimal value of the number in the linked list. The most significant bit is at the head of the
+            linked list.</p>
+
+        <h3>Example 1</h3>
+        <pre><code>Input: head = [1,0,1]
+Output: 5
+Explanation: (101) in base 2 = (5) in base 10</code></pre>
+
+        <h3>Example 2</h3>
+        <pre><code>Input: head = [0]
+Output: 0</code></pre>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/" target="_blank">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr>
+
+        <h2>Key Insight</h2>
+        <p>The solution leverages the fact that binary numbers can be converted to decimal by traversing the linked list
+            and accumulating the result:</p>
+        <ol>
+            <li>Start with result = 0</li>
+            <li>For each node in the linked list:
+                <ul>
+                    <li>Left shift result by 1 (equivalent to multiplying by 2)</li>
+                    <li>Add the current node's value to the result</li>
+                </ul>
+            </li>
+            <li>Return the accumulated result</li>
+        </ol>
+
+        <div class="callout tip">
+            <strong>Why this works:</strong> Each left shift operation moves the existing bits to the left, making room
+            for the new bit at the least significant position.
+        </div>
+
+        <hr>
+
+        <h2>Approach 1: Linear Traversal with Bit Shifting</h2>
+        <p>This approach directly converts the binary linked list to decimal by traversing the list once.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize result to 0</li>
+            <li>Traverse the linked list from head to tail:
+                <ul>
+                    <li>Left shift result by 1 (result = result * 2)</li>
+                    <li>Add current node's value to result (result += node.val)</li>
+                </ul>
+            </li>
+            <li>Return the final result</li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Optimal Solution</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-optimal">C++</button>
+                    <button class="tab-button" data-tab="java-optimal">Java</button>
+                    <button class="tab-button" data-tab="python-optimal">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-optimal-tab">
+                    <pre><code><span class="code-token-keyword">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */</span>
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">getDecimalValue</span>(ListNode* head) {
+        <span class="code-token-keyword">int</span> result = 0;
+        <span class="code-token-keyword">while</span> (head != <span class="code-token-keyword">nullptr</span>) {
+            result = (result << 1) | head->val;
+            head = head->next;
+        }
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-optimal-tab">
+                    <pre><code><span class="code-token-keyword">/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */</span>
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">getDecimalValue</span>(ListNode head) {
+        <span class="code-token-keyword">int</span> result = 0;
+        <span class="code-token-keyword">while</span> (head != <span class="code-token-keyword">null</span>) {
+            result = (result << 1) | head.val;
+            head = head.next;
+        }
+        <span class="code-token-keyword">return</span> result;
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-optimal-tab">
+                    <pre><code><span class="code-token-keyword"># Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next</span>
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">getDecimalValue</span>(self, head: ListNode) -> <span class="code-token-keyword">int</span>:
+        result = 0
+        <span class="code-token-keyword">while</span> head:
+            result = (result << 1) | head.val
+            head = head.next
+        <span class="code-token-keyword">return</span> result</code></pre>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                <strong>Complexity:</strong> O(n) time, O(1) space - where n is the number of nodes in the linked list
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach 2: String Conversion</h2>
+        <p>This approach converts the binary linked list to a string first, then converts the string to decimal.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Traverse the linked list and build a binary string</li>
+            <li>Convert the binary string to decimal using built-in functions</li>
+            <li>Return the decimal value</li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Alternative Solution</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-string">C++</button>
+                    <button class="tab-button" data-tab="java-string">Java</button>
+                    <button class="tab-button" data-tab="python-string">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-string-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">getDecimalValue</span>(ListNode* head) {
+        string binary;
+        <span class="code-token-keyword">while</span> (head != <span class="code-token-keyword">nullptr</span>) {
+            binary += to_string(head->val);
+            head = head->next;
+        }
+        <span class="code-token-keyword">return</span> stoi(binary, 0, 2);
+    }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-string-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">getDecimalValue</span>(ListNode head) {
+        StringBuilder binary = <span class="code-token-keyword">new</span> StringBuilder();
+        <span class="code-token-keyword">while</span> (head != <span class="code-token-keyword">null</span>) {
+            binary.append(head.val);
+            head = head.next;
+        }
+        <span class="code-token-keyword">return</span> Integer.parseInt(binary.toString(), 2);
+    }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-string-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">getDecimalValue</span>(self, head: ListNode) -> <span class="code-token-keyword">int</span>:
+        binary = ''
+        <span class="code-token-keyword">while</span> head:
+            binary += str(head.val)
+            head = head.next
+        <span class="code-token-keyword">return</span> int(binary, 2)</code></pre>
+                </div>
+            </div>
+
+            <div class="callout note">
+                <strong>Complexity:</strong> O(n) time, O(n) space - requires extra space for the string
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Approach Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time</th>
+                    <th>Space</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bit Shifting</td>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                    <td>Optimal solution</td>
+                </tr>
+                <tr>
+                    <td>String Conversion</td>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                    <td>Readability</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout tip">
+            <strong>Recommendation:</strong> Use the bit shifting approach for optimal performance
+        </div>
+
+        <hr>
+
+        <h2>Edge Cases</h2>
+        <h3>1. Single node with value 0</h3>
+        <pre><code>Input: [0] → Output: 0</code></pre>
+
+        <h3>2. Single node with value 1</h3>
+        <pre><code>Input: [1] → Output: 1</code></pre>
+
+        <h3>3. All zeros</h3>
+        <pre><code>Input: [0,0,0] → Output: 0</code></pre>
+
+        <h3>4. All ones</h3>
+        <pre><code>Input: [1,1,1] → Output: 7</code></pre>
+
+        <h3>5. Maximum length (30 nodes)</h3>
+        <pre><code>Input: [1,1,...,1] (30 times) → Output: 2^30 - 1</code></pre>
+
+        <div class="callout warning">
+            <strong>Note:</strong> The bit shifting approach works for the maximum constraint (30 nodes) as 2^30-1 fits
+            within a 32-bit signed integer
+        </div>
+
+        <hr>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <details>
+                <summary>Why does left shifting work for binary conversion?</summary>
+                <p>Left shifting by 1 is equivalent to multiplying by 2 in binary. Each shift moves the existing bits
+                    left, making room for the new bit at the least significant position.</p>
+            </details>
+
+            <details>
+                <summary>Can we solve this recursively?</summary>
+                <p>Yes, but recursion would use O(n) stack space and isn't more efficient than the iterative solution.
+                </p>
+            </details>
+
+            <details>
+                <summary>What's the difference between bit shifting and multiplying by 2?</summary>
+                <p>Bit shifting (<<) is generally faster at the hardware level than multiplication, though modern
+                        compilers often optimize multiplication by 2 to use bit shifting.</p>
+            </details>
+
+            <details>
+                <summary>Why not use pow() function for conversion?</summary>
+                <p>Using pow() would require tracking the position of each bit, making the solution more complex without
+                    any benefit over the bit shifting approach.</p>
+            </details>
+
+            <details>
+                <summary>How does this handle leading zeros?</summary>
+                <p>The problem states the most significant bit is at the head, so leading zeros are part of the number
+                    (e.g., [0,1,0] represents binary 010 which is decimal 2).</p>
+            </details>
+
+            <details>
+                <summary>Can this be extended to other bases?</summary>
+                <p>Yes, similar approaches work for other bases by multiplying by the base instead of shifting bits.</p>
+            </details>
+
+            <details>
+                <summary>What if the linked list is empty?</summary>
+                <p>The problem constraints state the linked list is not empty, so we don't need to handle this case.</p>
+            </details>
+
+            <details>
+                <summary>Why is the bitwise OR used instead of addition?</summary>
+                <p>Bitwise OR (|) and addition (+) would work the same in this case since we're only dealing with 0 and
+                    1, but OR is slightly more idiomatic for bit manipulation.</p>
+            </details>
+
+            <details>
+                <summary>How would you explain this to a beginner?</summary>
+                <p>Imagine reading a binary number left to right. For each digit, double your current total and add the
+                    new digit. This is exactly what the bit shifting approach does.</p>
+            </details>
+
+            <details>
+                <summary>Can we reverse the linked list first?</summary>
+                <p>Yes, but reversing would require O(n) time and space without providing any benefit over the
+                    straightforward approach.</p>
+            </details>
+        </div>
+
+        <div class="callout">
+            <strong>Final Recommendation:</strong> The bit shifting approach provides the most efficient solution with
+            optimal time and space complexity, making it ideal for this problem.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            document.querySelectorAll('.faq-section details').forEach(detail => {
+                detail.addEventListener('toggle', () => {
+                    if (detail.open) {
+                        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>

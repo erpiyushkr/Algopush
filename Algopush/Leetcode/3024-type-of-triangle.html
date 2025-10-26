@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leetcode 3024 | Type of Triangle</title>
+    <meta name="description"
+        content="LeetCode 3024 solution: Determine triangle type using multiple approaches including direct comparison, sorting optimization, and set-based type detection.">
+    <meta name="keywords"
+        content="Leetcode type of triangle, leetcode 3024 type of triangle explanation, LeetCode 3024, Triangle Type, Equilateral, Isosceles, Scalene, 3024. Type of Triangle, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question">
+    <meta name="author" content="Algopush">
+    <link rel="canonical" href="https://algopush.com/Leetcode/3024-type-of-triangle.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 3024 | Type of Triangle">
+    <meta property="og:description"
+        content="Multiple approaches to determine triangle validity and type with detailed complexity analysis and implementations.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/3024.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/3024-type-of-triangle.html">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode 3024 | Type of Triangle">
+    <meta name="twitter:description"
+        content="Complete guide to solving triangle classification problem with time and space complexity analysis.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3024.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Type of Triangle Classification",
+    "url": "https://algopush.com/Leetcode/3024-type-of-triangle.html",
+    "image": "https://algopush.com/Leetcode/Images/3024.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Algopush",
+      "url": "https://algopush.com"
+    },
+    "datePublished": "2025-05-20",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Algopush",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://algopush.com/components/logo.png"
+      }
+    }
+  }
+  </script>
+
+    <style>
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Main Content Container */
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        /* Problem Visualization Image */
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        /* Code Blocks */
+        /* Code Blocks */
+        pre {
+            background: #f8f9fa;
+            margin-top: 0.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        /* LeetCode-like Syntax Highlighting with Light Theme */
+        .code-token-keyword {
+            color: #007acc;
+            /* LeetCode's blue for keywords */
+        }
+
+        .code-token-function {
+            color: #795e26;
+            /* LeetCode's function yellowish-brown */
+        }
+
+        .code-token-number {
+            color: #098658;
+            /* LeetCode's number green */
+        }
+
+        .code-token-string {
+            color: #a31515;
+            /* Typical red strings (LeetCode-like) */
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        /* Highlight Callouts */
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Code Container */
+        .code-container {
+            position: relative;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        /* Tabs */
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Problem Metadata */
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>3024. Type of Triangle</span>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/3024.png" alt="Triangle Type Classification">
+        </div>
+
+        <h1>3024: Type of Triangle</h1>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Easy</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Math, Geometry, Sorting</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Google, Amazon, Microsoft</span>
+            </div>
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>Given three positive integers representing triangle sides, classify the triangle type (equilateral,
+            isosceles, scalene) or return "none" if invalid.</p>
+
+        <h3>Example 1</h3>
+        <pre><code>Input: [3,3,3] → Output: "equilateral"</code></pre>
+
+        <h3>Example 2</h3>
+        <pre><code>Input: [3,4,5] → Output: "scalene"</code></pre>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/type-of-triangle/" target="_blank">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr>
+
+        <h2>Approach 1: Direct Comparison</h2>
+        <p>Check all three triangle inequalities directly and compare side lengths.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Check validity using a + b > c for all combinations</li>
+            <li>Check for equilateral (all sides equal)</li>
+            <li>Check for scalene (all sides different)</li>
+            <li>Default to isosceles if exactly two sides match</li>
+        </ol>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Space</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Direct Comparison</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-direct">C++</button>
+                    <button class="tab-button" data-tab="java-direct">Java</button>
+                    <button class="tab-button" data-tab="python-direct">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-direct-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+  <span class="code-token-keyword">string</span> <span class="code-token-function">triangleType</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+    <span class="code-token-keyword">int</span> a = nums[<span class="code-token-number">0</span>], b = nums[<span class="code-token-number">1</span>], c = nums[<span class="code-token-number">2</span>];
+    <span class="code-token-keyword">if</span>(a + b &lt;= c || b + c &lt;= a || c + a &lt;= b) <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>;
+
+    <span class="code-token-keyword">if</span>(a == b && b == c) <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>;
+    <span class="code-token-keyword">if</span>(a != b && b != c && a != c) <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span>;
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>;
+  }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-direct-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+  <span class="code-token-keyword">public</span> <span class="code-token-keyword">String</span> <span class="code-token-function">triangleType</span>(<span class="code-token-keyword">int</span>[] nums) {
+    <span class="code-token-keyword">int</span> a = nums[<span class="code-token-number">0</span>], b = nums[<span class="code-token-number">1</span>], c = nums[<span class="code-token-number">2</span>];
+    <span class="code-token-keyword">if</span>(a + b &lt;= c || b + c &lt;= a || c + a &lt;= b) <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>;
+
+    <span class="code-token-keyword">if</span>(a == b &amp;&amp; b == c) <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>;
+    <span class="code-token-keyword">if</span>(a != b &amp;&amp; b != c &amp;&amp; a != c) <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span>;
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>;
+  }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-direct-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+  <span class="code-token-keyword">def</span> <span class="code-token-function">triangleType</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">str</span>:
+    a, b, c = nums
+    <span class="code-token-keyword">if</span> a + b &lt;= c <span class="code-token-keyword">or</span> b + c &lt;= a <span class="code-token-keyword">or</span> c + a &lt;= b:
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>
+
+    <span class="code-token-keyword">if</span> a == b == c:
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>
+    <span class="code-token-keyword">if</span> a != b <span class="code-token-keyword">and</span> b != c <span class="code-token-keyword">and</span> a != c:
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span>
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+
+        <h2>Approach 2: Sorting Optimization</h2>
+        <p>Sort sides first to simplify validity check to a single condition.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Sort the array in ascending order</li>
+            <li>Check if smallest two sides sum > largest side</li>
+            <li>Use set to count unique values for classification</li>
+        </ol>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Sorting Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-sort">C++</button>
+                    <button class="tab-button" data-tab="java-sort">Java</button>
+                    <button class="tab-button" data-tab="python-sort">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-sort-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+  <span class="code-token-keyword">string</span> <span class="code-token-function">triangleType</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+    <span class="code-token-function">sort</span>(nums.<span class="code-token-function">begin</span>(), nums.<span class="code-token-function">end</span>());
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] + nums[<span class="code-token-number">1</span>] &lt;= nums[<span class="code-token-number">2</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>;
+
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] == nums[<span class="code-token-number">2</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>;
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] == nums[<span class="code-token-number">1</span>] || nums[<span class="code-token-number">1</span>] == nums[<span class="code-token-number">2</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>;
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span>;
+  }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-sort-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+  <span class="code-token-keyword">public</span> <span class="code-token-keyword">String</span> <span class="code-token-function">triangleType</span>(<span class="code-token-keyword">int</span>[] nums) {
+    Arrays.<span class="code-token-function">sort</span>(nums);
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] + nums[<span class="code-token-number">1</span>] &lt;= nums[<span class="code-token-number">2</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>;
+
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] == nums[<span class="code-token-number">2</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>;
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] == nums[<span class="code-token-number">1</span>] || nums[<span class="code-token-number">1</span>] == nums[<span class="code-token-number">2</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>;
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span>;
+  }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-sort-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+  <span class="code-token-keyword">def</span> <span class="code-token-function">triangleType</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">str</span>:
+    nums.<span class="code-token-function">sort</span>()
+    <span class="code-token-keyword">if</span> nums[<span class="code-token-number">0</span>] + nums[<span class="code-token-number">1</span>] &lt;= nums[<span class="code-token-number">2</span>]:
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>
+
+    <span class="code-token-keyword">if</span> nums[<span class="code-token-number">0</span>] == nums[<span class="code-token-number">2</span>]:
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>
+    <span class="code-token-keyword">if</span> nums[<span class="code-token-number">0</span>] == nums[<span class="code-token-number">1</span>] <span class="code-token-keyword">or</span> nums[<span class="code-token-number">1</span>] == nums[<span class="code-token-number">2</span>]:
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+
+        <h2>Approach 3: Set-Based Detection</h2>
+        <p>Use Set to track unique values for efficient type classification.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Set-Based Solution</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-set">C++</button>
+                    <button class="tab-button" data-tab="java-set">Java</button>
+                    <button class="tab-button" data-tab="python-set">Python</button>
+                </div>
+
+                <!-- C++ Code -->
+                <div class="tab-content active" id="cpp-set-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+  <span class="code-token-keyword">string</span> <span class="code-token-function">triangleType</span>(vector&lt;<span class="code-token-keyword">int</span>&gt;& nums) {
+    unordered_set&lt;<span class="code-token-keyword">int</span>&gt; s(nums.<span class="code-token-function">begin</span>(), nums.<span class="code-token-function">end</span>());
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] + nums[<span class="code-token-number">1</span>] &lt;= nums[<span class="code-token-number">2</span>] || 
+       nums[<span class="code-token-number">1</span>] + nums[<span class="code-token-number">2</span>] &lt;= nums[<span class="code-token-number">0</span>] || 
+       nums[<span class="code-token-number">2</span>] + nums[<span class="code-token-number">0</span>] &lt;= nums[<span class="code-token-number">1</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>;
+
+    <span class="code-token-keyword">if</span>(s.<span class="code-token-function">size</span>() == <span class="code-token-number">1</span>) <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>;
+    <span class="code-token-keyword">if</span>(s.<span class="code-token-function">size</span>() == <span class="code-token-number">2</span>) <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>;
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span>;
+  }
+};</code></pre>
+                </div>
+
+                <!-- Java Code -->
+                <div class="tab-content" id="java-set-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+  <span class="code-token-keyword">public</span> <span class="code-token-keyword">String</span> <span class="code-token-function">triangleType</span>(<span class="code-token-keyword">int</span>[] nums) {
+    Set&lt;<span class="code-token-keyword">Integer</span>&gt; set = <span class="code-token-keyword">new</span> <span class="code-token-function">HashSet</span>&lt;&gt;();
+    <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> num : nums) set.<span class="code-token-function">add</span>(num);
+
+    <span class="code-token-keyword">if</span>(nums[<span class="code-token-number">0</span>] + nums[<span class="code-token-number">1</span>] &lt;= nums[<span class="code-token-number">2</span>] || 
+       nums[<span class="code-token-number">1</span>] + nums[<span class="code-token-number">2</span>] &lt;= nums[<span class="code-token-number">0</span>] || 
+       nums[<span class="code-token-number">2</span>] + nums[<span class="code-token-number">0</span>] &lt;= nums[<span class="code-token-number">1</span>]) 
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>;
+
+    <span class="code-token-keyword">if</span>(set.<span class="code-token-function">size</span>() == <span class="code-token-number">1</span>) <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>;
+    <span class="code-token-keyword">if</span>(set.<span class="code-token-function">size</span>() == <span class="code-token-number">2</span>) <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>;
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span>;
+  }
+}</code></pre>
+                </div>
+
+                <!-- Python Code -->
+                <div class="tab-content" id="python-set-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+  <span class="code-token-keyword">def</span> <span class="code-token-function">triangleType</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">str</span>:
+    unique = <span class="code-token-function">len</span>(<span class="code-token-function">set</span>(nums))
+    a, b, c = nums
+
+    <span class="code-token-keyword">if</span> a + b &lt;= c <span class="code-token-keyword">or</span> b + c &lt;= a <span class="code-token-keyword">or</span> c + a &lt;= b:
+      <span class="code-token-keyword">return</span> <span class="code-token-string">"none"</span>
+
+    <span class="code-token-keyword">if</span> unique == <span class="code-token-number">1</span>: <span class="code-token-keyword">return</span> <span class="code-token-string">"equilateral"</span>
+    <span class="code-token-keyword">if</span> unique == <span class="code-token-number">2</span>: <span class="code-token-keyword">return</span> <span class="code-token-string">"isosceles"</span>
+    <span class="code-token-keyword">return</span> <span class="code-token-string">"scalene"</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+
+        <h2>Approach Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time</th>
+                    <th>Space</th>
+                    <th>Readability</th>
+                    <th>Check Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Direct Comparison</td>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                    <td>Good</td>
+                    <td>3 validity checks</td>
+                </tr>
+                <tr>
+                    <td>Sorting</td>
+                    <td>O(1)*</td>
+                    <td>O(1)</td>
+                    <td>Best</td>
+                    <td>1 validity check</td>
+                </tr>
+                <tr>
+                    <td>Set-Based</td>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                    <td>Moderate</td>
+                    <td>3 validity checks</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>* Sorting 3 elements is effectively O(1)</p>
+
+        <div class="callout warning">
+            <strong>Important:</strong> While all approaches have O(1) complexity, sorting method reduces validity
+            checks and improves readability.
+        </div>
+
+        <hr>
+
+        <h2>Edge Cases</h2>
+        <h3>1. Invalid Triangle</h3>
+        <pre><code>Input: [1,2,3] → Output: "none"</code></pre>
+
+        <h3>2. Two Equal Sides (Isosceles)</h3>
+        <pre><code>Input: [3,3,4] → Output: "isosceles"</code></pre>
+
+        <h3>3. All Sides Equal</h3>
+        <pre><code>Input: [5,5,5] → Output: "equilateral"</code></pre>
+
+        <h3>4. Zero Length (Invalid by Constraints)</h3>
+        <pre><code>Input: [0,1,1] → Constraints prevent this</code></pre>
+
+        <div class="callout tip">
+            <strong>Testing Tip:</strong> Always verify cases where sum of two sides equals exactly the third (invalid
+            case).
+        </div>
+
+        <hr>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <details>
+                <summary>Why check a + b > c instead of ≥?</summary>
+                <p>Triangle inequality theorem requires the sum of any two sides to be strictly greater than the third
+                    side for a valid triangle.</p>
+            </details>
+
+            <details>
+                <summary>Does the order of sides matter?</summary>
+                <p>No, triangle properties are order-agnostic. All approaches handle any order of input sides.</p>
+            </details>
+
+            <details>
+                <summary>How does sorting help in validation?</summary>
+                <p>After sorting, we only need to check if the sum of the two smaller sides is greater than the largest
+                    side.</p>
+            </details>
+
+            <details>
+                <summary>Why use a Set in Approach 3?</summary>
+                <p>A Set automatically tracks unique values, making it efficient to determine the number of distinct
+                    sides.</p>
+            </details>
+
+            <details>
+                <summary>Can we have multiple correct answers?</summary>
+                <p>No, each valid triangle has exactly one correct classification based on side lengths.</p>
+            </details>
+
+            <details>
+                <summary>How to handle floating-point numbers?</summary>
+                <p>While the problem specifies integers, the same logic works for floating-point numbers using
+                    appropriate comparisons.</p>
+            </details>
+
+            <details>
+                <summary>What's the maximum input size?</summary>
+                <p>Fixed input size of 3 elements (nums.length == 3) as per problem constraints.</p>
+            </details>
+
+            <details>
+                <summary>Why O(1) space complexity?</summary>
+                <p>All approaches use constant extra space regardless of input size (fixed to 3 elements).</p>
+            </details>
+
+            <details>
+                <summary>Can we use bit manipulation?</summary>
+                <p>Possible but would complicate the solution without providing any performance benefits.</p>
+            </details>
+
+            <details>
+                <summary>How to extend for polygons?</summary>
+                <p>This solution is specific to triangles. Polygons require different validation (sum of (n-1) sides >
+                    longest side).</p>
+            </details>
+
+            <details>
+                <summary>Why prefer sorting approach?</summary>
+                <p>Reduces validity checks from 3 to 1, improves readability, and handles side order automatically.</p>
+            </details>
+
+            <details>
+                <summary>What about negative numbers?</summary>
+                <p>Problem constraints specify 1 ≤ nums[i] ≤ 100, making negative inputs impossible.</p>
+            </details>
+        </div>
+
+        <div class="callout">
+            <strong>Final Recommendation:</strong> The sorting approach provides the best combination of efficiency,
+            readability, and maintainability for this problem.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Tab functionality with improved mobile support
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize tabs
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                // Set first tab as active by default if none are active
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                // Add click handlers
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+
+                        // Update active tab button
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        // Update active tab content
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // FAQ highlight when opened
+            document.querySelectorAll('.faq-section details').forEach(detail => {
+                detail.addEventListener('toggle', () => {
+                    if (detail.open) {
+                        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then((response) => response.text())
+                .then((data) => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>

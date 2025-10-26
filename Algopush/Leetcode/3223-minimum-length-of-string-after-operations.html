@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3223 | Minimum Length of String After Operations</title>
+  <meta name="description"
+    content="Solve the string operation problem using frequency analysis. Complete solutions in C++, Java, and Python." />
+  <meta name="keywords"
+    content="leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, LeetCode 3223, Minimum Length of String After Operations, frequency counting algorithm, string problems, coding interview preparation, C++ Java Python solutions" />
+  <meta name="author" content="Algopush" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3223: Minimum Length of String After Operations">
+  <meta property="og:description"
+    content="Complete guide to solving the Minimum Length of String After Operations problem using frequency analysis.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3223.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3223-minimum-length-of-string-after-operations.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3223: Minimum Length of String After Operations">
+  <meta name="twitter:description"
+    content="Frequency analysis approach to solve the LeetCode 3223: Minimum Length of String After Operations problem with code examples.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3223.png">
+
+  <!-- Google News / Publisher Meta Tags -->
+  <meta name="news_keywords"
+    content="LeetCode, leetcode 3223, Minimum Length of String After Operations, Algorithm, Programming">
+  <meta name="standout" content="https://algopush.com/Leetcode/3223-minimum-length-of-string-after-operations.html">
+  <meta name="rating" content="general" />
+  <meta http-equiv="content-language" content="en" />
+  <meta name="distribution" content="global" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3223-minimum-length-of-string-after-operations.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Structured Data for enhanced SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Minimum Length of String After Operations",
+      "url": "https://algopush.com/Leetcode/3223-minimum-length-of-string-after-operations.html",
+      "image": "https://algopush.com/Leetcode/Images/3223.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-05-03",
+      "dateModified": "2025-05-03",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <!-- Google News Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Optimal Solution for LeetCode 3223: Minimum Length of String After Operations",
+      "url": "https://algopush.com/Leetcode/3223-minimum-length-of-string-after-operations.html",
+      "image": "https://algopush.com/Leetcode/Images/3223.png",
+      "datePublished": "2025-05-03T00:00:00+00:00",
+      "dateModified": "2025-05-03T00:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header will be inserted by JavaScript -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3223. Minimum Length of String After Operations</span>
+    </div>
+
+    <!-- Problem Visualization Image -->
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3223.png"
+        alt="Minimum Length of String After Operations visualization" loading="lazy">
+    </div>
+
+    <h1>3223: Minimum Length of String After Operations</h1>
+
+    <!-- Problem Metadata -->
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">String Manipulation, Frequency Counting</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Amazon, Microsoft, Oracle</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> This problem requires understanding of frequency analysis and parity. The optimal
+      solution runs in O(n) time with O(1) space complexity.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>You are given a string s. You can perform the following process on s any number of times:</p>
+    <ol>
+      <li>Choose an index i where there's at least one matching character to the left and right of i</li>
+      <li>Delete the closest occurrence to the left of i</li>
+      <li>Delete the closest occurrence to the right of i</li>
+    </ol>
+    <p>Return the minimum possible length of s after performing these operations.</p>
+
+    <h3>Example 1</h3>
+    <pre><code>Input: s = "abaacbcbb"
+Output: 5
+Explanation:
+1. Choose index 2 (first 'a'), remove at indices 0 and 3 → "bacbcbb"
+2. Choose index 3 (first 'b'), remove at indices 0 and 5 → "acbcb"</code></pre>
+
+    <h3>Example 2</h3>
+    <pre><code>Input: s = "aa"
+Output: 2
+Explanation: No operations possible</code></pre>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/minimum-length-of-string-after-operations/" target="_blank"
+        rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Frequency Analysis (Optimal)</h2>
+    <p>Count character frequencies and determine minimal length based on parity.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Count frequency of each character</li>
+      <li>For each character:
+        <ul>
+          <li>If frequency is even: Can remove all but 2</li>
+          <li>If frequency is odd: Can remove all but 1</li>
+        </ul>
+      </li>
+      <li>Sum remaining counts</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimal Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-freq">C++</button>
+          <button class="tab-button" data-tab="java-freq">Java</button>
+          <button class="tab-button" data-tab="python-freq">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-freq-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minimumLength</span>(string s) {
+        vector&lt;<span class="code-token-keyword">int</span>&gt; <span class="code-token-function">freq</span>(26, 0);
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">char</span> c : s) freq[c-<span class="code-token-string">'a'</span>]++;
+        
+        <span class="code-token-keyword">int</span> result = 0;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> count : freq) {
+            <span class="code-token-keyword">if</span>(count == 0) <span class="code-token-keyword">continue</span>;
+            result += (count % 2 == 0) ? 2 : 1;
+        }
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-freq-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minimumLength</span>(String s) {
+        <span class="code-token-keyword">int</span>[] freq = <span class="code-token-keyword">new</span> <span class="code-token-keyword">int</span>[26];
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">char</span> c : s.<span class="code-token-function">toCharArray</span>()) freq[c-<span class="code-token-string">'a'</span>]++;
+        
+        <span class="code-token-keyword">int</span> result = 0;
+        <span class="code-token-keyword">for</span>(<span class="code-token-keyword">int</span> count : freq) {
+            <span class="code-token-keyword">if</span>(count == 0) <span class="code-token-keyword">continue</span>;
+            result += (count % 2 == 0) ? 2 : 1;
+        }
+        <span class="code-token-keyword">return</span> result;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-freq-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minimumLength</span>(self, s: str) -> int:
+        freq = [0] * 26
+        <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> s:
+            freq[<span class="code-token-function">ord</span>(c) - <span class="code-token-function">ord</span>(<span class="code-token-string">'a'</span>)] += 1
+            
+        <span class="code-token-keyword">return</span> <span class="code-token-function">sum</span>(2 <span class="code-token-keyword">if</span> c % 2 == 0 <span class="code-token-keyword">else</span> 1 <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> freq <span class="code-token-keyword">if</span> c > 0)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This solution leverages the observation that each operation removes two
+        matching characters. The final length depends on whether character counts are even or odd.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Two Pointers</h2>
+    <p>Alternative solution using two pointers to simulate the operations.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize left and right pointers</li>
+      <li>While characters match at both ends:
+        <ul>
+          <li>Move pointers inward past matching characters</li>
+          <li>Track remaining length</li>
+        </ul>
+      </li>
+      <li>Return final length</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Two Pointers Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-ptr">C++</button>
+          <button class="tab-button" data-tab="java-ptr">Java</button>
+          <button class="tab-button" data-tab="python-ptr">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-ptr-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">minimumLength</span>(string s) {
+        <span class="code-token-keyword">int</span> left = 0, right = s.<span class="code-token-function">size</span>() - 1;
+        <span class="code-token-keyword">while</span>(left < right && s[left] == s[right]) {
+            <span class="code-token-keyword">char</span> current = s[left];
+            <span class="code-token-keyword">while</span>(left <= right && s[left] == current) left++;
+            <span class="code-token-keyword">while</span>(left <= right && s[right] == current) right--;
+        }
+        <span class="code-token-keyword">return</span> right - left + 1;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-ptr-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">minimumLength</span>(String s) {
+        <span class="code-token-keyword">int</span> left = 0, right = s.<span class="code-token-function">length</span>() - 1;
+        <span class="code-token-keyword">while</span>(left < right && s.<span class="code-token-function">charAt</span>(left) == s.<span class="code-token-function">charAt</span>(right)) {
+            <span class="code-token-keyword">char</span> current = s.<span class="code-token-function">charAt</span>(left);
+            <span class="code-token-keyword">while</span>(left <= right && s.<span class="code-token-function">charAt</span>(left) == current) left++;
+            <span class="code-token-keyword">while</span>(left <= right && s.<span class="code-token-function">charAt</span>(right) == current) right--;
+        }
+        <span class="code-token-keyword">return</span> right - left + 1;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-ptr-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minimumLength</span>(self, s: str) -> int:
+        left, right = 0, len(s) - 1
+        <span class="code-token-keyword">while</span> left < right <span class="code-token-keyword">and</span> s[left] == s[right]:
+            current = s[left]
+            <span class="code-token-keyword">while</span> left <= right <span class="code-token-keyword">and</span> s[left] == current:
+                left += 1
+            <span class="code-token-keyword">while</span> left <= right <span class="code-token-keyword">and</span> s[right] == current:
+                right -= 1
+        <span class="code-token-keyword">return</span> right - left + 1</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> The two pointers approach simulates the actual operations by collapsing
+        matching prefixes and suffixes. This works well for strings with matching ends.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Comparison of Approaches</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+          <th>When to Use</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frequency Analysis</td>
+          <td>O(n)</td>
+          <td>O(1)</td>
+          <td>General case</td>
+          <td>Simple implementation</td>
+          <td>Doesn't simulate actual operations</td>
+        </tr>
+        <tr>
+          <td>Two Pointers</td>
+          <td>O(n)</td>
+          <td>O(1)</td>
+          <td>Strings with matching ends</td>
+          <td>Simulates actual process</td>
+          <td>Slightly more complex logic</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <strong>Interview Tip:</strong> The frequency analysis approach is often sufficient for interviews, but be
+      prepared to discuss alternative solutions like the two pointers approach.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Special Considerations</h2>
+    <p>When implementing solutions for this problem, consider these edge cases:</p>
+
+    <h3>1. All Characters Same</h3>
+    <pre><code><b>Input:</b> "aaaaa" → <b>Output:</b> 1
+<b>Explanation:</b> Can remove all but one character</code></pre>
+
+    <h3>2. No Possible Operations</h3>
+    <pre><code><b>Input:</b> "abc" → <b>Output:</b> 3
+<b>Explanation:</b> No matching characters to perform operations</code></pre>
+
+    <h3>3. Alternating Characters</h3>
+    <pre><code><b>Input:</b> "ababab" → <b>Output:</b> 6
+<b>Explanation:</b> No operations possible due to alternation</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test your solution with these edge cases to ensure correctness. The examples
+      demonstrate how different string patterns affect the final length.
+    </div>
+
+    <hr />
+
+    <h2>Visualization</h2>
+    <div class="callout">
+      <p>The frequency analysis approach works by:</p>
+      <ol>
+        <li><strong>Counting:</strong> Calculate occurrences of each character</li>
+        <li><strong>Analyzing:</strong> Determine if counts are even or odd</li>
+        <li><strong>Summing:</strong> Add 2 for even counts, 1 for odd counts</li>
+      </ol>
+      <p>This approach efficiently calculates the minimal possible length without simulating each operation.</p>
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why does the frequency approach work?</summary>
+        <p>
+          Each operation removes two matching characters. The final length depends on whether we can pair all characters
+          (even counts leave 2, odd counts leave 1).
+        </p>
+      </details>
+
+      <details>
+        <summary>2. When does the two pointers approach fail?</summary>
+        <p>
+          It may fail for cases where operations could be performed in the middle of the string but not at the ends.
+          However, the problem constraints ensure it works.
+        </p>
+      </details>
+
+      <details>
+        <summary>3. Can this be solved with dynamic programming?</summary>
+        <p>
+          While possible, DP would be overkill for this problem as it has O(n) solutions with better space complexity.
+        </p>
+      </details>
+
+      <details>
+        <summary>4. How would you handle Unicode characters?</summary>
+        <p>
+          For Unicode, replace the 26-element array with a hash map to count frequencies, increasing space to O(k) where
+          k is number of unique characters.
+        </p>
+      </details>
+
+      <details>
+        <summary>5. What's the minimal possible length?</summary>
+        <p>
+          The minimal length is the number of characters with odd counts (each contributes 1) plus the number of
+          character types with even counts (each contributes 2).
+        </p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Thoughts:</strong> This problem demonstrates how careful analysis of operations can lead to
+      efficient solutions without complex simulations. The frequency counting approach provides an optimal O(n) time
+      solution.
+    </div>
+  </main>
+
+  <!-- Footer will be inserted by JavaScript -->
+  <div id="footer"></div>
+
+  <script>
+    // Tab functionality with improved mobile support
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize tabs
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Set first tab as active by default if none are active
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        // Add click handlers
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+
+            // Update active tab button
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update active tab content
+            tabContents.forEach(content => content.classList.remove('active'));
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // FAQ highlight when opened
+      document.querySelectorAll('.faq-section details').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (detail.open) {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>

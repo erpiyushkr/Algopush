@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 3618 | Split Array by Prime Indices</title>
+  <meta name="description"
+    content="Complete solutions for LeetCode 3618: Learn efficient prime identification techniques and multiple approaches to solve the array splitting problem." />
+  <meta name="keywords"
+    content="leetcode, leetcode 3618, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question,leetcode daily question, split array by prime indices, sieve of eratosthenes, leetcode sieve of eratosthenes, prime numbers, array partitioning, algorithm optimization, leetcode premium problem, , leetcode array question, leetcode contest question, leetcode contest" />
+  <meta name="author" content="Algopush" />
+  <link rel="canonical" href="https://algopush.com/Leetcode/3618-split-array-by-prime-indices.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3618: Split Array by Prime Indices">
+  <meta property="og:description"
+    content="Optimal solutions with O(n) time complexity. Complete guide with multiple approaches and implementations.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3618.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3618-split-array-by-prime-indices.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3618: Split Array by Prime Indices">
+  <meta name="twitter:description"
+    content="Solve array partitioning problem using prime number identification techniques. Code examples in C++, Java, and Python.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3618.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Split Array by Prime Indices",
+      "url": "https://algopush.com/Leetcode/3618-split-array-by-prime-indices.html",
+      "image": "https://algopush.com/Leetcode/Images/3618.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "url": "https://algopush.com"
+      },
+      "datePublished": "2025-07-20",
+      "dateModified": "2025-07-20",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    /* Problem Visualization Image */
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    /* Code Syntax Highlighting */
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    /* Tabs */
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Problem Metadata */
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    /* Visualization Container */
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+
+    /* Animation for prime visualization */
+    @keyframes highlightPrime {
+      0% {
+        background-color: transparent;
+      }
+
+      50% {
+        background-color: rgba(25, 99, 145, 0.3);
+      }
+
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    .prime-highlight {
+      animation: highlightPrime 1.5s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3618. Split Array by Prime Indices</span>
+    </div>
+
+    <h1>3618: Split Array by Prime Indices</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Arrays, Prime Numbers, Sieve of Eratosthenes</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Amazon, Google, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3618.png" alt="Split Array by Prime Indices visualization"
+        loading="lazy">
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> For large inputs, always use the Sieve of Eratosthenes for prime identification - it
+      reduces the time complexity from O(n√n) to O(n log log n).
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an integer array <code>nums</code>, split it into two arrays A and B following these rules:</p>
+    <ol>
+      <li>Elements at prime indices go into array A</li>
+      <li>All other elements go into array B</li>
+    </ol>
+    <p>Return the absolute difference between the sums of the two arrays: <code>|sum(A) - sum(B)|</code>.</p>
+    <p><strong>Note:</strong> Prime numbers are natural numbers greater than 1 with exactly two distinct factors: 1 and
+      themselves. An empty array has a sum of 0.</p>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> nums = [2, 3, 4]</p>
+        <p><strong>Prime Indices:</strong> 2 (since index 2 is prime)</p>
+        <p><strong>Array A:</strong> [4]</p>
+        <p><strong>Array B:</strong> [2, 3]</p>
+        <p><strong>Output:</strong> |4 - (2+3)| = |4-5| = 1</p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 2</h4>
+        <p><strong>Input:</strong> nums = [-1, 5, 7, 0]</p>
+        <p><strong>Prime Indices:</strong> 2, 3</p>
+        <p><strong>Array A:</strong> [7, 0]</p>
+        <p><strong>Array B:</strong> [-1, 5]</p>
+        <p><strong>Output:</strong> |(7+0) - (-1+5)| = |7 - 4| = 3</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/split-array-by-prime-indices/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Approach 1: Brute-force Prime Checking</h2>
+    <p>Check each index for primality using trial division, then calculate the sums.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Initialize two sums: sumA (for prime indices) and sumB (for non-prime indices)</li>
+      <li>Iterate through each index i in the array</li>
+      <li>For each index, check if it's prime using a helper function</li>
+      <li>If prime, add nums[i] to sumA</li>
+      <li>Otherwise, add nums[i] to sumB</li>
+      <li>Return |sumA - sumB|</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n√n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Brute-force Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-basic">C++</button>
+          <button class="tab-button" data-tab="java-basic">Java</button>
+          <button class="tab-button" data-tab="python-basic">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-basic-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-keyword">if</span> (n <= 1) <span class="code-token-keyword">return</span> false;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 2; i * i <= n; i++) {
+            <span class="code-token-keyword">if</span> (n % i == 0) 
+                <span class="code-token-keyword">return</span> false;
+        }
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">splitArray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> sumA = 0, sumB = 0;
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (<span class="code-token-function">isPrime</span>(i)) {
+                sumA += nums[i];
+            } <span class="code-token-keyword">else</span> {
+                sumB += nums[i];
+            }
+        }
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sumA - sumB);
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-basic-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> n) {
+        <span class="code-token-keyword">if</span> (n <= 1) <span class="code-token-keyword">return</span> false;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 2; i * i <= n; i++) {
+            <span class="code-token-keyword">if</span> (n % i == 0) 
+                <span class="code-token-keyword">return</span> false;
+        }
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">splitArray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">long</span> sumA = 0, sumB = 0;
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (<span class="code-token-function">isPrime</span>(i)) {
+                sumA += nums[i];
+            } <span class="code-token-keyword">else</span> {
+                sumB += nums[i];
+            }
+        }
+        <span class="code-token-keyword">return</span> Math.<span class="code-token-function">abs</span>(sumA - sumB);
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-basic-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">isPrime</span>(self, n: int) -> bool:
+        <span class="code-token-keyword">if</span> n <= 1:
+            <span class="code-token-keyword">return</span> False
+        i = 2
+        <span class="code-token-keyword">while</span> i * i <= n:
+            <span class="code-token-keyword">if</span> n % i == 0:
+                <span class="code-token-keyword">return</span> False
+            i += 1
+        <span class="code-token-keyword">return</span> True
+
+    <span class="code-token-keyword">def</span> <span class="code-token-function">splitArray</span>(self, nums: List[int]) -> int:
+        sumA, sumB = 0, 0
+        n = len(nums)
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            <span class="code-token-keyword">if</span> self.<span class="code-token-function">isPrime</span>(i):
+                sumA += nums[i]
+            <span class="code-token-keyword">else</span>:
+                sumB += nums[i]
+        <span class="code-token-keyword">return</span> abs(sumA - sumB)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach is straightforward but inefficient for large n (n ≤ 10^5)
+        due to O(√n) prime check for each index.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Optimized with Sieve of Eratosthenes</h2>
+    <p>Precompute prime indices using the Sieve algorithm for O(1) prime checks during iteration.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create a boolean array <code>isPrime</code> of size n (array length)</li>
+      <li>Initialize all elements as true (assuming all are prime initially)</li>
+      <li>Mark 0 and 1 as non-prime (since primes start from 2)</li>
+      <li>Iterate from 2 to √n: if current number is prime, mark all its multiples as non-prime</li>
+      <li>Iterate through the array: if <code>isPrime[i]</code> is true, add to sumA; else add to sumB</li>
+      <li>Return |sumA - sumB|</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n log log n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Sieve of Eratosthenes Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-sieve">C++</button>
+          <button class="tab-button" data-tab="java-sieve">Java</button>
+          <button class="tab-button" data-tab="python-sieve">Python</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-sieve-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">splitArray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        <span class="code-token-keyword">if</span> (n == 0) <span class="code-token-keyword">return</span> 0;
+        
+        <span class="code-token-comment">// Create sieve array</span>
+        vector<<span class="code-token-keyword">bool</span>> <span class="code-token-function">isPrime</span>(n, true);
+        <span class="code-token-keyword">if</span> (n > 0) isPrime[0] = false; <span class="code-token-comment">// index 0 is not prime</span>
+        <span class="code-token-keyword">if</span> (n > 1) isPrime[1] = false; <span class="code-token-comment">// index 1 is not prime</span>
+        
+        <span class="code-token-comment">// Sieve of Eratosthenes</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 2; i * i < n; i++) {
+            <span class="code-token-keyword">if</span> (isPrime[i]) {
+                <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i * i; j < n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> sumA = 0, sumB = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (isPrime[i]) {
+                sumA += nums[i];
+            } <span class="code-token-keyword">else</span> {
+                sumB += nums[i];
+            }
+        }
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sumA - sumB);
+    }
+};</code></pre>
+        </div>
+
+        <!-- Java Code -->
+        <div class="tab-content" id="java-sieve-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">splitArray</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        <span class="code-token-keyword">if</span> (n == 0) <span class="code-token-keyword">return</span> 0;
+        
+        <span class="code-token-comment">// Create sieve array</span>
+        <span class="code-token-keyword">boolean</span>[] isPrime = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[n];
+        Arrays.<span class="code-token-function">fill</span>(isPrime, true);
+        <span class="code-token-keyword">if</span> (n > 0) isPrime[0] = false;
+        <span class="code-token-keyword">if</span> (n > 1) isPrime[1] = false;
+        
+        <span class="code-token-comment">// Sieve of Eratosthenes</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 2; i * i < n; i++) {
+            <span class="code-token-keyword">if</span> (isPrime[i]) {
+                <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i * i; j < n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        
+        <span class="code-token-keyword">long</span> sumA = 0, sumB = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (isPrime[i]) {
+                sumA += nums[i];
+            } <span class="code-token-keyword">else</span> {
+                sumB += nums[i];
+            }
+        }
+        <span class="code-token-keyword">return</span> Math.<span class="code-token-function">abs</span>(sumA - sumB);
+    }
+}</code></pre>
+        </div>
+
+        <!-- Python Code -->
+        <div class="tab-content" id="python-sieve-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">splitArray</span>(self, nums: List[int]) -> int:
+        n = len(nums)
+        <span class="code-token-keyword">if</span> n == 0:
+            <span class="code-token-keyword">return</span> 0
+        
+        <span class="code-token-comment"># Create sieve array</span>
+        is_prime = [True] * n
+        <span class="code-token-keyword">if</span> n > 0:
+            is_prime[0] = False
+        <span class="code-token-keyword">if</span> n > 1:
+            is_prime[1] = False
+        
+        <span class="code-token-comment"># Sieve of Eratosthenes</span>
+        i = 2
+        <span class="code-token-keyword">while</span> i * i < n:
+            <span class="code-token-keyword">if</span> is_prime[i]:
+                j = i * i
+                <span class="code-token-keyword">while</span> j < n:
+                    is_prime[j] = False
+                    j += i
+            i += 1
+        
+        sumA, sumB = 0, 0
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            <span class="code-token-keyword">if</span> is_prime[i]:
+                sumA += nums[i]
+            <span class="code-token-keyword">else</span>:
+                sumB += nums[i]
+                
+        <span class="code-token-keyword">return</span> abs(sumA - sumB)</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This is the optimal solution for large inputs. The Sieve of Eratosthenes
+        efficiently marks non-prime indices in O(n log log n) time.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Single Pass with Precomputed Primes</h2>
+    <p>Precompute primes up to maximum possible n (10^5) once for efficiency in repeated calls.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Precompute primes up to 100000 (max constraint) using Sieve of Eratosthenes</li>
+      <li>Store results in a global boolean array</li>
+      <li>For each input array, simply iterate through indices</li>
+      <li>Check if index is prime using precomputed array</li>
+      <li>Calculate sums and return the absolute difference</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n) per call</td>
+          <td>O(max_n)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Precomputed Primes Solution</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-precomputed">C++</button>
+        </div>
+
+        <!-- C++ Code -->
+        <div class="tab-content active" id="cpp-precomputed-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">private</span>:
+    vector<<span class="code-token-keyword">bool</span>> primes;
+    <span class="code-token-keyword">bool</span> computed = false;
+    
+    <span class="code-token-keyword">void</span> <span class="code-token-function">computePrimes</span>(<span class="code-token-keyword">int</span> max_n) {
+        primes = vector<<span class="code-token-keyword">bool</span>>(max_n + 1, true);
+        <span class="code-token-keyword">if</span> (max_n >= 0) primes[0] = false;
+        <span class="code-token-keyword">if</span> (max_n >= 1) primes[1] = false;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 2; i * i <= max_n; i++) {
+            <span class="code-token-keyword">if</span> (primes[i]) {
+                <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> j = i * i; j <= max_n; j += i) {
+                    primes[j] = false;
+                }
+            }
+        }
+        computed = true;
+    }
+    
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">splitArray</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        <span class="code-token-keyword">if</span> (!computed || n >= primes.<span class="code-token-function">size</span>()) {
+            <span class="code-token-function">computePrimes</span>(100000); <span class="code-token-comment">// max constraint</span>
+        }
+        
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> sumA = 0, sumB = 0;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < n; i++) {
+            <span class="code-token-keyword">if</span> (primes[i]) {
+                sumA += nums[i];
+            } <span class="code-token-keyword">else</span> {
+                sumB += nums[i];
+            }
+        }
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sumA - sumB);
+    }
+};</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Implementation Note:</strong> This approach is ideal for systems with multiple calls to the function.
+        The prime sieve is computed only once and reused.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brute-force</td>
+          <td>O(n√n)</td>
+          <td>O(1)</td>
+          <td>Small inputs (n &lt; 1000)</td>
+        </tr>
+        <tr>
+          <td>Sieve of Eratosthenes</td>
+          <td>O(n log log n)</td>
+          <td>O(n)</td>
+          <td>Large inputs (n ≤ 10^5)</td>
+        </tr>
+        <tr>
+          <td>Precomputed Primes</td>
+          <td>O(n) per call</td>
+          <td>O(max_n)</td>
+          <td>Repeated function calls</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Important:</strong> For the given constraints (n ≤ 10^5), the Sieve of Eratosthenes is the most efficient
+      approach.
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+    <h3>1. Empty Array</h3>
+    <pre><code>Input: [] → Output: 0</code></pre>
+
+    <h3>2. Single Element Array</h3>
+    <pre><code>Input: [5] → Output: |0 - 5| = 5 (since index 0 is not prime)</code></pre>
+
+    <h3>3. All Prime Indices</h3>
+    <pre><code>Input: [1, 2, 3, 4] (indices 2 and 3 are prime) 
+Output: |(3+4) - (1+2)| = |7 - 3| = 4</code></pre>
+
+    <h3>4. Negative Numbers</h3>
+    <pre><code>Input: [-1, -2, -3, -4] 
+Prime indices: 2,3 → sumA = -3 + -4 = -7
+sumB = -1 + -2 = -3
+Output: |-7 - (-3)| = |-4| = 4</code></pre>
+
+    <div class="callout danger">
+      <strong>Warning:</strong> Always test with large inputs (n=10^5) to ensure performance. The brute-force approach
+      will timeout.
+    </div>
+
+    <hr />
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why is index 0 not considered prime?</summary>
+        <p>Prime numbers are defined as natural numbers greater than 1 with exactly two distinct factors. Since 0
+          doesn't meet these criteria (it's not greater than 1), it's not prime.</p>
+      </details>
+
+      <details>
+        <summary>2. How does the Sieve of Eratosthenes work?</summary>
+        <p>The algorithm works by iteratively marking the multiples of each prime starting from 2. All remaining
+          unmarked numbers are primes. It efficiently eliminates non-primes in O(n log log n) time.</p>
+      </details>
+
+      <details>
+        <summary>3. Why start marking multiples from i*i?</summary>
+        <p>When processing prime number i, all multiples smaller than i*i have already been marked by smaller primes.
+          Starting from i*i optimizes the algorithm.</p>
+      </details>
+
+      <details>
+        <summary>4. How to handle negative numbers?</summary>
+        <p>Negative numbers are handled the same as positive numbers. Simply add them to the appropriate sum based on
+          their index primality.</p>
+      </details>
+
+      <details>
+        <summary>5. Can we solve this without extra space?</summary>
+        <p>For large n (≤10^5), the brute-force approach uses O(1) space but is too slow. The Sieve approach requires
+          O(n) space but is much faster.</p>
+      </details>
+
+      <details>
+        <summary>6. Why use long for sums?</summary>
+        <p>With n ≤ 10^5 and nums[i] up to 10^9, the total sum could be as large as 10^14, which exceeds 32-bit integer
+          range. Using long prevents overflow.</p>
+      </details>
+
+      <details>
+        <summary>7. Is 1 considered a prime number?</summary>
+        <p>No, 1 is not a prime number. By definition, primes must have exactly two distinct positive divisors, and 1
+          has only one divisor (itself).</p>
+      </details>
+
+      <details>
+        <summary>8. How to handle large inputs efficiently?</summary>
+        <p>Always use the Sieve of Eratosthenes approach for large inputs. The brute-force method becomes impractical
+          for n > 10,000.</p>
+      </details>
+
+      <details>
+        <summary>9. Can we optimize further?</summary>
+        <p>We can combine the prime marking and summing into a single loop, but the Sieve still dominates the time
+          complexity. The current optimizations are sufficient for constraints.</p>
+      </details>
+
+      <details>
+        <summary>10. Why absolute difference?</summary>
+        <p>The problem asks for the absolute difference |sumA - sumB| to ensure a non-negative result regardless of
+          which sum is larger.</p>
+      </details>
+    </div>
+
+    <div class="callout">
+      <strong>Final Insight:</strong> This problem demonstrates the importance of choosing the right prime
+      identification algorithm based on input size. Understanding the Sieve of Eratosthenes is crucial for efficient
+      solutions in number theory problems.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy Code', 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+
+      // Lazy loading for images
+      if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img');
+
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.add('prime-highlight');
+              imageObserver.unobserve(img);
+            }
+          });
+        });
+
+        lazyImages.forEach(img => {
+          if (img.dataset.src) {
+            imageObserver.observe(img);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
