@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1. Two Sum | LeetCode Solution</title>
-    <meta name="description" 
+    <title>Two Sum | LeetCode Solution</title>
+    <meta name="description"
         content="Complete solution for LeetCode Two Sum problem with efficient algorithms, multiple approaches, and code implementations in C++, Java, and Python.">
     <meta name="keywords"
         content="LeetCode, Two Sum, Hash Table, Array, Algorithm, Solution, Coding Interview, LeetCode Medium Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question">
     <meta name="author" content="Algopush">
     <link rel="canonical" href="https://algopush.com/Leetcode/1-two-sum.html">
-    
+
     <!-- Favicon -->
     <link rel="icon" href="../components/favicon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="../components/favicon.png">
@@ -105,9 +106,9 @@
             overflow: hidden;
             box-shadow: var(--box-shadow);
             text-align: center;
-            }
+        }
 
-            .problem-visual img {
+        .problem-visual img {
             max-width: 100%;
             height: auto;
             max-height: 400px;
@@ -499,6 +500,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="header"></div>
 
@@ -531,8 +533,10 @@
         </div>
 
         <h2>Problem Statement</h2>
-        <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</p>
-        <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.</p>
+        <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two
+            numbers such that they add up to <code>target</code>.</p>
+        <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same
+            element twice.</p>
         <p>You can return the answer in any order.</p>
 
         <h3>Example 1</h3>
@@ -558,7 +562,8 @@ Output: [0,1]</code></pre>
         <hr>
 
         <h2>Approach 1: Brute Force</h2>
-        <p>The simplest approach involves checking every possible pair in the array to see if their sum equals the target.</p>
+        <p>The simplest approach involves checking every possible pair in the array to see if their sum equals the
+            target.</p>
 
         <h3>Algorithm Steps</h3>
         <ol>
@@ -637,7 +642,8 @@ Output: [0,1]</code></pre>
         <hr>
 
         <h2>Approach 2: Two-pass Hash Table</h2>
-        <p>This approach reduces the time complexity by using a hash table to store element indices for quick lookups.</p>
+        <p>This approach reduces the time complexity by using a hash table to store element indices for quick lookups.
+        </p>
 
         <h3>Algorithm Steps</h3>
         <ol>
@@ -880,18 +886,21 @@ Output: [0,1]</code></pre>
 
         <hr>
 
-        <script type="text/javascript"> var infolinks_pid = 3438220; var infolinks_wsid = 0; </script> <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+        <script type="text/javascript"> var infolinks_pid = 3438220; var infolinks_wsid = 0; </script>
+        <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
 
         <h2>Frequently Asked Questions</h2>
         <div class="faq-section">
             <details>
                 <summary>Why is the hash table approach more efficient?</summary>
-                <p>The hash table reduces the time complexity from O(n²) to O(n) by allowing O(1) lookups for complements.</p>
+                <p>The hash table reduces the time complexity from O(n²) to O(n) by allowing O(1) lookups for
+                    complements.</p>
             </details>
 
             <details>
                 <summary>How does the one-pass approach handle duplicates?</summary>
-                <p>Since we check for the complement before adding the current element to the map, we avoid using the same element twice.</p>
+                <p>Since we check for the complement before adding the current element to the map, we avoid using the
+                    same element twice.</p>
             </details>
 
             <details>
@@ -901,17 +910,20 @@ Output: [0,1]</code></pre>
 
             <details>
                 <summary>Can we use a different data structure?</summary>
-                <p>A hash table provides the best average-case performance. Alternatives like balanced BSTs would have O(n log n) time.</p>
+                <p>A hash table provides the best average-case performance. Alternatives like balanced BSTs would have
+                    O(n log n) time.</p>
             </details>
 
             <details>
                 <summary>How does the solution handle negative numbers?</summary>
-                <p>The algorithm works with negative numbers since complement calculation and hash lookups function the same.</p>
+                <p>The algorithm works with negative numbers since complement calculation and hash lookups function the
+                    same.</p>
             </details>
 
             <details>
                 <summary>Is the solution order-sensitive?</summary>
-                <p>The order of returned indices doesn't matter, as long as they point to elements that sum to the target.</p>
+                <p>The order of returned indices doesn't matter, as long as they point to elements that sum to the
+                    target.</p>
             </details>
 
             <details>
@@ -951,7 +963,8 @@ Output: [0,1]</code></pre>
         </div>
 
         <div class="callout">
-            <strong>Final Recommendation:</strong> The one-pass hash table solution is optimal for both time and space complexity in real-world scenarios.
+            <strong>Final Recommendation:</strong> The one-pass hash table solution is optimal for both time and space
+            complexity in real-world scenarios.
         </div>
     </main>
 
@@ -1018,4 +1031,5 @@ Output: [0,1]</code></pre>
         });
     </script>
 </body>
+
 </html>
