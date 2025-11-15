@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeetCode 3731: Find Missing Elements | Algopush</title>
+  <meta name="description"
+    content="Learn how to solve Find Missing Elements problem with multiple approaches. Code in C++, Java, Python with detailed explanations and complexity analysis.">
+  <meta name="keywords"
+    content="LeetCode 3731, Find Missing Elements, missing numbers in range, array range detection, algorithm solution, array manipulation, Algopush, coding interview preparation, array problems, hash set, sorting approach, , Algorithm, Solution, Coding Interview, LeetCode Medium Problem, Competitive Programming, leetcode, leetcode problem of the day, leetcode contest question, leetcode easy question, leetcode medium question, leetcode daily question, Leetcode dsa interview question, sde interview question">
+  <meta name="author" content="Algopush">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://algopush.com/Leetcode/3731-find-missing-elements.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3731: Find Missing Elements - Array Range Detection Solutions">
+  <meta property="og:description"
+    content="Solve Find Missing Elements problem with multiple approaches. Code in C++, Java, Python with detailed explanations and complexity analysis.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3731.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3731-find-missing-elements.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode 3731: Find Missing Elements Solutions">
+  <meta name="twitter:description" content="Master array range detection and missing element finding approaches.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3731.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Find Missing Elements Solution Guide",
+        "url": "https://algopush.com/Leetcode/3731-find-missing-elements.html",
+        "image": "https://algopush.com/Leetcode/Images/3731.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "url": "https://algopush.com"
+        },
+        "datePublished": "2025-08-09",
+        "dateModified": "2025-08-09",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Algopush",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://algopush.com/components/logo.png"
+            }
+        },
+        "description": "Comprehensive solution for LeetCode 3731: Find Missing Elements with multiple approaches and code implementations."
+    }
+    </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .grid-item {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      font-weight: bold;
+    }
+
+    .present {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .missing {
+      background-color: #ffebee;
+      border-color: #f44336;
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+
+      50% {
+        background-color: #b3e0ff;
+      }
+
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>3731. Find Missing Elements</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3731.png" alt="Find Missing Elements visualization" loading="lazy">
+    </div>
+
+    <h1>3731: Find Missing Elements</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Easy</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Array, Hash Table, Sorting</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> The key insight is that we only need to check numbers between the minimum and maximum
+      values in the array, since the smallest and largest elements are guaranteed to be present.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an integer array <code>nums</code> of unique integers, find all missing integers in the range between the
+      smallest and largest elements. The smallest and largest elements are guaranteed to be present in the array.</p>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> nums = [1,4,2,5]</p>
+        <p><strong>Output:</strong> [3]</p>
+        <p><strong>Explanation:</strong> Range is [1,5], only 3 is missing.</p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 2</h4>
+        <p><strong>Input:</strong> nums = [7,8,6,9]</p>
+        <p><strong>Output:</strong> []</p>
+        <p><strong>Explanation:</strong> Range is [6,9], all numbers are present.</p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 3</h4>
+        <p><strong>Input:</strong> nums = [5,1]</p>
+        <p><strong>Output:</strong> [2,3,4]</p>
+        <p><strong>Explanation:</strong> Range is [1,5], missing 2, 3, and 4.</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/find-missing-elements/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Key Insight</h2>
+    <p>The solution relies on these crucial observations:</p>
+    <ol>
+      <li>The smallest and largest elements are always present in the array</li>
+      <li>We only need to check numbers between min and max (inclusive)</li>
+      <li>All integers in the array are unique</li>
+      <li>The range is small (1 to 100), so even O(n²) approaches are efficient</li>
+    </ol>
+
+    <div class="callout warning">
+      <strong>Important:</strong> The constraint 2 ≤ nums.length ≤ 100 and 1 ≤ nums[i] ≤ 100 makes the problem suitable
+      for various approaches.
+    </div>
+
+    <h2>Approach 1: Hash Set (Optimal)</h2>
+    <p>Use a hash set to store all numbers for O(1) lookups, then iterate through the range to find missing numbers.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Find the minimum and maximum values in the array</li>
+      <li>Store all numbers in a hash set for fast lookups</li>
+      <li>Iterate from min to max (inclusive)</li>
+      <li>Add numbers not found in the set to the result</li>
+      <li>Return the result list</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Linear time for building set and checking range, linear space for the hash set.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Hash Set Approach</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-hash">C++</button>
+          <button class="tab-button" data-tab="java-hash">Java</button>
+          <button class="tab-button" data-tab="python-hash">Python</button>
+        </div>
+
+        <div class="tab-content active" id="cpp-hash-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector<<span class="code-token-keyword">int</span>> <span class="code-token-function">findMissingElements</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        unordered_set<<span class="code-token-keyword">int</span>> numSet(nums.begin(), nums.end());
+        <span class="code-token-keyword">int</span> minNum = *min_element(nums.begin(), nums.end());
+        <span class="code-token-keyword">int</span> maxNum = *max_element(nums.begin(), nums.end());
+        
+        vector<<span class="code-token-keyword">int</span>> result;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = minNum; i <= maxNum; i++) {
+            <span class="code-token-keyword">if</span> (numSet.find(i) == numSet.end()) {
+                result.push_back(i);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+        </div>
+
+        <div class="tab-content" id="java-hash-tab">
+          <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> List<<span class="code-token-keyword">Integer</span>> <span class="code-token-function">findMissingElements</span>(<span class="code-token-keyword">int</span>[] nums) {
+        Set<<span class="code-token-keyword">Integer</span>> numSet = <span class="code-token-keyword">new</span> HashSet<>();
+        <span class="code-token-keyword">int</span> minNum = Integer.MAX_VALUE;
+        <span class="code-token-keyword">int</span> maxNum = Integer.MIN_VALUE;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            numSet.add(num);
+            minNum = Math.min(minNum, num);
+            maxNum = Math.max(maxNum, num);
+        }
+        
+        List<<span class="code-token-keyword">Integer</span>> result = <span class="code-token-keyword">new</span> ArrayList<>();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = minNum; i <= maxNum; i++) {
+            <span class="code-token-keyword">if</span> (!numSet.contains(i)) {
+                result.add(i);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+}</code></pre>
+        </div>
+
+        <div class="tab-content" id="python-hash-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">findMissingElements</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> List[<span class="code-token-keyword">int</span>]:
+        num_set = set(nums)
+        min_num = min(nums)
+        max_num = max(nums)
+        
+        result = []
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(min_num, max_num + 1):
+            <span class="code-token-keyword">if</span> i <span class="code-token-keyword">not</span> <span class="code-token-keyword">in</span> num_set:
+                result.append(i)
+                
+        <span class="code-token-keyword">return</span> result</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Efficiency:</strong> This approach runs in O(n) time with O(n) space, making it optimal for the given
+        constraints.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Sorting and Linear Scan</h2>
+    <p>Sort the array and then scan through the range to find gaps where numbers are missing.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Sort the array in ascending order</li>
+      <li>Find the minimum and maximum values (first and last elements after sorting)</li>
+      <li>Use a pointer to track expected numbers in the range</li>
+      <li>Iterate through sorted array and find missing numbers</li>
+      <li>Return the result list</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n log n)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Sorting dominates time complexity, constant space excluding output.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Sorting Approach</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-sort">C++</button>
+          <button class="tab-button" data-tab="java-sort">Java</button>
+          <button class="tab-button" data-tab="python-sort">Python</button>
+        </div>
+
+        <div class="tab-content active" id="cpp-sort-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector<<span class="code-token-keyword">int</span>> <span class="code-token-function">findMissingElements</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        sort(nums.begin(), nums.end());
+        <span class="code-token-keyword">int</span> minNum = nums[0];
+        <span class="code-token-keyword">int</span> maxNum = nums.back();
+        
+        vector<<span class="code-token-keyword">int</span>> result;
+        <span class="code-token-keyword">int</span> expected = minNum;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">while</span> (expected < num) {
+                result.push_back(expected);
+                expected++;
+            }
+            expected = num + 1;
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+        </div>
+
+        <div class="tab-content" id="java-sort-tab">
+          <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> List<<span class="code-token-keyword">Integer</span>> <span class="code-token-function">findMissingElements</span>(<span class="code-token-keyword">int</span>[] nums) {
+        Arrays.sort(nums);
+        <span class="code-token-keyword">int</span> minNum = nums[0];
+        <span class="code-token-keyword">int</span> maxNum = nums[nums.length - 1];
+        
+        List<<span class="code-token-keyword">Integer</span>> result = <span class="code-token-keyword">new</span> ArrayList<>();
+        <span class="code-token-keyword">int</span> expected = minNum;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">while</span> (expected < num) {
+                result.add(expected);
+                expected++;
+            }
+            expected = num + 1;
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+}</code></pre>
+        </div>
+
+        <div class="tab-content" id="python-sort-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">findMissingElements</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> List[<span class="code-token-keyword">int</span>]:
+        nums.sort()
+        min_num = nums[0]
+        max_num = nums[-1]
+        
+        result = []
+        expected = min_num
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-keyword">while</span> expected < num:
+                result.append(expected)
+                expected += 1
+            expected = num + 1
+            
+        <span class="code-token-keyword">return</span> result</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Advantage:</strong> This approach uses O(1) extra space (excluding output) and is easy to understand.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Boolean Array</h2>
+    <p>Use a boolean array to mark presence of numbers in the range.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Find minimum and maximum values</li>
+      <li>Create a boolean array of size (max - min + 1)</li>
+      <li>Mark positions as true for numbers present in the array</li>
+      <li>Collect indices that are false as missing numbers</li>
+      <li>Return the result list</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n)</td>
+          <td>O(range)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Linear time, space proportional to the range between min and max.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Boolean Array Approach</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-bool">C++</button>
+          <button class="tab-button" data-tab="java-bool">Java</button>
+          <button class="tab-button" data-tab="python-bool">Python</button>
+        </div>
+
+        <div class="tab-content active" id="cpp-bool-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    vector<<span class="code-token-keyword">int</span>> <span class="code-token-function">findMissingElements</span>(vector<<span class="code-token-keyword">int</span>>& nums) {
+        <span class="code-token-keyword">int</span> minNum = *min_element(nums.begin(), nums.end());
+        <span class="code-token-keyword">int</span> maxNum = *max_element(nums.begin(), nums.end());
+        <span class="code-token-keyword">int</span> rangeSize = maxNum - minNum + 1;
+        
+        vector<<span class="code-token-keyword">bool</span>> present(rangeSize, false);
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            present[num - minNum] = true;
+        }
+        
+        vector<<span class="code-token-keyword">int</span>> result;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < rangeSize; i++) {
+            <span class="code-token-keyword">if</span> (!present[i]) {
+                result.push_back(i + minNum);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+        </div>
+
+        <div class="tab-content" id="java-bool-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> List<<span class="code-token-keyword">Integer</span>> <span class="code-token-function">findMissingElements</span>(<span class="code-token-keyword">int</span>[] nums) {
+        <span class="code-token-keyword">int</span> minNum = Integer.MAX_VALUE;
+        <span class="code-token-keyword">int</span> maxNum = Integer.MIN_VALUE;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            minNum = Math.min(minNum, num);
+            maxNum = Math.max(maxNum, num);
+        }
+        
+        <span class="code-token-keyword">int</span> rangeSize = maxNum - minNum + 1;
+        <span class="code-token-keyword">boolean</span>[] present = <span class="code-token-keyword">new</span> <span class="code-token-keyword">boolean</span>[rangeSize];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            present[num - minNum] = true;
+        }
+        
+        List<<span class="code-token-keyword">Integer</span>> result = <span class="code-token-keyword">new</span> ArrayList<>();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = 0; i < rangeSize; i++) {
+            <span class="code-token-keyword">if</span> (!present[i]) {
+                result.add(i + minNum);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+}</code></pre>
+        </div>
+
+        <div class="tab-content" id="python-bool-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">findMissingElements</span>(self, nums: List[<span class="code-token-keyword">int</span>]) -> List[<span class="code-token-keyword">int</span>]:
+        min_num = min(nums)
+        max_num = max(nums)
+        range_size = max_num - min_num + 1
+        
+        present = [False] * range_size
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            present[num - min_num] = True
+        
+        result = []
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(range_size):
+            <span class="code-token-keyword">if</span> <span class="code-token-keyword">not</span> present[i]:
+                result.append(i + min_num)
+                
+        <span class="code-token-keyword">return</span> result</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Efficiency:</strong> Very efficient for small ranges, which is perfect for this problem (max range size
+        is 100).
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+
+    <h3>1. No Missing Elements</h3>
+    <pre><code>Input: [1,2,3,4,5] → Output: []
+Input: [6,7,8,9] → Output: []</code></pre>
+
+    <h3>2. All Elements Missing Except Ends</h3>
+    <pre><code>Input: [1,5] → Output: [2,3,4]
+Input: [10,15] → Output: [11,12,13,14]</code></pre>
+
+    <h3>3. Single Missing Element</h3>
+    <pre><code>Input: [1,2,4,5] → Output: [3]
+Input: [7,8,9,11] → Output: [10]</code></pre>
+
+    <h3>4. Random Missing Elements</h3>
+    <pre><code>Input: [1,3,5,7,9] → Output: [2,4,6,8]
+Input: [2,5,8,11] → Output: [3,4,6,7,9,10]</code></pre>
+
+    <h3>5. Minimum Array Size</h3>
+    <pre><code>Input: [1,2] → Output: []
+Input: [1,3] → Output: [2]</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test with arrays that have no missing elements, all elements missing between
+      ends, and various patterns of missing elements.
+    </div>
+
+    <hr />
+
+    <h2>Detailed Explanation</h2>
+    <p>The problem requires finding all integers that are missing between the smallest and largest elements of the
+      array. The key insight is that we only need to consider numbers in the range [min, max] since the endpoints are
+      guaranteed to be present.</p>
+
+    <div class="grid-container">
+      <div class="grid-item present">1</div>
+      <div class="grid-item present">4</div>
+      <div class="grid-item present">2</div>
+      <div class="grid-item missing">3</div>
+      <div class="grid-item present">5</div>
+    </div>
+
+    <p>For the input [1,4,2,5]:</p>
+    <ul>
+      <li>Minimum = 1, Maximum = 5</li>
+      <li>Expected range: [1,2,3,4,5]</li>
+      <li>Present: 1, 2, 4, 5</li>
+      <li>Missing: 3</li>
+    </ul>
+
+    <p>The solution approaches work as follows:</p>
+    <ol>
+      <li><strong>Hash Set:</strong> Store all numbers in a set for O(1) lookups, then check each number in the range
+      </li>
+      <li><strong>Sorting:</strong> Sort the array and find gaps between consecutive elements</li>
+      <li><strong>Boolean Array:</strong> Use array indices to mark presence of numbers</li>
+    </ol>
+
+    <p>All approaches are efficient given the constraints (n ≤ 100, values ≤ 100), but the hash set approach is
+      generally preferred for its simplicity and optimal time complexity.</p>
+
+    <div class="callout tip">
+      <strong>Why it works:</strong> By focusing only on the range between min and max, we avoid unnecessary checks and
+      efficiently find missing elements.
+    </div>
+
+    <hr />
+
+    <h2>FAQs</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. Why are the smallest and largest elements guaranteed to be present?</summary>
+        <p>This is given in the problem statement: "The smallest and largest integers of the original range are still
+          present in nums." This constraint simplifies the problem.</p>
+      </details>
+
+      <details>
+        <summary>2. What is the time complexity of the hash set approach?</summary>
+        <p>The hash set approach runs in O(n) time for building the set and O(range) time for checking numbers, giving
+          overall O(n) time complexity.</p>
+      </details>
+
+      <details>
+        <summary>3. What is the space complexity of the hash set approach?</summary>
+        <p>The space complexity is O(n) for storing the hash set, which is efficient for the given constraints.</p>
+      </details>
+
+      <details>
+        <summary>4. When would the boolean array approach be better?</summary>
+        <p>The boolean array approach is better when the range between min and max is small, which is always true for
+          this problem (max range = 100).</p>
+      </details>
+
+      <details>
+        <summary>5. Can the array contain duplicate elements?</summary>
+        <p>No, the problem states that the array consists of unique integers, so no duplicates exist.</p>
+      </details>
+
+      <details>
+        <summary>6. What is the maximum possible range size?</summary>
+        <p>Since 1 ≤ nums[i] ≤ 100, the maximum range size is 100 (from 1 to 100).</p>
+      </details>
+
+      <details>
+        <summary>7. How does the sorting approach handle consecutive numbers?</summary>
+        <p>In the sorting approach, when numbers are consecutive, the expected pointer moves smoothly without adding any
+          missing numbers to the result.</p>
+      </details>
+
+      <details>
+        <summary>8. What happens if the array is already sorted?</summary>
+        <p>All approaches work correctly regardless of the initial order. The sorting approach would still sort it, but
+          this is efficient for small n.</p>
+      </details>
+
+      <details>
+        <summary>9. Can this problem be solved in O(1) space?</summary>
+        <p>The sorting approach uses O(1) extra space (excluding output), but modifies the input array. If we cannot
+          modify the input, we need O(n) space.</p>
+      </details>
+
+      <details>
+        <summary>10. What is the most efficient approach for large ranges?</summary>
+        <p>For large ranges, the hash set approach is most efficient as it doesn't depend on the range size for space,
+          only on the number of elements.</p>
+      </details>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>
