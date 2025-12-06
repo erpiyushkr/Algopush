@@ -408,7 +408,12 @@
         <priority>0.8</priority>
     </url>
 
-    
+    <url>
+        <loc>https://algopush.com/Leetcode/3765-complete-prime-number.html</loc>
+        <lastmod>2025-12-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
     
 
 </urlset>

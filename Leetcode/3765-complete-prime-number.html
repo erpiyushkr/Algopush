@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeetCode 3765: Complete Prime Number</title>
+  <meta name="description"
+    content="Learn how to solve LeetCode 3765 : Complete Prime Number problem with multiple approaches. Code in C++, Java, Python with detailed explanations and complexity analysis.">
+  <meta name="keywords"
+    content="LeetCode 3765, LeetCode 3765 Complete Prime Number, complete prime, prime prefix suffix, algorithm solution, prime number checking, Algopush, coding interview preparation, math problems, string manipulation, primality test,, coding interview preparation, array problems, greedy algorithm, sorting approach, mathematical optimization, leetcode algorithms, Leetcode daily question, Leetcode practice question, Leetcode medium question, leetcode easy question, prepare coding interview">
+  <meta name="author" content="Piyush Kumar, Algopush">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Algopush">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://algopush.com/Leetcode/3765-complete-prime-number.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../components/favicon.png">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LeetCode 3765: Complete Prime Number">
+  <meta property="og:description"
+    content="Solve Complete Prime Number problem with multiple approaches. Code in C++, Java, Python with detailed explanations and complexity analysis.">
+  <meta property="og:image" content="https://algopush.com/Leetcode/Images/3765.png">
+  <meta property="og:url" content="https://algopush.com/Leetcode/3765-complete-prime-number.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LeetCode: Complete Prime Number Solutions">
+  <meta name="twitter:description"
+    content="Master prime prefix and suffix checking approaches for complete prime problem.">
+  <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3765.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Complete Prime Number Solution Guide",
+      "url": "https://algopush.com/Leetcode/3765-complete-prime-number.html",
+      "image": "https://algopush.com/Leetcode/Images/3765.png",
+      "author": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "url": "https://algopush.com/"
+      },
+      "datePublished": "2025-08-09",
+      "dateModified": "2025-08-09",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      },
+      "description": "Comprehensive solution for LeetCode Complete Prime Number problem with multiple approaches and code implementations.",
+      "founder": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "jobTitle": "Founder",
+        "url": "https://algopush.com"
+      },
+      "foundingDate": "2025"
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #102c41;
+      --secondary-color: #196391;
+      --accent-color: #102c41;
+      --meta-color: #db5305;
+      --light-bg: #f5f9fc;
+      --highlight-color: #f5f9fc;
+      --text-color: black;
+      --light-text: #7f8c8d;
+      --border-radius: 6px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --callout-tip: #e8f8f5;
+      --callout-note: #eaf2f8;
+      --callout-warning: #fef5e7;
+      --callout-danger: #ffebee;
+      --callout-tip-border: #1abc9c;
+      --callout-note-border: #3498db;
+      --callout-warning-border: #f39c12;
+      --callout-danger-border: #f44336;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    main {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
+
+    .problem-visual {
+      max-width: 100%;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .problem-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      display: inline-block;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      margin-top: 1.8rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 2rem 0;
+    }
+
+    pre {
+      background: #f8f9fa;
+      padding: 1.2rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      border-left: 4px solid var(--accent-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2c3e50;
+    }
+
+    .highlight {
+      background: var(--highlight-color);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .code-header {
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .code-filename {
+      font-weight: 600;
+    }
+
+    .code-copy {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .code-copy:hover {
+      background: var(--highlight-color);
+    }
+
+    .code-token-keyword {
+      color: #d73a49;
+    }
+
+    .code-token-function {
+      color: #6f42c1;
+    }
+
+    .code-token-comment {
+      color: #6a737d;
+      font-style: italic;
+    }
+
+    .code-token-string {
+      color: #032f62;
+    }
+
+    .code-token-number {
+      color: #005cc5;
+    }
+
+    .code-tabs {
+      margin: 0.5rem 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #eaecee;
+      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .tab-button:hover:not(.active) {
+      background: #d5dbdb;
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .faq-section {
+      margin: 2rem 0;
+    }
+
+    .faq-section details {
+      margin: 0.8rem 0;
+      padding: 0.1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      transition: var(--transition);
+    }
+
+    .faq-section details[open] {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-section summary:hover {
+      color: var(--accent-color);
+      background: #f5f5f5;
+    }
+
+    .faq-section p {
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+
+    .breadcrumb {
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to right, #f5f5f5, white);
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: var(--secondary-color);
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .problem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-item .label {
+      font-weight: 600;
+      color: var(--meta-color);
+    }
+
+    .callout {
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--border-radius);
+      border-left: 4px solid;
+    }
+
+    .callout.tip {
+      background-color: var(--callout-tip);
+      border-color: var(--callout-tip-border);
+    }
+
+    .callout.note {
+      background-color: var(--callout-note);
+      border-color: var(--callout-note-border);
+    }
+
+    .callout.warning {
+      background-color: var(--callout-warning);
+      border-color: var(--callout-warning-border);
+    }
+
+    .callout.danger {
+      background-color: var(--callout-danger);
+      border-color: var(--callout-danger-border);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .visual-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .visual-item {
+      flex: 1;
+      min-width: 300px;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      background: #f8f9fa;
+      box-shadow: var(--box-shadow);
+    }
+
+    .visual-item h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .grid-item {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      font-weight: bold;
+    }
+
+    .prime {
+      background-color: #e8f8f5;
+      border-color: #1abc9c;
+    }
+
+    .not-prime {
+      background-color: #ffebee;
+      border-color: #f44336;
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: #e6f7ff;
+      }
+
+      50% {
+        background-color: #b3e0ff;
+      }
+
+      100% {
+        background-color: #e6f7ff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .problem-meta {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .visual-item {
+        min-width: 100%;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .tab-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .code-copy {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="https://algopush.com">Home</a> &gt;
+      <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+      <span>Complete Prime Number</span>
+    </div>
+
+    <div class="problem-visual">
+      <img src="https://algopush.com/Leetcode/Images/3765.png" alt="Complete Prime Number visualization" loading="lazy">
+    </div>
+
+    <h1>Complete Prime Number</h1>
+
+    <div class="problem-meta">
+      <div class="meta-item">
+        <span class="label">Difficulty:</span>
+        <span class="value">Medium</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Topics:</span>
+        <span class="value">Math, String, Primality Test</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Companies:</span>
+        <span class="value">Google, Amazon, Microsoft</span>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Pro Tip:</strong> A number is a complete prime if and only if all its prefixes and suffixes are prime
+      numbers. The key optimization is to avoid redundant prime checks by memoization.
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Given an integer <code>num</code>, return <code>true</code> if it is a <strong>complete prime</strong>,
+      otherwise return <code>false</code>. A <strong>complete prime</strong> is a number where every prefix and every
+      suffix of its decimal representation is a prime number.</p>
+
+    <div class="visual-container">
+      <div class="visual-item">
+        <h4>Example 1</h4>
+        <p><strong>Input:</strong> num = 233</p>
+        <p><strong>Output:</strong> true</p>
+        <p><strong>Explanation:</strong> Prefixes: 2, 23, 233 (all prime). Suffixes: 3, 33, 233 (all prime).</p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 2</h4>
+        <p><strong>Input:</strong> num = 19</p>
+        <p><strong>Output:</strong> false</p>
+        <p><strong>Explanation:</strong> Prefix 1 is not prime. Suffix 9 is not prime.</p>
+      </div>
+
+      <div class="visual-item">
+        <h4>Example 3</h4>
+        <p><strong>Input:</strong> num = 5</p>
+        <p><strong>Output:</strong> true</p>
+        <p><strong>Explanation:</strong> Single digit prime number.</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>Problem Link:</strong>
+      <a href="https://leetcode.com/problems/complete-prime-number/" target="_blank" rel="noopener noreferrer">
+        View on LeetCode ↗
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Key Insight</h2>
+    <p>The solution relies on these crucial observations:</p>
+    <ol>
+      <li>A number is a complete prime if ALL its prefixes and suffixes are prime numbers</li>
+      <li>Single-digit numbers must be prime (2, 3, 5, 7)</li>
+      <li>Prefixes are formed from left to right, suffixes from right to left</li>
+      <li>The same number may appear as both prefix and suffix (the full number)</li>
+      <li>We can optimize by memoizing prime checks to avoid redundant computations</li>
+    </ol>
+
+    <div class="callout warning">
+      <strong>Important:</strong> The number 1 is NOT prime. Also, leading zeros are not considered (since we're working
+      with actual integer values).
+    </div>
+
+    <h2>Approach 1: Naive Prefix-Suffix Check (Your Approach)</h2>
+    <p>Check all prefixes and suffixes independently by converting substrings to integers and testing primality.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Convert number to string for easy substring operations</li>
+      <li>Check all prefixes from left to right:
+        <ul>
+          <li>Take substring from index 0 to i (inclusive)</li>
+          <li>Convert to integer and check primality</li>
+          <li>If any prefix is not prime, return false</li>
+        </ul>
+      </li>
+      <li>Check all suffixes from right to left:
+        <ul>
+          <li>Take substring from index i to end</li>
+          <li>Convert to integer and check primality</li>
+          <li>If any suffix is not prime, return false</li>
+        </ul>
+      </li>
+      <li>If all checks pass, return true</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n²√M)</td>
+          <td>O(1)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where n is number of digits and M is the maximum number value. Each primality test takes O(√num) time.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Naive Prefix-Suffix Check</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-naive">C++</button>
+          <button class="tab-button" data-tab="java-naive">Java</button>
+          <button class="tab-button" data-tab="python-naive">Python</button>
+        </div>
+
+        <div class="tab-content active" id="cpp-naive-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> num) {
+        <span class="code-token-keyword">if</span> (num <= <span class="code-token-number">1</span>) <span class="code-token-keyword">return</span> false;
+        <span class="code-token-keyword">if</span> (num == <span class="code-token-number">2</span>) <span class="code-token-keyword">return</span> true;
+        <span class="code-token-keyword">if</span> (num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span>) <span class="code-token-keyword">return</span> false;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">3</span>; i * i <= num; i += <span class="code-token-number">2</span>) {
+            <span class="code-token-keyword">if</span> (num % i == <span class="code-token-number">0</span>) <span class="code-token-keyword">return</span> false;
+        }
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">completePrime</span>(<span class="code-token-keyword">int</span> num) {
+        string s = to_string(num);
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        <span class="code-token-comment">// Check all prefixes</span>
+        string prefix = "";
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            prefix += s[i];
+            <span class="code-token-keyword">int</span> val = <span class="code-token-function">stoi</span>(prefix);
+            <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(val)) <span class="code-token-keyword">return</span> false;
+        }
+        
+        <span class="code-token-comment">// Check all suffixes</span>
+        string suffix = "";
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n - <span class="code-token-number">1</span>; i >= <span class="code-token-number">0</span>; i--) {
+            suffix = s[i] + suffix;
+            <span class="code-token-keyword">int</span> val = <span class="code-token-function">stoi</span>(suffix);
+            <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(val)) <span class="code-token-keyword">return</span> false;
+        }
+        
+        <span class="code-token-keyword">return</span> true;
+    }
+};</code></pre>
+        </div>
+
+        <div class="tab-content" id="java-naive-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> num) {
+        <span class="code-token-keyword">if</span> (num <= <span class="code-token-number">1</span>) <span class="code-token-keyword">return</span> false;
+        <span class="code-token-keyword">if</span> (num == <span class="code-token-number">2</span>) <span class="code-token-keyword">return</span> true;
+        <span class="code-token-keyword">if</span> (num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span>) <span class="code-token-keyword">return</span> false;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">3</span>; i * i <= num; i += <span class="code-token-number">2</span>) {
+            <span class="code-token-keyword">if</span> (num % i == <span class="code-token-number">0</span>) <span class="code-token-keyword">return</span> false;
+        }
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">completePrime</span>(<span class="code-token-keyword">int</span> num) {
+        String s = Integer.<span class="code-token-function">toString</span>(num);
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        <span class="code-token-comment">// Check all prefixes</span>
+        StringBuilder prefix = <span class="code-token-keyword">new</span> StringBuilder();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            prefix.<span class="code-token-function">append</span>(s.<span class="code-token-function">charAt</span>(i));
+            <span class="code-token-keyword">int</span> val = Integer.<span class="code-token-function">parseInt</span>(prefix.<span class="code-token-function">toString</span>());
+            <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(val)) <span class="code-token-keyword">return</span> false;
+        }
+        
+        <span class="code-token-comment">// Check all suffixes</span>
+        StringBuilder suffix = <span class="code-token-keyword">new</span> StringBuilder();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n - <span class="code-token-number">1</span>; i >= <span class="code-token-number">0</span>; i--) {
+            suffix.<span class="code-token-function">insert</span>(<span class="code-token-number">0</span>, s.<span class="code-token-function">charAt</span>(i));
+            <span class="code-token-keyword">int</span> val = Integer.<span class="code-token-function">parseInt</span>(suffix.<span class="code-token-function">toString</span>());
+            <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(val)) <span class="code-token-keyword">return</span> false;
+        }
+        
+        <span class="code-token-keyword">return</span> true;
+    }
+}</code></pre>
+        </div>
+
+        <div class="tab-content" id="python-naive-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">isPrime</span>(self, num: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        <span class="code-token-keyword">if</span> num <= <span class="code-token-number">1</span>:
+            <span class="code-token-keyword">return</span> False
+        <span class="code-token-keyword">if</span> num == <span class="code-token-number">2</span>:
+            <span class="code-token-keyword">return</span> True
+        <span class="code-token-keyword">if</span> num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span>:
+            <span class="code-token-keyword">return</span> False
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(<span class="code-token-number">3</span>, int(num**<span class="code-token-number">0.5</span>) + <span class="code-token-number">1</span>, <span class="code-token-number">2</span>):
+            <span class="code-token-keyword">if</span> num % i == <span class="code-token-number">0</span>:
+                <span class="code-token-keyword">return</span> False
+        <span class="code-token-keyword">return</span> True
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">completePrime</span>(self, num: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        s = str(num)
+        n = len(s)
+        
+        <span class="code-token-comment"># Check all prefixes</span>
+        prefix = ""
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            prefix += s[i]
+            <span class="code-token-keyword">if</span> <span class="code-token-keyword">not</span> self.isPrime(int(prefix)):
+                <span class="code-token-keyword">return</span> False
+        
+        <span class="code-token-comment"># Check all suffixes</span>
+        suffix = ""
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n - <span class="code-token-number">1</span>, -<span class="code-token-number">1</span>, -<span class="code-token-number">1</span>):
+            suffix = s[i] + suffix
+            <span class="code-token-keyword">if</span> <span class="code-token-keyword">not</span> self.isPrime(int(suffix)):
+                <span class="code-token-keyword">return</span> False
+        
+        <span class="code-token-keyword">return</span> True</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Efficiency:</strong> This approach is straightforward but may perform redundant prime checks for the
+        same
+        number appearing as both prefix and suffix.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 2: Memoized Prime Checks</h2>
+    <p>Use memoization (caching) to avoid redundant prime number checks for the same value.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Create a memoization map/dictionary to store prime check results</li>
+      <li>Convert number to string for substring operations</li>
+      <li>Generate all unique prefixes and suffixes</li>
+      <li>For each unique number, check primality using memoized function</li>
+      <li>Return false if any check fails, otherwise return true</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(k√M)</td>
+          <td>O(k)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where k is number of unique prefixes/suffixes (≤ 2n) and M is maximum number value.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Memoized Prime Checks</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-memo">C++</button>
+          <button class="tab-button" data-tab="java-memo">Java</button>
+          <button class="tab-button" data-tab="python-memo">Python</button>
+        </div>
+
+        <div class="tab-content active" id="cpp-memo-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    
+    unordered_map<<span class="code-token-keyword">int</span>, <span class="code-token-keyword">bool</span>> memo;
+    
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> num) {
+        <span class="code-token-keyword">if</span> (memo.<span class="code-token-function">find</span>(num) != memo.<span class="code-token-function">end</span>()) {
+            <span class="code-token-keyword">return</span> memo[num];
+        }
+        
+        <span class="code-token-keyword">if</span> (num <= <span class="code-token-number">1</span>) {
+            memo[num] = false;
+            <span class="code-token-keyword">return</span> false;
+        }
+        <span class="code-token-keyword">if</span> (num == <span class="code-token-number">2</span>) {
+            memo[num] = true;
+            <span class="code-token-keyword">return</span> true;
+        }
+        <span class="code-token-keyword">if</span> (num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span>) {
+            memo[num] = false;
+            <span class="code-token-keyword">return</span> false;
+        }
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">3</span>; i * i <= num; i += <span class="code-token-number">2</span>) {
+            <span class="code-token-keyword">if</span> (num % i == <span class="code-token-number">0</span>) {
+                memo[num] = false;
+                <span class="code-token-keyword">return</span> false;
+            }
+        }
+        
+        memo[num] = true;
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">completePrime</span>(<span class="code-token-keyword">int</span> num) {
+        string s = to_string(num);
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        unordered_set<<span class="code-token-keyword">int</span>> numbersToCheck;
+        
+        <span class="code-token-comment">// Collect all prefixes</span>
+        string prefix = "";
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            prefix += s[i];
+            numbersToCheck.<span class="code-token-function">insert</span>(<span class="code-token-function">stoi</span>(prefix));
+        }
+        
+        <span class="code-token-comment">// Collect all suffixes</span>
+        string suffix = "";
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n - <span class="code-token-number">1</span>; i >= <span class="code-token-number">0</span>; i--) {
+            suffix = s[i] + suffix;
+            numbersToCheck.<span class="code-token-function">insert</span>(<span class="code-token-function">stoi</span>(suffix));
+        }
+        
+        <span class="code-token-comment">// Check all unique numbers</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> number : numbersToCheck) {
+            <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(number)) {
+                <span class="code-token-keyword">return</span> false;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> true;
+    }
+};</code></pre>
+        </div>
+
+        <div class="tab-content" id="java-memo-tab">
+          <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    
+    <span class="code-token-keyword">private</span> Map<<span class="code-token-keyword">Integer</span>, <span class="code-token-keyword">Boolean</span>> memo = <span class="code-token-keyword">new</span> HashMap<>();
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> num) {
+        <span class="code-token-keyword">if</span> (memo.<span class="code-token-function">containsKey</span>(num)) {
+            <span class="code-token-keyword">return</span> memo.<span class="code-token-function">get</span>(num);
+        }
+        
+        <span class="code-token-keyword">if</span> (num <= <span class="code-token-number">1</span>) {
+            memo.<span class="code-token-function">put</span>(num, false);
+            <span class="code-token-keyword">return</span> false;
+        }
+        <span class="code-token-keyword">if</span> (num == <span class="code-token-number">2</span>) {
+            memo.<span class="code-token-function">put</span>(num, true);
+            <span class="code-token-keyword">return</span> true;
+        }
+        <span class="code-token-keyword">if</span> (num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span>) {
+            memo.<span class="code-token-function">put</span>(num, false);
+            <span class="code-token-keyword">return</span> false;
+        }
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">3</span>; i * i <= num; i += <span class="code-token-number">2</span>) {
+            <span class="code-token-keyword">if</span> (num % i == <span class="code-token-number">0</span>) {
+                memo.<span class="code-token-function">put</span>(num, false);
+                <span class="code-token-keyword">return</span> false;
+            }
+        }
+        
+        memo.<span class="code-token-function">put</span>(num, true);
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">completePrime</span>(<span class="code-token-keyword">int</span> num) {
+        String s = Integer.<span class="code-token-function">toString</span>(num);
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        Set<<span class="code-token-keyword">Integer</span>> numbersToCheck = <span class="code-token-keyword">new</span> HashSet<>();
+        
+        <span class="code-token-comment">// Collect all prefixes</span>
+        StringBuilder prefix = <span class="code-token-keyword">new</span> StringBuilder();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            prefix.<span class="code-token-function">append</span>(s.<span class="code-token-function">charAt</span>(i));
+            numbersToCheck.<span class="code-token-function">add</span>(Integer.<span class="code-token-function">parseInt</span>(prefix.<span class="code-token-function">toString</span>()));
+        }
+        
+        <span class="code-token-comment">// Collect all suffixes</span>
+        StringBuilder suffix = <span class="code-token-keyword">new</span> StringBuilder();
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n - <span class="code-token-number">1</span>; i >= <span class="code-token-number">0</span>; i--) {
+            suffix.<span class="code-token-function">insert</span>(<span class="code-token-number">0</span>, s.<span class="code-token-function">charAt</span>(i));
+            numbersToCheck.<span class="code-token-function">add</span>(Integer.<span class="code-token-function">parseInt</span>(suffix.<span class="code-token-function">toString</span>()));
+        }
+        
+        <span class="code-token-comment">// Check all unique numbers</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> number : numbersToCheck) {
+            <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(number)) {
+                <span class="code-token-keyword">return</span> false;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> true;
+    }
+}</code></pre>
+        </div>
+
+        <div class="tab-content" id="python-memo-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">__init__</span>(self):
+        self.memo = {}
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">isPrime</span>(self, num: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        <span class="code-token-keyword">if</span> num <span class="code-token-keyword">in</span> self.memo:
+            <span class="code-token-keyword">return</span> self.memo[num]
+        
+        <span class="code-token-keyword">if</span> num <= <span class="code-token-number">1</span>:
+            self.memo[num] = False
+            <span class="code-token-keyword">return</span> False
+        <span class="code-token-keyword">if</span> num == <span class="code-token-number">2</span>:
+            self.memo[num] = True
+            <span class="code-token-keyword">return</span> True
+        <span class="code-token-keyword">if</span> num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span>:
+            self.memo[num] = False
+            <span class="code-token-keyword">return</span> False
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(<span class="code-token-number">3</span>, int(num**<span class="code-token-number">0.5</span>) + <span class="code-token-number">1</span>, <span class="code-token-number">2</span>):
+            <span class="code-token-keyword">if</span> num % i == <span class="code-token-number">0</span>:
+                self.memo[num] = False
+                <span class="code-token-keyword">return</span> False
+        
+        self.memo[num] = True
+        <span class="code-token-keyword">return</span> True
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">completePrime</span>(self, num: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        s = str(num)
+        n = len(s)
+        
+        numbers_to_check = set()
+        
+        <span class="code-token-comment"># Collect all prefixes</span>
+        prefix = ""
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            prefix += s[i]
+            numbers_to_check.add(int(prefix))
+        
+        <span class="code-token-comment"># Collect all suffixes</span>
+        suffix = ""
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n - <span class="code-token-number">1</span>, -<span class="code-token-number">1</span>, -<span class="code-token-number">1</span>):
+            suffix = s[i] + suffix
+            numbers_to_check.add(int(suffix))
+        
+        <span class="code-token-comment"># Check all unique numbers</span>
+        <span class="code-token-keyword">for</span> number <span class="code-token-keyword">in</span> numbers_to_check:
+            <span class="code-token-keyword">if</span> <span class="code-token-keyword">not</span> self.isPrime(number):
+                <span class="code-token-keyword">return</span> False
+        
+        <span class="code-token-keyword">return</span> True</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Advantage:</strong> This approach reduces redundant prime checks by storing results in a memoization
+        cache, improving performance when the same number appears multiple times.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Approach 3: Optimized Early Exit with Set</h2>
+    <p>Combine prefix and suffix checking with early exit and use a set to track checked numbers.</p>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+      <li>Convert number to string</li>
+      <li>Use a set to track numbers that have been checked</li>
+      <li>Check prefixes first, exiting early if any fail</li>
+      <li>Then check suffixes, using memoized results when available</li>
+      <li>Return true only if all checks pass</li>
+    </ol>
+
+    <h3>Complexity Analysis</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Complexity</th>
+          <th>Space Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O(n√M)</td>
+          <td>O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Where n is number of digits and M is maximum number value.</p>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="code-filename">Optimized Early Exit</span>
+        <button class="code-copy">Copy Code</button>
+      </div>
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="cpp-optimized">C++</button>
+          <button class="tab-button" data-tab="java-optimized">Java</button>
+          <button class="tab-button" data-tab="python-optimized">Python</button>
+        </div>
+
+        <div class="tab-content active" id="cpp-optimized-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> num) {
+        <span class="code-token-keyword">if</span> (num <= <span class="code-token-number">1</span>) <span class="code-token-keyword">return</span> false;
+        <span class="code-token-keyword">if</span> (num == <span class="code-token-number">2</span> || num == <span class="code-token-number">3</span>) <span class="code-token-keyword">return</span> true;
+        <span class="code-token-keyword">if</span> (num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span> || num % <span class="code-token-number">3</span> == <span class="code-token-number">0</span>) <span class="code-token-keyword">return</span> false;
+        
+        <span class="code-token-comment">// 6k ± 1 optimization</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">5</span>; i * i <= num; i += <span class="code-token-number">6</span>) {
+            <span class="code-token-keyword">if</span> (num % i == <span class="code-token-number">0</span> || num % (i + <span class="code-token-number">2</span>) == <span class="code-token-number">0</span>) {
+                <span class="code-token-keyword">return</span> false;
+            }
+        }
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">bool</span> <span class="code-token-function">completePrime</span>(<span class="code-token-keyword">int</span> num) {
+        string s = to_string(num);
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        unordered_set<<span class="code-token-keyword">int</span>> checked;
+        
+        <span class="code-token-comment">// Check prefixes with early exit</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            <span class="code-token-keyword">int</span> prefix = <span class="code-token-function">stoi</span>(s.<span class="code-token-function">substr</span>(<span class="code-token-number">0</span>, i + <span class="code-token-number">1</span>));
+            <span class="code-token-keyword">if</span> (checked.<span class="code-token-function">find</span>(prefix) == checked.<span class="code-token-function">end</span>()) {
+                <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(prefix)) <span class="code-token-keyword">return</span> false;
+                checked.<span class="code-token-function">insert</span>(prefix);
+            }
+        }
+        
+        <span class="code-token-comment">// Check suffixes with early exit and reuse checked results</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n - <span class="code-token-number">1</span>; i >= <span class="code-token-number">0</span>; i--) {
+            <span class="code-token-keyword">int</span> suffix = <span class="code-token-function">stoi</span>(s.<span class="code-token-function">substr</span>(i));
+            <span class="code-token-keyword">if</span> (checked.<span class="code-token-function">find</span>(suffix) == checked.<span class="code-token-function">end</span>()) {
+                <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(suffix)) <span class="code-token-keyword">return</span> false;
+                checked.<span class="code-token-function">insert</span>(suffix);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> true;
+    }
+};</code></pre>
+        </div>
+
+        <div class="tab-content" id="java-optimized-tab">
+          <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">isPrime</span>(<span class="code-token-keyword">int</span> num) {
+        <span class="code-token-keyword">if</span> (num <= <span class="code-token-number">1</span>) <span class="code-token-keyword">return</span> false;
+        <span class="code-token-keyword">if</span> (num == <span class="code-token-number">2</span> || num == <span class="code-token-number">3</span>) <span class="code-token-keyword">return</span> true;
+        <span class="code-token-keyword">if</span> (num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span> || num % <span class="code-token-number">3</span> == <span class="code-token-number">0</span>) <span class="code-token-keyword">return</span> false;
+        
+        <span class="code-token-comment">// 6k ± 1 optimization</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">5</span>; i * i <= num; i += <span class="code-token-number">6</span>) {
+            <span class="code-token-keyword">if</span> (num % i == <span class="code-token-number">0</span> || num % (i + <span class="code-token-number">2</span>) == <span class="code-token-number">0</span>) {
+                <span class="code-token-keyword">return</span> false;
+            }
+        }
+        <span class="code-token-keyword">return</span> true;
+    }
+    
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">boolean</span> <span class="code-token-function">completePrime</span>(<span class="code-token-keyword">int</span> num) {
+        String s = Integer.<span class="code-token-function">toString</span>(num);
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        Set<<span class="code-token-keyword">Integer</span>> checked = <span class="code-token-keyword">new</span> HashSet<>();
+        
+        <span class="code-token-comment">// Check prefixes with early exit</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            <span class="code-token-keyword">int</span> prefix = Integer.<span class="code-token-function">parseInt</span>(s.<span class="code-token-function">substring</span>(<span class="code-token-number">0</span>, i + <span class="code-token-number">1</span>));
+            <span class="code-token-keyword">if</span> (!checked.<span class="code-token-function">contains</span>(prefix)) {
+                <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(prefix)) <span class="code-token-keyword">return</span> false;
+                checked.<span class="code-token-function">add</span>(prefix);
+            }
+        }
+        
+        <span class="code-token-comment">// Check suffixes with early exit and reuse checked results</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n - <span class="code-token-number">1</span>; i >= <span class="code-token-number">0</span>; i--) {
+            <span class="code-token-keyword">int</span> suffix = Integer.<span class="code-token-function">parseInt</span>(s.<span class="code-token-function">substring</span>(i));
+            <span class="code-token-keyword">if</span> (!checked.<span class="code-token-function">contains</span>(suffix)) {
+                <span class="code-token-keyword">if</span> (!<span class="code-token-function">isPrime</span>(suffix)) <span class="code-token-keyword">return</span> false;
+                checked.<span class="code-token-function">add</span>(suffix);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> true;
+    }
+}</code></pre>
+        </div>
+
+        <div class="tab-content" id="python-optimized-tab">
+          <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">isPrime</span>(self, num: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        <span class="code-token-keyword">if</span> num <= <span class="code-token-number">1</span>:
+            <span class="code-token-keyword">return</span> False
+        <span class="code-token-keyword">if</span> num == <span class="code-token-number">2</span> <span class="code-token-keyword">or</span> num == <span class="code-token-number">3</span>:
+            <span class="code-token-keyword">return</span> True
+        <span class="code-token-keyword">if</span> num % <span class="code-token-number">2</span> == <span class="code-token-number">0</span> <span class="code-token-keyword">or</span> num % <span class="code-token-number">3</span> == <span class="code-token-number">0</span>:
+            <span class="code-token-keyword">return</span> False
+        
+        <span class="code-token-comment"># 6k ± 1 optimization</span>
+        i = <span class="code-token-number">5</span>
+        <span class="code-token-keyword">while</span> i * i <= num:
+            <span class="code-token-keyword">if</span> num % i == <span class="code-token-number">0</span> <span class="code-token-keyword">or</span> num % (i + <span class="code-token-number">2</span>) == <span class="code-token-number">0</span>:
+                <span class="code-token-keyword">return</span> False
+            i += <span class="code-token-number">6</span>
+        <span class="code-token-keyword">return</span> True
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">completePrime</span>(self, num: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">bool</span>:
+        s = str(num)
+        n = len(s)
+        
+        checked = set()
+        
+        <span class="code-token-comment"># Check prefixes with early exit</span>
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            prefix = int(s[:i + <span class="code-token-number">1</span>])
+            <span class="code-token-keyword">if</span> prefix <span class="code-token-keyword">not</span> <span class="code-token-keyword">in</span> checked:
+                <span class="code-token-keyword">if</span> <span class="code-token-keyword">not</span> self.isPrime(prefix):
+                    <span class="code-token-keyword">return</span> False
+                checked.add(prefix)
+        
+        <span class="code-token-comment"># Check suffixes with early exit and reuse checked results</span>
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n - <span class="code-token-number">1</span>, -<span class="code-token-number">1</span>, -<span class="code-token-number">1</span>):
+            suffix = int(s[i:])
+            <span class="code-token-keyword">if</span> suffix <span class="code-token-keyword">not</span> <span class="code-token-keyword">in</span> checked:
+                <span class="code-token-keyword">if</span> <span class="code-token-keyword">not</span> self.isPrime(suffix):
+                    <span class="code-token-keyword">return</span> False
+                checked.add(suffix)
+        
+        <span class="code-token-keyword">return</span> True</code></pre>
+        </div>
+      </div>
+      <div class="callout note">
+        <strong>Optimization:</strong> This approach uses the 6k ± 1 optimization for primality testing and early exit
+        strategy, making it the most efficient among all approaches.
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Edge Cases and Testing</h2>
+
+    <h3>1. Single Digit Numbers</h3>
+    <pre><code>Input: 2 → Output: true (prime)
+Input: 4 → Output: false (not prime)
+Input: 1 → Output: false (not prime)</code></pre>
+
+    <h3>2. Two Digit Numbers</h3>
+    <pre><code>Input: 23 → Output: true (prefixes: 2,23; suffixes: 3,23 - all prime)
+Input: 29 → Output: true (prefixes: 2,29; suffixes: 9,29 - 9 not prime → false)
+Input: 19 → Output: false (prefix 1 not prime)</code></pre>
+
+    <h3>3. Three Digit Numbers</h3>
+    <pre><code>Input: 233 → Output: true (all prefixes and suffixes prime)
+Input: 237 → Output: false (suffix 37 prime, but 7 prime, 237 not prime? Let's check)
+Actually: Prefixes: 2,23,237 (237 not prime → false)
+Suffixes: 3,37,237 (237 not prime → false)</code></pre>
+
+    <h3>4. Numbers with Repeated Digits</h3>
+    <pre><code>Input: 373 → Output: true
+Prefixes: 3,37,373 (all prime)
+Suffixes: 3,73,373 (all prime)
+
+Input: 777 → Output: false
+Prefixes: 7,77,777 (77 not prime, 777 not prime)</code></pre>
+
+    <h3>5. Large Numbers</h3>
+    <pre><code>Input: 233993 → Output: true
+Prefixes: 2,23,233,2339,23399,233993 (all prime)
+Suffixes: 3,93,993,3993,33993,233993 (need to check each)</code></pre>
+
+    <div class="callout warning">
+      <strong>Important:</strong> Always test with single-digit numbers, numbers containing digit 1, and numbers where
+      middle prefixes/suffixes might fail even if the full number is prime.
+    </div>
+
+    <hr />
+
+    <h2>Detailed Explanation</h2>
+    <p>The problem requires checking if a number is a "complete prime" - meaning ALL its prefixes and ALL its suffixes
+      must be prime numbers.</p>
+
+    <div class="grid-container">
+      <div class="grid-item prime">2</div>
+      <div class="grid-item prime">3</div>
+      <div class="grid-item prime">3</div>
+      <div class="grid-item prime">9</div>
+      <div class="grid-item prime">9</div>
+      <div class="grid-item prime">3</div>
+    </div>
+
+    <p>For the number 233993:</p>
+    <ul>
+      <li><strong>Prefixes:</strong> 2, 23, 233, 2339, 23399, 233993</li>
+      <li><strong>Suffixes:</strong> 3, 93, 993, 3993, 33993, 233993</li>
+      <li>All must be prime for the number to be a complete prime</li>
+    </ul>
+
+    <p>The key challenge is efficiently checking primality for potentially many numbers. We can optimize by:</p>
+    <ol>
+      <li><strong>Memoization:</strong> Store results of primality tests to avoid redundant computations</li>
+      <li><strong>Early Exit:</strong> Return false as soon as any prefix or suffix fails the prime test</li>
+      <li><strong>Optimized Primality Test:</strong> Use 6k ± 1 optimization to check fewer divisors</li>
+      <li><strong>Set Usage:</strong> Track already checked numbers to avoid duplicate checks</li>
+    </ol>
+
+    <p>The most efficient approach (Approach 3) combines all these optimizations:</p>
+    <ul>
+      <li>Uses 6k ± 1 optimization for faster primality testing</li>
+      <li>Implements early exit when any check fails</li>
+      <li>Uses a set to avoid redundant prime checks</li>
+      <li>Processes prefixes and suffixes separately for clarity</li>
+    </ul>
+
+    <div class="callout tip">
+      <strong>Why it works:</strong> A number is a complete prime if and only if every possible substring starting from
+      the beginning (prefix) and every possible substring ending at the end (suffix) represents a prime number when
+      interpreted as an integer.
+    </div>
+
+    <hr />
+
+    <h2>FAQs</h2>
+
+    <div class="faq-section">
+      <details>
+        <summary>1. What is the definition of a complete prime?</summary>
+        <p>A complete prime is a number where every prefix (substring starting from the first digit) and every suffix
+          (substring ending at the last digit) of its decimal representation is a prime number.</p>
+      </details>
+
+      <details>
+        <summary>2. Is 1 considered a prime number in this problem?</summary>
+        <p>No, 1 is not considered a prime number. According to standard mathematical definition, a prime number must be
+          greater than 1 and have exactly two distinct positive divisors: 1 and itself.</p>
+      </details>
+
+      <details>
+        <summary>3. What is the time complexity of the primality test?</summary>
+        <p>The basic primality test has time complexity O(√n) where n is the number being tested. The optimized 6k ± 1
+          version reduces the constant factor but remains O(√n).</p>
+      </details>
+
+      <details>
+        <summary>4. Why use memoization for prime checks?</summary>
+        <p>Memoization avoids redundant primality tests for the same number. For example, the full number appears as
+          both a prefix and suffix, and smaller numbers may appear multiple times in different contexts.</p>
+      </details>
+
+      <details>
+        <summary>5. What is the 6k ± 1 optimization for primality testing?</summary>
+        <p>All prime numbers greater than 3 can be expressed in the form 6k ± 1. This optimization checks divisibility
+          only by numbers of this form, reducing the number of checks by about 2/3 compared to checking all numbers up
+          to √n.</p>
+      </details>
+
+      <details>
+        <summary>6. Can leading zeros appear in prefixes or suffixes?</summary>
+        <p>No, since we're converting substrings to integers, leading zeros are automatically removed. For example, "01"
+          becomes 1, which would then be tested for primality.</p>
+      </details>
+
+      <details>
+        <summary>7. What is the maximum number of digits we need to handle?</summary>
+        <p>The problem constraints typically limit numbers to 32-bit integers (up to 2,147,483,647 or about 10 digits).
+          However, our solutions work for any integer that fits in the language's integer type.</p>
+      </details>
+
+      <details>
+        <summary>8. How does early exit improve performance?</summary>
+        <p>Early exit means we stop checking as soon as we find any prefix or suffix that is not prime. This can
+          significantly reduce the number of primality tests needed, especially for numbers that fail early.</p>
+      </details>
+
+      <details>
+        <summary>9. Are there any known complete primes?</summary>
+        <p>Yes, some known complete primes include: 2, 3, 5, 7, 23, 37, 53, 73, 373, 233993, etc. The sequence is
+          finite and known as "truncatable primes" in mathematics.</p>
+      </details>
+
+      <details>
+        <summary>10. What's the difference between prefix and suffix in this context?</summary>
+        <p>Prefix: Substring starting from the first digit (e.g., for 2357: 2, 23, 235, 2357). Suffix: Substring ending
+          at the last digit (e.g., for 2357: 7, 57, 357, 2357). Both must be prime for a complete prime.</p>
+      </details>
+    </div>
+
+    <div class="callout note">
+      <strong>About Algopush:</strong>Algopush provides comprehensive algorithm solutions and explanations for coding
+      interview preparation.
+      Visit <a href="https://algopush.com">algopush.com</a> for more problem solutions and coding resources.
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tab functionality
+      document.querySelectorAll('.code-tabs').forEach(container => {
+        const tabButtons = container.querySelectorAll('.tab-button');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        // Initialize first tab
+        if (!container.querySelector('.tab-button.active')) {
+          tabButtons[0]?.classList.add('active');
+          tabContents[0]?.classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            container.querySelector(`#${tabName}-tab`).classList.add('active');
+          });
+        });
+      });
+
+      // Copy button functionality
+      document.querySelectorAll('.code-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+          const code = activeTab.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = originalText, 2000);
+          });
+        });
+      });
+
+      // Load header and footer
+      fetch("../components/header.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("../components/footer.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
+</body>
+
+</html>
