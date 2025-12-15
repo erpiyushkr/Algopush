@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3775: Reverse Words With Same Vowel Count</title>
+    <meta name="description"
+        content="LeetCode 3775 - Reverse Words With Same Vowel Count. Learn multiple approaches: string splitting, in-place processing, and two-pointer techniques.">
+    <meta name="keywords"
+        content="LeetCode 3775, Reverse Words With Same Vowel Count, string manipulation, vowel counting, word reversal, algorithm solution, Algopush, coding interview preparation, string problems, leetcode medium, leetcode daily challenge, leetcode practice, coding interview questions, array problems, sliding window, two pointers, dynamic programming, algorithm solution, Algopush, coding interview preparation, contiguous subarrays, stock price patterns, leetcode medium, leetcode daily challenge, leetcode practice, coding interview questions, LeetCode, LeetCode solutions, LeetCode problems, coding interview, algorithm, data structures, LeetCode easy, LeetCode medium, LeetCode hard, LeetCode daily challenge, LeetCode practice, coding problems, algorithm solutions, data structure problems, LeetCode Python, LeetCode Java, LeetCode C++, LeetCode JavaScript, programming interview, technical interview, FAANG interview, tech interview preparation, LeetCode discuss, LeetCode contest, competitive programming, LeetCode study plan, blind 75 LeetCode, LeetCode patterns, problem solving, coding exercises, LeetCode array problems, LeetCode string problems, LeetCode tree problems, LeetCode graph problems, LeetCode dynamic programming, LeetCode backtracking, LeetCode greedy, LeetCode two pointers, LeetCode binary search, LeetCode sliding window, LeetCode hash table, LeetCode stack, LeetCode queue, LeetCode heap, LeetCode linked list, LeetCode recursion, LeetCode DFS, LeetCode BFS, LeetCode sorting, LeetCode bit manipulation, LeetCode math problems, LeetCode SQL, LeetCode system design, LeetCode OOP, LeetCode concurrency, LeetCode database, LeetCode shell, LeetCode premium, LeetCode explore, LeetCode interview, LeetCode job search, LeetCode career, software engineer interview, coding test, online assessment, OA preparation, LeetCode Amazon, LeetCode Google, LeetCode Microsoft, LeetCode Facebook, LeetCode Apple, LeetCode Netflix, LeetCode Tesla, company tagged questions, LeetCode mock interview, LeetCode interview simulator, coding interview questions, algorithm interview, data structure interview, LeetCode explanation, LeetCode video solution, LeetCode walkthrough, LeetCode tutorial, LeetCode for beginners, LeetCode advanced, coding challenge, programming challenge, solve LeetCode, LeetCode community, LeetCode ranking, LeetCode profile, LeetCode progress, LeetCode streak, LeetCode rewards, code submission, optimal solution, time complexity, space complexity, brute force solution, optimized solution, edge cases, test cases, LeetCode input output, problem statement, constraints analysis, similar problems">
+    <meta name="author" content="Piyush Kumar, Algopush">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Algopush">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://algopush.com/Leetcode/3775-reverse-words-same-vowel-count.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 3775: Reverse Words With Same Vowel Count">
+    <meta property="og:description"
+        content="Master the Reverse Words With Same Vowel Count problem with multiple approaches. Code in C++, Java, Python with detailed explanations.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/3775.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/3775-reverse-words-same-vowel-count.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode: Reverse Words With Same Vowel Count Solutions">
+    <meta name="twitter:description"
+        content="Learn optimal approaches for reversing words with same vowel count as first word.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3775.png">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Reverse Words With Same Vowel Count Solution Guide",
+      "url": "https://algopush.com/Leetcode/3775-reverse-words-same-vowel-count.html",
+      "image": "https://algopush.com/Leetcode/Images/3775.png",
+      "author": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "url": "https://algopush.com/"
+      },
+      "datePublished": "2025-12-15",
+      "dateModified": "2025-12-15",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      },
+      "description": "Comprehensive solution for LeetCode Reverse Words With Same Vowel Count problem with multiple approaches and code implementations.",
+      "founder": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "jobTitle": "Founder",
+        "url": "https://algopush.com"
+      },
+      "foundingDate": "2025"
+    }
+  </script>
+
+    <style>
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+            margin-top: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-top: 1.8rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 2rem 0;
+        }
+
+        pre {
+            background: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .code-container {
+            position: relative;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        .code-token-keyword {
+            color: #d73a49;
+        }
+
+        .code-token-function {
+            color: #6f42c1;
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        .code-token-string {
+            color: #032f62;
+        }
+
+        .code-token-number {
+            color: #005cc5;
+        }
+
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .visual-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .visual-item {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            box-shadow: var(--box-shadow);
+        }
+
+        .visual-item h4 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .grid-item {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .vowel {
+            background-color: #e8f8f5;
+            border-color: #1abc9c;
+            color: #1abc9c;
+        }
+
+        .consonant {
+            background-color: #eaf2f8;
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .space {
+            background-color: #fef5e7;
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+
+        .reversed {
+            background-color: #ffebee;
+            border-color: #f44336;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: #ffebee;
+            }
+
+            50% {
+                background-color: #ffcdd2;
+            }
+
+            100% {
+                background-color: #ffebee;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .visual-item {
+                min-width: 100%;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+
+        <h1>3775. Reverse Words With Same Vowel Count</h1>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>Reverse Words With Same Vowel Count</span>
+        </div>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Medium</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">String, Two Pointers, Simulation</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Google, Amazon, Meta</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Acceptance Rate:</span>
+                <span class="value">65.6%</span>
+            </div>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/3775.png"
+                alt="Reverse Words With Same Vowel Count visualization" loading="lazy">
+        </div>
+
+        <div class="callout tip">
+            <strong>Pro Tip:</strong> This problem tests your ability to work with strings, count specific characters
+            (vowels), and manipulate substrings. The key is to split the problem into three parts: 1) Count vowels in
+            first word, 2) Process each subsequent word, 3) Reverse words when vowel counts match.
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>You are given a string <code>s</code> consisting of lowercase English words, each separated by a single
+            space.</p>
+        <p>Determine how many vowels appear in the first word. Then, reverse each following word that has the same vowel
+            count. Leave all remaining words unchanged.</p>
+        <p>Return the resulting string.</p>
+        <p>Vowels are <code>'a'</code>, <code>'e'</code>, <code>'i'</code>, <code>'o'</code>, and <code>'u'</code>.</p>
+
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Example 1</h4>
+                <p><strong>Input:</strong> s = "cat and mice"</p>
+                <p><strong>Output:</strong> "cat dna mice"</p>
+                <p><strong>Explanation:</strong></p>
+                <ul>
+                    <li>The first word "cat" has 1 vowel.</li>
+                    <li>"and" has 1 vowel, so it is reversed to form "dna".</li>
+                    <li>"mice" has 2 vowels, so it remains unchanged.</li>
+                    <li>Thus, the resulting string is "cat dna mice".</li>
+                </ul>
+            </div>
+
+            <div class="visual-item">
+                <h4>Example 2</h4>
+                <p><strong>Input:</strong> s = "book is nice"</p>
+                <p><strong>Output:</strong> "book is ecin"</p>
+                <p><strong>Explanation:</strong></p>
+                <ul>
+                    <li>The first word "book" has 2 vowels.</li>
+                    <li>"is" has 1 vowel, so it remains unchanged.</li>
+                    <li>"nice" has 2 vowels, so it is reversed to form "ecin".</li>
+                    <li>Thus, the resulting string is "book is ecin".</li>
+                </ul>
+            </div>
+
+            <div class="visual-item">
+                <h4>Visualization</h4>
+                <p>For s = "cat and mice":</p>
+                <div class="grid-container">
+                    <div class="grid-item">c</div>
+                    <div class="grid-item vowel">a</div>
+                    <div class="grid-item">t</div>
+                    <div class="grid-item space">(space)</div>
+                    <div class="grid-item vowel">a</div>
+                    <div class="grid-item">n</div>
+                    <div class="grid-item">d</div>
+                    <div class="grid-item space">(space)</div>
+                    <div class="grid-item">m</div>
+                    <div class="grid-item vowel">i</div>
+                    <div class="grid-item vowel">e</div>
+                </div>
+                <p>First word vowels: <strong>1</strong> (just 'a')</p>
+                <p>Second word reversed because it also has 1 vowel</p>
+                <p>Third word unchanged (2 vowels ≠ 1)</p>
+            </div>
+        </div>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/reverse-words-with-same-vowel-count/" target="_blank"
+                rel="noopener noreferrer">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr />
+
+        <h2>Key Insight</h2>
+        <p>The solution requires careful string processing with these key observations:</p>
+        <ol>
+            <li>The <strong>first word is never reversed</strong> - it only serves as the reference for vowel count</li>
+            <li>Words are separated by <strong>single spaces</strong> (no leading/trailing spaces)</li>
+            <li>Only lowercase English letters are used</li>
+            <li>We need to count vowels in each word and compare with the first word's vowel count</li>
+            <li>When reversing, we reverse the entire word, not just the vowels</li>
+        </ol>
+        <p>Important edge cases:</p>
+        <ul>
+            <li>Single word strings (nothing to reverse)</li>
+            <li>Words with no vowels (only consonants)</li>
+            <li>Words where vowel count matches but the word is already a palindrome</li>
+            <li>Long strings up to 10⁵ characters</li>
+        </ul>
+
+        <div class="callout warning">
+            <strong>Important:</strong> Remember that 'y' is NOT considered a vowel in this problem. Only 'a', 'e', 'i',
+            'o', 'u' count. This is a common point of confusion in vowel-counting problems.
+        </div>
+
+        <h2>Approach 1: String Splitting (Most Intuitive)</h2>
+        <p>Split the string into words, count vowels in first word, then process each subsequent word, reversing when
+            vowel counts match.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Split the input string by spaces to get an array of words</li>
+            <li>Count vowels in the first word (word[0])</li>
+            <li>For each word from index 1 to the end:
+                <ul>
+                    <li>Count vowels in the current word</li>
+                    <li>If vowel count equals first word's vowel count, reverse the word</li>
+                </ul>
+            </li>
+            <li>Join the words back with spaces and return</li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>This approach is straightforward: we isolate each word, count its vowels, and reverse it if needed. The
+            string splitting handles word boundaries for us.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Where n is the length of the string. We traverse the string once to split, then each word once to process.
+            Space is O(n) for storing the word array.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">String Splitting Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-split">C++</button>
+                    <button class="tab-button" data-tab="java-split">Java</button>
+                    <button class="tab-button" data-tab="python-split">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-split-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    
+    <span class="code-token-comment">// Helper function to count vowels in a word</span>
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countVowels</span>(<span class="code-token-keyword">const</span> string& word) {
+        <span class="code-token-keyword">int</span> count = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : word) {
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">'a'</span> || c == <span class="code-token-string">'e'</span> || c == <span class="code-token-string">'i'</span> || 
+                c == <span class="code-token-string">'o'</span> || c == <span class="code-token-string">'u'</span>) {
+                count++;
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+    
+    string <span class="code-token-function">reverseWordsWithSameVowelCount</span>(string s) {
+        <span class="code-token-comment">// Split the string by spaces</span>
+        vector<string> words;
+        stringstream ss(s);
+        string word;
+        
+        <span class="code-token-keyword">while</span> (ss >> word) {
+            words.<span class="code-token-function">push_back</span>(word);
+        }
+        
+        <span class="code-token-comment">// Count vowels in first word</span>
+        <span class="code-token-keyword">int</span> firstWordVowelCount = <span class="code-token-function">countVowels</span>(words[<span class="code-token-number">0</span>]);
+        
+        <span class="code-token-comment">// Process remaining words</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">1</span>; i < words.<span class="code-token-function">size</span>(); i++) {
+            <span class="code-token-keyword">if</span> (<span class="code-token-function">countVowels</span>(words[i]) == firstWordVowelCount) {
+                <span class="code-token-comment">// Reverse the word</span>
+                <span class="code-token-function">reverse</span>(words[i].<span class="code-token-function">begin</span>(), words[i].<span class="code-token-function">end</span>());
+            }
+        }
+        
+        <span class="code-token-comment">// Join words back together</span>
+        string result;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < words.<span class="code-token-function">size</span>(); i++) {
+            <span class="code-token-keyword">if</span> (i > <span class="code-token-number">0</span>) result += <span class="code-token-string">" "</span>;
+            result += words[i];
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-split-tab">
+                    <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    
+    <span class="code-token-comment">// Helper function to count vowels in a word</span>
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countVowels</span>(String word) {
+        <span class="code-token-keyword">int</span> count = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : word.<span class="code-token-function">toCharArray</span>()) {
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">'a'</span> || c == <span class="code-token-string">'e'</span> || c == <span class="code-token-string">'i'</span> || 
+                c == <span class="code-token-string">'o'</span> || c == <span class="code-token-string">'u'</span>) {
+                count++;
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+    
+    <span class="code-token-keyword">public</span> String <span class="code-token-function">reverseWordsWithSameVowelCount</span>(String s) {
+        <span class="code-token-comment">// Split the string by spaces</span>
+        String[] words = s.<span class="code-token-function">split</span>(<span class="code-token-string">" "</span>);
+        
+        <span class="code-token-comment">// Count vowels in first word</span>
+        <span class="code-token-keyword">int</span> firstWordVowelCount = <span class="code-token-function">countVowels</span>(words[<span class="code-token-number">0</span>]);
+        
+        <span class="code-token-comment">// Process remaining words</span>
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">1</span>; i < words.length; i++) {
+            <span class="code-token-keyword">if</span> (<span class="code-token-function">countVowels</span>(words[i]) == firstWordVowelCount) {
+                <span class="code-token-comment">// Reverse the word</span>
+                words[i] = <span class="code-token-keyword">new</span> StringBuilder(words[i]).<span class="code-token-function">reverse</span>().<span class="code-token-function">toString</span>();
+            }
+        }
+        
+        <span class="code-token-comment">// Join words back together</span>
+        <span class="code-token-keyword">return</span> String.<span class="code-token-function">join</span>(<span class="code-token-string">" "</span>, words);
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-split-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">count_vowels</span>(self, word: <span class="code-token-keyword">str</span>) -> <span class="code-token-keyword">int</span>:
+        <span class="code-token-comment"># Helper function to count vowels in a word</span>
+        vowels = <span class="code-token-function">set</span>([<span class="code-token-string">'a'</span>, <span class="code-token-string">'e'</span>, <span class="code-token-string">'i'</span>, <span class="code-token-string">'o'</span>, <span class="code-token-string">'u'</span>])
+        count = <span class="code-token-number">0</span>
+        <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> word:
+            <span class="code-token-keyword">if</span> c <span class="code-token-keyword">in</span> vowels:
+                count += <span class="code-token-number">1</span>
+        <span class="code-token-keyword">return</span> count
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">reverseWordsWithSameVowelCount</span>(self, s: <span class="code-token-keyword">str</span>) -> <span class="code-token-keyword">str</span>:
+        <span class="code-token-comment"># Split the string by spaces</span>
+        words = s.<span class="code-token-function">split</span>()
+        
+        <span class="code-token-comment"># Count vowels in first word</span>
+        first_word_vowel_count = self.count_vowels(words[<span class="code-token-number">0</span>])
+        
+        <span class="code-token-comment"># Process remaining words</span>
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(<span class="code-token-number">1</span>, len(words)):
+            <span class="code-token-keyword">if</span> self.count_vowels(words[i]) == first_word_vowel_count:
+                <span class="code-token-comment"># Reverse the word</span>
+                words[i] = words[i][::-<span class="code-token-number">1</span>]
+        
+        <span class="code-token-comment"># Join words back together</span>
+        <span class="code-token-keyword">return</span> <span class="code-token-string">" "</span>.<span class="code-token-function">join</span>(words)</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Advantage:</strong> This approach is the most intuitive and readable. It clearly separates the
+                problem into logical steps: split, count, compare, reverse, join. The time complexity is optimal for the
+                problem constraints.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Approach 2: Two-Pointer In-Place Processing</h2>
+        <p>Process the string without splitting, using two pointers to identify word boundaries and process in-place.
+        </p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Find the end of the first word (first space or end of string)</li>
+            <li>Count vowels in the first word</li>
+            <li>Use two pointers to iterate through the string:
+                <ul>
+                    <li>Pointer <code>i</code> marks start of current word</li>
+                    <li>Pointer <code>j</code> finds end of current word (next space or end)</li>
+                </ul>
+            </li>
+            <li>For each subsequent word:
+                <ul>
+                    <li>Count vowels between <code>i</code> and <code>j</code></li>
+                    <li>If count matches first word, reverse the substring <code>[i, j)</code></li>
+                </ul>
+            </li>
+            <li>Move to next word and continue</li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>This approach avoids creating an array of words by processing the string in place. We maintain pointers to
+            word boundaries and reverse substrings directly when needed.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(1) or O(n) for language-specific needs</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Single pass through the string. Space is O(1) for extra variables, though some languages (like Python with
+            immutable strings) need O(n) space.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Two-Pointer In-Place Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-twoptr">C++</button>
+                    <button class="tab-button" data-tab="java-twoptr">Java</button>
+                    <button class="tab-button" data-tab="python-twoptr">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-twoptr-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    
+    <span class="code-token-comment">// Helper function to count vowels in a substring [start, end)</span>
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countVowelsInRange</span>(<span class="code-token-keyword">const</span> string& s, <span class="code-token-keyword">int</span> start, <span class="code-token-keyword">int</span> end) {
+        <span class="code-token-keyword">int</span> count = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = start; i < end; i++) {
+            <span class="code-token-keyword">char</span> c = s[i];
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">'a'</span> || c == <span class="code-token-string">'e'</span> || c == <span class="code-token-string">'i'</span> || 
+                c == <span class="code-token-string">'o'</span> || c == <span class="code-token-string">'u'</span>) {
+                count++;
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+    
+    <span class="code-token-comment">// Helper to reverse a substring [start, end) in place</span>
+    <span class="code-token-keyword">void</span> <span class="code-token-function">reverseSubstring</span>(string& s, <span class="code-token-keyword">int</span> start, <span class="code-token-keyword">int</span> end) {
+        <span class="code-token-keyword">int</span> left = start, right = end - <span class="code-token-number">1</span>;
+        <span class="code-token-keyword">while</span> (left < right) {
+            <span class="code-token-function">swap</span>(s[left], s[right]);
+            left++;
+            right--;
+        }
+    }
+    
+    string <span class="code-token-function">reverseWordsWithSameVowelCount</span>(string s) {
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        <span class="code-token-comment">// Find end of first word</span>
+        <span class="code-token-keyword">int</span> firstWordEnd = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (firstWordEnd < n && s[firstWordEnd] != <span class="code-token-string">' '</span>) {
+            firstWordEnd++;
+        }
+        
+        <span class="code-token-comment">// Count vowels in first word</span>
+        <span class="code-token-keyword">int</span> firstWordVowelCount = <span class="code-token-function">countVowelsInRange</span>(s, <span class="code-token-number">0</span>, firstWordEnd);
+        
+        <span class="code-token-comment">// Process remaining words</span>
+        <span class="code-token-keyword">int</span> wordStart = firstWordEnd + <span class="code-token-number">1</span>;  <span class="code-token-comment">// Start of next word</span>
+        
+        <span class="code-token-keyword">while</span> (wordStart < n) {
+            <span class="code-token-comment">// Find end of current word</span>
+            <span class="code-token-keyword">int</span> wordEnd = wordStart;
+            <span class="code-token-keyword">while</span> (wordEnd < n && s[wordEnd] != <span class="code-token-string">' '</span>) {
+                wordEnd++;
+            }
+            
+            <span class="code-token-comment">// Count vowels in current word</span>
+            <span class="code-token-keyword">int</span> currentVowelCount = <span class="code-token-function">countVowelsInRange</span>(s, wordStart, wordEnd);
+            
+            <span class="code-token-comment">// Reverse if vowel count matches</span>
+            <span class="code-token-keyword">if</span> (currentVowelCount == firstWordVowelCount) {
+                <span class="code-token-function">reverseSubstring</span>(s, wordStart, wordEnd);
+            }
+            
+            <span class="code-token-comment">// Move to next word</span>
+            wordStart = wordEnd + <span class="code-token-number">1</span>;
+        }
+        
+        <span class="code-token-keyword">return</span> s;
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-twoptr-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    
+    <span class="code-token-comment">// Helper function to count vowels in a substring [start, end)</span>
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countVowelsInRange</span>(<span class="code-token-keyword">char</span>[] chars, <span class="code-token-keyword">int</span> start, <span class="code-token-keyword">int</span> end) {
+        <span class="code-token-keyword">int</span> count = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = start; i < end; i++) {
+            <span class="code-token-keyword">char</span> c = chars[i];
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">'a'</span> || c == <span class="code-token-string">'e'</span> || c == <span class="code-token-string">'i'</span> || 
+                c == <span class="code-token-string">'o'</span> || c == <span class="code-token-string">'u'</span>) {
+                count++;
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+    
+    <span class="code-token-comment">// Helper to reverse a substring [start, end) in place</span>
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">void</span> <span class="code-token-function">reverseSubstring</span>(<span class="code-token-keyword">char</span>[] chars, <span class="code-token-keyword">int</span> start, <span class="code-token-keyword">int</span> end) {
+        <span class="code-token-keyword">int</span> left = start, right = end - <span class="code-token-number">1</span>;
+        <span class="code-token-keyword">while</span> (left < right) {
+            <span class="code-token-keyword">char</span> temp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = temp;
+            left++;
+            right--;
+        }
+    }
+    
+    <span class="code-token-keyword">public</span> String <span class="code-token-function">reverseWordsWithSameVowelCount</span>(String s) {
+        <span class="code-token-comment">// Convert to char array for in-place modification</span>
+        <span class="code-token-keyword">char</span>[] chars = s.<span class="code-token-function">toCharArray</span>();
+        <span class="code-token-keyword">int</span> n = chars.length;
+        
+        <span class="code-token-comment">// Find end of first word</span>
+        <span class="code-token-keyword">int</span> firstWordEnd = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (firstWordEnd < n && chars[firstWordEnd] != <span class="code-token-string">' '</span>) {
+            firstWordEnd++;
+        }
+        
+        <span class="code-token-comment">// Count vowels in first word</span>
+        <span class="code-token-keyword">int</span> firstWordVowelCount = <span class="code-token-function">countVowelsInRange</span>(chars, <span class="code-token-number">0</span>, firstWordEnd);
+        
+        <span class="code-token-comment">// Process remaining words</span>
+        <span class="code-token-keyword">int</span> wordStart = firstWordEnd + <span class="code-token-number">1</span>;  <span class="code-token-comment">// Start of next word</span>
+        
+        <span class="code-token-keyword">while</span> (wordStart < n) {
+            <span class="code-token-comment">// Find end of current word</span>
+            <span class="code-token-keyword">int</span> wordEnd = wordStart;
+            <span class="code-token-keyword">while</span> (wordEnd < n && chars[wordEnd] != <span class="code-token-string">' '</span>) {
+                wordEnd++;
+            }
+            
+            <span class="code-token-comment">// Count vowels in current word</span>
+            <span class="code-token-keyword">int</span> currentVowelCount = <span class="code-token-function">countVowelsInRange</span>(chars, wordStart, wordEnd);
+            
+            <span class="code-token-comment">// Reverse if vowel count matches</span>
+            <span class="code-token-keyword">if</span> (currentVowelCount == firstWordVowelCount) {
+                <span class="code-token-function">reverseSubstring</span>(chars, wordStart, wordEnd);
+            }
+            
+            <span class="code-token-comment">// Move to next word</span>
+            wordStart = wordEnd + <span class="code-token-number">1</span>;
+        }
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-keyword">new</span> String(chars);
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-twoptr-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">reverseWordsWithSameVowelCount</span>(self, s: <span class="code-token-keyword">str</span>) -> <span class="code-token-keyword">str</span>:
+        <span class="code-token-comment"># Python strings are immutable, so we need to build result</span>
+        result = []
+        n = len(s)
+        
+        <span class="code-token-comment"># Find end of first word</span>
+        first_word_end = <span class="code-token-number">0</span>
+        <span class="code-token-keyword">while</span> first_word_end < n <span class="code-token-keyword">and</span> s[first_word_end] != <span class="code-token-string">' '</span>:
+            first_word_end += <span class="code-token-number">1</span>
+        
+        <span class="code-token-comment"># Count vowels in first word</span>
+        first_word = s[:first_word_end]
+        vowels = <span class="code-token-function">set</span>([<span class="code-token-string">'a'</span>, <span class="code-token-string">'e'</span>, <span class="code-token-string">'i'</span>, <span class="code-token-string">'o'</span>, <span class="code-token-string">'u'</span>])
+        first_word_vowel_count = sum(<span class="code-token-number">1</span> <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> first_word <span class="code-token-keyword">if</span> c <span class="code-token-keyword">in</span> vowels)
+        
+        <span class="code-token-comment"># Add first word to result</span>
+        result.<span class="code-token-function">append</span>(first_word)
+        
+        <span class="code-token-comment"># Process remaining words</span>
+        word_start = first_word_end + <span class="code-token-number">1</span>
+        
+        <span class="code-token-keyword">while</span> word_start < n:
+            <span class="code-token-comment"># Find end of current word</span>
+            word_end = word_start
+            <span class="code-token-keyword">while</span> word_end < n <span class="code-token-keyword">and</span> s[word_end] != <span class="code-token-string">' '</span>:
+                word_end += <span class="code-token-number">1</span>
+            
+            <span class="code-token-comment"># Get current word</span>
+            current_word = s[word_start:word_end]
+            
+            <span class="code-token-comment"># Count vowels in current word</span>
+            current_vowel_count = sum(<span class="code-token-number">1</span> <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> current_word <span class="code-token-keyword">if</span> c <span class="code-token-keyword">in</span> vowels)
+            
+            <span class="code-token-comment"># Add word to result (reversed if vowel count matches)</span>
+            <span class="code-token-keyword">if</span> current_vowel_count == first_word_vowel_count:
+                result.<span class="code-token-function">append</span>(current_word[::-<span class="code-token-number">1</span>])
+            <span class="code-token-keyword">else</span>:
+                result.<span class="code-token-function">append</span>(current_word)
+            
+            <span class="code-token-comment"># Move to next word</span>
+            word_start = word_end + <span class="code-token-number">1</span>
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-string">" "</span>.<span class="code-token-function">join</span>(result)</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Space Optimization:</strong> This approach minimizes additional space usage by processing the
+                string in-place (or with minimal extra space in Python). It's more efficient for very large strings
+                where creating an array of words might be expensive.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Approach 3: Stream Processing with StringBuilder</h2>
+        <p>Process the string as a stream, building the result incrementally without storing all words.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize a StringBuilder/result string and word counter</li>
+            <li>Traverse the string character by character:
+                <ul>
+                    <li>Collect characters until a space is encountered</li>
+                    <li>When space found or end of string reached:
+                        <ul>
+                            <li>If first word, count vowels and store count</li>
+                            <li>If subsequent word, count vowels and reverse if matches</li>
+                            <li>Add word to result (with space if not first word)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Return the built result</li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>This approach processes the string in a single pass without splitting or creating arrays. It's
+            memory-efficient and works well for streaming scenarios.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(n) for output, O(1) extra</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Single pass through the string. Space is O(n) for the output string, with minimal extra variables.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Stream Processing Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-stream">C++</button>
+                    <button class="tab-button" data-tab="java-stream">Java</button>
+                    <button class="tab-button" data-tab="python-stream">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-stream-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    
+    <span class="code-token-comment">// Helper to count vowels in a string</span>
+    <span class="code-token-keyword">int</span> <span class="code-token-function">countVowels</span>(<span class="code-token-keyword">const</span> string& word) {
+        <span class="code-token-keyword">int</span> count = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : word) {
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">'a'</span> || c == <span class="code-token-string">'e'</span> || c == <span class="code-token-string">'i'</span> || 
+                c == <span class="code-token-string">'o'</span> || c == <span class="code-token-string">'u'</span>) {
+                count++;
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+    
+    <span class="code-token-comment">// Helper to reverse a string</span>
+    string <span class="code-token-function">reverseString</span>(<span class="code-token-keyword">const</span> string& word) {
+        string reversed = word;
+        <span class="code-token-function">reverse</span>(reversed.<span class="code-token-function">begin</span>(), reversed.<span class="code-token-function">end</span>());
+        <span class="code-token-keyword">return</span> reversed;
+    }
+    
+    string <span class="code-token-function">reverseWordsWithSameVowelCount</span>(string s) {
+        string result;
+        string currentWord;
+        <span class="code-token-keyword">int</span> wordIndex = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">int</span> firstWordVowelCount = -<span class="code-token-number">1</span>;  <span class="code-token-comment">// Will be set when we process first word</span>
+        
+        <span class="code-token-comment">// Add a space at the end to handle last word uniformly</span>
+        s += <span class="code-token-string">' '</span>;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : s) {
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">' '</span>) {
+                <span class="code-token-comment">// End of a word</span>
+                <span class="code-token-keyword">if</span> (!currentWord.<span class="code-token-function">empty</span>()) {
+                    <span class="code-token-keyword">int</span> vowelCount = <span class="code-token-function">countVowels</span>(currentWord);
+                    
+                    <span class="code-token-keyword">if</span> (wordIndex == <span class="code-token-number">0</span>) {
+                        <span class="code-token-comment">// First word - just store vowel count</span>
+                        firstWordVowelCount = vowelCount;
+                        result += currentWord;
+                    } <span class="code-token-keyword">else</span> {
+                        <span class="code-token-comment">// Subsequent words - add space then word (maybe reversed)</span>
+                        result += <span class="code-token-string">' '</span>;
+                        <span class="code-token-keyword">if</span> (vowelCount == firstWordVowelCount) {
+                            result += <span class="code-token-function">reverseString</span>(currentWord);
+                        } <span class="code-token-keyword">else</span> {
+                            result += currentWord;
+                        }
+                    }
+                    
+                    currentWord.<span class="code-token-function">clear</span>();
+                    wordIndex++;
+                }
+            } <span class="code-token-keyword">else</span> {
+                <span class="code-token-comment">// Add character to current word</span>
+                currentWord += c;
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result;
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-stream-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    
+    <span class="code-token-keyword">public</span> String <span class="code-token-function">reverseWordsWithSameVowelCount</span>(String s) {
+        StringBuilder result = <span class="code-token-keyword">new</span> StringBuilder();
+        StringBuilder currentWord = <span class="code-token-keyword">new</span> StringBuilder();
+        <span class="code-token-keyword">int</span> wordIndex = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">int</span> firstWordVowelCount = -<span class="code-token-number">1</span>;  <span class="code-token-comment">// Will be set when we process first word</span>
+        
+        <span class="code-token-comment">// Add a space at the end to handle last word uniformly</span>
+        s = s + <span class="code-token-string">" "</span>;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < s.<span class="code-token-function">length</span>(); i++) {
+            <span class="code-token-keyword">char</span> c = s.<span class="code-token-function">charAt</span>(i);
+            
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">' '</span>) {
+                <span class="code-token-comment">// End of a word</span>
+                <span class="code-token-keyword">if</span> (currentWord.<span class="code-token-function">length</span>() > <span class="code-token-number">0</span>) {
+                    String word = currentWord.<span class="code-token-function">toString</span>();
+                    <span class="code-token-keyword">int</span> vowelCount = <span class="code-token-function">countVowels</span>(word);
+                    
+                    <span class="code-token-keyword">if</span> (wordIndex == <span class="code-token-number">0</span>) {
+                        <span class="code-token-comment">// First word - just store vowel count</span>
+                        firstWordVowelCount = vowelCount;
+                        result.<span class="code-token-function">append</span>(word);
+                    } <span class="code-token-keyword">else</span> {
+                        <span class="code-token-comment">// Subsequent words - add space then word (maybe reversed)</span>
+                        result.<span class="code-token-function">append</span>(<span class="code-token-string">' '</span>);
+                        <span class="code-token-keyword">if</span> (vowelCount == firstWordVowelCount) {
+                            result.<span class="code-token-function">append</span>(<span class="code-token-keyword">new</span> StringBuilder(word).<span class="code-token-function">reverse</span>().<span class="code-token-function">toString</span>());
+                        } <span class="code-token-keyword">else</span> {
+                            result.<span class="code-token-function">append</span>(word);
+                        }
+                    }
+                    
+                    currentWord.<span class="code-token-function">setLength</span>(<span class="code-token-number">0</span>);  <span class="code-token-comment">// Clear the StringBuilder</span>
+                    wordIndex++;
+                }
+            } <span class="code-token-keyword">else</span> {
+                <span class="code-token-comment">// Add character to current word</span>
+                currentWord.<span class="code-token-function">append</span>(c);
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> result.<span class="code-token-function">toString</span>();
+    }
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">countVowels</span>(String word) {
+        <span class="code-token-keyword">int</span> count = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">char</span> c : word.<span class="code-token-function">toCharArray</span>()) {
+            <span class="code-token-keyword">if</span> (c == <span class="code-token-string">'a'</span> || c == <span class="code-token-string">'e'</span> || c == <span class="code-token-string">'i'</span> || 
+                c == <span class="code-token-string">'o'</span> || c == <span class="code-token-string">'u'</span>) {
+                count++;
+            }
+        }
+        <span class="code-token-keyword">return</span> count;
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-stream-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">reverseWordsWithSameVowelCount</span>(self, s: <span class="code-token-keyword">str</span>) -> <span class="code-token-keyword">str</span>:
+        result = []
+        current_word = []
+        word_index = <span class="code-token-number">0</span>
+        first_word_vowel_count = -<span class="code-token-number">1</span>  <span class="code-token-comment"># Will be set when we process first word</span>
+        vowels = <span class="code-token-function">set</span>([<span class="code-token-string">'a'</span>, <span class="code-token-string">'e'</span>, <span class="code-token-string">'i'</span>, <span class="code-token-string">'o'</span>, <span class="code-token-string">'u'</span>])
+        
+        <span class="code-token-comment"># Add a space at the end to handle last word uniformly</span>
+        s = s + <span class="code-token-string">" "</span>
+        
+        <span class="code-token-keyword">for</span> c <span class="code-token-keyword">in</span> s:
+            <span class="code-token-keyword">if</span> c == <span class="code-token-string">' '</span>:
+                <span class="code-token-comment"># End of a word</span>
+                <span class="code-token-keyword">if</span> current_word:
+                    word = <span class="code-token-string">''</span>.<span class="code-token-function">join</span>(current_word)
+                    vowel_count = sum(<span class="code-token-number">1</span> <span class="code-token-keyword">for</span> ch <span class="code-token-keyword">in</span> word <span class="code-token-keyword">if</span> ch <span class="code-token-keyword">in</span> vowels)
+                    
+                    <span class="code-token-keyword">if</span> word_index == <span class="code-token-number">0</span>:
+                        <span class="code-token-comment"># First word - just store vowel count</span>
+                        first_word_vowel_count = vowel_count
+                        result.<span class="code-token-function">append</span>(word)
+                    <span class="code-token-keyword">else</span>:
+                        <span class="code-token-comment"># Subsequent words - word (maybe reversed)</span>
+                        <span class="code-token-keyword">if</span> vowel_count == first_word_vowel_count:
+                            result.<span class="code-token-function">append</span>(word[::-<span class="code-token-number">1</span>])
+                        <span class="code-token-keyword">else</span>:
+                            result.<span class="code-token-function">append</span>(word)
+                    
+                    current_word.<span class="code-token-function">clear</span>()
+                    word_index += <span class="code-token-number">1</span>
+            <span class="code-token-keyword">else</span>:
+                <span class="code-token-comment"># Add character to current word</span>
+                current_word.<span class="code-token-function">append</span>(c)
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-string">" "</span>.<span class="code-token-function">join</span>(result)</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Stream Processing Advantage:</strong> This approach is efficient for very large strings as it
+                processes characters sequentially without backtracking. It's particularly useful if the input were
+                coming from a stream rather than a complete string.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Comparison of Approaches</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                    <th>Key Insight</th>
+                    <th>Best Use Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>String Splitting</strong></td>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                    <td>Simplest, most readable code</td>
+                    <td>General use, interviews, readability matters</td>
+                </tr>
+                <tr>
+                    <td><strong>Two-Pointer In-Place</strong></td>
+                    <td>O(n)</td>
+                    <td>O(1) extra space</td>
+                    <td>Minimizes memory usage, in-place processing</td>
+                    <td>Memory-constrained environments, large strings</td>
+                </tr>
+                <tr>
+                    <td><strong>Stream Processing</strong></td>
+                    <td>O(n)</td>
+                    <td>O(n) output, O(1) extra</td>
+                    <td>Processes as stream, no array storage</td>
+                    <td>Streaming data, incremental processing</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout tip">
+            <strong>Recommendation:</strong> For interviews, the String Splitting approach is usually best because it's
+            clear and demonstrates understanding of string manipulation. For production code with memory constraints,
+            consider the Two-Pointer approach. All approaches have O(n) time complexity which is optimal.
+        </div>
+
+        <hr />
+
+        <h2>Edge Cases and Testing</h2>
+
+        <h3>1. Single Word</h3>
+        <pre><code>Input: "hello" → Output: "hello"
+No other words to compare or reverse</code></pre>
+
+        <h3>2. No Vowels in First Word</h3>
+        <pre><code>Input: "xyz abc def" → Output: "xyz cba fed"
+First word "xyz" has 0 vowels
+"abc" has 1 vowel → NOT reversed
+"def" has 1 vowel → NOT reversed
+Wait, correction: Only words with 0 vowels should be reversed
+So output: "xyz cba fed" (both "cba" and "fed" have 1 vowel, not 0)</code></pre>
+
+        <h3>3. All Words Same Vowel Count</h3>
+        <pre><code>Input: "cat bat rat" → Output: "cat tab tar"
+All words have 1 vowel, so all except first are reversed</code></pre>
+
+        <h3>4. Words with Multiple Same Vowels</h3>
+        <pre><code>Input: "aeiou book test" → Output: "aeiou koob test"
+First word "aeiou" has 5 vowels
+"book" has 2 vowels → NOT reversed
+"test" has 1 vowel → NOT reversed
+Actually, "book" has 2 vowels (o, o), so not reversed
+"test" has 1 vowel (e), so not reversed</code></pre>
+
+        <h3>5. Palindrome Words</h3>
+        <pre><code>Input: "racecar madam radar" → Output: "racecar madam radar"
+First word "racecar" has 3 vowels (a, e, a)
+"madam" has 2 vowels (a, a) → NOT reversed
+"radar" has 2 vowels (a, a) → NOT reversed
+Even if reversed, palindromes look the same</code></pre>
+
+        <h3>6. Very Long String</h3>
+        <pre><code>Input: "a" repeated 50000 times + " b" repeated 50000 times
+Output: "aaa... bbb..." (second word reversed if vowel count matches)
+Tests performance with 10⁵ characters</code></pre>
+
+        <div class="callout warning">
+            <strong>Important:</strong> Remember that 'y' is NOT a vowel in this problem. Also, uppercase letters don't
+            appear (problem states lowercase English letters only). This simplifies vowel checking.
+        </div>
+
+        <hr />
+
+        <h2>Detailed Example Walkthrough</h2>
+        <p>Let's trace through the String Splitting approach with s = "book is nice":</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>Action</th>
+                    <th>Words Array</th>
+                    <th>First Word Vowels</th>
+                    <th>Current Word</th>
+                    <th>Vowel Count</th>
+                    <th>Action Taken</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Split string</td>
+                    <td>["book", "is", "nice"]</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Initialize</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Count first word vowels</td>
+                    <td>["book", "is", "nice"]</td>
+                    <td>2 (o, o)</td>
+                    <td>book</td>
+                    <td>2</td>
+                    <td>Store count = 2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Process "is"</td>
+                    <td>["book", "is", "nice"]</td>
+                    <td>2</td>
+                    <td>is</td>
+                    <td>1 (i)</td>
+                    <td>1 ≠ 2 → Leave unchanged</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Process "nice"</td>
+                    <td>["book", "is", "nice"]</td>
+                    <td>2</td>
+                    <td>nice</td>
+                    <td>2 (i, e)</td>
+                    <td>2 = 2 → Reverse to "ecin"</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Join words</td>
+                    <td>["book", "is", "ecin"]</td>
+                    <td>2</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Return "book is ecin"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Before Processing</h4>
+                <div class="grid-container">
+                    <div class="grid-item">b</div>
+                    <div class="grid-item vowel">o</div>
+                    <div class="grid-item vowel">o</div>
+                    <div class="grid-item">k</div>
+                    <div class="grid-item space">(space)</div>
+                    <div class="grid-item">i</div>
+                    <div class="grid-item">s</div>
+                    <div class="grid-item space">(space)</div>
+                    <div class="grid-item">n</div>
+                    <div class="grid-item">i</div>
+                    <div class="grid-item">c</div>
+                    <div class="grid-item">e</div>
+                </div>
+                <p><strong>Vowel counts:</strong> book(2), is(1), nice(2)</p>
+            </div>
+            <div class="visual-item">
+                <h4>After Processing</h4>
+                <div class="grid-container">
+                    <div class="grid-item">b</div>
+                    <div class="grid-item vowel">o</div>
+                    <div class="grid-item vowel">o</div>
+                    <div class="grid-item">k</div>
+                    <div class="grid-item space">(space)</div>
+                    <div class="grid-item">i</div>
+                    <div class="grid-item">s</div>
+                    <div class="grid-item space">(space)</div>
+                    <div class="grid-item reversed">e</div>
+                    <div class="grid-item reversed">c</div>
+                    <div class="grid-item reversed">i</div>
+                    <div class="grid-item reversed">n</div>
+                </div>
+                <p><strong>Result:</strong> "book is ecin"</p>
+                <p>Only "nice" reversed (vowel count = first word's count)</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>FAQs</h2>
+
+        <div class="faq-section">
+            <details>
+                <summary>1. Why isn't the first word ever reversed?</summary>
+                <p>The problem states: "Determine how many vowels appear in the first word. Then, reverse each following
+                    word that has the same vowel count." The first word serves as the reference point. We use its vowel
+                    count to decide which subsequent words to reverse.</p>
+            </details>
+
+            <details>
+                <summary>2. What if the first word has no vowels?</summary>
+                <p>Then we count 0 vowels. Any subsequent word with 0 vowels (i.e., no vowels at all) will be reversed.
+                    Words with any vowels will remain unchanged.</p>
+            </details>
+
+            <details>
+                <summary>3. Are uppercase vowels considered?</summary>
+                <p>No, the problem states the string consists of lowercase English letters only. So we only need to
+                    check for lowercase 'a', 'e', 'i', 'o', 'u'.</p>
+            </details>
+
+            <details>
+                <summary>4. What about the letter 'y'? Is it ever a vowel?</summary>
+                <p>In this problem, 'y' is NOT considered a vowel. Only the five standard vowels 'a', 'e', 'i', 'o', 'u'
+                    count. This is specified in the problem statement.</p>
+            </details>
+
+            <details>
+                <summary>5. Can words have leading or trailing spaces?</summary>
+                <p>No, the constraints state: "s does not contain leading or trailing spaces." Words are separated by
+                    single spaces with no extra spaces at the beginning or end.</p>
+            </details>
+
+            <details>
+                <summary>6. What's the maximum string length we need to handle?</summary>
+                <p>Up to 10⁵ characters according to the constraints. All our O(n) approaches handle this efficiently.
+                </p>
+            </details>
+
+            <details>
+                <summary>7. How do we handle duplicate vowels in a word?</summary>
+                <p>Each occurrence of a vowel counts separately. For example, "book" has 2 vowels (both 'o'), "beet" has
+                    2 vowels ('e', 'e'), "audio" has 4 vowels ('a', 'u', 'i', 'o').</p>
+            </details>
+
+            <details>
+                <summary>8. What if two words have the same vowel count but different vowels?</summary>
+                <p>We only care about the count, not which specific vowels. If word1 has 2 vowels ('a', 'e') and word2
+                    has 2 vowels ('i', 'o'), they both have count 2 and word2 would be reversed if it comes after the
+                    first word (and first word also has 2 vowels).</p>
+            </details>
+
+            <details>
+                <summary>9. Can the string be empty?</summary>
+                <p>No, constraints say 1 <= s.length, so the string has at least 1 character. Since it consists of words
+                        separated by spaces, the minimum is a single word.</p>
+            </details>
+
+            <details>
+                <summary>10. What's the most efficient way to check if a character is a vowel?</summary>
+                <p>For this problem with only lowercase letters, a simple if statement checking c == 'a' || c == 'e'
+                    etc. is efficient. For case-insensitive checking, you could convert to lowercase first or check both
+                    cases. Using a set (in Python) or unordered_set (in C++) is also efficient and clean.</p>
+            </details>
+        </div>
+
+        <div class="callout note">
+            <strong>About Algopush:</strong> Algopush provides comprehensive algorithm solutions and explanations for
+            coding interview preparation.
+            Visit <a href="https://algopush.com">algopush.com</a> for more problem solutions and coding resources.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab functionality
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                // Initialize first tab
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        button.classList.add('active');
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>
