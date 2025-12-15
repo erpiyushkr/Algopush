@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeetCode 2110: Number of Smooth Descent Periods of a Stock</title>
+    <title>2110: Number of Smooth Descent Periods of a Stock</title>
     <meta name="description"
-        content="Solve LeetCode 2110 - Number of Smooth Descent Periods of a Stock. Learn multiple approaches: sliding window, dynamic programming, and mathematical formula. Code in C++, Java, Python.">
+        content="LeetCode 2110 - Number of Smooth Descent Periods of a Stock. Code in C++, Java, Python.">
     <meta name="keywords"
-        content="LeetCode 2110, Number of Smooth Descent Periods of a Stock, stock smooth descent, array problems, sliding window, two pointers, dynamic programming, algorithm solution, Algopush, coding interview preparation, contiguous subarrays, stock price patterns, leetcode medium, leetcode daily challenge, leetcode practice, coding interview questions">
+        content="LeetCode 2110, Number of Smooth Descent Periods of a Stock, stock smooth descent, array problems, sliding window, two pointers, dynamic programming, algorithm solution, Algopush, coding interview preparation, contiguous subarrays, stock price patterns, leetcode medium, leetcode daily challenge, leetcode practice, coding interview questions, LeetCode, LeetCode solutions, LeetCode problems, coding interview, algorithm, data structures, LeetCode easy, LeetCode medium, LeetCode hard, LeetCode daily challenge, LeetCode practice, coding problems, algorithm solutions, data structure problems, LeetCode Python, LeetCode Java, LeetCode C++, LeetCode JavaScript, programming interview, technical interview, FAANG interview, tech interview preparation, LeetCode discuss, LeetCode contest, competitive programming, LeetCode study plan, blind 75 LeetCode, LeetCode patterns, problem solving, coding exercises, LeetCode array problems, LeetCode string problems, LeetCode tree problems, LeetCode graph problems, LeetCode dynamic programming, LeetCode backtracking, LeetCode greedy, LeetCode two pointers, LeetCode binary search, LeetCode sliding window, LeetCode hash table, LeetCode stack, LeetCode queue, LeetCode heap, LeetCode linked list, LeetCode recursion, LeetCode DFS, LeetCode BFS, LeetCode sorting, LeetCode bit manipulation, LeetCode math problems, LeetCode SQL, LeetCode system design, LeetCode OOP, LeetCode concurrency, LeetCode database, LeetCode shell, LeetCode premium, LeetCode explore, LeetCode interview, LeetCode job search, LeetCode career, software engineer interview, coding test, online assessment, OA preparation, LeetCode Amazon, LeetCode Google, LeetCode Microsoft, LeetCode Facebook, LeetCode Apple, LeetCode Netflix, LeetCode Tesla, company tagged questions, LeetCode mock interview, LeetCode interview simulator, coding interview questions, algorithm interview, data structure interview, LeetCode explanation, LeetCode video solution, LeetCode walkthrough, LeetCode tutorial, LeetCode for beginners, LeetCode advanced, coding challenge, programming challenge, solve LeetCode, LeetCode community, LeetCode ranking, LeetCode profile, LeetCode progress, LeetCode streak, LeetCode rewards, code submission, optimal solution, time complexity, space complexity, brute force solution, optimized solution, edge cases, test cases, LeetCode input output, problem statement, constraints analysis, similar problems">
     <meta name="author" content="Piyush Kumar, Algopush">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Algopush">
@@ -624,7 +624,8 @@
 
         <h2>Problem Statement</h2>
         <p>You are given an integer array <code>prices</code> representing the daily price history of a stock, where
-            <code>prices[i]</code> is the stock price on the ith day.</p>
+            <code>prices[i]</code> is the stock price on the ith day.
+        </p>
         <p>A <strong>smooth descent period</strong> of a stock consists of one or more contiguous days such that the
             price on each day is lower than the price on the preceding day by exactly 1. The first day of the period is
             exempted from this rule[citation:5].</p>
@@ -816,7 +817,8 @@
                     <li>Start new segment with length <code>L = 1</code></li>
                     <li>Move <code>i</code> to next day</li>
                     <li>While still in smooth descent (<code>prices[i-1] - prices[i] == 1</code>), increment
-                        <code>L</code> and <code>i</code></li>
+                        <code>L</code> and <code>i</code>
+                    </li>
                     <li>Add <code>L * (L + 1) / 2</code> to answer</li>
                 </ul>
             </li>
@@ -826,7 +828,8 @@
         <h3>How It Works</h3>
         <p>A contiguous segment of length <code>L</code> where prices decrease by exactly 1 each day contains exactly
             <code>L</code> single-day periods, <code>L-1</code> two-day periods, ..., and 1 <code>L</code>-day period.
-            The total is the sum of 1 to <code>L</code>, which equals <code>L(L+1)/2</code>.</p>
+            The total is the sum of 1 to <code>L</code>, which equals <code>L(L+1)/2</code>.
+        </p>
 
         <h3>Complexity Analysis</h3>
         <table>
@@ -928,7 +931,8 @@
             <li>For each day <code>i</code> from 0 to n-1:
                 <ul>
                     <li>If <code>i > 0</code> and <code>prices[i-1] - prices[i] == 1</code>, add <code>dp[i-1]</code> to
-                        <code>dp[i]</code></li>
+                        <code>dp[i]</code>
+                    </li>
                     <li>Add <code>dp[i]</code> to <code>ans</code></li>
                 </ul>
             </li>
@@ -938,7 +942,8 @@
         <h3>How It Works</h3>
         <p><code>dp[i]</code> stores the number of smooth descent periods ending at day <code>i</code>. If day
             <code>i</code> continues a smooth descent from day <code>i-1</code>, then all periods ending at
-            <code>i-1</code> can be extended to include <code>i</code>.</p>
+            <code>i-1</code> can be extended to include <code>i</code>.
+        </p>
 
         <h3>Complexity Analysis</h3>
         <table>
