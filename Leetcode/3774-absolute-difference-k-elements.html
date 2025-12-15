@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3774: Absolute Difference Between Maximum & Minimum K Elements</title>
+    <meta name="description"
+        content="Solve LeetCode 3774 - Absolute Difference Between Maximum and Minimum K Elements. Learn multiple approaches: sorting, heap-based selection, quickselect algorithm.">
+    <meta name="keywords"
+        content="LeetCode 3774, Absolute Difference Between Maximum and Minimum K Elements, k largest elements, k smallest elements, array problems, sorting, heap data structure, quickselect algorithm, algorithm solution, Algopush, coding interview preparation, array manipulation, sum difference, leetcode easy, leetcode daily challenge, leetcode practice, coding interview questions">
+    <meta name="author" content="Piyush Kumar, Algopush">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Algopush">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://algopush.com/Leetcode/3774-absolute-difference-k-elements.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 3774: Absolute Difference Between Maximum and Minimum K Elements">
+    <meta property="og:description"
+        content="Master the Absolute Difference problem with sorting, heap, and selection approaches. Code in C++, Java, Python with detailed explanations.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/3774.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/3774-absolute-difference-k-elements.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode: Absolute Difference K Elements Solutions">
+    <meta name="twitter:description"
+        content="Learn optimal approaches for finding absolute difference between k largest and k smallest elements.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3774.png">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Absolute Difference Between Maximum and Minimum K Elements Solution Guide",
+      "url": "https://algopush.com/Leetcode/3774-absolute-difference-k-elements.html",
+      "image": "https://algopush.com/Leetcode/Images/3774.png",
+      "author": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "url": "https://algopush.com/"
+      },
+      "datePublished": "2025-12-15",
+      "dateModified": "2025-12-15",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      },
+      "description": "Comprehensive solution for LeetCode Absolute Difference Between Maximum and Minimum K Elements problem with multiple approaches and code implementations.",
+      "founder": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "jobTitle": "Founder",
+        "url": "https://algopush.com"
+      },
+      "foundingDate": "2025"
+    }
+  </script>
+
+    <style>
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+            margin-top: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-top: 1.8rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 2rem 0;
+        }
+
+        pre {
+            background: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .code-container {
+            position: relative;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        .code-token-keyword {
+            color: #d73a49;
+        }
+
+        .code-token-function {
+            color: #6f42c1;
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        .code-token-string {
+            color: #032f62;
+        }
+
+        .code-token-number {
+            color: #005cc5;
+        }
+
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .visual-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .visual-item {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            box-shadow: var(--box-shadow);
+        }
+
+        .visual-item h4 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .grid-item {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .smallest {
+            background-color: #e8f8f5;
+            border-color: #1abc9c;
+        }
+
+        .largest {
+            background-color: #e8f8f5;
+            border-color: #3498db;
+        }
+
+        .regular {
+            background-color: #fff;
+            border-color: #ddd;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: #e6f7ff;
+            }
+
+            50% {
+                background-color: #b3e0ff;
+            }
+
+            100% {
+                background-color: #e6f7ff;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .visual-item {
+                min-width: 100%;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+
+        <h1>3774. Absolute Difference Between Maximum and Minimum K Elements</h1>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>Absolute Difference Between Maximum and Minimum K Elements</span>
+        </div>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Easy</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">Array, Sorting, Heap, Quickselect</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Amazon, Google, Microsoft</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Acceptance Rate:</span>
+                <span class="value">74.8%</span>
+            </div>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/3774.png" alt="Absolute Difference K Elements visualization"
+                loading="lazy">
+        </div>
+
+        <div class="callout tip">
+            <strong>Pro Tip:</strong> For this problem with n ≤ 100, simple sorting (O(n log n)) is perfectly adequate
+            and the most readable solution. However, understanding heap-based (O(n log k)) and selection-based (O(n))
+            approaches is valuable for interview preparation where constraints might be larger.
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>You are given an integer array <code>nums</code> and an integer <code>k</code>.</p>
+        <p>Find the absolute difference between:</p>
+        <ul>
+            <li>The sum of the <code>k</code> largest elements in the array; and</li>
+            <li>The sum of the <code>k</code> smallest elements in the array.</li>
+        </ul>
+        <p>Return an integer denoting this difference.</p>
+
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Example 1</h4>
+                <p><strong>Input:</strong> nums = [5,2,2,4], k = 2</p>
+                <p><strong>Output:</strong> 5</p>
+                <p><strong>Explanation:</strong></p>
+                <ul>
+                    <li>The k = 2 largest elements are 4 and 5. Their sum is 4 + 5 = 9.</li>
+                    <li>The k = 2 smallest elements are 2 and 2. Their sum is 2 + 2 = 4.</li>
+                    <li>The absolute difference is abs(9 - 4) = 5.</li>
+                </ul>
+            </div>
+
+            <div class="visual-item">
+                <h4>Example 2</h4>
+                <p><strong>Input:</strong> nums = [100], k = 1</p>
+                <p><strong>Output:</strong> 0</p>
+                <p><strong>Explanation:</strong></p>
+                <ul>
+                    <li>The largest element is 100.</li>
+                    <li>The smallest element is 100.</li>
+                    <li>The absolute difference is abs(100 - 100) = 0.</li>
+                </ul>
+            </div>
+
+            <div class="visual-item">
+                <h4>Visualization</h4>
+                <p>For nums = [5,2,2,4], k = 2:</p>
+                <div class="grid-container">
+                    <div class="grid-item smallest">2</div>
+                    <div class="grid-item smallest">2</div>
+                    <div class="grid-item regular">4</div>
+                    <div class="grid-item largest">5</div>
+                </div>
+                <p>Smallest k = 2: <strong>2 + 2 = 4</strong></p>
+                <p>Largest k = 2: <strong>4 + 5 = 9</strong></p>
+                <p>Difference: <strong>|9 - 4| = 5</strong></p>
+            </div>
+        </div>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/absolute-difference-between-maximum-and-minimum-k-elements/"
+                target="_blank" rel="noopener noreferrer">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr />
+
+        <h2>Key Insight</h2>
+        <p>The solution requires finding two distinct sums from the same array:</p>
+        <ol>
+            <li><strong>Sum of k smallest elements:</strong> The k elements with minimum values</li>
+            <li><strong>Sum of k largest elements:</strong> The k elements with maximum values</li>
+        </ol>
+        <p>Important observations:</p>
+        <ul>
+            <li>The same element cannot be counted in both sums (unless the array has duplicates and k is large)</li>
+            <li>When k = n (array length), both sums include all elements, so the difference is 0</li>
+            <li>The absolute difference ensures a non-negative result</li>
+            <li>With small constraints (n ≤ 100), even O(n²) approaches would work, but we aim for optimal solutions
+            </li>
+        </ul>
+
+        <div class="callout warning">
+            <strong>Important:</strong> When the array has duplicate values, the same value might appear in both k
+            smallest and k largest groups if there aren't enough distinct values. For example, in [1,1,2,3] with k=2,
+            the k smallest are [1,1] and k largest are [2,3] - no overlap of indices but value 1 appears twice in
+            smallest.
+        </div>
+
+        <h2>Approach 1: Sorting and Direct Summation (Optimal for Given Constraints)</h2>
+        <p>Sort the array and directly sum the first k elements (smallest) and last k elements (largest), then compute
+            their absolute difference.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Sort the array in non-decreasing order</li>
+            <li>Calculate sum of first k elements (smallest)</li>
+            <li>Calculate sum of last k elements (largest)</li>
+            <li>Return absolute difference between the two sums</li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>After sorting, the smallest k elements are at indices 0 to k-1, and the largest k elements are at indices n-k
+            to n-1. We sum these ranges directly.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n log n)</td>
+                    <td>O(1) or O(log n) for sorting algorithm</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Where n is the length of nums array. The dominant factor is sorting. Built-in sort typically uses O(log n)
+            space for recursion or O(1) for iterative sorts.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Sorting Approach (Your Solution)</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-sort">C++</button>
+                    <button class="tab-button" data-tab="java-sort">Java</button>
+                    <button class="tab-button" data-tab="python-sort">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-sort-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">absDifference</span>(vector<<span class="code-token-keyword">int</span>>& nums, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        
+        <span class="code-token-comment">// Sort the array in non-decreasing order</span>
+        <span class="code-token-function">sort</span>(<span class="code-token-function">begin</span>(nums), <span class="code-token-function">end</span>(nums));
+        
+        <span class="code-token-comment">// Calculate sum of k smallest elements (first k)</span>
+        <span class="code-token-keyword">int</span> sumSmallest = <span class="code-token-function">accumulate</span>(<span class="code-token-function">begin</span>(nums), <span class="code-token-function">begin</span>(nums) + k, <span class="code-token-number">0</span>);
+        
+        <span class="code-token-comment">// Calculate sum of k largest elements (last k)</span>
+        <span class="code-token-keyword">int</span> sumLargest = <span class="code-token-function">accumulate</span>(<span class="code-token-function">end</span>(nums) - k, <span class="code-token-function">end</span>(nums), <span class="code-token-number">0</span>);
+        
+        <span class="code-token-comment">// Return absolute difference</span>
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sumLargest - sumSmallest);
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-sort-tab">
+                    <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">absDifference</span>(<span class="code-token-keyword">int</span>[] nums, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        
+        <span class="code-token-comment">// Sort the array in non-decreasing order</span>
+        Arrays.<span class="code-token-function">sort</span>(nums);
+        
+        <span class="code-token-comment">// Calculate sum of k smallest elements (first k)</span>
+        <span class="code-token-keyword">int</span> sumSmallest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < k; i++) {
+            sumSmallest += nums[i];
+        }
+        
+        <span class="code-token-comment">// Calculate sum of k largest elements (last k)</span>
+        <span class="code-token-keyword">int</span> sumLargest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = n - k; i < n; i++) {
+            sumLargest += nums[i];
+        }
+        
+        <span class="code-token-comment">// Return absolute difference</span>
+        <span class="code-token-keyword">return</span> Math.<span class="code-token-function">abs</span>(sumLargest - sumSmallest);
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-sort-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">absDifference</span>(self, nums: list[<span class="code-token-keyword">int</span>], k: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
+        n = len(nums)
+        
+        <span class="code-token-comment"># Sort the array in non-decreasing order</span>
+        nums.<span class="code-token-function">sort</span>()
+        
+        <span class="code-token-comment"># Calculate sum of k smallest elements (first k)</span>
+        sum_smallest = sum(nums[:k])
+        
+        <span class="code-token-comment"># Calculate sum of k largest elements (last k)</span>
+        sum_largest = sum(nums[-k:])
+        
+        <span class="code-token-comment"># Return absolute difference</span>
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sum_largest - sum_smallest)</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Optimal for Constraints:</strong> With n ≤ 100, O(n log n) sorting is extremely efficient and
+                provides the cleanest, most readable solution. This approach works correctly even with duplicate
+                elements.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Approach 2: Heap-Based Selection (O(n log k) Time)</h2>
+        <p>Use a max-heap to find k smallest elements and a min-heap to find k largest elements without fully sorting
+            the array.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>For k smallest elements:
+                <ul>
+                    <li>Use a max-heap (priority queue) of size k</li>
+                    <li>Add each element, removing largest when heap size > k</li>
+                    <li>Remaining heap contains k smallest elements</li>
+                </ul>
+            </li>
+            <li>For k largest elements:
+                <ul>
+                    <li>Use a min-heap (priority queue) of size k</li>
+                    <li>Add each element, removing smallest when heap size > k</li>
+                    <li>Remaining heap contains k largest elements</li>
+                </ul>
+            </li>
+            <li>Sum elements in both heaps and compute absolute difference</li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>A max-heap keeps track of the largest among the smallest k elements seen so far. When we see a smaller
+            element, it replaces the current largest in the heap. Similarly, a min-heap keeps track of the smallest
+            among the largest k elements.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n log k)</td>
+                    <td>O(k)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>We process n elements, performing O(log k) heap operations for each. Space is O(k) for storing the heaps.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Heap-Based Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-heap">C++</button>
+                    <button class="tab-button" data-tab="java-heap">Java</button>
+                    <button class="tab-button" data-tab="python-heap">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-heap-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">int</span> <span class="code-token-function">absDifference</span>(vector<<span class="code-token-keyword">int</span>>& nums, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-comment">// Max-heap for k smallest elements (we want to keep smallest, so remove largest)</span>
+        priority_queue<<span class="code-token-keyword">int</span>> maxHeap; <span class="code-token-comment">// default is max-heap</span>
+        
+        <span class="code-token-comment">// Min-heap for k largest elements (we want to keep largest, so remove smallest)</span>
+        priority_queue<<span class="code-token-keyword">int</span>, vector<<span class="code-token-keyword">int</span>>, greater<<span class="code-token-keyword">int</span>>> minHeap;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-comment">// Process for k smallest (max-heap)</span>
+            maxHeap.<span class="code-token-function">push</span>(num);
+            <span class="code-token-keyword">if</span> (maxHeap.<span class="code-token-function">size</span>() > k) {
+                maxHeap.<span class="code-token-function">pop</span>(); <span class="code-token-comment">// Remove the largest (root of max-heap)</span>
+            }
+            
+            <span class="code-token-comment">// Process for k largest (min-heap)</span>
+            minHeap.<span class="code-token-function">push</span>(num);
+            <span class="code-token-keyword">if</span> (minHeap.<span class="code-token-function">size</span>() > k) {
+                minHeap.<span class="code-token-function">pop</span>(); <span class="code-token-comment">// Remove the smallest (root of min-heap)</span>
+            }
+        }
+        
+        <span class="code-token-comment">// Calculate sum of k smallest elements from max-heap</span>
+        <span class="code-token-keyword">int</span> sumSmallest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (!maxHeap.<span class="code-token-function">empty</span>()) {
+            sumSmallest += maxHeap.<span class="code-token-function">top</span>();
+            maxHeap.<span class="code-token-function">pop</span>();
+        }
+        
+        <span class="code-token-comment">// Calculate sum of k largest elements from min-heap</span>
+        <span class="code-token-keyword">int</span> sumLargest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (!minHeap.<span class="code-token-function">empty</span>()) {
+            sumLargest += minHeap.<span class="code-token-function">top</span>();
+            minHeap.<span class="code-token-function">pop</span>();
+        }
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sumLargest - sumSmallest);
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-heap-tab">
+                    <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">absDifference</span>(<span class="code-token-keyword">int</span>[] nums, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-comment">// Max-heap for k smallest elements (we want to keep smallest, so remove largest)</span>
+        PriorityQueue<<span class="code-token-keyword">Integer</span>> maxHeap = <span class="code-token-keyword">new</span> PriorityQueue<>(Collections.<span class="code-token-function">reverseOrder</span>());
+        
+        <span class="code-token-comment">// Min-heap for k largest elements (we want to keep largest, so remove smallest)</span>
+        PriorityQueue<<span class="code-token-keyword">Integer</span>> minHeap = <span class="code-token-keyword">new</span> PriorityQueue<>();
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-comment">// Process for k smallest (max-heap)</span>
+            maxHeap.<span class="code-token-function">offer</span>(num);
+            <span class="code-token-keyword">if</span> (maxHeap.<span class="code-token-function">size</span>() > k) {
+                maxHeap.<span class="code-token-function">poll</span>(); <span class="code-token-comment">// Remove the largest (root of max-heap)</span>
+            }
+            
+            <span class="code-token-comment">// Process for k largest (min-heap)</span>
+            minHeap.<span class="code-token-function">offer</span>(num);
+            <span class="code-token-keyword">if</span> (minHeap.<span class="code-token-function">size</span>() > k) {
+                minHeap.<span class="code-token-function">poll</span>(); <span class="code-token-comment">// Remove the smallest (root of min-heap)</span>
+            }
+        }
+        
+        <span class="code-token-comment">// Calculate sum of k smallest elements from max-heap</span>
+        <span class="code-token-keyword">int</span> sumSmallest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (!maxHeap.<span class="code-token-function">isEmpty</span>()) {
+            sumSmallest += maxHeap.<span class="code-token-function">poll</span>();
+        }
+        
+        <span class="code-token-comment">// Calculate sum of k largest elements from min-heap</span>
+        <span class="code-token-keyword">int</span> sumLargest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">while</span> (!minHeap.<span class="code-token-function">isEmpty</span>()) {
+            sumLargest += minHeap.<span class="code-token-function">poll</span>();
+        }
+        
+        <span class="code-token-keyword">return</span> Math.<span class="code-token-function">abs</span>(sumLargest - sumSmallest);
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-heap-tab">
+                    <pre><code><span class="code-token-keyword">import</span> heapq
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">absDifference</span>(self, nums: list[<span class="code-token-keyword">int</span>], k: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
+        <span class="code-token-comment"># Max-heap for k smallest elements (we use min-heap with negative values)</span>
+        max_heap = []  <span class="code-token-comment"># Will store negatives to simulate max-heap</span>
+        
+        <span class="code-token-comment"># Min-heap for k largest elements</span>
+        min_heap = []
+        
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-comment"># Process for k smallest (using negative to simulate max-heap)</span>
+            heapq.heappush(max_heap, -num)
+            <span class="code-token-keyword">if</span> len(max_heap) > k:
+                heapq.heappop(max_heap)  <span class="code-token-comment"># Remove the largest (most negative when negated)</span>
+            
+            <span class="code-token-comment"># Process for k largest (standard min-heap)</span>
+            heapq.heappush(min_heap, num)
+            <span class="code-token-keyword">if</span> len(min_heap) > k:
+                heapq.heappop(min_heap)  <span class="code-token-comment"># Remove the smallest</span>
+        
+        <span class="code-token-comment"># Calculate sum of k smallest elements (negate back from max-heap)</span>
+        sum_smallest = sum(-x <span class="code-token-keyword">for</span> x <span class="code-token-keyword">in</span> max_heap)
+        
+        <span class="code-token-comment"># Calculate sum of k largest elements from min-heap</span>
+        sum_largest = sum(min_heap)
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sum_largest - sum_smallest)</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Heap Insight:</strong> This approach is more efficient than sorting when k is much smaller than
+                n. For k approaching n, it becomes O(n log n) similar to sorting, but for small k, it's O(n log k) which
+                is better than O(n log n).
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Approach 3: Quickselect Algorithm (O(n) Average Time)</h2>
+        <p>Use the Quickselect algorithm to find the k smallest and k largest elements without fully sorting the array.
+        </p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Make a copy of the array to avoid modifying the original</li>
+            <li>Use Quickselect to find the kth smallest element and partition the array</li>
+            <li>Sum all elements ≤ kth smallest (handling duplicates carefully)</li>
+            <li>Similarly find kth largest and sum all elements ≥ kth largest</li>
+            <li>Compute absolute difference</li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>Quickselect is a selection algorithm to find the kth smallest/largest element. It uses the same partitioning
+            scheme as Quicksort but only recurses into one side.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n) average, O(n²) worst-case</td>
+                    <td>O(1) or O(log n) for recursion</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Average case is linear time. Worst-case is quadratic but can be avoided with randomized pivot selection.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Quickselect Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-quickselect">C++</button>
+                    <button class="tab-button" data-tab="java-quickselect">Java</button>
+                    <button class="tab-button" data-tab="python-quickselect">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-quickselect-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    
+    <span class="code-token-comment">// Helper function for Quickselect</span>
+    <span class="code-token-keyword">int</span> <span class="code-token-function">partition</span>(vector<<span class="code-token-keyword">int</span>>& nums, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> right, <span class="code-token-keyword">int</span> pivotIndex) {
+        <span class="code-token-keyword">int</span> pivotValue = nums[pivotIndex];
+        <span class="code-token-function">swap</span>(nums[pivotIndex], nums[right]); <span class="code-token-comment">// Move pivot to end</span>
+        <span class="code-token-keyword">int</span> storeIndex = left;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = left; i < right; i++) {
+            <span class="code-token-keyword">if</span> (nums[i] < pivotValue) {
+                <span class="code-token-function">swap</span>(nums[storeIndex], nums[i]);
+                storeIndex++;
+            }
+        }
+        <span class="code-token-function">swap</span>(nums[right], nums[storeIndex]); <span class="code-token-comment">// Move pivot to its final place</span>
+        <span class="code-token-keyword">return</span> storeIndex;
+    }
+    
+    <span class="code-token-comment">// Quickselect to find kth smallest element</span>
+    <span class="code-token-keyword">int</span> <span class="code-token-function">quickselect</span>(vector<<span class="code-token-keyword">int</span>>& nums, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> right, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">if</span> (left == right) <span class="code-token-keyword">return</span> nums[left];
+        
+        <span class="code-token-comment">// Random pivot for better average performance</span>
+        <span class="code-token-keyword">int</span> pivotIndex = left + <span class="code-token-function">rand</span>() % (right - left + <span class="code-token-number">1</span>);
+        pivotIndex = <span class="code-token-function">partition</span>(nums, left, right, pivotIndex);
+        
+        <span class="code-token-keyword">if</span> (k == pivotIndex) {
+            <span class="code-token-keyword">return</span> nums[k];
+        } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (k < pivotIndex) {
+            <span class="code-token-keyword">return</span> <span class="code-token-function">quickselect</span>(nums, left, pivotIndex - <span class="code-token-number">1</span>, k);
+        } <span class="code-token-keyword">else</span> {
+            <span class="code-token-keyword">return</span> <span class="code-token-function">quickselect</span>(nums, pivotIndex + <span class="code-token-number">1</span>, right, k);
+        }
+    }
+    
+    <span class="code-token-keyword">int</span> <span class="code-token-function">absDifference</span>(vector<<span class="code-token-keyword">int</span>>& nums, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> n = nums.<span class="code-token-function">size</span>();
+        
+        <span class="code-token-comment">// Make copies for finding smallest and largest</span>
+        vector<<span class="code-token-keyword">int</span>> numsForSmallest = nums;
+        vector<<span class="code-token-keyword">int</span>> numsForLargest = nums;
+        
+        <span class="code-token-comment">// Find kth smallest element</span>
+        <span class="code-token-keyword">int</span> kthSmallest = <span class="code-token-function">quickselect</span>(numsForSmallest, <span class="code-token-number">0</span>, n - <span class="code-token-number">1</span>, k - <span class="code-token-number">1</span>);
+        
+        <span class="code-token-comment">// Find kth largest element (which is (n-k)th smallest)</span>
+        <span class="code-token-keyword">int</span> kthLargest = <span class="code-token-function">quickselect</span>(numsForLargest, <span class="code-token-number">0</span>, n - <span class="code-token-number">1</span>, n - k);
+        
+        <span class="code-token-comment">// Sum k smallest elements</span>
+        <span class="code-token-keyword">int</span> sumSmallest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num < kthSmallest) {
+                sumSmallest += num;
+            }
+        }
+        
+        <span class="code-token-comment">// Count how many elements equal to kthSmallest we need to include</span>
+        <span class="code-token-keyword">int</span> countKthSmallest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == kthSmallest) countKthSmallest++;
+        }
+        
+        <span class="code-token-comment">// Add remaining elements equal to kthSmallest to reach k total</span>
+        <span class="code-token-keyword">int</span> needed = k;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num < kthSmallest) needed--;
+        }
+        sumSmallest += needed * kthSmallest;
+        
+        <span class="code-token-comment">// Sum k largest elements</span>
+        <span class="code-token-keyword">int</span> sumLargest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num > kthLargest) {
+                sumLargest += num;
+            }
+        }
+        
+        <span class="code-token-comment">// Count how many elements equal to kthLargest we need to include</span>
+        <span class="code-token-keyword">int</span> countKthLargest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == kthLargest) countKthLargest++;
+        }
+        
+        <span class="code-token-comment">// Add remaining elements equal to kthLargest to reach k total</span>
+        needed = k;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num > kthLargest) needed--;
+        }
+        sumLargest += needed * kthLargest;
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sumLargest - sumSmallest);
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-quickselect-tab">
+                    <pre><code><span class="code-token-keyword">import</span> java.util.*;
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">partition</span>(<span class="code-token-keyword">int</span>[] nums, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> right, <span class="code-token-keyword">int</span> pivotIndex) {
+        <span class="code-token-keyword">int</span> pivotValue = nums[pivotIndex];
+        <span class="code-token-comment">// Move pivot to end</span>
+        <span class="code-token-keyword">int</span> temp = nums[pivotIndex];
+        nums[pivotIndex] = nums[right];
+        nums[right] = temp;
+        
+        <span class="code-token-keyword">int</span> storeIndex = left;
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = left; i < right; i++) {
+            <span class="code-token-keyword">if</span> (nums[i] < pivotValue) {
+                temp = nums[storeIndex];
+                nums[storeIndex] = nums[i];
+                nums[i] = temp;
+                storeIndex++;
+            }
+        }
+        
+        <span class="code-token-comment">// Move pivot to its final place</span>
+        temp = nums[right];
+        nums[right] = nums[storeIndex];
+        nums[storeIndex] = temp;
+        
+        <span class="code-token-keyword">return</span> storeIndex;
+    }
+    
+    <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">quickselect</span>(<span class="code-token-keyword">int</span>[] nums, <span class="code-token-keyword">int</span> left, <span class="code-token-keyword">int</span> right, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">if</span> (left == right) <span class="code-token-keyword">return</span> nums[left];
+        
+        Random random = <span class="code-token-keyword">new</span> Random();
+        <span class="code-token-keyword">int</span> pivotIndex = left + random.<span class="code-token-function">nextInt</span>(right - left + <span class="code-token-number">1</span>);
+        pivotIndex = <span class="code-token-function">partition</span>(nums, left, right, pivotIndex);
+        
+        <span class="code-token-keyword">if</span> (k == pivotIndex) {
+            <span class="code-token-keyword">return</span> nums[k];
+        } <span class="code-token-keyword">else</span> <span class="code-token-keyword">if</span> (k < pivotIndex) {
+            <span class="code-token-keyword">return</span> <span class="code-token-function">quickselect</span>(nums, left, pivotIndex - <span class="code-token-number">1</span>, k);
+        } <span class="code-token-keyword">else</span> {
+            <span class="code-token-keyword">return</span> <span class="code-token-function">quickselect</span>(nums, pivotIndex + <span class="code-token-number">1</span>, right, k);
+        }
+    }
+    
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">absDifference</span>(<span class="code-token-keyword">int</span>[] nums, <span class="code-token-keyword">int</span> k) {
+        <span class="code-token-keyword">int</span> n = nums.length;
+        
+        <span class="code-token-comment">// Make copies for finding smallest and largest</span>
+        <span class="code-token-keyword">int</span>[] numsForSmallest = nums.clone();
+        <span class="code-token-keyword">int</span>[] numsForLargest = nums.clone();
+        
+        <span class="code-token-comment">// Find kth smallest element</span>
+        <span class="code-token-keyword">int</span> kthSmallest = <span class="code-token-function">quickselect</span>(numsForSmallest, <span class="code-token-number">0</span>, n - <span class="code-token-number">1</span>, k - <span class="code-token-number">1</span>);
+        
+        <span class="code-token-comment">// Find kth largest element (which is (n-k)th smallest)</span>
+        <span class="code-token-keyword">int</span> kthLargest = <span class="code-token-function">quickselect</span>(numsForLargest, <span class="code-token-number">0</span>, n - <span class="code-token-number">1</span>, n - k);
+        
+        <span class="code-token-comment">// Sum k smallest elements</span>
+        <span class="code-token-keyword">int</span> sumSmallest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num < kthSmallest) {
+                sumSmallest += num;
+            }
+        }
+        
+        <span class="code-token-comment">// Count how many elements equal to kthSmallest we need to include</span>
+        <span class="code-token-keyword">int</span> countKthSmallest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == kthSmallest) countKthSmallest++;
+        }
+        
+        <span class="code-token-comment">// Add remaining elements equal to kthSmallest to reach k total</span>
+        <span class="code-token-keyword">int</span> needed = k;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num < kthSmallest) needed--;
+        }
+        sumSmallest += needed * kthSmallest;
+        
+        <span class="code-token-comment">// Sum k largest elements</span>
+        <span class="code-token-keyword">int</span> sumLargest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num > kthLargest) {
+                sumLargest += num;
+            }
+        }
+        
+        <span class="code-token-comment">// Count how many elements equal to kthLargest we need to include</span>
+        <span class="code-token-keyword">int</span> countKthLargest = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num == kthLargest) countKthLargest++;
+        }
+        
+        <span class="code-token-comment">// Add remaining elements equal to kthLargest to reach k total</span>
+        needed = k;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> num : nums) {
+            <span class="code-token-keyword">if</span> (num > kthLargest) needed--;
+        }
+        sumLargest += needed * kthLargest;
+        
+        <span class="code-token-keyword">return</span> Math.<span class="code-token-function">abs</span>(sumLargest - sumSmallest);
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-quickselect-tab">
+                    <pre><code><span class="code-token-keyword">import</span> random
+
+<span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">partition</span>(self, nums: list[<span class="code-token-keyword">int</span>], left: <span class="code-token-keyword">int</span>, right: <span class="code-token-keyword">int</span>, pivot_index: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
+        pivot_value = nums[pivot_index]
+        <span class="code-token-comment"># Move pivot to end</span>
+        nums[pivot_index], nums[right] = nums[right], nums[pivot_index]
+        
+        store_index = left
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(left, right):
+            <span class="code-token-keyword">if</span> nums[i] < pivot_value:
+                nums[store_index], nums[i] = nums[i], nums[store_index]
+                store_index += <span class="code-token-number">1</span>
+        
+        <span class="code-token-comment"># Move pivot to its final place</span>
+        nums[right], nums[store_index] = nums[store_index], nums[right]
+        
+        <span class="code-token-keyword">return</span> store_index
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">quickselect</span>(self, nums: list[<span class="code-token-keyword">int</span>], left: <span class="code-token-keyword">int</span>, right: <span class="code-token-keyword">int</span>, k: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
+        <span class="code-token-keyword">if</span> left == right:
+            <span class="code-token-keyword">return</span> nums[left]
+        
+        <span class="code-token-comment"># Random pivot for better average performance</span>
+        pivot_index = random.randint(left, right)
+        pivot_index = self.partition(nums, left, right, pivot_index)
+        
+        <span class="code-token-keyword">if</span> k == pivot_index:
+            <span class="code-token-keyword">return</span> nums[k]
+        <span class="code-token-keyword">elif</span> k < pivot_index:
+            <span class="code-token-keyword">return</span> self.quickselect(nums, left, pivot_index - <span class="code-token-number">1</span>, k)
+        <span class="code-token-keyword">else</span>:
+            <span class="code-token-keyword">return</span> self.quickselect(nums, pivot_index + <span class="code-token-number">1</span>, right, k)
+    
+    <span class="code-token-keyword">def</span> <span class="code-token-function">absDifference</span>(self, nums: list[<span class="code-token-keyword">int</span>], k: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
+        n = len(nums)
+        
+        <span class="code-token-comment"># Make copies for finding smallest and largest</span>
+        nums_for_smallest = nums.copy()
+        nums_for_largest = nums.copy()
+        
+        <span class="code-token-comment"># Find kth smallest element</span>
+        kth_smallest = self.quickselect(nums_for_smallest, <span class="code-token-number">0</span>, n - <span class="code-token-number">1</span>, k - <span class="code-token-number">1</span>)
+        
+        <span class="code-token-comment"># Find kth largest element (which is (n-k)th smallest)</span>
+        kth_largest = self.quickselect(nums_for_largest, <span class="code-token-number">0</span>, n - <span class="code-token-number">1</span>, n - k)
+        
+        <span class="code-token-comment"># Sum k smallest elements</span>
+        sum_smallest = <span class="code-token-number">0</span>
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-keyword">if</span> num < kth_smallest:
+                sum_smallest += num
+        
+        <span class="code-token-comment"># Count how many elements equal to kth_smallest we need to include</span>
+        count_kth_smallest = nums.count(kth_smallest)
+        
+        <span class="code-token-comment"># Add remaining elements equal to kth_smallest to reach k total</span>
+        needed = k
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-keyword">if</span> num < kth_smallest:
+                needed -= <span class="code-token-number">1</span>
+        sum_smallest += needed * kth_smallest
+        
+        <span class="code-token-comment"># Sum k largest elements</span>
+        sum_largest = <span class="code-token-number">0</span>
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-keyword">if</span> num > kth_largest:
+                sum_largest += num
+        
+        <span class="code-token-comment"># Count how many elements equal to kth_largest we need to include</span>
+        count_kth_largest = nums.count(kth_largest)
+        
+        <span class="code-token-comment"># Add remaining elements equal to kth_largest to reach k total</span>
+        needed = k
+        <span class="code-token-keyword">for</span> num <span class="code-token-keyword">in</span> nums:
+            <span class="code-token-keyword">if</span> num > kth_largest:
+                needed -= <span class="code-token-number">1</span>
+        sum_largest += needed * kth_largest
+        
+        <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(sum_largest - sum_smallest)</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Quickselect Insight:</strong> This approach provides average O(n) time complexity, which is
+                theoretically optimal for selection problems. However, it's more complex to implement correctly,
+                especially when dealing with duplicate elements and ensuring we get exactly k elements in our sums.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Comparison of Approaches</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                    <th>Key Insight</th>
+                    <th>Best Use Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Sorting</strong></td>
+                    <td>O(n log n)</td>
+                    <td>O(1) or O(log n)</td>
+                    <td>Simplest, most readable</td>
+                    <td>Small n (≤100), interviews when readability matters</td>
+                </tr>
+                <tr>
+                    <td><strong>Heap-Based</strong></td>
+                    <td>O(n log k)</td>
+                    <td>O(k)</td>
+                    <td>Efficient when k ≪ n</td>
+                    <td>Large n, small k, streaming data</td>
+                </tr>
+                <tr>
+                    <td><strong>Quickselect</strong></td>
+                    <td>O(n) avg, O(n²) worst</td>
+                    <td>O(1) or O(log n)</td>
+                    <td>Theoretically optimal average case</td>
+                    <td>Large n, performance-critical applications</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout tip">
+            <strong>Recommendation:</strong> For LeetCode 3774 with n ≤ 100, the sorting approach is perfectly adequate,
+            easiest to implement, and least error-prone. The heap-based approach is good practice for interview problems
+            with larger constraints, and quickselect is valuable knowledge for algorithm enthusiasts.
+        </div>
+
+        <hr />
+
+        <h2>Edge Cases and Testing</h2>
+
+        <h3>1. k = n (All Elements)</h3>
+        <pre><code>Input: nums = [1,2,3,4], k = 4 → Output: 0
+Sum of k smallest = 1+2+3+4 = 10
+Sum of k largest = 1+2+3+4 = 10
+Difference = |10-10| = 0</code></pre>
+
+        <h3>2. k = 1 (Single Element)</h3>
+        <pre><code>Input: nums = [5,2,8,1], k = 1 → Output: 7
+Smallest = 1, Largest = 8
+Difference = |8-1| = 7</code></pre>
+
+        <h3>3. Duplicate Elements</h3>
+        <pre><code>Input: nums = [2,2,2,2], k = 2 → Output: 0
+Smallest 2 elements: 2+2 = 4
+Largest 2 elements: 2+2 = 4
+Difference = |4-4| = 0</code></pre>
+
+        <h3>4. Array with Negative Numbers</h3>
+        <p>Note: Problem constraints say nums[i] ≥ 1, but if negatives were allowed:</p>
+        <pre><code>Input: nums = [-5, -2, 0, 3, 7], k = 2 → Output: 12
+Smallest: -5 + -2 = -7
+Largest: 3 + 7 = 10
+Difference = |10 - (-7)| = 17</code></pre>
+
+        <h3>5. k Larger Than Distinct Values</h3>
+        <pre><code>Input: nums = [1,1,2,3,3], k = 4 → Output: 5
+Smallest 4: 1+1+2+3 = 7
+Largest 4: 1+2+3+3 = 9
+Difference = |9-7| = 2</code></pre>
+
+        <div class="callout warning">
+            <strong>Important:</strong> When k = n/2 and n is even, the middle elements might be counted in both
+            smallest and largest if there are duplicates. The problem allows this as it's about values, not indices.
+        </div>
+
+        <hr />
+
+        <h2>FAQs</h2>
+
+        <div class="faq-section">
+            <details>
+                <summary>1. Why is the sorting approach optimal for this problem's constraints?</summary>
+                <p>With n ≤ 100, O(n log n) sorting (approximately 100 * log₂(100) ≈ 700 operations) is extremely fast
+                    and simple to implement. More complex algorithms like quickselect have higher constant factors and
+                    implementation complexity that aren't justified for such small inputs.</p>
+            </details>
+
+            <details>
+                <summary>2. What if the same element appears in both k smallest and k largest?</summary>
+                <p>That's allowed by the problem statement. The problem asks for "the sum of the k largest elements" and
+                    "the sum of the k smallest elements" based on values, not indices. If an element value appears
+                    multiple times, it can contribute to both sums.</p>
+            </details>
+
+            <details>
+                <summary>3. Can we use counting sort given nums[i] ≤ 100?</summary>
+                <p>Yes! With values limited to 1-100, counting sort with O(n + range) = O(n + 100) = O(n) is possible.
+                    Create a frequency array of size 101, fill it, then iterate to find k smallest and largest sums.</p>
+            </details>
+
+            <details>
+                <summary>4. What's the difference between using a max-heap vs min-heap for k smallest?</summary>
+                <p>For k smallest elements, we want to keep the k smallest values seen so far. A max-heap lets us
+                    quickly remove the largest of those k when we find a smaller element. For k largest elements, a
+                    min-heap lets us quickly remove the smallest of those k when we find a larger element.</p>
+            </details>
+
+            <details>
+                <summary>5. How does quickselect handle duplicate elements?</summary>
+                <p>The standard quickselect algorithm as shown partitions elements into "less than pivot" and "greater
+                    than or equal to pivot". With duplicates, all elements equal to the pivot end up together after
+                    partitioning. We need additional logic to count how many of the pivot value to include in our sum.
+                </p>
+            </details>
+
+            <details>
+                <summary>6. Is there a Python one-liner solution?</summary>
+                <p>Yes! Python's expressive syntax allows:
+                    <code>return abs(sum(sorted(nums)[-k:]) - sum(sorted(nums)[:k]))</code>. This is readable and
+                    efficient for the given constraints.
+                </p>
+            </details>
+
+            <details>
+                <summary>7. What happens when k = 0?</summary>
+                <p>The problem constraints state 1 ≤ k ≤ n, so k = 0 is not a valid input. If it were allowed, both sums
+                    would be 0, so the difference would be 0.</p>
+            </details>
+
+            <details>
+                <summary>8. Can we solve this without modifying the input array?</summary>
+                <p>Yes, by making a copy before sorting or using heap/quickselect approaches that don't require in-place
+                    modification of the original array. The sorting approach shown modifies the input; to avoid this,
+                    create a copy first.</p>
+            </details>
+
+            <details>
+                <summary>9. What's the memory usage of each approach?</summary>
+                <p>Sorting: O(1) or O(log n) for recursion stack. Heap: O(k) for storing heap elements. Quickselect:
+                    O(1) or O(log n) for recursion stack (can be implemented iteratively to use O(1)).</p>
+            </details>
+
+            <details>
+                <summary>10. How would you modify the solution for very large n (e.g., 10⁷)?</summary>
+                <p>For extremely large n that doesn't fit in memory, use:
+                    <br>1. Streaming algorithm with two heaps of size k (O(n log k) time, O(k) space)
+                    <br>2. If k is also large, use approximate algorithms or distributed computing
+                    <br>3. If data is on disk, use external sorting
+                </p>
+            </details>
+        </div>
+
+        <div class="callout note">
+            <strong>About Algopush:</strong> Algopush provides comprehensive algorithm solutions and explanations for
+            coding interview preparation.
+            Visit <a href="https://algopush.com">algopush.com</a> for more problem solutions and coding resources.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab functionality
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                // Initialize first tab
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        button.classList.add('active');
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>
