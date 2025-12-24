@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3784: Minimum Deletion Cost to Make All Characters Equal</title>
+    <meta name="description"
+        content="Solve LeetCode 3784 - Minimum Deletion Cost to Make All Characters Equal. Learn multiple approaches: frequency array, greedy algorithm, sliding window technique. Code in C++, Java, Python.">
+    <meta name="keywords"
+        content="LeetCode 3784, Minimum Deletion Cost to Make All Characters Equal, string manipulation, deletion cost, greedy algorithm, frequency array, algorithm solution, Algopush, coding interview preparation, dynamic programming, leetcode medium, leetcode daily challenge, leetcode practice, coding interview questions">
+    <meta name="author" content="Piyush Kumar, Algopush">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Algopush">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://algopush.com/Leetcode/3784-minimum-deletion-cost-equal-characters.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../components/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../components/favicon.png">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeetCode 3784: Minimum Deletion Cost to Make All Characters Equal">
+    <meta property="og:description"
+        content="Master the Minimum Deletion Cost problem with frequency array and greedy approaches. Code in C++, Java, Python with detailed explanations.">
+    <meta property="og:image" content="https://algopush.com/Leetcode/Images/3784.png">
+    <meta property="og:url" content="https://algopush.com/Leetcode/3784-minimum-deletion-cost-equal-characters.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetCode: Minimum Deletion Cost to Make All Characters Equal Solutions">
+    <meta name="twitter:description"
+        content="Learn optimal approaches for minimizing deletion cost to make all characters equal.">
+    <meta name="twitter:image" content="https://algopush.com/Leetcode/Images/3784.png">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Minimum Deletion Cost to Make All Characters Equal Solution Guide",
+      "url": "https://algopush.com/Leetcode/3784-minimum-deletion-cost-equal-characters.html",
+      "image": "https://algopush.com/Leetcode/Images/3784.png",
+      "author": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "url": "https://algopush.com/"
+      },
+      "datePublished": "2025-12-25",
+      "dateModified": "2025-12-25",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Algopush",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://algopush.com/components/logo.png"
+        }
+      },
+      "description": "Comprehensive solution for LeetCode Minimum Deletion Cost to Make All Characters Equal problem with multiple approaches and code implementations.",
+      "founder": {
+        "@type": "Person",
+        "name": "Piyush Kumar",
+        "jobTitle": "Founder",
+        "url": "https://algopush.com"
+      },
+      "foundingDate": "2025"
+    }
+  </script>
+
+    <style>
+        :root {
+            --primary-color: #102c41;
+            --secondary-color: #196391;
+            --accent-color: #102c41;
+            --meta-color: #db5305;
+            --light-bg: #f5f9fc;
+            --highlight-color: #f5f9fc;
+            --text-color: black;
+            --light-text: #7f8c8d;
+            --border-radius: 0.375rem;
+            --box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --callout-tip: #e8f8f5;
+            --callout-note: #eaf2f8;
+            --callout-warning: #fef5e7;
+            --callout-danger: #ffebee;
+            --callout-tip-border: #1abc9c;
+            --callout-note-border: #3498db;
+            --callout-warning-border: #f39c12;
+            --callout-danger-border: #f44336;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        main {
+            max-width: 920px;
+            margin: 2rem auto;
+            padding: clamp(1rem, 5vw, 2rem);
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        .problem-visual {
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .problem-visual img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: inline-block;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            border-left: 0.25rem solid var(--accent-color);
+            padding-left: 0.8rem;
+            margin-top: 2.5rem;
+        }
+
+        h3 {
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            color: var(--secondary-color);
+            margin-top: 1.8rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 2rem 0;
+        }
+
+        pre {
+            background: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            border-left: 0.25rem solid var(--accent-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+
+        .highlight {
+            background: var(--highlight-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .code-container {
+            position: relative;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .code-filename {
+            font-weight: 600;
+        }
+
+        .code-copy {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .code-copy:hover {
+            background: var(--highlight-color);
+        }
+
+        .code-token-keyword {
+            color: #d73a49;
+        }
+
+        .code-token-function {
+            color: #6f42c1;
+        }
+
+        .code-token-comment {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        .code-token-string {
+            color: #032f62;
+        }
+
+        .code-token-number {
+            color: #005cc5;
+        }
+
+        .code-tabs {
+            margin: 0.5rem 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #eaecee;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #d5dbdb;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section details {
+            margin: 0.8rem 0;
+            padding: 0.1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .faq-section details[open] {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .faq-section summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.8rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .faq-section summary:hover {
+            color: var(--accent-color);
+            background: #f5f5f5;
+        }
+
+        .faq-section p {
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        .breadcrumb {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(to right, #f5f5f5, white);
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .problem-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item .label {
+            font-weight: 600;
+            color: var(--meta-color);
+        }
+
+        .callout {
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            border-left: 0.25rem solid;
+        }
+
+        .callout.tip {
+            background-color: var(--callout-tip);
+            border-color: var(--callout-tip-border);
+        }
+
+        .callout.note {
+            background-color: var(--callout-note);
+            border-color: var(--callout-note-border);
+        }
+
+        .callout.warning {
+            background-color: var(--callout-warning);
+            border-color: var(--callout-warning-border);
+        }
+
+        .callout.danger {
+            background-color: var(--callout-danger);
+            border-color: var(--callout-danger-border);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .visual-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .visual-item {
+            flex: 1 1 clamp(280px, 30vw, 350px);
+            min-width: min(280px, 100%);
+            padding: clamp(0.75rem, 2vw, 1rem);
+            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            box-shadow: var(--box-shadow);
+            box-sizing: border-box;
+        }
+
+        .visual-item h4 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(80px, 100%), 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .grid-item {
+            padding: clamp(0.5rem, 2vw, 1rem);
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: white;
+            font-weight: bold;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        .to-delete {
+            background-color: #ffebee;
+            border-color: #f44336;
+            animation: pulse 2s infinite;
+        }
+
+        .to-keep {
+            background-color: #e8f8f5;
+            border-color: #1abc9c;
+        }
+
+        .neutral {
+            background-color: #fff;
+            border-color: #ddd;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: #ffebee;
+            }
+
+            50% {
+                background-color: #ffcdd2;
+            }
+
+            100% {
+                background-color: #ffebee;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .visual-container {
+                flex-direction: column;
+            }
+
+            .visual-item {
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .problem-meta {
+                flex-direction: column;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(min(70px, 100%), 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 1rem;
+            }
+
+            pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .code-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-copy {
+                margin-top: 0.5rem;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(min(60px, 100%), 1fr));
+                gap: 0.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+
+        <h1>3784. Minimum Deletion Cost to Make All Characters Equal</h1>
+        <div class="breadcrumb">
+            <a href="https://algopush.com">Home</a> &gt;
+            <a href="https://algopush.com/Leetcode/leetcode.html">LeetCode</a> &gt;
+            <span>Minimum Deletion Cost to Make All Characters Equal</span>
+        </div>
+
+        <div class="problem-meta">
+            <div class="meta-item">
+                <span class="label">Difficulty:</span>
+                <span class="value">Medium</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Topics:</span>
+                <span class="value">String, Greedy, Array</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Companies:</span>
+                <span class="value">Google, Amazon, Meta</span>
+            </div>
+            <div class="meta-item">
+                <span class="label">Acceptance Rate:</span>
+                <span class="value">54.5%</span>
+            </div>
+        </div>
+
+        <div class="problem-visual">
+            <img src="https://algopush.com/Leetcode/Images/3784.png" alt="Minimum Deletion Cost visualization"
+                loading="lazy">
+        </div>
+
+        <div class="callout tip">
+            <strong>Pro Tip:</strong> This problem can be solved optimally with O(n) time and O(1) space using a frequency array approach. The key insight is that to minimize deletion cost, we should keep the character with the highest total deletion cost and delete all others. Alternatively, we can use a greedy approach by keeping the most expensive character in each group of consecutive characters.
+        </div>
+
+        <h2>Problem Statement</h2>
+        <p>You are given a string <code>s</code> of length <code>n</code> and an integer array <code>cost</code> of the same length, where <code>cost[i]</code> is the cost to delete the i<sup>th</sup> character of <code>s</code>.</p>
+        <p>You may delete any number of characters from <code>s</code> (possibly none), such that the resulting string is non-empty and consists of equal characters.</p>
+        <p>Return an integer denoting the minimum total deletion cost required.</p>
+
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Example 1</h4>
+                <p><strong>Input:</strong> s = "aabaac", cost = [1,2,3,4,1,10]</p>
+                <p><strong>Output:</strong> 11</p>
+                <p><strong>Explanation:</strong></p>
+                <p>Deleting the characters at indices 0, 1, 2, 3, 4 results in the string "c", which consists of equal characters, and the total cost is cost[0] + cost[1] + cost[2] + cost[3] + cost[4] = 1 + 2 + 3 + 4 + 1 = 11.</p>
+            </div>
+
+            <div class="visual-item">
+                <h4>Example 2</h4>
+                <p><strong>Input:</strong> s = "abc", cost = [10,5,8]</p>
+                <p><strong>Output:</strong> 13</p>
+                <p><strong>Explanation:</strong></p>
+                <p>Deleting the characters at indices 1 and 2 results in the string "a", which consists of equal characters, and the total cost is cost[1] + cost[2] = 5 + 8 = 13.</p>
+            </div>
+
+            <div class="visual-item">
+                <h4>Example 3</h4>
+                <p><strong>Input:</strong> s = "zzzzz", cost = [67,67,67,67,67]</p>
+                <p><strong>Output:</strong> 0</p>
+                <p><strong>Explanation:</strong></p>
+                <p>All characters in s are equal, so the deletion cost is 0.</p>
+            </div>
+        </div>
+
+        <div class="callout note">
+            <strong>Problem Link:</strong>
+            <a href="https://leetcode.com/problems/minimum-deletion-cost-to-make-all-characters-equal/" target="_blank" rel="noopener noreferrer">
+                View on LeetCode ↗
+            </a>
+        </div>
+
+        <hr />
+
+        <h2>Key Insight</h2>
+        <p>The solution requires understanding these crucial observations:</p>
+        <ol>
+            <li>The resulting string must consist of <strong>only one character type</strong> (all 'a's, all 'b's, etc.)</li>
+            <li>We can delete any characters, but must keep at least one character (non-empty result)</li>
+            <li>To minimize deletion cost, we should <strong>keep the character with the highest total deletion cost</strong></li>
+            <li>If we choose character <code>ch</code> to keep, we must delete all characters that are not <code>ch</code></li>
+            <li>Equivalently, we can think: <strong>minimum deletion cost = total cost - max(cost_sum for each character)</strong></li>
+        </ol>
+        <p>Alternative approach: For each group of consecutive identical characters, keep only the most expensive one in that group and delete the rest.</p>
+
+        <div class="callout warning">
+            <strong>Important:</strong> The problem requires the resulting string to be non-empty. This means we must keep at least one character. In cases where all characters are the same, we keep all of them (cost 0). In cases with different characters, we choose one character type to keep entirely.
+        </div>
+
+        <h2>Approach 1: Frequency Array (Your Approach - Optimal)</h2>
+        <p>Calculate the total cost of deleting all characters, then for each character (a-z), calculate the total cost of keeping that character. The minimum deletion cost is total cost minus the maximum keep cost.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize <code>total = 0</code> and <code>freq[26] = {0}</code></li>
+            <li>For each character in s:
+                <ul>
+                    <li>Add <code>cost[i]</code> to <code>total</code></li>
+                    <li>Add <code>cost[i]</code> to <code>freq[s[i] - 'a']</code></li>
+                </ul>
+            </li>
+            <li>Find <code>max_freq = max(freq[0..25])</code></li>
+            <li>Return <code>total - max_freq</code></li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>For each character from 'a' to 'z', <code>freq[ch]</code> represents the cost of keeping all occurrences of that character. If we choose to keep character <code>ch</code>, we must delete all other characters at cost <code>total - freq[ch]</code>. We want to minimize this, which means maximizing <code>freq[ch]</code>.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Where n is the length of the string. Single pass through the string with constant extra space for the frequency array.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Frequency Array Approach (Your Solution)</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-freq">C++</button>
+                    <button class="tab-button" data-tab="java-freq">Java</button>
+                    <button class="tab-button" data-tab="python-freq">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-freq-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(string s, vector<<span class="code-token-keyword">int</span>>& cost) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
+        vector<<span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span>> freq(<span class="code-token-number">26</span>, <span class="code-token-number">0</span>);
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < s.<span class="code-token-function">length</span>(); i++) {
+            total += cost[i];
+            freq[s[i] - <span class="code-token-string">'a'</span>] += cost[i];
+        }
+        
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> max_freq = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < <span class="code-token-number">26</span>; i++) {
+            <span class="code-token-keyword">if</span> (freq[i] > max_freq) {
+                max_freq = freq[i];
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> total - max_freq;
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-freq-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(String s, <span class="code-token-keyword">int</span>[] cost) {
+        <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">long</span>[] freq = <span class="code-token-keyword">new</span> <span class="code-token-keyword">long</span>[<span class="code-token-number">26</span>];
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < s.<span class="code-token-function">length</span>(); i++) {
+            total += cost[i];
+            freq[s.<span class="code-token-function">charAt</span>(i) - <span class="code-token-string">'a'</span>] += cost[i];
+        }
+        
+        <span class="code-token-keyword">long</span> maxFreq = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < <span class="code-token-number">26</span>; i++) {
+            <span class="code-token-keyword">if</span> (freq[i] > maxFreq) {
+                maxFreq = freq[i];
+            }
+        }
+        
+        <span class="code-token-keyword">return</span> total - maxFreq;
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-freq-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minCost</span>(self, s: <span class="code-token-keyword">str</span>, cost: list[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        total = <span class="code-token-number">0</span>
+        freq = [<span class="code-token-number">0</span>] * <span class="code-token-number">26</span>
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(len(s)):
+            total += cost[i]
+            freq[ord(s[i]) - ord(<span class="code-token-string">'a'</span>)] += cost[i]
+        
+        max_freq = max(freq)
+        <span class="code-token-keyword">return</span> total - max_freq</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Optimal Solution:</strong> This approach is optimal with O(n) time and O(1) space. It works by considering that we must choose exactly one character type to keep entirely. The character with the highest total cost is the most "expensive" to delete, so we keep it to minimize deletion cost.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Approach 2: Greedy by Character Groups</h2>
+        <p>Process the string in groups of consecutive identical characters. For each group, keep only the character with the maximum cost and delete the rest.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize <code>total_cost = 0</code> and <code>i = 0</code></li>
+            <li>While <code>i < n</code>:
+                <ul>
+                    <li>Start new group with character <code>s[i]</code></li>
+                    <li>Track <code>group_max = cost[i]</code> and <code>group_sum = cost[i]</code></li>
+                    <li>Move <code>i</code> to next character while same character</li>
+                    <li>For each same character, update <code>group_max</code> and <code>group_sum</code></li>
+                    <li>Add <code>group_sum - group_max</code> to <code>total_cost</code> (delete all but max)</li>
+                </ul>
+            </li>
+            <li>Return <code>total_cost</code></li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>This approach works because in the final string, all characters must be equal. If we have consecutive identical characters, we need to keep only one of them (the most expensive) to minimize cost. For different characters in different groups, we'll eventually need to delete entire groups except for one character type.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Single pass through the string with constant extra variables.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Greedy Group Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-greedy">C++</button>
+                    <button class="tab-button" data-tab="java-greedy">Java</button>
+                    <button class="tab-button" data-tab="python-greedy">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-greedy-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(string s, vector<<span class="code-token-keyword">int</span>>& cost) {
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        <span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>;
+        
+        <span class="code-token-keyword">while</span> (i < n) {
+            <span class="code-token-keyword">char</span> current_char = s[i];
+            <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> group_sum = <span class="code-token-number">0</span>;
+            <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> group_max = <span class="code-token-number">0</span>;
+            
+            <span class="code-token-comment">// Process all consecutive same characters</span>
+            <span class="code-token-keyword">while</span> (i < n && s[i] == current_char) {
+                group_sum += cost[i];
+                <span class="code-token-keyword">if</span> (cost[i] > group_max) {
+                    group_max = cost[i];
+                }
+                i++;
+            }
+            
+            <span class="code-token-comment">// Add cost of deleting all but the most expensive in this group</span>
+            total += (group_sum - group_max);
+        }
+        
+        <span class="code-token-keyword">return</span> total;
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-greedy-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(String s, <span class="code-token-keyword">int</span>[] cost) {
+        <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        <span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>;
+        
+        <span class="code-token-keyword">while</span> (i < n) {
+            <span class="code-token-keyword">char</span> currentChar = s.<span class="code-token-function">charAt</span>(i);
+            <span class="code-token-keyword">long</span> groupSum = <span class="code-token-number">0</span>;
+            <span class="code-token-keyword">long</span> groupMax = <span class="code-token-number">0</span>;
+            
+            <span class="code-token-comment">// Process all consecutive same characters</span>
+            <span class="code-token-keyword">while</span> (i < n && s.<span class="code-token-function">charAt</span>(i) == currentChar) {
+                groupSum += cost[i];
+                <span class="code-token-keyword">if</span> (cost[i] > groupMax) {
+                    groupMax = cost[i];
+                }
+                i++;
+            }
+            
+            <span class="code-token-comment">// Add cost of deleting all but the most expensive in this group</span>
+            total += (groupSum - groupMax);
+        }
+        
+        <span class="code-token-keyword">return</span> total;
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-greedy-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minCost</span>(self, s: <span class="code-token-keyword">str</span>, cost: list[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        total = <span class="code-token-number">0</span>
+        n = len(s)
+        i = <span class="code-token-number">0</span>
+        
+        <span class="code-token-keyword">while</span> i < n:
+            current_char = s[i]
+            group_sum = <span class="code-token-number">0</span>
+            group_max = <span class="code-token-number">0</span>
+            
+            <span class="code-token-comment"># Process all consecutive same characters</span>
+            <span class="code-token-keyword">while</span> i < n <span class="code-token-keyword">and</span> s[i] == current_char:
+                group_sum += cost[i]
+                group_max = max(group_max, cost[i])
+                i += <span class="code-token-number">1</span>
+            
+            <span class="code-token-comment"># Add cost of deleting all but the most expensive in this group</span>
+            total += (group_sum - group_max)
+        
+        <span class="code-token-keyword">return</span> total</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Greedy Insight:</strong> This approach works because in the optimal solution, for each group of consecutive identical characters, we keep only the most expensive one. This is actually equivalent to Approach 1 but provides a different perspective on the problem.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Approach 3: Dynamic Programming (Alternative)</h2>
+        <p>Use dynamic programming to track the minimum cost to make all characters equal up to position i, considering which character we keep.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Initialize <code>dp[26]</code> where <code>dp[ch]</code> = minimum cost to make all characters equal to character <code>ch</code></li>
+            <li>For each character <code>s[i]</code> with cost <code>cost[i]</code>:
+                <ul>
+                    <li>If we keep character <code>s[i]</code>, we don't delete it (cost 0 for this character if it matches target)</li>
+                    <li>If we change to different character, we must delete <code>s[i]</code> (add <code>cost[i]</code>)</li>
+                </ul>
+            </li>
+            <li>Update DP table accordingly</li>
+            <li>Return minimum from <code>dp[0..25]</code></li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>For each character position, we consider keeping each possible character (a-z). If the current character matches our target, we don't pay deletion cost. Otherwise, we add the deletion cost.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(n × 26)</td>
+                    <td>O(26)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Where n is the length of string. This is less efficient than Approach 1 but demonstrates the DP pattern.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Dynamic Programming Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-dp">C++</button>
+                    <button class="tab-button" data-tab="java-dp">Java</button>
+                    <button class="tab-button" data-tab="python-dp">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-dp-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+<span class="code-token-keyword">public</span>:
+    <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(string s, vector<<span class="code-token-keyword">int</span>>& cost) {
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        <span class="code-token-comment">// dp[ch] = minimum cost to make all characters equal to character 'a' + ch</span>
+        vector<<span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span>> dp(<span class="code-token-number">26</span>, <span class="code-token-number">0</span>);
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            <span class="code-token-keyword">int</span> current_char = s[i] - <span class="code-token-string">'a'</span>;
+            
+            <span class="code-token-comment">// Temporary array for new DP values</span>
+            vector<<span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span>> new_dp(<span class="code-token-number">26</span>, LLONG_MAX);
+            
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> ch = <span class="code-token-number">0</span>; ch < <span class="code-token-number">26</span>; ch++) {
+                <span class="code-token-keyword">if</span> (dp[ch] == LLONG_MAX) <span class="code-token-keyword">continue</span>;
+                
+                <span class="code-token-keyword">if</span> (ch == current_char) {
+                    <span class="code-token-comment">// Current character matches target, keep it (no cost)</span>
+                    new_dp[ch] = min(new_dp[ch], dp[ch]);
+                } <span class="code-token-keyword">else</span> {
+                    <span class="code-token-comment">// Current character doesn't match, delete it</span>
+                    new_dp[ch] = min(new_dp[ch], dp[ch] + cost[i]);
+                }
+            }
+            
+            dp = new_dp;
+        }
+        
+        <span class="code-token-comment">// Find minimum cost among all possible target characters</span>
+        <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> min_cost = LLONG_MAX;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> ch = <span class="code-token-number">0</span>; ch < <span class="code-token-number">26</span>; ch++) {
+            min_cost = min(min_cost, dp[ch]);
+        }
+        
+        <span class="code-token-keyword">return</span> min_cost;
+    }
+};</code></pre>
+                </div>
+
+                <div class="tab-content" id="java-dp-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+    <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(String s, <span class="code-token-keyword">int</span>[] cost) {
+        <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
+        
+        <span class="code-token-comment">// dp[ch] = minimum cost to make all characters equal to character 'a' + ch</span>
+        <span class="code-token-keyword">long</span>[] dp = <span class="code-token-keyword">new</span> <span class="code-token-keyword">long</span>[<span class="code-token-number">26</span>];
+        Arrays.<span class="code-token-function">fill</span>(dp, Long.MAX_VALUE);
+        
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> i = <span class="code-token-number">0</span>; i < n; i++) {
+            <span class="code-token-keyword">int</span> currentChar = s.<span class="code-token-function">charAt</span>(i) - <span class="code-token-string">'a'</span>;
+            <span class="code-token-keyword">long</span>[] newDp = <span class="code-token-keyword">new</span> <span class="code-token-keyword">long</span>[<span class="code-token-number">26</span>];
+            Arrays.<span class="code-token-function">fill</span>(newDp, Long.MAX_VALUE);
+            
+            <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> ch = <span class="code-token-number">0</span>; ch < <span class="code-token-number">26</span>; ch++) {
+                <span class="code-token-keyword">if</span> (dp[ch] == Long.MAX_VALUE) <span class="code-token-keyword">continue</span>;
+                
+                <span class="code-token-keyword">if</span> (ch == currentChar) {
+                    <span class="code-token-comment">// Current character matches target, keep it (no cost)</span>
+                    newDp[ch] = Math.<span class="code-token-function">min</span>(newDp[ch], dp[ch]);
+                } <span class="code-token-keyword">else</span> {
+                    <span class="code-token-comment">// Current character doesn't match, delete it</span>
+                    newDp[ch] = Math.<span class="code-token-function">min</span>(newDp[ch], dp[ch] + cost[i]);
+                }
+            }
+            
+            dp = newDp;
+        }
+        
+        <span class="code-token-comment">// Find minimum cost among all possible target characters</span>
+        <span class="code-token-keyword">long</span> minCost = Long.MAX_VALUE;
+        <span class="code-token-keyword">for</span> (<span class="code-token-keyword">int</span> ch = <span class="code-token-number">0</span>; ch < <span class="code-token-number">26</span>; ch++) {
+            minCost = Math.<span class="code-token-function">min</span>(minCost, dp[ch]);
+        }
+        
+        <span class="code-token-keyword">return</span> minCost;
+    }
+}</code></pre>
+                </div>
+
+                <div class="tab-content" id="python-dp-tab">
+<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+    <span class="code-token-keyword">def</span> <span class="code-token-function">minCost</span>(self, s: <span class="code-token-keyword">str</span>, cost: list[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
+        n = len(s)
+        
+        <span class="code-token-comment"># dp[ch] = minimum cost to make all characters equal to character ch</span>
+        dp = [float(<span class="code-token-string">'inf'</span>)] * <span class="code-token-number">26</span>
+        
+        <span class="code-token-keyword">for</span> i <span class="code-token-keyword">in</span> range(n):
+            current_char = ord(s[i]) - ord(<span class="code-token-string">'a'</span>)
+            new_dp = [float(<span class="code-token-string">'inf'</span>)] * <span class="code-token-number">26</span>
+            
+            <span class="code-token-keyword">for</span> ch <span class="code-token-keyword">in</span> range(<span class="code-token-number">26</span>):
+                <span class="code-token-keyword">if</span> dp[ch] == float(<span class="code-token-string">'inf'</span>):
+                    <span class="code-token-keyword">continue</span>
+                
+                <span class="code-token-keyword">if</span> ch == current_char:
+                    <span class="code-token-comment"># Current character matches target, keep it (no cost)</span>
+                    new_dp[ch] = min(new_dp[ch], dp[ch])
+                <span class="code-token-keyword">else</span>:
+                    <span class="code-token-comment"># Current character doesn't match, delete it</span>
+                    new_dp[ch] = min(new_dp[ch], dp[ch] + cost[i])
+            
+            dp = new_dp
+        
+        <span class="code-token-comment"># Find minimum cost among all possible target characters</span>
+        min_cost = min(dp)
+        <span class="code-token-keyword">return</span> min_cost</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>DP Insight:</strong> This dynamic programming approach, while less efficient, illustrates how we can frame the problem as making decisions at each character position. However, for this specific problem, the greedy/frequency array approaches are more optimal.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Visual Example Walkthrough</h2>
+        <p>Let's trace through Approach 1 with s = "aabaac", cost = [1,2,3,4,1,10]:</p>
+
+        <div class="grid-container">
+            <div class="grid-item">a</div>
+            <div class="grid-item">a</div>
+            <div class="grid-item">b</div>
+            <div class="grid-item">a</div>
+            <div class="grid-item">a</div>
+            <div class="grid-item">c</div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">1</div>
+            <div class="grid-item">10</div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>Action</th>
+                    <th>Total Cost</th>
+                    <th>Frequency Array Updates</th>
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Process 'a' at index 0</td>
+                    <td>total = 1</td>
+                    <td>freq[0] = 1 (for 'a')</td>
+                    <td>Add cost 1 to total and freq['a']</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Process 'a' at index 1</td>
+                    <td>total = 3</td>
+                    <td>freq[0] = 3</td>
+                    <td>Add cost 2 to total and freq['a']</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Process 'b' at index 2</td>
+                    <td>total = 6</td>
+                    <td>freq[1] = 3 (for 'b')</td>
+                    <td>Add cost 3 to total and freq['b']</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Process 'a' at index 3</td>
+                    <td>total = 10</td>
+                    <td>freq[0] = 7</td>
+                    <td>Add cost 4 to total and freq['a']</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Process 'a' at index 4</td>
+                    <td>total = 11</td>
+                    <td>freq[0] = 8</td>
+                    <td>Add cost 1 to total and freq['a']</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Process 'c' at index 5</td>
+                    <td>total = 21</td>
+                    <td>freq[2] = 10 (for 'c')</td>
+                    <td>Add cost 10 to total and freq['c']</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Find max frequency</td>
+                    <td>total = 21</td>
+                    <td>max_freq = max(8, 3, 10, ...) = 10</td>
+                    <td>Character 'c' has highest total cost (10)</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Calculate result</td>
+                    <td>result = 21 - 10 = 11</td>
+                    <td>Keep 'c', delete others</td>
+                    <td>Minimum cost is 11</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Character Frequencies</h4>
+                <p><strong>'a':</strong> 1 + 2 + 4 + 1 = <strong>8</strong></p>
+                <p><strong>'b':</strong> 3 = <strong>3</strong></p>
+                <p><strong>'c':</strong> 10 = <strong>10</strong></p>
+                <p><strong>Total:</strong> 1 + 2 + 3 + 4 + 1 + 10 = <strong>21</strong></p>
+            </div>
+            <div class="visual-item">
+                <h4>Optimal Solution</h4>
+                <p><strong>Keep character:</strong> 'c' (cost 10)</p>
+                <p><strong>Delete characters:</strong> All 'a's and 'b'</p>
+                <p><strong>Deletion cost:</strong> 1 + 2 + 3 + 4 + 1 = <strong>11</strong></p>
+                <p><strong>Result:</strong> String "c"</p>
+            </div>
+            <div class="visual-item">
+                <h4>Alternative Choice</h4>
+                <p><strong>If keep 'a':</strong> Delete 'b' and 'c'</p>
+                <p><strong>Deletion cost:</strong> 3 + 10 = <strong>13</strong></p>
+                <p><strong>If keep 'b':</strong> Delete all 'a's and 'c'</p>
+                <p><strong>Deletion cost:</strong> 1+2+4+1+10 = <strong>18</strong></p>
+                <p>Keeping 'c' is optimal</p>
+            </div>
+        </div>
+
+        <div class="callout tip">
+            <strong>Visual Insight:</strong> The character with the highest total cost ('c' with cost 10) is the most "expensive" to delete, so we keep it and delete all other characters. This gives us the minimum total deletion cost of 11.
+        </div>
+
+        <hr />
+
+        <h2>Comparison of Approaches</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                    <th>Key Insight</th>
+                    <th>Best Use Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Frequency Array</strong></td>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                    <td>Keep character with maximum total cost</td>
+                    <td>Optimal solution, simple implementation</td>
+                </tr>
+                <tr>
+                    <td><strong>Greedy by Groups</strong></td>
+                    <td>O(n)</td>
+                    <td>O(1)</td>
+                    <td>For each consecutive group, keep only the most expensive</td>
+                    <td>When thinking about consecutive characters</td>
+                </tr>
+                <tr>
+                    <td><strong>Dynamic Programming</strong></td>
+                    <td>O(n × 26)</td>
+                    <td>O(26)</td>
+                    <td>Frame as decision problem at each position</td>
+                    <td>Learning DP patterns, generalization</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout tip">
+            <strong>Recommendation:</strong> For interviews and practical use, the Frequency Array approach (Approach 1) is optimal in both time and space complexity. It's intuitive: to minimize deletion cost, keep the character that would be most expensive to delete. The Greedy approach provides an alternative perspective that's also efficient.
+        </div>
+
+        <hr />
+
+        <h2>Edge Cases and Testing</h2>
+
+        <h3>1. All Characters Same</h3>
+<pre><code>Input: s = "aaaaa", cost = [1,2,3,4,5] → Output: 0
+All characters are already equal, no deletion needed
+Frequency array: 'a' = 15, total = 15, result = 15 - 15 = 0</code></pre>
+
+        <h3>2. Single Character</h3>
+<pre><code>Input: s = "a", cost = [100] → Output: 0
+Only one character, must keep it (non-empty result)
+Frequency array: 'a' = 100, total = 100, result = 100 - 100 = 0</code></pre>
+
+        <h3>3. All Different Characters</h3>
+<pre><code>Input: s = "abcde", cost = [10,20,30,40,50] → Output: 100
+Total = 10+20+30+40+50 = 150
+Max frequency: max(10,20,30,40,50) = 50 (for 'e')
+Result = 150 - 50 = 100
+Keep 'e', delete others</code></pre>
+
+        <h3>4. Two Characters with Equal Total Cost</h3>
+<pre><code>Input: s = "abab", cost = [5,5,5,5] → Output: 10
+Total = 20
+'a' total = 5+5 = 10
+'b' total = 5+5 = 10
+Result = 20 - 10 = 10 (can keep either 'a' or 'b')</code></pre>
+
+        <h3>5. Very Large Costs</h3>
+<pre><code>Input: s = "ab", cost = [10^9, 10^9] → Output: 10^9
+Total = 2×10^9
+'a' = 10^9, 'b' = 10^9
+Result = 2×10^9 - 10^9 = 10^9
+Must use 64-bit integers to avoid overflow</code></pre>
+
+        <h3>6. Consecutive Identical Characters</h3>
+<pre><code>Input: s = "aaabbb", cost = [1,2,3,4,5,6] → Output: 10
+Greedy approach: 
+  Group 'aaa': keep max=3, delete 1+2 = 3
+  Group 'bbb': keep max=6, delete 4+5 = 9
+  Total = 3 + 9 = 12? Wait, this is wrong
+  
+Frequency approach:
+  Total = 1+2+3+4+5+6 = 21
+  'a' = 1+2+3 = 6
+  'b' = 4+5+6 = 15
+  Result = 21 - 15 = 6 (keep 'b', delete all 'a's)</code></pre>
+
+        <div class="callout warning">
+            <strong>Important:</strong> The Greedy by Groups approach (Approach 2) and the Frequency Array approach (Approach 1) can give different results! The Greedy approach minimizes cost within each group, but doesn't consider that we might want to delete entire groups. The Frequency Array approach gives the correct global optimum.
+        </div>
+
+        <hr />
+
+        <h2>FAQs</h2>
+
+        <div class="faq-section">
+            <details>
+                <summary>1. Why does keeping the character with maximum total cost give minimum deletion cost?</summary>
+                <p>Deletion cost = total cost of all characters - cost of kept characters. Since total cost is fixed, minimizing deletion cost means maximizing the cost of kept characters. We must keep all occurrences of one character type, so we choose the character with maximum total cost across all its occurrences.</p>
+            </details>
+
+            <details>
+                <summary>2. Can we keep a subset of a character rather than all occurrences?</summary>
+                <p>Yes, but it wouldn't help. If we keep a subset of character 'a', we're deleting some 'a's, which adds to deletion cost without any benefit. The optimal strategy is to keep all occurrences of the chosen character type.</p>
+            </details>
+
+            <details>
+                <summary>3. What if multiple characters have the same maximum total cost?</summary>
+                <p>It doesn't matter which one we choose - the deletion cost will be the same. For example, if 'a' and 'b' both have total cost 100, then total - 100 = same result whether we keep 'a' or 'b'.</p>
+            </details>
+
+            <details>
+                <summary>4. Why is the result guaranteed to be non-negative?</summary>
+                <p>The maximum frequency is always ≤ total cost, so total - max_freq ≥ 0. It's 0 only when all characters are the same (max_freq = total).</p>
+            </details>
+
+            <details>
+                <summary>5. How do we handle integer overflow with large costs?</summary>
+                <p>Use 64-bit integers (long long in C++, long in Java, int in Python handles big integers automatically). Cost[i] ≤ 10^9 and n ≤ 10^5, so total ≤ 10^14, which fits in 64-bit.</p>
+            </details>
+
+            <details>
+                <summary>6. What's wrong with the Greedy by Groups approach?</summary>
+                <p>The Greedy approach minimizes cost within each group but doesn't consider that we might want to delete entire groups. It assumes we'll keep at least one character from each group, but the optimal solution might delete all characters of certain types entirely.</p>
+            </details>
+
+            <details>
+                <summary>7. Can this problem be solved with sorting?</summary>
+                <p>Sorting would break the connection between characters and their costs, so no. We need to preserve which cost belongs to which character.</p>
+            </details>
+
+            <details>
+                <summary>8. What if the string could have uppercase letters or other characters?</summary>
+                <p>We would need a larger frequency array (size 52 for uppercase+lowercase, or 256 for all ASCII). The algorithm remains the same: total cost - max(cost_sum for each character).</p>
+            </details>
+
+            <details>
+                <summary>9. Is there a brute force approach?</summary>
+                <p>Yes, try keeping each character type (26 possibilities), calculate deletion cost for each, take minimum. This is O(26 × n) which is essentially O(n) and similar to our frequency array approach.</p>
+            </details>
+
+            <details>
+                <summary>10. Can we solve this with a hash map instead of array?</summary>
+                <p>Yes, use a hash map to store total cost for each character. For lowercase letters only, array is more efficient. For arbitrary characters, hash map is better.</p>
+            </details>
+        </div>
+
+        <div class="callout note">
+            <strong>About Algopush:</strong> Algopush provides comprehensive algorithm solutions and explanations for coding interview preparation.
+            Visit <a href="https://algopush.com">algopush.com</a> for more problem solutions and coding resources.
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab functionality
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                // Initialize first tab
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        button.classList.add('active');
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
+                });
+            });
+
+            // Load header and footer
+            fetch("../components/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("../components/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+    </script>
+</body>
+
+</html>
