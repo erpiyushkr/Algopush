@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3784: Minimum Deletion Cost to Make All Characters Equal</title>
     <meta name="description"
-        content="Solve LeetCode 3784 - Minimum Deletion Cost to Make All Characters Equal. Learn multiple approaches: frequency array, greedy algorithm, sliding window technique. Code in C++, Java, Python.">
+        content="LeetCode 3784 - Minimum Deletion Cost to Make All Characters Equal. Learn multiple approaches: frequency array, greedy algorithm, sliding window technique. Code in C++, Java, Python.">
     <meta name="keywords"
         content="LeetCode 3784, Minimum Deletion Cost to Make All Characters Equal, string manipulation, deletion cost, greedy algorithm, frequency array, algorithm solution, Algopush, coding interview preparation, dynamic programming, leetcode medium, leetcode daily challenge, leetcode practice, coding interview questions">
     <meta name="author" content="Piyush Kumar, Algopush">
@@ -618,12 +618,19 @@
         </div>
 
         <div class="callout tip">
-            <strong>Pro Tip:</strong> This problem can be solved optimally with O(n) time and O(1) space using a frequency array approach. The key insight is that to minimize deletion cost, we should keep the character with the highest total deletion cost and delete all others. Alternatively, we can use a greedy approach by keeping the most expensive character in each group of consecutive characters.
+            <strong>Pro Tip:</strong> This problem can be solved optimally with O(n) time and O(1) space using a
+            frequency array approach. The key insight is that to minimize deletion cost, we should keep the character
+            with the highest total deletion cost and delete all others. Alternatively, we can use a greedy approach by
+            keeping the most expensive character in each group of consecutive characters.
         </div>
 
         <h2>Problem Statement</h2>
-        <p>You are given a string <code>s</code> of length <code>n</code> and an integer array <code>cost</code> of the same length, where <code>cost[i]</code> is the cost to delete the i<sup>th</sup> character of <code>s</code>.</p>
-        <p>You may delete any number of characters from <code>s</code> (possibly none), such that the resulting string is non-empty and consists of equal characters.</p>
+        <p>You are given a string <code>s</code> of length <code>n</code> and an integer array <code>cost</code> of the
+            same length, where <code>cost[i]</code> is the cost to delete the i<sup>th</sup> character of
+            <code>s</code>.
+        </p>
+        <p>You may delete any number of characters from <code>s</code> (possibly none), such that the resulting string
+            is non-empty and consists of equal characters.</p>
         <p>Return an integer denoting the minimum total deletion cost required.</p>
 
         <div class="visual-container">
@@ -632,7 +639,9 @@
                 <p><strong>Input:</strong> s = "aabaac", cost = [1,2,3,4,1,10]</p>
                 <p><strong>Output:</strong> 11</p>
                 <p><strong>Explanation:</strong></p>
-                <p>Deleting the characters at indices 0, 1, 2, 3, 4 results in the string "c", which consists of equal characters, and the total cost is cost[0] + cost[1] + cost[2] + cost[3] + cost[4] = 1 + 2 + 3 + 4 + 1 = 11.</p>
+                <p>Deleting the characters at indices 0, 1, 2, 3, 4 results in the string "c", which consists of equal
+                    characters, and the total cost is cost[0] + cost[1] + cost[2] + cost[3] + cost[4] = 1 + 2 + 3 + 4 +
+                    1 = 11.</p>
             </div>
 
             <div class="visual-item">
@@ -640,7 +649,8 @@
                 <p><strong>Input:</strong> s = "abc", cost = [10,5,8]</p>
                 <p><strong>Output:</strong> 13</p>
                 <p><strong>Explanation:</strong></p>
-                <p>Deleting the characters at indices 1 and 2 results in the string "a", which consists of equal characters, and the total cost is cost[1] + cost[2] = 5 + 8 = 13.</p>
+                <p>Deleting the characters at indices 1 and 2 results in the string "a", which consists of equal
+                    characters, and the total cost is cost[1] + cost[2] = 5 + 8 = 13.</p>
             </div>
 
             <div class="visual-item">
@@ -654,7 +664,8 @@
 
         <div class="callout note">
             <strong>Problem Link:</strong>
-            <a href="https://leetcode.com/problems/minimum-deletion-cost-to-make-all-characters-equal/" target="_blank" rel="noopener noreferrer">
+            <a href="https://leetcode.com/problems/minimum-deletion-cost-to-make-all-characters-equal/" target="_blank"
+                rel="noopener noreferrer">
                 View on LeetCode ↗
             </a>
         </div>
@@ -664,20 +675,29 @@
         <h2>Key Insight</h2>
         <p>The solution requires understanding these crucial observations:</p>
         <ol>
-            <li>The resulting string must consist of <strong>only one character type</strong> (all 'a's, all 'b's, etc.)</li>
+            <li>The resulting string must consist of <strong>only one character type</strong> (all 'a's, all 'b's, etc.)
+            </li>
             <li>We can delete any characters, but must keep at least one character (non-empty result)</li>
-            <li>To minimize deletion cost, we should <strong>keep the character with the highest total deletion cost</strong></li>
-            <li>If we choose character <code>ch</code> to keep, we must delete all characters that are not <code>ch</code></li>
-            <li>Equivalently, we can think: <strong>minimum deletion cost = total cost - max(cost_sum for each character)</strong></li>
+            <li>To minimize deletion cost, we should <strong>keep the character with the highest total deletion
+                    cost</strong></li>
+            <li>If we choose character <code>ch</code> to keep, we must delete all characters that are not
+                <code>ch</code>
+            </li>
+            <li>Equivalently, we can think: <strong>minimum deletion cost = total cost - max(cost_sum for each
+                    character)</strong></li>
         </ol>
-        <p>Alternative approach: For each group of consecutive identical characters, keep only the most expensive one in that group and delete the rest.</p>
+        <p>Alternative approach: For each group of consecutive identical characters, keep only the most expensive one in
+            that group and delete the rest.</p>
 
         <div class="callout warning">
-            <strong>Important:</strong> The problem requires the resulting string to be non-empty. This means we must keep at least one character. In cases where all characters are the same, we keep all of them (cost 0). In cases with different characters, we choose one character type to keep entirely.
+            <strong>Important:</strong> The problem requires the resulting string to be non-empty. This means we must
+            keep at least one character. In cases where all characters are the same, we keep all of them (cost 0). In
+            cases with different characters, we choose one character type to keep entirely.
         </div>
 
         <h2>Approach 1: Frequency Array (Your Approach - Optimal)</h2>
-        <p>Calculate the total cost of deleting all characters, then for each character (a-z), calculate the total cost of keeping that character. The minimum deletion cost is total cost minus the maximum keep cost.</p>
+        <p>Calculate the total cost of deleting all characters, then for each character (a-z), calculate the total cost
+            of keeping that character. The minimum deletion cost is total cost minus the maximum keep cost.</p>
 
         <h3>Algorithm Steps</h3>
         <ol>
@@ -693,7 +713,10 @@
         </ol>
 
         <h3>How It Works</h3>
-        <p>For each character from 'a' to 'z', <code>freq[ch]</code> represents the cost of keeping all occurrences of that character. If we choose to keep character <code>ch</code>, we must delete all other characters at cost <code>total - freq[ch]</code>. We want to minimize this, which means maximizing <code>freq[ch]</code>.</p>
+        <p>For each character from 'a' to 'z', <code>freq[ch]</code> represents the cost of keeping all occurrences of
+            that character. If we choose to keep character <code>ch</code>, we must delete all other characters at cost
+            <code>total - freq[ch]</code>. We want to minimize this, which means maximizing <code>freq[ch]</code>.
+        </p>
 
         <h3>Complexity Analysis</h3>
         <table>
@@ -710,7 +733,8 @@
                 </tr>
             </tbody>
         </table>
-        <p>Where n is the length of the string. Single pass through the string with constant extra space for the frequency array.</p>
+        <p>Where n is the length of the string. Single pass through the string with constant extra space for the
+            frequency array.</p>
 
         <div class="code-container">
             <div class="code-header">
@@ -725,7 +749,7 @@
                 </div>
 
                 <div class="tab-content active" id="cpp-freq-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
 <span class="code-token-keyword">public</span>:
     <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(string s, vector<<span class="code-token-keyword">int</span>>& cost) {
         <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
@@ -749,7 +773,7 @@
                 </div>
 
                 <div class="tab-content" id="java-freq-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
     <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(String s, <span class="code-token-keyword">int</span>[] cost) {
         <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
         <span class="code-token-keyword">long</span>[] freq = <span class="code-token-keyword">new</span> <span class="code-token-keyword">long</span>[<span class="code-token-number">26</span>];
@@ -772,7 +796,7 @@
                 </div>
 
                 <div class="tab-content" id="python-freq-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
     <span class="code-token-keyword">def</span> <span class="code-token-function">minCost</span>(self, s: <span class="code-token-keyword">str</span>, cost: list[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
         total = <span class="code-token-number">0</span>
         freq = [<span class="code-token-number">0</span>] * <span class="code-token-number">26</span>
@@ -786,14 +810,17 @@
                 </div>
             </div>
             <div class="callout note">
-                <strong>Optimal Solution:</strong> This approach is optimal with O(n) time and O(1) space. It works by considering that we must choose exactly one character type to keep entirely. The character with the highest total cost is the most "expensive" to delete, so we keep it to minimize deletion cost.
+                <strong>Optimal Solution:</strong> This approach is optimal with O(n) time and O(1) space. It works by
+                considering that we must choose exactly one character type to keep entirely. The character with the
+                highest total cost is the most "expensive" to delete, so we keep it to minimize deletion cost.
             </div>
         </div>
 
         <hr />
 
         <h2>Approach 2: Greedy by Character Groups</h2>
-        <p>Process the string in groups of consecutive identical characters. For each group, keep only the character with the maximum cost and delete the rest.</p>
+        <p>Process the string in groups of consecutive identical characters. For each group, keep only the character
+            with the maximum cost and delete the rest.</p>
 
         <h3>Algorithm Steps</h3>
         <ol>
@@ -811,7 +838,10 @@
         </ol>
 
         <h3>How It Works</h3>
-        <p>This approach works because in the final string, all characters must be equal. If we have consecutive identical characters, we need to keep only one of them (the most expensive) to minimize cost. For different characters in different groups, we'll eventually need to delete entire groups except for one character type.</p>
+        <p>This approach works because in the final string, all characters must be equal. If we have consecutive
+            identical characters, we need to keep only one of them (the most expensive) to minimize cost. For different
+            characters in different groups, we'll eventually need to delete entire groups except for one character type.
+        </p>
 
         <h3>Complexity Analysis</h3>
         <table>
@@ -843,7 +873,7 @@
                 </div>
 
                 <div class="tab-content active" id="cpp-greedy-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
 <span class="code-token-keyword">public</span>:
     <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(string s, vector<<span class="code-token-keyword">int</span>>& cost) {
         <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
@@ -874,7 +904,7 @@
                 </div>
 
                 <div class="tab-content" id="java-greedy-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
     <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(String s, <span class="code-token-keyword">int</span>[] cost) {
         <span class="code-token-keyword">long</span> total = <span class="code-token-number">0</span>;
         <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
@@ -904,7 +934,7 @@
                 </div>
 
                 <div class="tab-content" id="python-greedy-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
     <span class="code-token-keyword">def</span> <span class="code-token-function">minCost</span>(self, s: <span class="code-token-keyword">str</span>, cost: list[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
         total = <span class="code-token-number">0</span>
         n = len(s)
@@ -928,22 +958,28 @@
                 </div>
             </div>
             <div class="callout note">
-                <strong>Greedy Insight:</strong> This approach works because in the optimal solution, for each group of consecutive identical characters, we keep only the most expensive one. This is actually equivalent to Approach 1 but provides a different perspective on the problem.
+                <strong>Greedy Insight:</strong> This approach works because in the optimal solution, for each group of
+                consecutive identical characters, we keep only the most expensive one. This is actually equivalent to
+                Approach 1 but provides a different perspective on the problem.
             </div>
         </div>
 
         <hr />
 
         <h2>Approach 3: Dynamic Programming (Alternative)</h2>
-        <p>Use dynamic programming to track the minimum cost to make all characters equal up to position i, considering which character we keep.</p>
+        <p>Use dynamic programming to track the minimum cost to make all characters equal up to position i, considering
+            which character we keep.</p>
 
         <h3>Algorithm Steps</h3>
         <ol>
-            <li>Initialize <code>dp[26]</code> where <code>dp[ch]</code> = minimum cost to make all characters equal to character <code>ch</code></li>
+            <li>Initialize <code>dp[26]</code> where <code>dp[ch]</code> = minimum cost to make all characters equal to
+                character <code>ch</code></li>
             <li>For each character <code>s[i]</code> with cost <code>cost[i]</code>:
                 <ul>
-                    <li>If we keep character <code>s[i]</code>, we don't delete it (cost 0 for this character if it matches target)</li>
-                    <li>If we change to different character, we must delete <code>s[i]</code> (add <code>cost[i]</code>)</li>
+                    <li>If we keep character <code>s[i]</code>, we don't delete it (cost 0 for this character if it
+                        matches target)</li>
+                    <li>If we change to different character, we must delete <code>s[i]</code> (add <code>cost[i]</code>)
+                    </li>
                 </ul>
             </li>
             <li>Update DP table accordingly</li>
@@ -951,7 +987,8 @@
         </ol>
 
         <h3>How It Works</h3>
-        <p>For each character position, we consider keeping each possible character (a-z). If the current character matches our target, we don't pay deletion cost. Otherwise, we add the deletion cost.</p>
+        <p>For each character position, we consider keeping each possible character (a-z). If the current character
+            matches our target, we don't pay deletion cost. Otherwise, we add the deletion cost.</p>
 
         <h3>Complexity Analysis</h3>
         <table>
@@ -983,7 +1020,7 @@
                 </div>
 
                 <div class="tab-content active" id="cpp-dp-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
 <span class="code-token-keyword">public</span>:
     <span class="code-token-keyword">long</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(string s, vector<<span class="code-token-keyword">int</span>>& cost) {
         <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
@@ -1024,7 +1061,7 @@
                 </div>
 
                 <div class="tab-content" id="java-dp-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
     <span class="code-token-keyword">public</span> <span class="code-token-keyword">long</span> <span class="code-token-function">minCost</span>(String s, <span class="code-token-keyword">int</span>[] cost) {
         <span class="code-token-keyword">int</span> n = s.<span class="code-token-function">length</span>();
         
@@ -1064,7 +1101,7 @@
                 </div>
 
                 <div class="tab-content" id="python-dp-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
     <span class="code-token-keyword">def</span> <span class="code-token-function">minCost</span>(self, s: <span class="code-token-keyword">str</span>, cost: list[<span class="code-token-keyword">int</span>]) -> <span class="code-token-keyword">int</span>:
         n = len(s)
         
@@ -1094,7 +1131,9 @@
                 </div>
             </div>
             <div class="callout note">
-                <strong>DP Insight:</strong> This dynamic programming approach, while less efficient, illustrates how we can frame the problem as making decisions at each character position. However, for this specific problem, the greedy/frequency array approaches are more optimal.
+                <strong>DP Insight:</strong> This dynamic programming approach, while less efficient, illustrates how we
+                can frame the problem as making decisions at each character position. However, for this specific
+                problem, the greedy/frequency array approaches are more optimal.
             </div>
         </div>
 
@@ -1216,7 +1255,9 @@
         </div>
 
         <div class="callout tip">
-            <strong>Visual Insight:</strong> The character with the highest total cost ('c' with cost 10) is the most "expensive" to delete, so we keep it and delete all other characters. This gives us the minimum total deletion cost of 11.
+            <strong>Visual Insight:</strong> The character with the highest total cost ('c' with cost 10) is the most
+            "expensive" to delete, so we keep it and delete all other characters. This gives us the minimum total
+            deletion cost of 11.
         </div>
 
         <hr />
@@ -1258,7 +1299,10 @@
         </table>
 
         <div class="callout tip">
-            <strong>Recommendation:</strong> For interviews and practical use, the Frequency Array approach (Approach 1) is optimal in both time and space complexity. It's intuitive: to minimize deletion cost, keep the character that would be most expensive to delete. The Greedy approach provides an alternative perspective that's also efficient.
+            <strong>Recommendation:</strong> For interviews and practical use, the Frequency Array approach (Approach 1)
+            is optimal in both time and space complexity. It's intuitive: to minimize deletion cost, keep the character
+            that would be most expensive to delete. The Greedy approach provides an alternative perspective that's also
+            efficient.
         </div>
 
         <hr />
@@ -1266,38 +1310,38 @@
         <h2>Edge Cases and Testing</h2>
 
         <h3>1. All Characters Same</h3>
-<pre><code>Input: s = "aaaaa", cost = [1,2,3,4,5] → Output: 0
+        <pre><code>Input: s = "aaaaa", cost = [1,2,3,4,5] → Output: 0
 All characters are already equal, no deletion needed
 Frequency array: 'a' = 15, total = 15, result = 15 - 15 = 0</code></pre>
 
         <h3>2. Single Character</h3>
-<pre><code>Input: s = "a", cost = [100] → Output: 0
+        <pre><code>Input: s = "a", cost = [100] → Output: 0
 Only one character, must keep it (non-empty result)
 Frequency array: 'a' = 100, total = 100, result = 100 - 100 = 0</code></pre>
 
         <h3>3. All Different Characters</h3>
-<pre><code>Input: s = "abcde", cost = [10,20,30,40,50] → Output: 100
+        <pre><code>Input: s = "abcde", cost = [10,20,30,40,50] → Output: 100
 Total = 10+20+30+40+50 = 150
 Max frequency: max(10,20,30,40,50) = 50 (for 'e')
 Result = 150 - 50 = 100
 Keep 'e', delete others</code></pre>
 
         <h3>4. Two Characters with Equal Total Cost</h3>
-<pre><code>Input: s = "abab", cost = [5,5,5,5] → Output: 10
+        <pre><code>Input: s = "abab", cost = [5,5,5,5] → Output: 10
 Total = 20
 'a' total = 5+5 = 10
 'b' total = 5+5 = 10
 Result = 20 - 10 = 10 (can keep either 'a' or 'b')</code></pre>
 
         <h3>5. Very Large Costs</h3>
-<pre><code>Input: s = "ab", cost = [10^9, 10^9] → Output: 10^9
+        <pre><code>Input: s = "ab", cost = [10^9, 10^9] → Output: 10^9
 Total = 2×10^9
 'a' = 10^9, 'b' = 10^9
 Result = 2×10^9 - 10^9 = 10^9
 Must use 64-bit integers to avoid overflow</code></pre>
 
         <h3>6. Consecutive Identical Characters</h3>
-<pre><code>Input: s = "aaabbb", cost = [1,2,3,4,5,6] → Output: 10
+        <pre><code>Input: s = "aaabbb", cost = [1,2,3,4,5,6] → Output: 10
 Greedy approach: 
   Group 'aaa': keep max=3, delete 1+2 = 3
   Group 'bbb': keep max=6, delete 4+5 = 9
@@ -1310,7 +1354,10 @@ Frequency approach:
   Result = 21 - 15 = 6 (keep 'b', delete all 'a's)</code></pre>
 
         <div class="callout warning">
-            <strong>Important:</strong> The Greedy by Groups approach (Approach 2) and the Frequency Array approach (Approach 1) can give different results! The Greedy approach minimizes cost within each group, but doesn't consider that we might want to delete entire groups. The Frequency Array approach gives the correct global optimum.
+            <strong>Important:</strong> The Greedy by Groups approach (Approach 2) and the Frequency Array approach
+            (Approach 1) can give different results! The Greedy approach minimizes cost within each group, but doesn't
+            consider that we might want to delete entire groups. The Frequency Array approach gives the correct global
+            optimum.
         </div>
 
         <hr />
@@ -1320,57 +1367,73 @@ Frequency approach:
         <div class="faq-section">
             <details>
                 <summary>1. Why does keeping the character with maximum total cost give minimum deletion cost?</summary>
-                <p>Deletion cost = total cost of all characters - cost of kept characters. Since total cost is fixed, minimizing deletion cost means maximizing the cost of kept characters. We must keep all occurrences of one character type, so we choose the character with maximum total cost across all its occurrences.</p>
+                <p>Deletion cost = total cost of all characters - cost of kept characters. Since total cost is fixed,
+                    minimizing deletion cost means maximizing the cost of kept characters. We must keep all occurrences
+                    of one character type, so we choose the character with maximum total cost across all its
+                    occurrences.</p>
             </details>
 
             <details>
                 <summary>2. Can we keep a subset of a character rather than all occurrences?</summary>
-                <p>Yes, but it wouldn't help. If we keep a subset of character 'a', we're deleting some 'a's, which adds to deletion cost without any benefit. The optimal strategy is to keep all occurrences of the chosen character type.</p>
+                <p>Yes, but it wouldn't help. If we keep a subset of character 'a', we're deleting some 'a's, which adds
+                    to deletion cost without any benefit. The optimal strategy is to keep all occurrences of the chosen
+                    character type.</p>
             </details>
 
             <details>
                 <summary>3. What if multiple characters have the same maximum total cost?</summary>
-                <p>It doesn't matter which one we choose - the deletion cost will be the same. For example, if 'a' and 'b' both have total cost 100, then total - 100 = same result whether we keep 'a' or 'b'.</p>
+                <p>It doesn't matter which one we choose - the deletion cost will be the same. For example, if 'a' and
+                    'b' both have total cost 100, then total - 100 = same result whether we keep 'a' or 'b'.</p>
             </details>
 
             <details>
                 <summary>4. Why is the result guaranteed to be non-negative?</summary>
-                <p>The maximum frequency is always ≤ total cost, so total - max_freq ≥ 0. It's 0 only when all characters are the same (max_freq = total).</p>
+                <p>The maximum frequency is always ≤ total cost, so total - max_freq ≥ 0. It's 0 only when all
+                    characters are the same (max_freq = total).</p>
             </details>
 
             <details>
                 <summary>5. How do we handle integer overflow with large costs?</summary>
-                <p>Use 64-bit integers (long long in C++, long in Java, int in Python handles big integers automatically). Cost[i] ≤ 10^9 and n ≤ 10^5, so total ≤ 10^14, which fits in 64-bit.</p>
+                <p>Use 64-bit integers (long long in C++, long in Java, int in Python handles big integers
+                    automatically). Cost[i] ≤ 10^9 and n ≤ 10^5, so total ≤ 10^14, which fits in 64-bit.</p>
             </details>
 
             <details>
                 <summary>6. What's wrong with the Greedy by Groups approach?</summary>
-                <p>The Greedy approach minimizes cost within each group but doesn't consider that we might want to delete entire groups. It assumes we'll keep at least one character from each group, but the optimal solution might delete all characters of certain types entirely.</p>
+                <p>The Greedy approach minimizes cost within each group but doesn't consider that we might want to
+                    delete entire groups. It assumes we'll keep at least one character from each group, but the optimal
+                    solution might delete all characters of certain types entirely.</p>
             </details>
 
             <details>
                 <summary>7. Can this problem be solved with sorting?</summary>
-                <p>Sorting would break the connection between characters and their costs, so no. We need to preserve which cost belongs to which character.</p>
+                <p>Sorting would break the connection between characters and their costs, so no. We need to preserve
+                    which cost belongs to which character.</p>
             </details>
 
             <details>
                 <summary>8. What if the string could have uppercase letters or other characters?</summary>
-                <p>We would need a larger frequency array (size 52 for uppercase+lowercase, or 256 for all ASCII). The algorithm remains the same: total cost - max(cost_sum for each character).</p>
+                <p>We would need a larger frequency array (size 52 for uppercase+lowercase, or 256 for all ASCII). The
+                    algorithm remains the same: total cost - max(cost_sum for each character).</p>
             </details>
 
             <details>
                 <summary>9. Is there a brute force approach?</summary>
-                <p>Yes, try keeping each character type (26 possibilities), calculate deletion cost for each, take minimum. This is O(26 × n) which is essentially O(n) and similar to our frequency array approach.</p>
+                <p>Yes, try keeping each character type (26 possibilities), calculate deletion cost for each, take
+                    minimum. This is O(26 × n) which is essentially O(n) and similar to our frequency array approach.
+                </p>
             </details>
 
             <details>
                 <summary>10. Can we solve this with a hash map instead of array?</summary>
-                <p>Yes, use a hash map to store total cost for each character. For lowercase letters only, array is more efficient. For arbitrary characters, hash map is better.</p>
+                <p>Yes, use a hash map to store total cost for each character. For lowercase letters only, array is more
+                    efficient. For arbitrary characters, hash map is better.</p>
             </details>
         </div>
 
         <div class="callout note">
-            <strong>About Algopush:</strong> Algopush provides comprehensive algorithm solutions and explanations for coding interview preparation.
+            <strong>About Algopush:</strong> Algopush provides comprehensive algorithm solutions and explanations for
+            coding interview preparation.
             Visit <a href="https://algopush.com">algopush.com</a> for more problem solutions and coding resources.
         </div>
     </main>

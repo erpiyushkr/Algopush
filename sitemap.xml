@@ -4,7 +4,7 @@
     <url>
         <loc>https://algopush.com</loc>
         <lastmod>2025-06-29</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 
@@ -12,7 +12,7 @@
     <url>
         <loc>https://algopush.com/components/about.html</loc>
         <lastmod>2025-06-29</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
 
@@ -20,7 +20,7 @@
     <url>
         <loc>https://algopush.com/components/privacy-policy.html</loc>
         <lastmod>2025-06-29</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
 
@@ -28,7 +28,7 @@
     <url>
         <loc>https://algopush.com/components/terms-conditions.html</loc>
         <lastmod>2025-06-29</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
 
@@ -36,7 +36,7 @@
     <url>
         <loc>https://algopush.com/components/disclaimer.html</loc>
         <lastmod>2025-06-29</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
 
@@ -44,7 +44,7 @@
     <url>
         <loc>https://algopush.com/components/career.html</loc>
         <lastmod>2025-05-15</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
 
@@ -52,13 +52,13 @@
     <url>
         <loc>https://algopush.com/components/contacts.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://algopush.com/components/thank-you.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
 
@@ -74,7 +74,7 @@
     <url>
         <loc>https://algopush.com/Blog/sliding-window-technique.html</loc>
         <lastmod>2025-05-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
@@ -82,371 +82,371 @@
     <url>
         <loc>https://algopush.com/Leetcode/3392-count-subarrays-of-length-three-with-condition.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2302-count-subarrays-with-score-less-than-k.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2962-count-subarrays-where-max-element-appears-at-least-k-times.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1295-find-numbers-with-even-number-of-digits.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1829-maximum-xor-for-each-query.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2799-count-complete-subarrays-in-an-array.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/838-push-dominoes.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3387-maximize-amount-after-two-days-of-conversions.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3432-count-partitions-with-even-sum-difference.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3223-minimum-length-of-string-after-operations.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1920-build-array-from-permutation.html</loc>
         <lastmod>2025-05-06</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros.html</loc>
         <lastmod>2025-05-11</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3541-find-most-frequent-vowel-and-consonant.html</loc>
         <lastmod>2025-05-11</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3542-minimum-operations-to-convert-all-elements-to-zero.html</loc>
         <lastmod>2025-05-11</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2094-finding-3-digit-even-numbers.html</loc>
         <lastmod>2025-05-12</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3545-minimum-deletions-for-at-most-k-distinct-characters.html</loc>
         <lastmod>2025-05-12</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3546-equal-sum-grid-partition-i.html</loc>
         <lastmod>2025-05-18</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3335-total-characters-after-transformations.html</loc>
         <lastmod>2025-05-18</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3550-smallest-index-with-digit-sum-equal-to-index.html</loc>
         <lastmod>2025-05-18</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3551-minimum-swaps-to-sort-by-digit-sum.html</loc>
         <lastmod>2025-05-19</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3024-type-of-triangle.html</loc>
         <lastmod>2025-05-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/73-set-matrix-zeroes.html</loc>
         <lastmod>2025-05-22</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3566-partition-array-into-two-equal-product-subsets.html</loc>
         <lastmod>2025-06-01</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3442-maximum-difference-even-odd-frequency.html</loc>
         <lastmod>2025-06-10</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1432-max-difference-you-can-get-from-changing-an-integer.html</loc>
         <lastmod>2025-06-15</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1-two-sum.html</loc>
         <lastmod>2025-06-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2138-divide-a-string-into-groups-of-size-k.html</loc>
         <lastmod>2025-06-22</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3591-check-if-any-element-has-prime-frequency.html</loc>
         <lastmod>2025-06-22</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3587-minimum-adjacent-swaps-to-alternate-parity.html</loc>
         <lastmod>2025-06-22</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1290-convert-binary-number-in-linked-list-to-integer.html</loc>
         <lastmod>2025-07-15</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3136-valid-word.html</loc>
         <lastmod>2025-07-15</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3618-split-array-by-prime-indices.html</loc>
         <lastmod>2025-07-19</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3619-count-islands-with-total-value-divisible-by-k.html</loc>
         <lastmod>2025-07-19</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3537-fill-a-special-grid.html</loc>
         <lastmod>2025-07-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3536-maximum-product-of-two-digits.html</loc>
         <lastmod>2025-07-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3622-check-divisibility-by-digit-sum-and-product.html</loc>
         <lastmod>2025-07-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1957-delete-characters-to-make-fancy-string.html</loc>
         <lastmod>2025-07-21</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/1695-maximum-erasure-value.html</loc>
         <lastmod>2025-07-22</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3487-maximum-unique-subarray-sum-after-deletion.html</loc>
         <lastmod>2025-07-25</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2419-longest-subarray-with-maximum-bitwise-and.html</loc>
         <lastmod>2025-07-25</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/898-bitwise-ors-of-subarrays.html</loc>
         <lastmod>2025-07-25</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3637-trionic-array.html</loc>
         <lastmod>2025-08-03</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3638-maximum-balanced-shipments.html</loc>
         <lastmod>2025-08-03</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/869-reordered-power-of-2.html</loc>
         <lastmod>2025-08-09</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2348-number-of-zero-filled-subarrays.html</loc>
         <lastmod>2025-08-19</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3732-maximum-product-of-three-elements-after-one-replacement.html</loc>
         <lastmod>2025-11-01</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3731-find-missing-elements.html</loc>
         <lastmod>2025-11-02</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3765-complete-prime-number.html</loc>
         <lastmod>2025-12-02</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/2110-smooth-descent-periods.html</loc>
         <lastmod>2025-12-15</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3774-absolute-difference-k-elements.html</loc>
         <lastmod>2025-12-15</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3775-reverse-words-same-vowel-count.html</loc>
         <lastmod>2025-12-15</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3784-minimum-deletion-cost-equal-characters.html</loc>
         <lastmod>2025-12-25</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://algopush.com/Leetcode/3783-mirror-distance-integer.html</loc>
         <lastmod>2025-12-25</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     

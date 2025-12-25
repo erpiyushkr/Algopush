@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3783: Mirror Distance of an Integer</title>
     <meta name="description"
-        content="Solve LeetCode 3783 - Mirror Distance of an Integer. Learn multiple approaches: mathematical reversal, string reversal, and edge case handling. Code in C++, Java, Python.">
+        content="LeetCode 3783 - Mirror Distance of an Integer. Learn multiple approaches: mathematical reversal, string reversal, and edge case handling.">
     <meta name="keywords"
         content="LeetCode 3783, Mirror Distance of an Integer, digit reversal, palindrome, number manipulation, algorithm solution, Algopush, coding interview preparation, leetcode easy, leetcode daily challenge, leetcode practice, coding interview questions">
     <meta name="author" content="Piyush Kumar, Algopush">
@@ -622,12 +622,16 @@
         </div>
 
         <div class="callout tip">
-            <strong>Pro Tip:</strong> This is a straightforward problem that tests basic number manipulation skills. The key is to reverse the digits of the integer correctly, handling potential edge cases like numbers ending with zeros. The mathematical approach using modulo and division is optimal with O(d) time where d is the number of digits.
+            <strong>Pro Tip:</strong> This is a straightforward problem that tests basic number manipulation skills. The
+            key is to reverse the digits of the integer correctly, handling potential edge cases like numbers ending
+            with zeros. The mathematical approach using modulo and division is optimal with O(d) time where d is the
+            number of digits.
         </div>
 
         <h2>Problem Statement</h2>
         <p>You are given an integer <code>n</code>.</p>
-        <p>Define its mirror distance as: <code>abs(n - reverse(n))</code> where <code>reverse(n)</code> is the integer formed by reversing the digits of <code>n</code>.</p>
+        <p>Define its mirror distance as: <code>abs(n - reverse(n))</code> where <code>reverse(n)</code> is the integer
+            formed by reversing the digits of <code>n</code>.</p>
         <p>Return an integer denoting the mirror distance of <code>n</code>.</p>
         <p><code>abs(x)</code> denotes the absolute value of <code>x</code>.</p>
 
@@ -662,7 +666,8 @@
 
         <div class="callout note">
             <strong>Problem Link:</strong>
-            <a href="https://leetcode.com/problems/mirror-distance-of-an-integer/" target="_blank" rel="noopener noreferrer">
+            <a href="https://leetcode.com/problems/mirror-distance-of-an-integer/" target="_blank"
+                rel="noopener noreferrer">
                 View on LeetCode ↗
             </a>
         </div>
@@ -681,11 +686,14 @@
         <p>Alternative approach: Convert to string, reverse the string, convert back to integer.</p>
 
         <div class="callout warning">
-            <strong>Important:</strong> The constraint 1 ≤ n ≤ 10⁹ means we don't have to worry about overflow when reversing (max reversed number would be 9,000,000,001 which fits in 64-bit integer). However, in languages with 32-bit integers, we should use 64-bit integers for safety.
+            <strong>Important:</strong> The constraint 1 ≤ n ≤ 10⁹ means we don't have to worry about overflow when
+            reversing (max reversed number would be 9,000,000,001 which fits in 64-bit integer). However, in languages
+            with 32-bit integers, we should use 64-bit integers for safety.
         </div>
 
         <h2>Approach 1: Mathematical Reversal (Optimal)</h2>
-        <p>Reverse the integer mathematically using modulo and division operations. This approach is efficient and avoids string conversion overhead.</p>
+        <p>Reverse the integer mathematically using modulo and division operations. This approach is efficient and
+            avoids string conversion overhead.</p>
 
         <h3>Algorithm Steps</h3>
         <ol>
@@ -739,7 +747,7 @@
                 </div>
 
                 <div class="tab-content active" id="cpp-math-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
 <span class="code-token-keyword">public</span>:
     <span class="code-token-keyword">int</span> <span class="code-token-function">mirrorDistance</span>(<span class="code-token-keyword">int</span> n) {
         <span class="code-token-keyword">int</span> temp = <span class="code-token-number">0</span>;
@@ -757,7 +765,7 @@
                 </div>
 
                 <div class="tab-content" id="java-math-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
     <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">mirrorDistance</span>(<span class="code-token-keyword">int</span> n) {
         <span class="code-token-keyword">int</span> reversed = <span class="code-token-number">0</span>;
         <span class="code-token-keyword">int</span> temp = n;
@@ -774,7 +782,7 @@
                 </div>
 
                 <div class="tab-content" id="python-math-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
     <span class="code-token-keyword">def</span> <span class="code-token-function">mirrorDistance</span>(self, n: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
         reversed_num = <span class="code-token-number">0</span>
         temp = n
@@ -788,14 +796,17 @@
                 </div>
             </div>
             <div class="callout note">
-                <strong>Optimal Solution:</strong> This approach is optimal with O(d) time and O(1) space. It works by extracting digits from the end of the number and building the reversed number. Note that the mathematical approach automatically handles leading zeros correctly (e.g., 10 becomes 1, not 01).
+                <strong>Optimal Solution:</strong> This approach is optimal with O(d) time and O(1) space. It works by
+                extracting digits from the end of the number and building the reversed number. Note that the
+                mathematical approach automatically handles leading zeros correctly (e.g., 10 becomes 1, not 01).
             </div>
         </div>
 
         <hr />
 
         <h2>Approach 2: String Reversal</h2>
-        <p>Convert the integer to string, reverse the string, convert back to integer, and compute the absolute difference.</p>
+        <p>Convert the integer to string, reverse the string, convert back to integer, and compute the absolute
+            difference.</p>
 
         <h3>Algorithm Steps</h3>
         <ol>
@@ -845,7 +856,7 @@
                 </div>
 
                 <div class="tab-content active" id="cpp-string-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
 <span class="code-token-keyword">public</span>:
     <span class="code-token-keyword">int</span> <span class="code-token-function">mirrorDistance</span>(<span class="code-token-keyword">int</span> n) {
         string str_n = <span class="code-token-function">to_string</span>(n);
@@ -859,7 +870,7 @@
                 </div>
 
                 <div class="tab-content" id="java-string-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
     <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">mirrorDistance</span>(<span class="code-token-keyword">int</span> n) {
         String str_n = Integer.<span class="code-token-function">toString</span>(n);
         StringBuilder sb = <span class="code-token-keyword">new</span> StringBuilder(str_n);
@@ -872,7 +883,7 @@
                 </div>
 
                 <div class="tab-content" id="python-string-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
     <span class="code-token-keyword">def</span> <span class="code-token-function">mirrorDistance</span>(self, n: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
         str_n = str(n)
         reversed_str = str_n[::<span class="code-token-number">-1</span>]
@@ -881,14 +892,17 @@
                 </div>
             </div>
             <div class="callout note">
-                <strong>String Approach:</strong> This approach is simpler to understand but uses extra space for the string. It's good for interviews to show multiple approaches. Note that string reversal automatically handles leading zeros correctly (e.g., "10" reversed is "01", which when converted to int becomes 1).
+                <strong>String Approach:</strong> This approach is simpler to understand but uses extra space for the
+                string. It's good for interviews to show multiple approaches. Note that string reversal automatically
+                handles leading zeros correctly (e.g., "10" reversed is "01", which when converted to int becomes 1).
             </div>
         </div>
 
         <hr />
 
         <h2>Approach 3: Recursive Reversal</h2>
-        <p>Reverse the integer recursively by processing one digit at a time. This demonstrates recursive thinking for number manipulation problems.</p>
+        <p>Reverse the integer recursively by processing one digit at a time. This demonstrates recursive thinking for
+            number manipulation problems.</p>
 
         <h3>Algorithm Steps</h3>
         <ol>
@@ -900,44 +914,44 @@
 
         <h3>How It Works</h3>
         <p>Recursively builds the reversed number. For n = 123:</p>
-<ul>
-    <li>reverseRecursive(123, 0) → reverseRecursive(12, 3)</li>
-    <li>reverseRecursive(12, 3) → reverseRecursive(1, 32)</li>
-    <li>reverseRecursive(1, 32) → reverseRecursive(0, 321)</li>
-    <li>Return 321</li>
-</ul>
+        <ul>
+            <li>reverseRecursive(123, 0) → reverseRecursive(12, 3)</li>
+            <li>reverseRecursive(12, 3) → reverseRecursive(1, 32)</li>
+            <li>reverseRecursive(1, 32) → reverseRecursive(0, 321)</li>
+            <li>Return 321</li>
+        </ul>
 
-<h3>Complexity Analysis</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Time Complexity</th>
-            <th>Space Complexity</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>O(d)</td>
-            <td>O(d)</td>
-        </tr>
-    </tbody>
-</table>
-<p>Where d is the number of digits. The recursion depth is d, so O(d) space for the call stack.</p>
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(d)</td>
+                    <td>O(d)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Where d is the number of digits. The recursion depth is d, so O(d) space for the call stack.</p>
 
-<div class="code-container">
-    <div class="code-header">
-        <span class="code-filename">Recursive Approach</span>
-        <button class="code-copy">Copy Code</button>
-    </div>
-    <div class="code-tabs">
-        <div class="tab-buttons">
-            <button class="tab-button active" data-tab="cpp-recursive">C++</button>
-            <button class="tab-button" data-tab="java-recursive">Java</button>
-            <button class="tab-button" data-tab="python-recursive">Python</button>
-        </div>
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Recursive Approach</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-recursive">C++</button>
+                    <button class="tab-button" data-tab="java-recursive">Java</button>
+                    <button class="tab-button" data-tab="python-recursive">Python</button>
+                </div>
 
-        <div class="tab-content active" id="cpp-recursive-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                <div class="tab-content active" id="cpp-recursive-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
 <span class="code-token-keyword">private</span>:
     <span class="code-token-keyword">int</span> <span class="code-token-function">reverseRecursive</span>(<span class="code-token-keyword">int</span> num, <span class="code-token-keyword">int</span> rev) {
         <span class="code-token-keyword">if</span> (num == <span class="code-token-number">0</span>) {
@@ -953,10 +967,10 @@
         <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(n - reversed);
     }
 };</code></pre>
-        </div>
+                </div>
 
-        <div class="tab-content" id="java-recursive-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                <div class="tab-content" id="java-recursive-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
     <span class="code-token-keyword">private</span> <span class="code-token-keyword">int</span> <span class="code-token-function">reverseRecursive</span>(<span class="code-token-keyword">int</span> num, <span class="code-token-keyword">int</span> rev) {
         <span class="code-token-keyword">if</span> (num == <span class="code-token-number">0</span>) {
             <span class="code-token-keyword">return</span> rev;
@@ -970,10 +984,10 @@
         <span class="code-token-keyword">return</span> Math.<span class="code-token-function">abs</span>(n - reversed);
     }
 }</code></pre>
-        </div>
+                </div>
 
-        <div class="tab-content" id="python-recursive-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+                <div class="tab-content" id="python-recursive-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
     <span class="code-token-keyword">def</span> <span class="code-token-function">reverseRecursive</span>(self, num: <span class="code-token-keyword">int</span>, rev: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
         <span class="code-token-keyword">if</span> num == <span class="code-token-number">0</span>:
             <span class="code-token-keyword">return</span> rev
@@ -983,62 +997,65 @@
     <span class="code-token-keyword">def</span> <span class="code-token-function">mirrorDistance</span>(self, n: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
         reversed_num = self.<span class="code-token-function">reverseRecursive</span>(n, <span class="code-token-number">0</span>)
         <span class="code-token-keyword">return</span> abs(n - reversed_num)</code></pre>
-        </div>
-    </div>
-    <div class="callout note">
-        <strong>Recursive Insight:</strong> This approach demonstrates recursive thinking but is less efficient in space due to recursion depth. It's useful for understanding recursion but not optimal for production code.
-    </div>
-</div>
-
-<hr />
-
-<h2>Approach 4: Two-Pointer String Reversal</h2>
-<p>Use two pointers to reverse the string representation of the number, then convert back to integer.</p>
-
-<h3>Algorithm Steps</h3>
-<ol>
-    <li>Convert <code>n</code> to string</li>
-    <li>Initialize two pointers: <code>left = 0</code>, <code>right = length - 1</code></li>
-    <li>While <code>left < right</code>, swap characters at left and right</li>
-    <li>Increment left, decrement right</li>
-    <li>Convert reversed string to integer</li>
-    <li>Compute absolute difference</li>
-</ol>
-
-<h3>How It Works</h3>
-<p>This is similar to Approach 2 but manually implements string reversal using two pointers instead of built-in functions.</p>
-
-<h3>Complexity Analysis</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Time Complexity</th>
-            <th>Space Complexity</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>O(d)</td>
-            <td>O(d)</td>
-        </tr>
-    </tbody>
-</table>
-<p>Same as string reversal approach but demonstrates manual string manipulation.</p>
-
-<div class="code-container">
-    <div class="code-header">
-        <span class="code-filename">Two-Pointer String Reversal</span>
-        <button class="code-copy">Copy Code</button>
-    </div>
-    <div class="code-tabs">
-        <div class="tab-buttons">
-            <button class="tab-button active" data-tab="cpp-two-pointer">C++</button>
-            <button class="tab-button" data-tab="java-two-pointer">Java</button>
-            <button class="tab-button" data-tab="python-two-pointer">Python</button>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Recursive Insight:</strong> This approach demonstrates recursive thinking but is less efficient
+                in space due to recursion depth. It's useful for understanding recursion but not optimal for production
+                code.
+            </div>
         </div>
 
-        <div class="tab-content active" id="cpp-two-pointer-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+        <hr />
+
+        <h2>Approach 4: Two-Pointer String Reversal</h2>
+        <p>Use two pointers to reverse the string representation of the number, then convert back to integer.</p>
+
+        <h3>Algorithm Steps</h3>
+        <ol>
+            <li>Convert <code>n</code> to string</li>
+            <li>Initialize two pointers: <code>left = 0</code>, <code>right = length - 1</code></li>
+            <li>While <code>left < right</code>, swap characters at left and right</li>
+            <li>Increment left, decrement right</li>
+            <li>Convert reversed string to integer</li>
+            <li>Compute absolute difference</li>
+        </ol>
+
+        <h3>How It Works</h3>
+        <p>This is similar to Approach 2 but manually implements string reversal using two pointers instead of built-in
+            functions.</p>
+
+        <h3>Complexity Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O(d)</td>
+                    <td>O(d)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Same as string reversal approach but demonstrates manual string manipulation.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-filename">Two-Pointer String Reversal</span>
+                <button class="code-copy">Copy Code</button>
+            </div>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp-two-pointer">C++</button>
+                    <button class="tab-button" data-tab="java-two-pointer">Java</button>
+                    <button class="tab-button" data-tab="python-two-pointer">Python</button>
+                </div>
+
+                <div class="tab-content active" id="cpp-two-pointer-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
 <span class="code-token-keyword">public</span>:
     <span class="code-token-keyword">int</span> <span class="code-token-function">mirrorDistance</span>(<span class="code-token-keyword">int</span> n) {
         string str_n = <span class="code-token-function">to_string</span>(n);
@@ -1054,10 +1071,10 @@
         <span class="code-token-keyword">return</span> <span class="code-token-function">abs</span>(n - reversed_n);
     }
 };</code></pre>
-        </div>
+                </div>
 
-        <div class="tab-content" id="java-two-pointer-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
+                <div class="tab-content" id="java-two-pointer-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span> {
     <span class="code-token-keyword">public</span> <span class="code-token-keyword">int</span> <span class="code-token-function">mirrorDistance</span>(<span class="code-token-keyword">int</span> n) {
         <span class="code-token-keyword">char</span>[] chars = Integer.<span class="code-token-function">toString</span>(n).<span class="code-token-function">toCharArray</span>();
         <span class="code-token-keyword">int</span> left = <span class="code-token-number">0</span>, right = chars.length - <span class="code-token-number">1</span>;
@@ -1074,10 +1091,10 @@
         <span class="code-token-keyword">return</span> Math.<span class="code-token-function">abs</span>(n - reversed_n);
     }
 }</code></pre>
-        </div>
+                </div>
 
-        <div class="tab-content" id="python-two-pointer-tab">
-<pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
+                <div class="tab-content" id="python-two-pointer-tab">
+                    <pre><code><span class="code-token-keyword">class</span> <span class="code-token-function">Solution</span>:
     <span class="code-token-keyword">def</span> <span class="code-token-function">mirrorDistance</span>(self, n: <span class="code-token-keyword">int</span>) -> <span class="code-token-keyword">int</span>:
         chars = list(str(n))
         left, right = <span class="code-token-number">0</span>, len(chars) - <span class="code-token-number">1</span>
@@ -1089,309 +1106,329 @@
         
         reversed_n = int(<span class="code-token-string">''</span>.join(chars))
         <span class="code-token-keyword">return</span> abs(n - reversed_n)</code></pre>
+                </div>
+            </div>
+            <div class="callout note">
+                <strong>Two-Pointer Insight:</strong> This approach is useful for demonstrating manual string reversal
+                techniques. It's a common pattern that appears in many string manipulation problems.
+            </div>
         </div>
-    </div>
-    <div class="callout note">
-        <strong>Two-Pointer Insight:</strong> This approach is useful for demonstrating manual string reversal techniques. It's a common pattern that appears in many string manipulation problems.
-    </div>
-</div>
 
-<hr />
+        <hr />
 
-<h2>Visual Example Walkthrough</h2>
-<p>Let's trace through Approach 1 (Mathematical Reversal) with n = 123:</p>
+        <h2>Visual Example Walkthrough</h2>
+        <p>Let's trace through Approach 1 (Mathematical Reversal) with n = 123:</p>
 
-<div class="grid-container">
-    <div class="grid-item original">1</div>
-    <div class="grid-item original">2</div>
-    <div class="grid-item original">3</div>
-</div>
-<p><strong>Original Number: 123</strong></p>
+        <div class="grid-container">
+            <div class="grid-item original">1</div>
+            <div class="grid-item original">2</div>
+            <div class="grid-item original">3</div>
+        </div>
+        <p><strong>Original Number: 123</strong></p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Step</th>
-            <th>num</th>
-            <th>digit (num % 10)</th>
-            <th>reversed (reversed × 10 + digit)</th>
-            <th>num after (num / 10)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>123</td>
-            <td class="digit-processing">3</td>
-            <td>0 × 10 + 3 = <strong>3</strong></td>
-            <td>12</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>12</td>
-            <td class="digit-processing">2</td>
-            <td>3 × 10 + 2 = <strong>32</strong></td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>1</td>
-            <td class="digit-processing">1</td>
-            <td>32 × 10 + 1 = <strong>321</strong></td>
-            <td>0</td>
-        </tr>
-    </tbody>
-</table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>num</th>
+                    <th>digit (num % 10)</th>
+                    <th>reversed (reversed × 10 + digit)</th>
+                    <th>num after (num / 10)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>123</td>
+                    <td class="digit-processing">3</td>
+                    <td>0 × 10 + 3 = <strong>3</strong></td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12</td>
+                    <td class="digit-processing">2</td>
+                    <td>3 × 10 + 2 = <strong>32</strong></td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>1</td>
+                    <td class="digit-processing">1</td>
+                    <td>32 × 10 + 1 = <strong>321</strong></td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
 
-<div class="grid-container">
-    <div class="grid-item reversed">3</div>
-    <div class="grid-item reversed">2</div>
-    <div class="grid-item reversed">1</div>
-</div>
-<p><strong>Reversed Number: 321</strong></p>
+        <div class="grid-container">
+            <div class="grid-item reversed">3</div>
+            <div class="grid-item reversed">2</div>
+            <div class="grid-item reversed">1</div>
+        </div>
+        <p><strong>Reversed Number: 321</strong></p>
 
-<div class="visual-container">
-    <div class="visual-item">
-        <h4>Calculation</h4>
-        <p><strong>Original (n):</strong> 123</p>
-        <p><strong>Reversed:</strong> 321</p>
-        <p><strong>Difference:</strong> |123 - 321| = <strong>198</strong></p>
-        <p><strong>Mirror Distance:</strong> 198</p>
-    </div>
-    <div class="visual-item">
-        <h4>Edge Case: n = 10</h4>
-        <p><strong>Original:</strong> 10</p>
-        <p><strong>Reversal process:</strong></p>
-        <p>Step 1: digit = 0, reversed = 0</p>
-        <p>Step 2: digit = 1, reversed = 1</p>
-        <p><strong>Reversed:</strong> 1 (not 01)</p>
-        <p><strong>Mirror Distance:</strong> |10 - 1| = 9</p>
-    </div>
-    <div class="visual-item">
-        <h4>Edge Case: n = 7</h4>
-        <p><strong>Original:</strong> 7</p>
-        <p><strong>Reversal process:</strong></p>
-        <p>Step 1: digit = 7, reversed = 7</p>
-        <p><strong>Reversed:</strong> 7</p>
-        <p><strong>Mirror Distance:</strong> |7 - 7| = 0</p>
-        <p>(Single-digit numbers have distance 0)</p>
-    </div>
-</div>
+        <div class="visual-container">
+            <div class="visual-item">
+                <h4>Calculation</h4>
+                <p><strong>Original (n):</strong> 123</p>
+                <p><strong>Reversed:</strong> 321</p>
+                <p><strong>Difference:</strong> |123 - 321| = <strong>198</strong></p>
+                <p><strong>Mirror Distance:</strong> 198</p>
+            </div>
+            <div class="visual-item">
+                <h4>Edge Case: n = 10</h4>
+                <p><strong>Original:</strong> 10</p>
+                <p><strong>Reversal process:</strong></p>
+                <p>Step 1: digit = 0, reversed = 0</p>
+                <p>Step 2: digit = 1, reversed = 1</p>
+                <p><strong>Reversed:</strong> 1 (not 01)</p>
+                <p><strong>Mirror Distance:</strong> |10 - 1| = 9</p>
+            </div>
+            <div class="visual-item">
+                <h4>Edge Case: n = 7</h4>
+                <p><strong>Original:</strong> 7</p>
+                <p><strong>Reversal process:</strong></p>
+                <p>Step 1: digit = 7, reversed = 7</p>
+                <p><strong>Reversed:</strong> 7</p>
+                <p><strong>Mirror Distance:</strong> |7 - 7| = 0</p>
+                <p>(Single-digit numbers have distance 0)</p>
+            </div>
+        </div>
 
-<div class="callout tip">
-    <strong>Visual Insight:</strong> The mathematical reversal approach builds the reversed number digit by digit from the end. It automatically handles leading zeros correctly because the reversed integer doesn't preserve them (e.g., 10 reversed becomes 1, not 01).
-</div>
+        <div class="callout tip">
+            <strong>Visual Insight:</strong> The mathematical reversal approach builds the reversed number digit by
+            digit from the end. It automatically handles leading zeros correctly because the reversed integer doesn't
+            preserve them (e.g., 10 reversed becomes 1, not 01).
+        </div>
 
-<hr />
+        <hr />
 
-<h2>Comparison of Approaches</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Approach</th>
-            <th>Time Complexity</th>
-            <th>Space Complexity</th>
-            <th>Key Insight</th>
-            <th>Best Use Case</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Mathematical Reversal</strong></td>
-            <td>O(d)</td>
-            <td>O(1)</td>
-            <td>Use modulo and division to reverse digits</td>
-            <td>Optimal solution, minimal memory</td>
-        </tr>
-        <tr>
-            <td><strong>String Reversal</strong></td>
-            <td>O(d)</td>
-            <td>O(d)</td>
-            <td>Convert to string, reverse, convert back</td>
-            <td>Simpler code, easier to understand</td>
-        </tr>
-        <tr>
-            <td><strong>Recursive</strong></td>
-            <td>O(d)</td>
-            <td>O(d)</td>
-            <td>Recursive digit extraction</td>
-            <td>Demonstrating recursion skills</td>
-        </tr>
-        <tr>
-            <td><strong>Two-Pointer String</strong></td>
-            <td>O(d)</td>
-            <td>O(d)</td>
-            <td>Manual string reversal with two pointers</td>
-            <td>Interview demonstration of string manipulation</td>
-        </tr>
-    </tbody>
-</table>
+        <h2>Comparison of Approaches</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                    <th>Key Insight</th>
+                    <th>Best Use Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Mathematical Reversal</strong></td>
+                    <td>O(d)</td>
+                    <td>O(1)</td>
+                    <td>Use modulo and division to reverse digits</td>
+                    <td>Optimal solution, minimal memory</td>
+                </tr>
+                <tr>
+                    <td><strong>String Reversal</strong></td>
+                    <td>O(d)</td>
+                    <td>O(d)</td>
+                    <td>Convert to string, reverse, convert back</td>
+                    <td>Simpler code, easier to understand</td>
+                </tr>
+                <tr>
+                    <td><strong>Recursive</strong></td>
+                    <td>O(d)</td>
+                    <td>O(d)</td>
+                    <td>Recursive digit extraction</td>
+                    <td>Demonstrating recursion skills</td>
+                </tr>
+                <tr>
+                    <td><strong>Two-Pointer String</strong></td>
+                    <td>O(d)</td>
+                    <td>O(d)</td>
+                    <td>Manual string reversal with two pointers</td>
+                    <td>Interview demonstration of string manipulation</td>
+                </tr>
+            </tbody>
+        </table>
 
-<div class="callout tip">
-    <strong>Recommendation:</strong> For interviews and practical use, the Mathematical Reversal approach (Approach 1) is optimal in both time and space complexity. It's efficient and demonstrates strong number manipulation skills. The String approach is acceptable for most cases and can be easier to explain.
-</div>
+        <div class="callout tip">
+            <strong>Recommendation:</strong> For interviews and practical use, the Mathematical Reversal approach
+            (Approach 1) is optimal in both time and space complexity. It's efficient and demonstrates strong number
+            manipulation skills. The String approach is acceptable for most cases and can be easier to explain.
+        </div>
 
-<hr />
+        <hr />
 
-<h2>Edge Cases and Testing</h2>
+        <h2>Edge Cases and Testing</h2>
 
-<h3>1. Single Digit Numbers</h3>
-<pre><code>Input: n = 7 → Output: 0
+        <h3>1. Single Digit Numbers</h3>
+        <pre><code>Input: n = 7 → Output: 0
 Reversed: 7, Difference: |7 - 7| = 0
 All single-digit numbers have mirror distance 0</code></pre>
 
-<h3>2. Numbers Ending with Zero</h3>
-<pre><code>Input: n = 10 → Output: 9
+        <h3>2. Numbers Ending with Zero</h3>
+        <pre><code>Input: n = 10 → Output: 9
 Reversed: 01 which is 1, Difference: |10 - 1| = 9
 Important: Leading zeros are dropped when converting to integer</code></pre>
 
-<h3>3. Palindromic Numbers</h3>
-<pre><code>Input: n = 121 → Output: 0
+        <h3>3. Palindromic Numbers</h3>
+        <pre><code>Input: n = 121 → Output: 0
 Reversed: 121, Difference: |121 - 121| = 0
 All palindromes have mirror distance 0</code></pre>
 
-<h3>4. Maximum Input</h3>
-<pre><code>Input: n = 1000000000 (10⁹) → Output: 999999999
+        <h3>4. Maximum Input</h3>
+        <pre><code>Input: n = 1000000000 (10⁹) → Output: 999999999
 Reversed: 1, Difference: |1000000000 - 1| = 999999999
 Largest possible mirror distance</code></pre>
 
-<h3>5. Minimum Input</h3>
-<pre><code>Input: n = 1 → Output: 0
+        <h3>5. Minimum Input</h3>
+        <pre><code>Input: n = 1 → Output: 0
 Reversed: 1, Difference: |1 - 1| = 0</code></pre>
 
-<h3>6. Symmetric Numbers</h3>
-<pre><code>Input: n = 12321 → Output: 0
+        <h3>6. Symmetric Numbers</h3>
+        <pre><code>Input: n = 12321 → Output: 0
 Reversed: 12321, Difference: |12321 - 12321| = 0
 Another palindrome example</code></pre>
 
-<h3>7. Numbers with All Same Digits</h3>
-<pre><code>Input: n = 999 → Output: 0
+        <h3>7. Numbers with All Same Digits</h3>
+        <pre><code>Input: n = 999 → Output: 0
 Reversed: 999, Difference: |999 - 999| = 0</code></pre>
 
-<h3>8. Large Difference Case</h3>
-<pre><code>Input: n = 100 → Output: 99
+        <h3>8. Large Difference Case</h3>
+        <pre><code>Input: n = 100 → Output: 99
 Reversed: 1, Difference: |100 - 1| = 99
 Numbers with many trailing zeros have large mirror distance</code></pre>
 
-<div class="callout warning">
-    <strong>Important:</strong> Watch out for integer overflow when reversing. While the constraints (n ≤ 10⁹) guarantee the reversed number fits in 32-bit integer (max reversed would be 9,000,000,001 which fits in 64-bit), it's good practice to use 64-bit integers if the constraints were larger.
-</div>
+        <div class="callout warning">
+            <strong>Important:</strong> Watch out for integer overflow when reversing. While the constraints (n ≤ 10⁹)
+            guarantee the reversed number fits in 32-bit integer (max reversed would be 9,000,000,001 which fits in
+            64-bit), it's good practice to use 64-bit integers if the constraints were larger.
+        </div>
 
-<hr />
+        <hr />
 
-<h2>FAQs</h2>
+        <h2>FAQs</h2>
 
-<div class="faq-section">
-    <details>
-        <summary>1. What happens when n ends with zero(s)?</summary>
-        <p>When reversing numbers ending with zeros, the reversed number drops leading zeros. For example, reverse(100) = 001 which becomes 1. This is handled automatically by both mathematical and string approaches when converting back to integer.</p>
-    </details>
+        <div class="faq-section">
+            <details>
+                <summary>1. What happens when n ends with zero(s)?</summary>
+                <p>When reversing numbers ending with zeros, the reversed number drops leading zeros. For example,
+                    reverse(100) = 001 which becomes 1. This is handled automatically by both mathematical and string
+                    approaches when converting back to integer.</p>
+            </details>
 
-    <details>
-        <summary>2. Can the mirror distance be negative?</summary>
-        <p>No, mirror distance is defined as the absolute difference, so it's always non-negative. The <code>abs()</code> function ensures this.</p>
-    </details>
+            <details>
+                <summary>2. Can the mirror distance be negative?</summary>
+                <p>No, mirror distance is defined as the absolute difference, so it's always non-negative. The
+                    <code>abs()</code> function ensures this.</p>
+            </details>
 
-    <details>
-        <summary>3. What's the time complexity in terms of n?</summary>
-        <p>O(log₁₀ n) or more precisely O(d) where d is the number of digits. Since d = ⌊log₁₀ n⌋ + 1, it's logarithmic in terms of n.</p>
-    </details>
+            <details>
+                <summary>3. What's the time complexity in terms of n?</summary>
+                <p>O(log₁₀ n) or more precisely O(d) where d is the number of digits. Since d = ⌊log₁₀ n⌋ + 1, it's
+                    logarithmic in terms of n.</p>
+            </details>
 
-    <details>
-        <summary>4. Can we solve this without reversing the entire number?</summary>
-        <p>Not really. The problem definition requires computing reverse(n), so we must reverse the digits in some form. However, we could compute the difference digit by digit without explicitly building the reversed number, but that would be more complex.</p>
-    </details>
+            <details>
+                <summary>4. Can we solve this without reversing the entire number?</summary>
+                <p>Not really. The problem definition requires computing reverse(n), so we must reverse the digits in
+                    some form. However, we could compute the difference digit by digit without explicitly building the
+                    reversed number, but that would be more complex.</p>
+            </details>
 
-    <details>
-        <summary>5. What if n is negative?</summary>
-        <p>The constraints say 1 ≤ n ≤ 10⁹, so n is always positive. If n could be negative, we would need to handle the sign separately (e.g., reverse(-123) = -321).</p>
-    </details>
+            <details>
+                <summary>5. What if n is negative?</summary>
+                <p>The constraints say 1 ≤ n ≤ 10⁹, so n is always positive. If n could be negative, we would need to
+                    handle the sign separately (e.g., reverse(-123) = -321).</p>
+            </details>
 
-    <details>
-        <summary>6. How do we handle integer overflow?</summary>
-        <p>With constraints n ≤ 10⁹, the reversed number is at most 9,000,000,001 which fits in 64-bit integer. For safety, use 64-bit integers (long long in C++, long in Java).</p>
-    </details>
+            <details>
+                <summary>6. How do we handle integer overflow?</summary>
+                <p>With constraints n ≤ 10⁹, the reversed number is at most 9,000,000,001 which fits in 64-bit integer.
+                    For safety, use 64-bit integers (long long in C++, long in Java).</p>
+            </details>
 
-    <details>
-        <summary>7. Is there a formula for mirror distance?</summary>
-        <p>Not a simple closed-form formula. It depends on the specific digits of n. For two-digit numbers ab (where a and b are digits), mirror distance = |10a + b - (10b + a)| = 9|a - b|.</p>
-    </details>
+            <details>
+                <summary>7. Is there a formula for mirror distance?</summary>
+                <p>Not a simple closed-form formula. It depends on the specific digits of n. For two-digit numbers ab
+                    (where a and b are digits), mirror distance = |10a + b - (10b + a)| = 9|a - b|.</p>
+            </details>
 
-    <details>
-        <summary>8. Can we use bit manipulation?</summary>
-        <p>No, this is about decimal digits, not binary bits. Bit manipulation wouldn't help for reversing decimal digits.</p>
-    </details>
+            <details>
+                <summary>8. Can we use bit manipulation?</summary>
+                <p>No, this is about decimal digits, not binary bits. Bit manipulation wouldn't help for reversing
+                    decimal digits.</p>
+            </details>
 
-    <details>
-        <summary>9. What's the largest possible mirror distance?</summary>
-        <p>For n in [1, 10⁹], the largest mirror distance occurs when n = 10⁹ = 1,000,000,000. reverse(1,000,000,000) = 1, so distance = 999,999,999.</p>
-    </details>
+            <details>
+                <summary>9. What's the largest possible mirror distance?</summary>
+                <p>For n in [1, 10⁹], the largest mirror distance occurs when n = 10⁹ = 1,000,000,000.
+                    reverse(1,000,000,000) = 1, so distance = 999,999,999.</p>
+            </details>
 
-    <details>
-        <summary>10. Can we solve this with a stack?</summary>
-        <p>Yes, we could push digits onto a stack and pop them to reverse, but that's essentially the same as the string or mathematical approach with extra data structure overhead.</p>
-    </details>
-</div>
+            <details>
+                <summary>10. Can we solve this with a stack?</summary>
+                <p>Yes, we could push digits onto a stack and pop them to reverse, but that's essentially the same as
+                    the string or mathematical approach with extra data structure overhead.</p>
+            </details>
+        </div>
 
-<div class="callout note">
-    <strong>About Algopush:</strong> Algopush provides comprehensive algorithm solutions and explanations for coding interview preparation.
-    Visit <a href="https://algopush.com">algopush.com</a> for more problem solutions and coding resources.
-</div>
-</main>
+        <div class="callout note">
+            <strong>About Algopush:</strong> Algopush provides comprehensive algorithm solutions and explanations for
+            coding interview preparation.
+            Visit <a href="https://algopush.com">algopush.com</a> for more problem solutions and coding resources.
+        </div>
+    </main>
 
-<div id="footer"></div>
+    <div id="footer"></div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Tab functionality
-        document.querySelectorAll('.code-tabs').forEach(container => {
-            const tabButtons = container.querySelectorAll('.tab-button');
-            const tabContents = container.querySelectorAll('.tab-content');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab functionality
+            document.querySelectorAll('.code-tabs').forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-button');
+                const tabContents = container.querySelectorAll('.tab-content');
 
-            // Initialize first tab
-            if (!container.querySelector('.tab-button.active')) {
-                tabButtons[0]?.classList.add('active');
-                tabContents[0]?.classList.add('active');
-            }
+                // Initialize first tab
+                if (!container.querySelector('.tab-button.active')) {
+                    tabButtons[0]?.classList.add('active');
+                    tabContents[0]?.classList.add('active');
+                }
 
-            tabButtons.forEach(button => {
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.getAttribute('data-tab');
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        button.classList.add('active');
+                        container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    });
+                });
+            });
+
+            // Copy button functionality
+            document.querySelectorAll('.code-copy').forEach(button => {
                 button.addEventListener('click', () => {
-                    const tabName = button.getAttribute('data-tab');
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    button.classList.add('active');
-                    container.querySelector(`#${tabName}-tab`).classList.add('active');
+                    const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
+                    const code = activeTab.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = originalText, 2000);
+                    });
                 });
             });
-        });
 
-        // Copy button functionality
-        document.querySelectorAll('.code-copy').forEach(button => {
-            button.addEventListener('click', () => {
-                const activeTab = button.closest('.code-container').querySelector('.tab-content.active');
-                const code = activeTab.querySelector('code').innerText;
-                navigator.clipboard.writeText(code).then(() => {
-                    const originalText = button.textContent;
-                    button.textContent = 'Copied!';
-                    setTimeout(() => button.textContent = originalText, 2000);
+            // Load header and footer
+            fetch("../components/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
                 });
-            });
+
+            fetch("../components/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
         });
-
-        // Load header and footer
-        fetch("../components/header.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("header").innerHTML = data;
-            });
-
-        fetch("../components/footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("footer").innerHTML = data;
-            });
-    });
-</script>
+    </script>
 </body>
 
 </html>
