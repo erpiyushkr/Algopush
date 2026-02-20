@@ -2,8 +2,8 @@
     {
         "title": "What is Deep Learning",
         "description": "A complete beginner-friendly guide to deep learning, neural networks, and modern AI systems explained step by step.",
-        "image": "/blog/images/deep-learning-og.png",
-        "url": "https://algopush.com/blog/what-is-deep-learning.html",
+        "image": "https://algopush.com/Blog/images/deep-learning-og.png",
+        "url": "https://algopush.com/Blog/what-is-deep-learning.html",
         "category": "AI",
         "date": "2026-02-14",
         "keywords": [
@@ -17,7 +17,7 @@
     {
         "title": "Sliding Window Technique",
         "description": "Ultimate guide to sliding window technique with 25+ LeetCode examples, animated visualizations, and professional implementation strategies.",
-        "image": "/blog/images/sliding-window.png",
+        "image": "https://algopush.com/Blog/images/sliding-window.png",
         "url": "https://algopush.com/Blog/sliding-window-technique.html",
         "category": "Algorithms",
         "date": "2026-02-14",
@@ -26,6 +26,21 @@
             "algorithms",
             "arrays",
             "strings"
+        ],
+        "featured": false
+    },
+    {
+        "title": "How to Crack LeetCode in 2026",
+        "description": "Master LeetCode in 2026 with this complete DSA roadmap. Learn patterns, core topics, and problem-solving strategies used by top engineers.",
+        "image": "https://algopush.com/Blog/images/leetcode-roadmap-intro.png",
+        "url": "https://algopush.com/Blog/how-to-crack-leetcode-in-2026-complete-dsa-problem-solving-roadmap.html",
+        "category": "RoadMap",
+        "date": "2026-02-21",
+        "keywords": [
+            "leetcode",
+            "leetcode roadmap",
+            "dsa roadmap",
+            "leetcode strategy"
         ],
         "featured": false
     }

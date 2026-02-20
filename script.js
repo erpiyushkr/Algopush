@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('../components/header.html')
+  fetch('https://algopush.com/components/header.html')
     .then(res => res.text())
     .then(data => {
       document.getElementById('header').innerHTML = data;
     });
 
-  fetch('../components/footer.html')
+  fetch('https://algopush.com/components/footer.html')
     .then(res => res.text())
     .then(data => {
       document.getElementById('footer').innerHTML = data;

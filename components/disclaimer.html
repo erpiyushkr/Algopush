@@ -30,8 +30,8 @@
   <link rel="canonical" href="https://algopush.com/disclaimer.html">
   
   <!-- Favicon -->
-  <link rel="icon" href="../components/favicon.png" type="image/x-icon">
-  <link rel="apple-touch-icon" href="../components/favicon.png">
+  <link rel="icon" href="https://algopush.com/components/favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://algopush.com/components/favicon.png">
 
   <style>
     :root {
@@ -292,12 +292,12 @@
     const loadHeaderFooter = async () => {
       try {
         // Load header
-        const headerResponse = await fetch('header.html');
+        const headerResponse = await fetch('https://algopush.com/components/header.html');
         if (!headerResponse.ok) throw new Error('Header not found');
         document.getElementById('header-container').innerHTML = await headerResponse.text();
         
         // Load footer
-        const footerResponse = await fetch('footer.html');
+        const footerResponse = await fetch('https://algopush.com/components/footer.html');
         if (!footerResponse.ok) throw new Error('Footer not found');
         document.getElementById('footer-container').innerHTML = await footerResponse.text();
       } catch (error) {
@@ -305,7 +305,7 @@
         // Fallback if header/footer files are not found
         document.getElementById('header-container').innerHTML = `
           <header style="background: #102c41; padding: 1rem; text-align: center;">
-            <a href="index.html" style="color: white; font-size: 1.5rem; font-weight: bold; text-decoration: none;">AlgoPush</a>
+            <a href="https://algopush.com/components/index.html" style="color: white; font-size: 1.5rem; font-weight: bold; text-decoration: none;">AlgoPush</a>
           </header>`;
         document.getElementById('footer-container').innerHTML = `
           <footer style="background: #102c41; color: white; text-align: center; padding: 2rem; margin-top: 2rem;">
@@ -364,7 +364,7 @@
         highlightCurrentSection();
         
         // Set active link in navigation
-        const currentPage = window.location.pathname.split('/').pop();
+        const currentPage = window.location.pathname.split('https://algopush.com/').pop();
         document.querySelectorAll('nav a').forEach(link => {
           if (link.getAttribute('href') === currentPage) {
             link.classList.add('active');
